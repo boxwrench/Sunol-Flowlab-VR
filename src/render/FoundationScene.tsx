@@ -2,41 +2,38 @@ import { Canvas } from '@react-three/fiber'
 import { XR } from '@react-three/xr'
 import type { ReactNode } from 'react'
 
-import type { ParticleStateView } from '../sim'
+import type { ParticleStateView, TurbidityBandsView } from '../sim'
 import { xrStore } from '../xr/store'
-import { ParticleCloud, type ParticleFrameRecorder } from './ParticleCloud'
+import { HeroObservationTank } from './HeroObservationTank'
+import { JarTestBench } from './JarTestBench'
+import type { ParticleFrameRecorder } from './ParticleCloud'
 
 interface FoundationSceneProps {
   readonly children?: ReactNode
   readonly particleState: ParticleStateView
+  readonly turbidityBands: TurbidityBandsView
   readonly recordParticleFrame: ParticleFrameRecorder
 }
 
 export function FoundationScene({
   children,
   particleState,
+  turbidityBands,
   recordParticleFrame,
 }: FoundationSceneProps) {
   return (
-    <Canvas camera={{ position: [0, 1.4, 3], fov: 48 }} dpr={[1, 1.5]}>
+    <Canvas camera={{ position: [3.1, 1.75, 4.6], fov: 42 }} dpr={[1, 1.5]}>
       <XR store={xrStore}>
         {children}
-        <color attach="background" args={['#071416']} />
-        <ambientLight intensity={1.2} />
-        <directionalLight position={[2, 4, 3]} intensity={2} />
-        <ParticleCloud
-          state={particleState}
-          recordFrame={recordParticleFrame}
+        <color attach="background" args={['#081719']} />
+        <ambientLight intensity={1.35} />
+        <directionalLight position={[2, 4, 3]} intensity={2.2} />
+        <HeroObservationTank
+          particleState={particleState}
+          turbidityBands={turbidityBands}
+          recordParticleFrame={recordParticleFrame}
         />
-        <mesh position={[0, 0.6, 0]}>
-          <boxGeometry args={[1.45, 1.2, 0.75]} />
-          <meshStandardMaterial
-            color="#1d7778"
-            transparent
-            opacity={0.14}
-            depthWrite={false}
-          />
-        </mesh>
+        <JarTestBench />
         <gridHelper args={[8, 16, '#315b59', '#173332']} />
       </XR>
     </Canvas>

@@ -1,6 +1,6 @@
 # Batch 03 Implementation Plan: Desktop Phenomenon Proof
 
-**Status:** Ready — reduced Batch 02A accepted  
+**Status:** In progress — presentation slice implemented; human review gates open  
 **Branch:** `batch-03-desktop-proof`  
 **Depends on:** Batch 02 accepted; Batch 00 regression and visual contracts available  
 **May run in parallel with:** Batch 04 in an isolated worktree  

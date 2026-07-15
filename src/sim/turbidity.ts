@@ -32,6 +32,12 @@ export interface TurbidityBandsView {
   readonly sampledAtSimulationTime: number
 }
 
+export interface ClearingFrontDiagnostics {
+  readonly topClearFraction: number
+  readonly clearingFrontDepth: number
+  readonly upperZoneTurbidity: number
+}
+
 export const DEFAULT_TURBIDITY_CONFIG: Readonly<TurbidityConfig> =
   Object.freeze({
     bandCount: 12,
@@ -156,6 +162,29 @@ export function upperColumnTurbidity(
   for (let band = firstBand; band < config.bandCount; band += 1)
     total += bands.values[band]
   return total / config.upperClarityBandCount
+}
+
+export function clearingFrontDiagnostics(
+  bands: TurbidityBandsView,
+  config: Readonly<TurbidityConfig> = DEFAULT_TURBIDITY_CONFIG,
+): ClearingFrontDiagnostics {
+  validateBandStorage(bands, config)
+  const firstUpperBand = config.bandCount - config.upperClarityBandCount
+  let clearUpperBands = 0
+  for (let band = firstUpperBand; band < config.bandCount; band += 1)
+    if (bands.values[band] <= config.upperClarityThreshold) clearUpperBands += 1
+
+  let contiguousClearBands = 0
+  for (let band = config.bandCount - 1; band >= 0; band -= 1) {
+    if (bands.values[band] > config.upperClarityThreshold) break
+    contiguousClearBands += 1
+  }
+
+  return {
+    topClearFraction: clearUpperBands / config.upperClarityBandCount,
+    clearingFrontDepth: contiguousClearBands / config.bandCount,
+    upperZoneTurbidity: upperColumnTurbidity(bands, config),
+  }
 }
 
 function bandIndex(

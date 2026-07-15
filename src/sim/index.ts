@@ -59,11 +59,13 @@ export {
 } from './phenomenon'
 export {
   DEFAULT_TURBIDITY_CONFIG,
+  clearingFrontDiagnostics,
   createTurbidityBands,
   endpointTurbidity,
   resetTurbidityBands,
   sampleTurbidityBands,
   upperColumnTurbidity,
+  type ClearingFrontDiagnostics,
   type TurbidityBandsState,
   type TurbidityBandsView,
   type TurbidityConfig,

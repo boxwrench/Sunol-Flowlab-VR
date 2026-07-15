@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest'
 
 import { createParticleState, resetParticleState } from './particleState'
 import {
+  clearingFrontDiagnostics,
   createTurbidityBands,
   endpointTurbidity,
   resetTurbidityBands,
@@ -64,5 +65,18 @@ describe('authoritative turbidity bands', () => {
     expect(bands.values).toBe(values)
     expect(bands.initialLoads).toBe(initialLoads)
     expect(bands.currentLoads).toBe(currentLoads)
+  })
+
+  it('derives clearing-front diagnostics from the authoritative bands', () => {
+    const bands = createTurbidityBands()
+    bands.values.set([
+      0.8, 0.7, 0.6, 0.5, 0.4, 0.3, 0.25, 0.2, 0.15, 0.1, 0.05, 0,
+    ])
+
+    const diagnostics = clearingFrontDiagnostics(bands)
+
+    expect(diagnostics.topClearFraction).toBe(1)
+    expect(diagnostics.clearingFrontDepth).toBeCloseTo(7 / 12)
+    expect(diagnostics.upperZoneTurbidity).toBeCloseTo(0.075)
   })
 })

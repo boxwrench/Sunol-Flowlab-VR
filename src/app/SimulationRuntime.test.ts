@@ -44,5 +44,6 @@ describe('SimulationRuntime', () => {
     expect(runtime.dose).toBe(5)
     expect(runtime.turbidityBands.values).toBe(bands)
     expect(optimum).toBeLessThan(underdose)
+    expect(runtime.clarityReachedAtSimulationTime).not.toBeNull()
   })
 })

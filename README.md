@@ -6,7 +6,7 @@ This is a **phenomenological coagulation model**, not dose-prediction software, 
 
 ## Project status
 
-Implementation is in progress. Batch 00 is substantially complete, Batch 01A is accepted, and reduced Batch 02A now proves the deterministic 11-dose phenomenon with app-owned state, authoritative turbidity bands, browser evidence, and an accepted nine-seed regression suite. Batch 02B performance machinery is deferred; Batch 03 desktop presentation is ready to begin. Physical Quest 3 and hosted-route criteria remain open. See [the Batch 02A acceptance packet](docs/BATCH_02A_ACCEPTANCE.md), [PROGRESS.md](PROGRESS.md), and the [implementation-plan index](IMPLEMENTATION_PLAN.md).
+Implementation is in progress. Batch 00 is substantially complete, Batch 01A is accepted, and reduced Batch 02A proves the deterministic 11-dose phenomenon with app-owned state, authoritative turbidity bands, browser evidence, and an accepted nine-seed regression suite. Batch 02B performance machinery is deferred. Batch 03 desktop presentation is in progress with a band-driven hero tank, static six-jar blockout, deterministic comparison presets, clearing diagnostics, and a clean recognition-review mode; its external recognition and human visual-comparison gates remain open. Physical Quest 3 and hosted-route criteria also remain open. See [the Batch 03 progress packet](docs/BATCH_03_PROGRESS.md), [PROGRESS.md](PROGRESS.md), and the [implementation-plan index](IMPLEMENTATION_PLAN.md).
 
 The approved presentation direction is a [hybrid six-jar test bench and hero observation tank](docs/DESIGN_DIRECTION_JAR_TEST_HYBRID.md): one live authoritative simulation, six static canonical preset summaries, and a complete plot/log covering all eleven dose values.
 

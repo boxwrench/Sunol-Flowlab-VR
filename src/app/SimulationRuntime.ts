@@ -74,6 +74,10 @@ export class SimulationRuntime {
     return this.workspace.bands.sampledAtSimulationTime
   }
 
+  get clarityReachedAtSimulationTime(): number | null {
+    return this.workspace.clarityReachedAtSimulationTime
+  }
+
   step(elapsedSeconds: number): number {
     return this.clock.advance(elapsedSeconds, this.stepSimulation)
   }

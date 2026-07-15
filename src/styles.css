@@ -66,6 +66,41 @@ button {
 .emulator-note {
   font-size: 0.85rem;
 }
+.comparison-controls {
+  position: absolute;
+  z-index: 1;
+  left: 50%;
+  bottom: 1rem;
+  display: grid;
+  gap: 0.45rem;
+  min-width: min(31rem, calc(100% - 2rem));
+  padding: 0.7rem 0.8rem;
+  border: 1px solid #315b59;
+  border-radius: 0.5rem;
+  color: #b9cecb;
+  background: rgb(7 20 22 / 90%);
+  transform: translateX(-50%);
+  text-align: center;
+  font-size: 0.78rem;
+}
+.comparison-controls div {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.45rem;
+}
+.comparison-controls button {
+  padding: 0.48rem 0.6rem;
+  border: 1px solid #3e6a66;
+  border-radius: 0.35rem;
+  color: #dcebea;
+  background: #123332;
+  cursor: pointer;
+}
+.comparison-controls button[aria-pressed='true'] {
+  border-color: #8bd2ca;
+  color: #ffffff;
+  background: #1a625f;
+}
 .metrics {
   position: absolute;
   z-index: 1;
