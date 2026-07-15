@@ -1,0 +1,10 @@
+* text=auto eol=lf whitespace=-blank-at-eof
+*.md whitespace=-trailing-space,-blank-at-eof
+*.pdf binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.webp binary
+*.glb binary
+*.mp3 binary
+*.ogg binary

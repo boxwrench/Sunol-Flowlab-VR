@@ -1,0 +1,218 @@
+# Batch 07 Implementation Plan: Physical Instrumentation and Experiment Memory
+
+**Status:** Planned  
+**Branch:** `batch-07-instrumentation`  
+**Depends on:** Batch 06 accepted  
+**May run in parallel with:** Instrument geometry and data wiring after interfaces freeze  
+**Primary gate:** The apparatus explains itself physically, records exactly one result per trial, persists the curve, and lets a visitor clear inherited data without software chrome.
+
+## Goal
+
+Turn the complete treatment loop into an understandable experimental instrument through diegetic controls, readouts, plotting, and persistent experiment memory.
+
+## Agent execution rules
+
+- Read `CLAUDE.md`, the current repository tree, `package.json`, and relevant tests before proposing edits.
+- Summarize the current architecture and any conflicts with this plan before writing code.
+- Use one implementation owner per worktree. A second agent may review, but must not edit concurrently.
+- Implement only this batch. Do not pull later-batch work forward because it appears convenient.
+- Preserve the `/sim`, `/render`, `/xr`, and `/app` ownership boundaries.
+- Keep simulation state outside React. Do not add React state updates to the hot simulation path.
+- Report uncertainty instead of inventing package APIs, especially for the pinned `@react-three/xr` version.
+- Produce evidence: changed files, commands run, test output, performance measurements where applicable, known limitations, and remaining hot-path allocations.
+- Do not mark the batch complete until every acceptance criterion has objective evidence.
+
+## Core rule
+
+Every display derives from the same authoritative turbidity-band record captured by Batch 06. Different display mappings are allowed; independent process calculations are not.
+
+## Workstream 07A - Read-only physical instrumentation
+
+### Work package 07A.1 - Dose scale and control labeling
+
+- Add engraved or raised detent marks for 0-10.
+- Provide a clear pointer/alignment mark.
+- Ensure labels remain readable at normal working distance in VR.
+- Avoid decimal or real chemical-dose units that imply calibration.
+- Use a restrained physical label that communicates relative dose.
+
+### Work package 07A.2 - Trial-status indicator
+
+Choose one restrained physical approach:
+
+- mechanical timer;
+- phase lights;
+- a rotating phase drum;
+- or a small combination.
+
+Requirements:
+
+- consumes state-machine phase only;
+- no floating software panel;
+- distinguishes ready, active treatment, measuring, complete, and refilling;
+- does not compete visually with the tank.
+
+### Work package 07A.3 - Turbidity gauge
+
+- Build a physical gauge face and needle.
+- Map authoritative endpoint turbidity through a documented display transform.
+- Animate the needle only during measurement.
+- Use relative labels or an explicitly internal scale, not fake calibrated NTU.
+- Add test hooks to compare gauge target with trial result.
+
+### Work package 07A.4 - Nephelometer geometry
+
+- Add emitter and 90-degree side detector geometry around the sample zone.
+- Keep the beam/event temporary and inexpensive.
+- Detector glow maps from the same sample data used for result capture.
+- Avoid volumetric beam effects and stacked transparency.
+
+### Work package 07A.5 - Mounted dose-response plot
+
+Build a physical board that:
+
+- displays detents 0-10 on the horizontal axis;
+- uses the same internal/relative turbidity scale as the gauge mapping;
+- plots one point per completed trial;
+- supports repeated testing at one dose through an explicit policy, such as latest result, average, or multiple small points;
+- clearly reveals the U-shape as data accumulates;
+- remains legible at arm’s length.
+
+Document the repeated-dose policy before implementation.
+
+## Workstream 07B - Experiment actions and persistence
+
+### Work package 07B.1 - Experiment-log domain model
+
+Define a versioned schema, for example:
+
+```ts
+interface ExperimentLogV1 {
+  schemaVersion: 1
+  projectVersion: string
+  points: TrialResult[]
+  updatedAt: string
+}
+```
+
+Requirements:
+
+- validate on load;
+- reject or migrate malformed/old data safely;
+- keep persistence outside simulation state;
+- never allow stored points to alter a new trial’s raw-water reset;
+- enforce one append per completed result ID or equivalent deduplication key.
+
+### Work package 07B.2 - localStorage persistence
+
+- Save after a valid completed trial.
+- Restore on app start.
+- Handle unavailable storage and quota errors gracefully.
+- Add schema version and migration hook.
+- Avoid writing every frame.
+- Add tests for empty, valid, corrupt, and future-version data.
+
+### Work package 07B.3 - Refill/reset handle
+
+- Replace temporary development refill trigger with a reliable physical handle or control.
+- Accept input only in appropriate phases, normally `COMPLETE`.
+- Start the existing `REFILLING` sequence.
+- Prevent the handle from clearing experiment history.
+- Provide clear mechanical affordance and optional sound/haptic cue.
+
+### Work package 07B.4 - Tear-off plot sheet
+
+- Add a physical tab/grab region.
+- Detect a deliberate pull gesture or simpler reliable equivalent.
+- Animate removal of the current sheet.
+- Clear the persisted experiment log at the defined commit point.
+- Reveal a fresh blank sheet.
+- Prevent accidental clears from hover or minor movement.
+- Provide an undo only if it can remain fully diegetic and simple; otherwise require a deliberate threshold and accept the clear as final.
+
+### Work package 07B.5 - Data-consistency assertions
+
+Add automated checks proving:
+
+- gauge target maps from the captured band record;
+- plot value maps from the same captured band record;
+- persisted result equals the trial result;
+- one completed trial adds exactly one point;
+- refill adds no point;
+- app restart restores the same plotted values;
+- tear-off clear removes stored and visible points together.
+
+## Work package 07C - Instrument layout and comprehension test
+
+Test:
+
+- dose marks visible while operating the control;
+- phase indicator understandable without text overlay;
+- tank remains the visual focus;
+- gauge and plot are readable but not dominant;
+- refill and clear-log controls cannot be confused;
+- a new visitor can complete a second trial after seeing the first result;
+- players begin deliberately changing dose to seek a lower plotted result.
+
+Use short observation sessions rather than explanatory tutorials.
+
+## Explicit non-goals
+
+- No classroom lesson system.
+- No floating UI panel.
+- No calibrated NTU claim.
+- No final plant environment.
+- No spectator autoplay sequence.
+- No charge-vision or ghost replay unless separately approved as optional work.
+
+## Required tests and evidence
+
+- gauge/plot/source-of-truth unit tests;
+- experiment-log schema and migration tests;
+- localStorage failure handling;
+- exactly-once append test;
+- refill interaction smoke test;
+- tear-off deliberate-clear test;
+- session restart persistence test;
+- Quest readability screenshots and interaction observations;
+- performance metrics after adding all instruments.
+
+## Review-agent checklist
+
+- Does any instrument calculate its own turbidity?
+- Is fake precision introduced by labels or units?
+- Can inherited data be cleared physically?
+- Can one trial create multiple points?
+- Are refill and experiment-log clear separate actions?
+- Does persistence stay outside `/sim`?
+- Has instrument geometry added excessive draw calls or transparency?
+
+## Acceptance criteria
+
+- Physical dose marks, status indicator, gauge, nephelometer, plot, refill handle, and clear-sheet action are present.
+- Every completed trial creates exactly one plotted/persisted result.
+- Gauge, water appearance, recorded result, and plot agree through the band authority.
+- Experiment data survives browser sessions.
+- A visitor can deliberately clear inherited data and receive a blank sheet.
+- No software chrome is required to operate or understand the experiment.
+- Players naturally begin searching for the minimum.
+
+## Suggested tag and commit
+
+- Commit: `feat: add physical instrumentation and persistent experiment log`
+- Accepted tag: `instrumentation-complete`
+
+## Required closing acceptance packet
+
+The implementation agent must provide:
+
+1. What changed.
+2. What intentionally did not change.
+3. Files added, removed, and modified.
+4. Commands run and exact results.
+5. Dose-sweep comparison when simulation behavior changed.
+6. Desktop or Quest metrics when rendering or XR behavior changed.
+7. Known defects, compromises, and deferred decisions.
+8. Remaining allocations or expensive operations in per-frame paths.
+9. Documentation updated.
+10. Proposed commit message and whether the batch gate passed.
