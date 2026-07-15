@@ -7,6 +7,7 @@ export interface PerformanceSnapshot {
   readonly activeParticles: number
   readonly drawCalls: number
   readonly sampleCount: number
+  readonly heapUsedBytes: number | null
 }
 
 export interface PerformanceReport {
@@ -48,7 +49,6 @@ export class PerformanceMonitor {
     ) {
       throw new RangeError('Performance samples must be finite and non-negative')
     }
-
     this.frameSamples[this.nextSample] = frameMs
     this.simulationSamples[this.nextSample] = simulationStepMs
     this.syncSamples[this.nextSample] = instanceSyncMs
@@ -58,16 +58,16 @@ export class PerformanceMonitor {
     this.samplesRecorded += 1
   }
 
-  snapshot(): PerformanceSnapshot {
+  snapshot(heapUsedBytes: number | null = null): PerformanceSnapshot {
     const count = Math.min(this.samplesRecorded, this.frameSamples.length)
     if (count === 0) {
       return {
         averageFps: 0, averageFrameMs: 0, p95FrameMs: 0,
         averageSimulationStepMs: 0, averageInstanceSyncMs: 0,
         activeParticles: this.activeParticles, drawCalls: this.drawCalls, sampleCount: 0,
+        heapUsedBytes,
       }
     }
-
     const frames = Array.from(this.frameSamples.subarray(0, count)).sort((a, b) => a - b)
     const averageFrameMs = average(this.frameSamples, count)
     return {
@@ -79,21 +79,26 @@ export class PerformanceMonitor {
       activeParticles: this.activeParticles,
       drawCalls: this.drawCalls,
       sampleCount: count,
+      heapUsedBytes,
     }
   }
+}
+
+export function readBrowserHeapBytes(source: unknown = performance): number | null {
+  if (typeof source !== 'object' || source === null || !('memory' in source)) return null
+  const memory = source.memory
+  if (typeof memory !== 'object' || memory === null || !('usedJSHeapSize' in memory)) return null
+  const value = memory.usedJSHeapSize
+  return typeof value === 'number' && Number.isFinite(value) && value >= 0 ? value : null
 }
 
 export function createPerformanceReport(
   monitor: PerformanceMonitor,
   userAgent: string,
   buildMode: string,
+  heapUsedBytes: number | null = null,
 ): PerformanceReport {
-  return {
-    capturedAt: new Date().toISOString(),
-    userAgent,
-    buildMode,
-    metrics: monitor.snapshot(),
-  }
+  return { capturedAt: new Date().toISOString(), userAgent, buildMode, metrics: monitor.snapshot(heapUsedBytes) }
 }
 
 export const developmentPerformance = new PerformanceMonitor()

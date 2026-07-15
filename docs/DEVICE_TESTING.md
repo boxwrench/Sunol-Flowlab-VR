@@ -18,7 +18,7 @@ npm run dev
 adb reverse tcp:5173 tcp:5173
 ```
 
-Open `http://localhost:5173` in Quest Browser. Loopback origins are treated as potentially trustworthy for secure-context purposes; the application must still verify `window.isSecureContext` and `navigator.xr` before offering immersive entry. Batch 01 must prove actual `immersive-vr` entry, both controller poses/select input, session exit, and Chrome remote inspection on this route.
+Open `http://localhost:5173` in Quest Browser. Loopback origins are treated as potentially trustworthy for secure-context purposes; the application must still verify `window.isSecureContext` and `navigator.xr` before offering immersive entry. XR session entry is intentionally user-initiated through **Enter VR**; automatic session offers are disabled to prevent competing IWER/browser offers. Batch 01 must prove actual `immersive-vr` entry, both controller poses/select input, session exit, and Chrome remote inspection on this route.
 
 Vite's local HTTPS mode remains available for same-network testing when loopback forwarding is unsuitable. A hosted HTTPS smoke URL is required before the Batch 01B gate closes; choosing or writing to a public host requires separate approval.
 
@@ -32,4 +32,3 @@ Vite's local HTTPS mode remains available for same-network testing when loopback
 ## Gate capture
 
 For every real-device gate, record headset model, OS version, Quest Browser version, build/config hash, connection route, controller handedness, average/p95 frame time, draw calls, and any console errors in `docs/PERFORMANCE.md`.
-

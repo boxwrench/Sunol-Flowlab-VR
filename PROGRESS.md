@@ -14,3 +14,4 @@
 - 2026-07-14: Added preallocated development telemetry with one-second UI refresh and JSON report export; next add the headless benchmark and memory-allocation audit.
 - 2026-07-14: Added a machine-readable 500-particle headless benchmark over production simulation paths; next record benchmark evidence and audit remaining hot-path allocations.
 - 2026-07-14: Recorded benchmark evidence and the hot-path allocation audit; next complete the five-minute rendered Chrome memory observation.
+- 2026-07-14: Added Chrome heap telemetry and observed flat post-GC memory through a five-minute window; disabled automatic XR session offers, with an uninterrupted post-fix rerun next.

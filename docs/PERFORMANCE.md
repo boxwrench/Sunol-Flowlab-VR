@@ -31,5 +31,19 @@ Command: `npm run benchmark`. The JSON line in command output is the machine-rea
 - Metrics recording: three preallocated rolling arrays; snapshot sorting allocates only during the one-second development overlay refresh or explicit export.
 - Expected remaining per-frame work: two timer reads around simulation, one timer read after instance upload, 500 matrix writes, and React Three Fiber/Three.js internal rendering work.
 
-Still required for the Batch 01A gate: a five-minute rendered Chrome idle/heap observation and a captured post-render metrics report. Real Quest measurements remain device-blocked.
+## 2026-07-14 - Chrome rendered memory observation
 
+Chrome's optional `performance.memory.usedJSHeapSize` counter was added to development telemetry and observed with 500 rendered particles and three draw calls. After startup and garbage collection, heap use remained in a narrow 64.0-65.0 MB range from approximately 50 through 250 seconds; the recovered surface reported 66.1 MB. Particle and draw-call counts remained stable, with no evidence of unbounded heap growth.
+
+| Elapsed | Heap | Average frame | p95 frame | Simulation | Instance sync |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| baseline | 71.2 MB | 8.35 ms | 15.6 ms | 0.083 ms | 0.034 ms |
+| ~50 s | 64.4 MB | 5.62 ms | 11.4 ms | 0.006 ms | 0.016 ms |
+| ~100 s | 64.9 MB | 5.66 ms | 9.7 ms | 0.003 ms | 0.017 ms |
+| ~150 s | 65.0 MB | 5.75 ms | 8.9 ms | 0.005 ms | 0.020 ms |
+| ~200 s | 64.6 MB | 5.81 ms | 10.1 ms | 0.007 ms | 0.021 ms |
+| ~250 s | 64.0 MB | 6.03 ms | 9.5 ms | 0.006 ms | 0.021 ms |
+
+Near the end of the window, the emulator presentation surface became blank without a new application error and recovered immediately on reload. The only recorded console error predated the observation and reported that an XR session offer had been superseded. The app now disables automatic session offers and retains its explicit **Enter VR** action. The flat memory trend is accepted as evidence; an uninterrupted five-minute post-fix presentation rerun remains pending because work was paused for publication.
+
+Real Quest measurements remain device-blocked. The Batch 01A rendered gate also remains open until the post-fix uninterrupted rerun captures its final metrics report.

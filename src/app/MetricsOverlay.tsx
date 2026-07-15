@@ -1,12 +1,19 @@
 import { useEffect, useState } from 'react'
 
-import { createPerformanceReport, developmentPerformance } from './performance'
+import {
+  createPerformanceReport,
+  developmentPerformance,
+  readBrowserHeapBytes,
+} from './performance'
 
 export function MetricsOverlay() {
-  const [metrics, setMetrics] = useState(() => developmentPerformance.snapshot())
+  const [metrics, setMetrics] = useState(() => developmentPerformance.snapshot(readBrowserHeapBytes()))
 
   useEffect(() => {
-    const timer = window.setInterval(() => setMetrics(developmentPerformance.snapshot()), 1000)
+    const timer = window.setInterval(
+      () => setMetrics(developmentPerformance.snapshot(readBrowserHeapBytes())),
+      1000,
+    )
     return () => window.clearInterval(timer)
   }, [])
 
@@ -15,9 +22,14 @@ export function MetricsOverlay() {
       developmentPerformance,
       navigator.userAgent,
       import.meta.env.MODE,
+      readBrowserHeapBytes(),
     )
     console.info('Sunol FlowLab VR performance report', JSON.stringify(report))
   }
+
+  const heap = metrics.heapUsedBytes === null
+    ? 'heap unavailable'
+    : `${(metrics.heapUsedBytes / 1_048_576).toFixed(1)} MB heap`
 
   return (
     <aside className="metrics" aria-label="Development performance metrics">
@@ -29,8 +41,8 @@ export function MetricsOverlay() {
       <span>{metrics.averageInstanceSyncMs.toFixed(3)} ms instance sync</span>
       <span>{metrics.activeParticles} particles</span>
       <span>{metrics.drawCalls} draw calls</span>
+      <span>{heap}</span>
       <button type="button" onClick={exportReport}>Export report to console</button>
     </aside>
   )
 }
-
