@@ -70,9 +70,10 @@ evidence justifies Batch 02B collision, pooling, density, or spatial-hash work.
 - Complete the blinded low/optimum/high visual rubric with an operator-informed
   reviewer and a non-operator reviewer; confirm the best outcome is identifiable
   without labels or a plot.
-- Keep the physical Quest route open until ADB reports one authorized device and
-  the documented headset checks pass. This does not convert emulator evidence
-  into real-device evidence.
+- The local physical Quest preflight is accepted separately in
+  [PERFORMANCE.md](PERFORMANCE.md#2026-07-15---physical-quest-3-local-preflight).
+  Batch 03 still requires its own later headset readability and performance
+  evidence after presentation and interaction are integrated.
 
 Batch 03 is not accepted until its human-comprehension gates and remaining
 performance evidence are recorded.

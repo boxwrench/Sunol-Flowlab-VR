@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 
 import { FoundationScene } from '../render/FoundationScene'
 import {
@@ -7,6 +7,10 @@ import {
   type DoseDetent,
 } from '../sim'
 import { xrStore } from '../xr/store'
+import {
+  ControllerPreflight,
+  type XrPreflightEvent,
+} from '../xr/ControllerPreflight'
 import { MetricsOverlay } from './MetricsOverlay'
 import { developmentPerformance } from './performance'
 import { SimulationDriver } from './SimulationDriver'
@@ -16,7 +20,17 @@ declare global {
   interface Window {
     render_game_to_text?: () => string
     advanceTime?: (milliseconds: number) => void
+    render_xr_preflight_to_text?: () => string
   }
+}
+
+interface XrPreflightSnapshot {
+  sessionActive: boolean
+  leftControllerDetected: boolean
+  rightControllerDetected: boolean
+  leftSelectCount: number
+  rightSelectCount: number
+  targetSelectCount: number
 }
 
 const COMPARISON_PRESETS: ReadonlyArray<{
@@ -47,9 +61,41 @@ export function App() {
     new URLSearchParams(window.location.search).get('mode') === 'proof'
   const [entryError, setEntryError] = useState<string | null>(null)
   const [selectedDose, setSelectedDose] = useState<DoseDetent>(5)
+  const xrPreflightRef = useRef<XrPreflightSnapshot>({
+    sessionActive: false,
+    leftControllerDetected: false,
+    rightControllerDetected: false,
+    leftSelectCount: 0,
+    rightSelectCount: 0,
+    targetSelectCount: 0,
+  })
   const runtimeRef = useRef<SimulationRuntime | null>(null)
   if (runtimeRef.current === null) runtimeRef.current = new SimulationRuntime()
   const runtime = runtimeRef.current
+
+  const recordXrPreflightEvent = useCallback(
+    (event: XrPreflightEvent): void => {
+      const snapshot = xrPreflightRef.current
+      switch (event.type) {
+        case 'session':
+          snapshot.sessionActive = event.active
+          break
+        case 'controller':
+          if (event.handedness === 'left')
+            snapshot.leftControllerDetected = event.detected
+          else snapshot.rightControllerDetected = event.detected
+          break
+        case 'select':
+          if (event.handedness === 'left') snapshot.leftSelectCount += 1
+          else snapshot.rightSelectCount += 1
+          break
+        case 'target-select':
+          snapshot.targetSelectCount += 1
+          break
+      }
+    },
+    [],
+  )
 
   useEffect(() => {
     runtime.start()
@@ -80,9 +126,12 @@ export function App() {
       runtime.pause()
       runtime.stepHeadless(Math.round(milliseconds / (1000 / 60)))
     }
+    window.render_xr_preflight_to_text = () =>
+      JSON.stringify(xrPreflightRef.current)
     return () => {
       delete window.render_game_to_text
       delete window.advanceTime
+      delete window.render_xr_preflight_to_text
     }
   }, [runtime])
 
@@ -147,6 +196,9 @@ export function App() {
         recordParticleFrame={recordParticleFrame}
       >
         <SimulationDriver runtime={runtime} />
+        {import.meta.env.DEV ? (
+          <ControllerPreflight recordEvent={recordXrPreflightEvent} />
+        ) : null}
       </FoundationScene>
     </main>
   )

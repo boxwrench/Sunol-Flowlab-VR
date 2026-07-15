@@ -34,9 +34,9 @@ The jar rack never requires six live simulations and never replaces the complete
 
 | Batch | Status                 | Gate                                                 |
 | ----- | ---------------------- | ---------------------------------------------------- |
-| 00    | Substantially complete | Physical Quest route remains open                    |
+| 00    | Substantially complete | Hosted HTTPS route remains open                      |
 | 01A   | Accepted               | Uninterrupted post-fix rendered observation recorded |
-| 01B   | Blocked                | Physical Quest 3 and hosted smoke route              |
+| 01B   | Partially accepted     | Local Quest route passed; hosted smoke remains open  |
 | 02A   | Accepted               | Deterministic 11-dose phenomenon proof recorded      |
 | 02B   | Deferred               | Requires measured performance or visible need        |
 | 03    | In progress            | External recognition and visual-review gates open    |
@@ -44,7 +44,7 @@ The jar rack never requires six live simulations and never replaces the complete
 
 An [earlier Godot implementation plan](docs/archive/Sunol%20FlowLab%20Implementation%20Plan%20%28superseded%20Godot%29.pdf) is retained only as a superseded source artifact for provenance and is non-binding for this greenfield WebXR repository. The stale duplicate Batch 03 snapshot was removed; Git history preserves it. Only [the indexed Batch 03 plan](batch-03-desktop-phenomenon-proof.md) is authoritative.
 
-Batch 01A has an app-owned deterministic runtime, read-only rendering consumption, permanent telemetry, a measured 500-particle foundation, and an accepted uninterrupted 310-second post-fix Chrome observation. Batch 01B and every real-device acceptance criterion remain open until verified on the physical headset.
+Batch 01A has an app-owned deterministic runtime, read-only rendering consumption, permanent telemetry, a measured 500-particle foundation, and an accepted uninterrupted 310-second post-fix Chrome observation. The local physical portion of Batch 01B passed on Quest 3 through ADB reverse: immersive entry, both controllers, select input, target selection, remote inspection, baseline metrics, and clean session exit were observed. Batch 01B remains open only for its separately authorized hosted-HTTPS smoke deployment.
 
 Batch 02A is accepted in [its closing packet](docs/BATCH_02A_ACCEPTANCE.md): the canonical minimum is Dose 5, both tail margins exceed the regression threshold, the extended nine-seed suite passes, and the complete 500-particle phenomenon path remains well inside the desktop benchmark ceiling. Generalized collision, pooling, mass/density, and merge-animation machinery remain deferred under Batch 02B because no benchmark or visible-behavior evidence justifies them.
 

@@ -4,7 +4,8 @@
 
 - Headset: Meta Quest 3
 - Developer Mode: enabled (confirmed by project owner on 2026-07-14)
-- Headset OS and Quest Browser versions: capture from the device at each acceptance gate
+- Headset OS: Android 14, build `UP1A.231005.007.A1` (captured 2026-07-15)
+- Quest Browser: `149.0.0.24.3.1013217646` (captured 2026-07-15)
 - Gate approver: project owner
 
 ## Local secure-context route
@@ -21,6 +22,21 @@ adb reverse tcp:5173 tcp:5173
 Open `http://localhost:5173` in Quest Browser. Loopback origins are treated as potentially trustworthy for secure-context purposes; the application must still verify `window.isSecureContext` and `navigator.xr` before offering immersive entry. XR session entry is intentionally user-initiated through **Enter VR**; automatic session offers are disabled to prevent competing IWER/browser offers. Batch 01 must prove actual `immersive-vr` entry, both controller poses/select input, session exit, and Chrome remote inspection on this route.
 
 Vite's local HTTPS mode remains available for same-network testing when loopback forwarding is unsuitable. A hosted HTTPS smoke URL is required before the Batch 01B gate closes; choosing or writing to a public host requires separate approval.
+
+## Accepted local physical route
+
+On 2026-07-15, device serial `2G0YC5ZG0M052K` was authorized and reported as
+one Quest 3 in ADB state `device`. The development server was mapped with
+`adb reverse tcp:5173 tcp:5173`, and Quest Browser loaded the secure loopback
+origin. Remote Chrome inspection confirmed `window.isSecureContext` and
+`navigator.xr`, immersive session entry, both handed controllers, trigger/select
+events, selection of the development target, and a clean session exit with the
+page still usable. Exact metrics and version evidence are recorded in
+[PERFORMANCE.md](PERFORMANCE.md#2026-07-15---physical-quest-3-local-preflight).
+
+This accepts the local physical-device subset only. It does not satisfy the
+hosted-HTTPS smoke deployment or later headset ergonomics, readability,
+thermal, endurance, and release gates.
 
 ## Desktop targets
 

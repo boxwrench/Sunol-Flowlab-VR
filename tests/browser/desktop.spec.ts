@@ -12,6 +12,17 @@ test('desktop foundation loads with explicit VR entry and a render surface', asy
   await expect(page.getByLabel('Development performance metrics')).toBeVisible()
   await expect(page.getByLabel('Comparison presets')).toBeVisible()
   await expect(page.locator('canvas')).toBeVisible()
+  const xrPreflight = await page.evaluate(() =>
+    JSON.parse(window.render_xr_preflight_to_text?.() ?? '{}'),
+  )
+  expect(xrPreflight).toMatchObject({
+    sessionActive: false,
+    leftControllerDetected: false,
+    rightControllerDetected: false,
+    leftSelectCount: 0,
+    rightSelectCount: 0,
+    targetSelectCount: 0,
+  })
 })
 
 test('comparison presets deterministically expose the U-shaped endpoint', async ({

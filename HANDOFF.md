@@ -6,8 +6,8 @@ Updated: 2026-07-15
 
 - Repository: <https://github.com/boxwrench/Sunol-Flowlab-VR>
 - Branch: `main`
-- Published baseline before this increment: `5d2ff8c` (`feat(sim): prove deterministic dose-response substrate`)
-- Current increment: Batch 03 desktop phenomenon presentation and diagnostics
+- Published baseline before this increment: `98ac4a2` (`docs: record desktop apparatus performance`)
+- Current increment: Batch 01B local physical Quest preflight closure and permanent development input telemetry
 - Active plan authority: [IMPLEMENTATION_PLAN.md](IMPLEMENTATION_PLAN.md) and its ordered `batch-00` through `batch-11` Markdown files
 - The superseded Godot plan is isolated under `docs/archive/` for provenance. Its stale duplicate Batch 03 snapshot was removed; use only the active indexed Batch 03 plan.
 
@@ -32,12 +32,20 @@ Updated: 2026-07-15
 - Accepted full 43-second browser/text-state/visual path and schema-2 production phenomenon benchmark
 - Band-driven hero observation tank, static six-jar recognition blockout, and deterministic low/optimum/high desktop presets
 - Unlabeled proof mode and authoritative clearing-front diagnostics
+- Authorized physical Quest 3 route over ADB reverse with secure-context and
+  `navigator.xr` confirmation
+- Physical immersive entry, both handed controllers, select input, development
+  target selection, Chrome remote inspection, baseline metrics, and clean
+  session exit
 
-The current local validation includes 15 passing repository contract tests, 64 passing Vitest tests across 14 files, canonical and nine-seed dose sweeps, reverse-order equality, type checking, lint, formatting, production build, a 28.38 ms 500-particle production-path benchmark, three passing desktop browser tests, deterministic low/optimum/high endpoint captures, an inspected unlabeled apparatus capture, and a 60 FPS 12-second real-time desktop apparatus observation with zero console errors. Full Batch 02A evidence is in [docs/BATCH_02A_ACCEPTANCE.md](docs/BATCH_02A_ACCEPTANCE.md); current Batch 03 evidence and open gates are in [docs/BATCH_03_PROGRESS.md](docs/BATCH_03_PROGRESS.md). The production build retains the expected non-failing large-chunk warnings from emulator environment assets.
+The current local validation includes 16 passing repository contract tests, 64 passing Vitest tests across 14 files, canonical and nine-seed dose sweeps, reverse-order equality, type checking, lint, formatting, production build, a production-path benchmark, three passing desktop browser tests, deterministic low/optimum/high endpoint captures, an inspected unlabeled apparatus capture, and a 60 FPS 12-second real-time desktop apparatus observation with zero console errors. The physical Quest preflight recorded a stable 120 FPS rolling snapshot, 8.33 ms average and 9.00 ms p95 frame time, both controllers and select events, and clean session exit. Full physical evidence is in [docs/PERFORMANCE.md](docs/PERFORMANCE.md#2026-07-15---physical-quest-3-local-preflight); Batch 02A evidence is in [docs/BATCH_02A_ACCEPTANCE.md](docs/BATCH_02A_ACCEPTANCE.md); current Batch 03 evidence and open gates are in [docs/BATCH_03_PROGRESS.md](docs/BATCH_03_PROGRESS.md). The production build retains the expected non-failing large-chunk warnings from emulator environment assets.
 
 ## Open gates and constraints
 
-- The Quest 3 is now physically present, but `adb devices -l` and Windows device discovery return no connected Quest/Android device. Use a known data-capable direct USB cable, unlock/wear the headset, and accept USB/debugging prompts before rerunning the device route. Do not mark real-device criteria complete until ADB reports exactly one device in state `device` and the headset checks pass.
+- The local physical Quest route is accepted. Device serial
+  `2G0YC5ZG0M052K` was authorized in ADB state `device`; immersive entry,
+  controller input, remote inspection, metrics, and exit passed. This does not
+  accept later ergonomics, readability, thermal, endurance, or release gates.
 - The accepted post-fix desktop observation kept Chrome heap within 34.9-35.5 MB for 310 uninterrupted seconds with 500 particles, three draw calls, and no console errors. The final exported report is recorded in `docs/PERFORMANCE.md`.
 - A hosted HTTPS deployment is not authorized yet. Localhost and the documented ADB reverse route are the approved development paths.
 - Public-data and fictionalization restrictions in [docs/DATA_BOUNDARY.md](docs/DATA_BOUNDARY.md) are binding.
@@ -60,12 +68,13 @@ The hybrid presentation direction does not create six simulations. The hero tank
 
 ## Recommended next session
 
-1. Connect and authorize the present Quest 3 until `adb devices -l` reports one device in state `device`; then run the documented reverse, Quest Browser, immersive-entry, controller, and remote-debug checks.
-2. Confirm CI passes after publication; ordinary CI intentionally excludes emulator interaction and physical Quest testing.
-3. Run the blinded apparatus-recognition protocol in `docs/UX_VALIDATION.md` with at least one operator or educator and preferably one non-operator.
-4. Complete the blinded low/optimum/high review before accepting Batch 03.
-5. Keep Batch 02B spatial hashing, pooling, mass/density fidelity, and merge-animation metadata deferred unless new measurements or visible limitations justify one.
-6. Keep hosted deployment and every unverified physical Quest criterion open; archived source artifacts remain non-authoritative.
+1. Confirm CI passes after publication; ordinary CI intentionally excludes emulator interaction and physical Quest testing.
+2. Run the blinded apparatus-recognition protocol in `docs/UX_VALIDATION.md` with at least one operator or educator and preferably one non-operator.
+3. Complete the blinded low/optimum/high review before accepting Batch 03.
+4. Keep Batch 02B spatial hashing, pooling, mass/density fidelity, and merge-animation metadata deferred unless new measurements or visible limitations justify one.
+5. Keep the hosted deployment and later headset-specific ergonomics, readability,
+   thermal, endurance, and release gates open; archived source artifacts remain
+   non-authoritative.
 
 ## Commands
 
@@ -81,4 +90,5 @@ npm run test:browser
 npm run dev
 ```
 
-Open `http://localhost:5173` in Chrome for the Quest 3 emulator. For later physical-device testing, follow [docs/DEVICE_TESTING.md](docs/DEVICE_TESTING.md).
+Open `http://localhost:5173` in Chrome for the Quest 3 emulator. For repeat
+physical-device testing, follow [docs/DEVICE_TESTING.md](docs/DEVICE_TESTING.md).

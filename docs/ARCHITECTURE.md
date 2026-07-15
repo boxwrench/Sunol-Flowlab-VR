@@ -35,6 +35,10 @@ Forbidden dependencies:
 
 Physical or spectator input becomes a validated discrete command. The application layer applies it to lifecycle/domain code. src/app/SimulationRuntime.ts owns the deterministic state and fixed-step clock, while an app-owned frame driver advances that runtime inside the React Three Fiber canvas. Rendering receives a read-only state view and synchronizes reusable Three.js objects. Turbidity bands produced by the simulation are the sole process source for hero-tank appearance, clearing-front diagnostics, instruments, completed results, static canonical jar summaries, persistence, and replay.
 
+Development-only XR preflight adapters may report session, controller, and
+selection facts to app-owned low-frequency telemetry. They do not own or mutate
+simulation state and are excluded from production presentation.
+
 The hero tank is the only live process presentation. Canonical jars are application-owned write-on-completion summaries derived from completed results. The complete dose-response plot and versioned experiment log retain all eleven dose values and rebuild canonical summaries on restore; jars are never simulation owners or complete history.
 
 ## Determinism and performance
@@ -51,4 +55,4 @@ Invalid external commands fail at the app boundary. Unsupported XR and session f
 
 ## Current state
 
-Batch 00 is substantially complete and Batch 01A is accepted. Batch 02A has an app-owned deterministic phenomenon runtime, fixed-capacity size and settled state, simplified aggregation/settling, one authoritative turbidity-band record, an accepted 11-dose/nine-seed sweep, and production-path benchmark evidence. Batch 02B engine mechanics remain deferred. Batch 01B physical-device and hosted-route validation remains open until the Quest is detected and tested; Batch 03 desktop presentation is ready to begin.
+Batch 00 is substantially complete and Batch 01A is accepted. The local physical portion of Batch 01B is accepted on Quest 3; the hosted-HTTPS smoke remains open. Batch 02A has an app-owned deterministic phenomenon runtime, fixed-capacity size and settled state, simplified aggregation/settling, one authoritative turbidity-band record, an accepted 11-dose/nine-seed sweep, and production-path benchmark evidence. Batch 02B engine mechanics remain deferred. Batch 03 desktop presentation is in progress with human recognition gates open.

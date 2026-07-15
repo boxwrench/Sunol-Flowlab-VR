@@ -1,6 +1,6 @@
 # Batch 00 Implementation Plan: Pre-build Contracts
 
-**Status:** Substantially complete — physical Quest route remains open
+**Status:** Substantially complete — local Quest route confirmed; hosted HTTPS remains open
 **Branch:** `batch-00-contracts`  
 **Depends on:** Project brief only  
 **May run in parallel with:** Visual reference gathering, public-data review, package verification  

@@ -1,6 +1,6 @@
 # Batch 01 Implementation Plan: Foundation and WebXR Preflight
 
-**Status:** In progress — Track 1A accepted; Track 1B device-blocked
+**Status:** In progress — Track 1A accepted; Track 1B local device gate accepted, hosted gate open
 **Branch:** `batch-01-foundation`  
 **Depends on:** Batch 00 accepted  
 **May run in parallel with:** Track 1A and Track 1B only under isolated ownership  
@@ -137,6 +137,8 @@ This track may use a separate branch/worktree. It must not edit simulation archi
 
 ### Work package 01B.1 - XR session entry
 
+Status: accepted on the local physical Quest route on 2026-07-15.
+
 - Create the XR store using APIs for the pinned `@react-three/xr` version.
 - Add one obvious development entry button.
 - Start `immersive-vr` from a secure context.
@@ -144,6 +146,8 @@ This track may use a separate branch/worktree. It must not edit simulation archi
 - Record capability detection results.
 
 ### Work package 01B.2 - Controller proof
+
+Status: accepted on the local physical Quest route on 2026-07-15.
 
 - Confirm both tracked controllers render or otherwise expose poses.
 - Confirm trigger/select input is received.
@@ -153,6 +157,8 @@ This track may use a separate branch/worktree. It must not edit simulation archi
 
 ### Work package 01B.3 - Emulator and real-headset workflow
 
+Status: accepted on the local physical Quest route on 2026-07-15.
+
 - Verify the integrated emulator supported by the pinned XR package.
 - Confirm the deprecated browser extension is not required.
 - Open the application in Quest Browser through the selected HTTPS route.
@@ -161,6 +167,8 @@ This track may use a separate branch/worktree. It must not edit simulation archi
 - Record headset, browser, OS, build hash, and package versions in `docs/PERFORMANCE.md`.
 
 ### Work package 01B.4 - Hosted smoke deployment
+
+Status: open; no public host has been authorized or selected.
 
 Deploy the minimal build to the intended static host or a disposable equivalent and prove:
 
@@ -229,6 +237,13 @@ Track 1A and Track 1B may run concurrently only when:
 - Remote inspection works.
 - Baseline Quest metrics and exact software versions are recorded.
 - No unresolved certificate, browser, session-entry, or package-version issue remains.
+
+The local physical subset is accepted: Quest 3 entered immersive VR from the
+ADB-reversed loopback route, both controllers and select input registered, the
+development target was selected, remote inspection reported stable baseline
+metrics, and session exit preserved a usable page. The track is not fully
+accepted until the hosted-HTTPS criteria above are exercised on an authorized
+deployment.
 
 ## Suggested commit
 

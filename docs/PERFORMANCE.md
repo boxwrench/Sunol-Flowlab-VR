@@ -1,5 +1,34 @@
 # Performance and Device Evidence
 
+## 2026-07-15 - Physical Quest 3 local preflight
+
+- Device: Meta Quest 3, serial `2G0YC5ZG0M052K`
+- OS: Android 14, build display `UP1A.231005.007.A1`, incremental `52270740038100520`
+- Browser: Quest Browser `149.0.0.24.3.1013217646` (`versionCode` `570100488`)
+- Route: USB ADB 37.0.1, `adb reverse tcp:5173 tcp:5173`, Quest Browser at `http://127.0.0.1:5173/`
+- Candidate: commit `98ac4a2` plus the development-only controller-preflight worktree; simulation config `fnv1a32-056c0563`
+- Capability: secure context `true`; `navigator.xr` present; `immersive-vr` entered
+- Input: left and right controllers detected; left select count 4; right select count 5; development target select count 6
+- Exit: session became inactive, controller presence cleared, telemetry counts remained intact, and the page retained its title, canvas, and **Enter VR** action
+
+The stable in-session rolling snapshot reported:
+
+| Average FPS | Average frame | p95 frame | Simulation | Instance sync | Particles | Draw calls | JS heap |
+| ----------: | ------------: | --------: | ---------: | ------------: | --------: | ---------: | ------: |
+|       120.0 |       8.33 ms |   9.00 ms |   0.007 ms |      0.025 ms |       500 |         20 | 22.0 MB |
+
+The Dose 5 run completed with normalized endpoint turbidity `0.200000`. Remote
+inspection recorded no runtime exception. Quest Browser emitted one non-failing
+capability warning because `dom-overlay` is not supported for `immersive-vr`;
+the application does not depend on that optional feature. An initial missing
+favicon request was corrected in the final candidate.
+
+This accepts the Batch 01B local physical-device route: ADB authorization,
+secure browser entry, immersive entry, both controller poses/select events,
+target selection, remote inspection, baseline metrics, and clean exit. It is a
+short functional preflight, not a thermal or endurance claim. The separate
+hosted-HTTPS smoke deployment remains open.
+
 ## 2026-07-14 - Chrome Quest 3 emulator preflight
 
 - Mode: development, Chrome localhost, IWER Meta Quest 3 profile
@@ -77,7 +106,7 @@ The final exported 300-frame rolling report was captured at `2026-07-15T15:14:54
 | Rolling sample count    |              300 |
 | Heap used               | 37,314,210 bytes |
 
-The exported user-agent identifies Oculus Browser on Quest 3 because it is supplied by the IWER emulation profile. This remains desktop Chrome evidence, not a physical-headset measurement. Track 1A's rendered stability gate is accepted. Real Quest performance remains device-blocked.
+The exported user-agent identifies Oculus Browser on Quest 3 because it is supplied by the IWER emulation profile. This remains desktop Chrome evidence, not a physical-headset measurement. Track 1A's rendered stability gate is accepted; the later physical preflight above is the real-device record.
 
 ## 2026-07-15 - Batch 02A production phenomenon benchmark
 

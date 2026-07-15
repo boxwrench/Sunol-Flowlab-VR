@@ -6,7 +6,7 @@ This is a **phenomenological coagulation model**, not dose-prediction software, 
 
 ## Project status
 
-Implementation is in progress. Batch 00 is substantially complete, Batch 01A is accepted, and reduced Batch 02A proves the deterministic 11-dose phenomenon with app-owned state, authoritative turbidity bands, browser evidence, and an accepted nine-seed regression suite. Batch 02B performance machinery is deferred. Batch 03 desktop presentation is in progress with a band-driven hero tank, static six-jar blockout, deterministic comparison presets, clearing diagnostics, and a clean recognition-review mode; its external recognition and human visual-comparison gates remain open. Physical Quest 3 and hosted-route criteria also remain open. See [the Batch 03 progress packet](docs/BATCH_03_PROGRESS.md), [PROGRESS.md](PROGRESS.md), and the [implementation-plan index](IMPLEMENTATION_PLAN.md).
+Implementation is in progress. Batch 00 is substantially complete, Batch 01A is accepted, and the local physical portion of Batch 01B is accepted on Quest 3; its hosted-URL smoke gate remains open. Reduced Batch 02A proves the deterministic 11-dose phenomenon with app-owned state, authoritative turbidity bands, browser evidence, and an accepted nine-seed regression suite. Batch 02B performance machinery is deferred. Batch 03 desktop presentation is in progress with a band-driven hero tank, static six-jar blockout, deterministic comparison presets, clearing diagnostics, and a clean recognition-review mode; its external recognition and human visual-comparison gates remain open. See [the physical Quest evidence](docs/PERFORMANCE.md#2026-07-15---physical-quest-3-local-preflight), [the Batch 03 progress packet](docs/BATCH_03_PROGRESS.md), [PROGRESS.md](PROGRESS.md), and the [implementation-plan index](IMPLEMENTATION_PLAN.md).
 
 The approved presentation direction is a [hybrid six-jar test bench and hero observation tank](docs/DESIGN_DIRECTION_JAR_TEST_HYBRID.md): one live authoritative simulation, six static canonical preset summaries, and a complete plot/log covering all eleven dose values.
 
@@ -40,7 +40,7 @@ npm run build
 npm run benchmark
 ```
 
-An optional desktop browser smoke test is available through npm run test:browser when Playwright Chromium is installed. Emulator interaction and physical Quest testing remain manual device gates.
+An optional desktop browser smoke test is available through npm run test:browser when Playwright Chromium is installed. Emulator interaction, physical Quest testing, and hosted-route checks remain manual gates.
 
 The physical XR route and Quest debugging workflow are documented in [docs/DEVICE_TESTING.md](docs/DEVICE_TESTING.md).
 
