@@ -6,6 +6,8 @@
 **May run in parallel with:** Batch 03 under a separate worktree  
 **Primary gate:** A user can reliably select one of 11 integer doses and press Start on the target Quest while maintaining 72 fps with useful headroom.
 
+> This batch must also follow [the hybrid jar-test design direction](docs/DESIGN_DIRECTION_JAR_TEST_HYBRID.md). The design brief governs product intent and presentation meaning; this batch remains authoritative for timing, scope, tests, evidence, and acceptance.
+
 ## Goal
 
 Prove physical interaction and ergonomics without any treatment physics. This isolates XR problems from chemistry and rendering problems.
@@ -36,7 +38,7 @@ It must not import simulation internals or render treatment particles.
 ## Work package 04.1 - Minimal XR apparatus scene
 
 - Create a comfortable tabletop scene with a simple floor/reference frame.
-- Add an empty tank placeholder and control mounting area.
+- Add an empty hero observation tank placeholder, static six-jar canonical preset rack, and control mounting area.
 - Establish standing and seated starting transforms.
 - Keep lighting and materials deliberately simple.
 - Add a development calibration marker for reach, eye height, and table height.
@@ -95,7 +97,17 @@ The fallback is accepted when it is:
 
 Do not carry both controls into the shipped scene unless accessibility testing demonstrates a real need.
 
-## Work package 04.5 - Start button
+## Work package 04.5 - Optional canonical jar preset selection
+
+- Treat jars as presets for doses 0, 2, 4, 6, 8, and 10 only.
+- Route every jar selection through the same validated SET_DOSE command as the physical control.
+- Reflect the selected preset on the 11-detent control without bypassing or weakening the full 0-10 contract.
+- Keep the jar rack static; do not add simulation state, moving particles, turbidity, completed summaries, or experiment history.
+- Accept jar selection only if it is reliable and does not confuse users about the hero tank being the single live trial.
+
+This interaction is optional for v1. The primary 11-detent control remains authoritative and sufficient.
+
+## Work package 04.6 - Start button
 
 - Add one large pressable control.
 - Use clear travel, return, and activation thresholds.
@@ -104,7 +116,7 @@ Do not carry both controls into the shipped scene unless accessibility testing d
 - Add optional stronger haptic pulse and simple mechanical sound hook.
 - Keep button behavior independent from any treatment state machine.
 
-## Work package 04.6 - Ergonomic validation
+## Work package 04.7 - Ergonomic validation
 
 Test on the real headset:
 
@@ -118,7 +130,7 @@ Test on the real headset:
 
 Record measurements and observations in `docs/DECISIONS.md` or `docs/XR_INTERACTION.md`.
 
-## Work package 04.7 - Reliability test protocol
+## Work package 04.8 - Reliability test protocol
 
 Perform a structured test, for example:
 
@@ -137,7 +149,7 @@ Suggested gate, subject to user testing:
 - no accidental command storms;
 - start button activates exactly once per deliberate press.
 
-## Work package 04.8 - Quest performance capture
+## Work package 04.9 - Quest performance capture
 
 Capture:
 
@@ -156,6 +168,7 @@ The empty shell should hold 72 fps with substantial headroom. A marginal pass he
 - No simulation imports.
 - No phase locking based on trial state.
 - No gauge, plot, refill handle, or tear-off sheet.
+- No live jar simulations, canonical jar summaries, or jar-owned experiment history.
 - No hand tracking.
 - No detailed environment art.
 - No desktop spectator interactions.
@@ -184,6 +197,7 @@ The empty shell should hold 72 fps with substantial headroom. A marginal pass he
 - The chosen control is either the lever or documented rotary fallback.
 - No unconstrained float dose enters application state.
 - Start button emits exactly one command per deliberate press.
+- Any implemented canonical jar selection emits the matching validated even DoseIndex and leaves the primary 11-detent contract intact.
 - Left/right and seated/standing use are acceptable.
 - The scene sustains 72 fps with useful headroom.
 - XR interaction APIs and decisions are documented against the pinned version.

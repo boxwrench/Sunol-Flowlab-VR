@@ -6,6 +6,8 @@
 **May run in parallel with:** Review, parity-test preparation, trace analysis  
 **Primary gate:** The proven desktop simulation runs inside the proven XR apparatus with the same qualitative behavior, deterministic results, and acceptable Quest performance.
 
+> This batch must also follow [the hybrid jar-test design direction](docs/DESIGN_DIRECTION_JAR_TEST_HYBRID.md). The design brief governs product intent and presentation meaning; this batch remains authoritative for timing, scope, tests, evidence, and acceptance.
+
 ## Goal
 
 Combine two already-proven systems without redesigning either one. Integration should expose mismatches, not become an excuse to refactor simulation behavior and XR interaction simultaneously.
@@ -29,6 +31,7 @@ Combine two already-proven systems without redesigning either one. Integration s
 - `/render` consumes simulation output and owns instance synchronization.
 - `/app` coordinates the selected dose, simulation lifecycle, desktop/XR mode, and scene composition.
 - Desktop and XR paths share one treatment implementation.
+- The hero observation tank is the only live process presentation; the six canonical jars remain static preset context.
 
 ## Work package 05.1 - Integration contract review
 
@@ -54,13 +57,14 @@ Implement controlled command routing:
 
 This batch may use a temporary limited lifecycle until Batch 06 supplies the full state machine.
 
-## Work package 05.3 - Place the simulation in the XR tank
+## Work package 05.3 - Place the simulation in the XR hero tank
 
 - Align simulation coordinates with tank geometry through one documented transform.
 - Avoid applying world transforms independently to each particle.
 - Place the existing `InstancedMesh` renderer in the XR scene.
 - Add the existing gradient turbidity quad.
 - Preserve the desktop proof route unchanged.
+- Preserve the six-jar rack as static geometry without clocks, process state, or duplicated turbidity.
 - Ensure tank dimensions and particle scale read at arm’s length.
 
 ## Work package 05.4 - Render synchronization
@@ -79,6 +83,7 @@ Test the minimum transparent stack:
 - open-top glass walls;
 - one gradient quad;
 - particles;
+- cheap static canonical jar geometry without stacked transparent walls;
 - no additional water volume mesh unless proven necessary.
 
 Check:
@@ -173,6 +178,7 @@ Stop and isolate the cause when:
 - Canonical low/optimum/high outcomes remain qualitatively correct in the headset.
 - Dose control and start input remain reliable.
 - One turbidity authority remains enforced.
+- Exactly one authoritative live simulation drives the hero tank; canonical jars remain non-simulated preset context.
 - Quest performance at 500 particles is acceptable with sufficient headroom for instrumentation.
 - Desktop proof remains independently runnable.
 - No unresolved ambiguity remains between interaction, simulation, and rendering defects.

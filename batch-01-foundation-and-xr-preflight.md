@@ -6,6 +6,8 @@
 **May run in parallel with:** Track 1A and Track 1B only under isolated ownership  
 **Primary gate:** The repository can render 500 deterministic particles with permanent metrics, and the actual Quest/WebXR toolchain is proven independently.
 
+> This batch must also follow [the hybrid jar-test design direction](docs/DESIGN_DIRECTION_JAR_TEST_HYBRID.md). The design brief governs product intent and presentation meaning; this batch remains authoritative for timing, scope, tests, evidence, and acceptance.
+
 ## Goal
 
 Prove the two basic technical foundations before building treatment behavior:
@@ -107,7 +109,27 @@ Metrics must be callable from code and exportable as a compact report. Do not ma
 - Search hot paths for array/object allocation, closures, repeated temporary `Vector3`/`Matrix4` creation, and React rerenders.
 - Record every remaining per-frame allocation and whether it is acceptable.
 
-**Gate for Track 1A:** No unbounded memory growth, deterministic reset, one particle draw call, and a successful production build.
+### Work package 01A.7 - Runtime ownership correction
+
+Status: implemented in the foundation; retained as a permanent regression gate.
+
+- Add an app-owned SimulationRuntime that creates and owns authoritative process state and the fixed-step clock.
+- Expose start, pause, reset, rendered advance, and headless stepping without React or WebGL ownership.
+- Pass externally owned read-only simulation views into rendering.
+- Keep simulation creation, reset, and stepping out of src/render.
+- Inject render telemetry or route it through a neutral boundary; forbid render imports from src/app.
+- Preserve src/sim independence from browser, React, Three.js, and XR dependencies.
+- Do not add a generalized engine, event bus, Redux, Zustand, or another global state framework.
+
+Tests:
+
+- import boundaries forbid src/render imports from src/app;
+- runtime lifecycle tests prove deterministic create, start, pause, reset, and advance behavior;
+- renderer contract tests prove ParticleCloud receives state and does not instantiate FixedStepClock or call authoritative step functions;
+- headless tests prove state advances without React, WebGL, or a browser;
+- optional development diagnostics may record unexpected React rerenders, but zero renders is not the gate.
+
+**Gate for Track 1A:** No unbounded memory growth, deterministic reset, app-owned runtime lifecycle, read-only rendering consumption, one particle draw call, and a successful production build.
 
 ## Track 1B - Minimal WebXR preflight
 
@@ -173,7 +195,8 @@ Track 1A and Track 1B may run concurrently only when:
 - typecheck and unit tests.
 - production build.
 - deterministic seed snapshot or numeric comparison.
-- five-minute idle memory observation.
+- five-minute idle memory observation;
+- runtime lifecycle, module-boundary, renderer-contract, and headless behavior tests.
 - desktop metric capture at 500 particles.
 - Quest screenshot or trace proving session entry and controller input.
 - hosted URL smoke-test record.
@@ -197,6 +220,7 @@ Track 1A and Track 1B may run concurrently only when:
 - Five-minute idle run shows no unbounded memory growth.
 - Permanent metrics are visible and exportable in development.
 - Production build succeeds.
+- Runtime ownership remains in src/app, deterministic behavior remains in src/sim, and src/render remains a read-only consumer.
 
 ### Track 1B
 

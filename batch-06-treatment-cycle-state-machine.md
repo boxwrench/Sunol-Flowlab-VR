@@ -6,6 +6,8 @@
 **May run in parallel with:** State-test authoring, instrument concepts, pacing review  
 **Primary gate:** One complete trial has a clear beginning, treatment sequence, fixed measurement, recorded result, and deterministic refill/reset.
 
+> This batch must also follow [the hybrid jar-test design direction](docs/DESIGN_DIRECTION_JAR_TEST_HYBRID.md). The design brief governs product intent and presentation meaning; this batch remains authoritative for timing, scope, tests, evidence, and acceptance.
+
 ## Goal
 
 Replace development-only trial controls with an explicit domain state machine that makes the experiment coherent, repeatable, and resistant to partial or illegal input.
@@ -106,6 +108,8 @@ Bind state transitions to existing simulation controls:
 
 Keep state-machine logic in app/domain code, not inside XR components.
 
+The hero observation tank remains the single live process presentation throughout every phase. Canonical jars never own phase state or timers.
+
 ## Work package 06.4 - Dose locking and interaction feedback
 
 - Lock dose control after `START`.
@@ -126,6 +130,8 @@ Implement the event sequence:
 6. transition to `COMPLETE`.
 
 The final gauge and plot geometry arrive in Batch 7. This batch provides the event, data, and minimal placeholders.
+
+The completed-result event must also be consumable by Batch 07 static canonical jar summaries. This batch does not update jars directly, and odd-dose results remain fully valid even though they never map to a canonical jar.
 
 Suggested result shape:
 
@@ -148,6 +154,7 @@ interface TrialResult {
 - Clear timers, transient effects, previous active result, merge tween state, and settled material.
 - Restore identical raw-water arrays from the saved seed/config.
 - Preserve completed experiment-log data outside the trial state.
+- Preserve the complete plot/log and any future canonical jar summaries during refill; only explicit history clearing removes them.
 - Confirm the next run at the same dose reproduces the same result.
 
 ## Work package 06.7 - Failure and lifecycle handling
@@ -213,6 +220,7 @@ Do not finalize visual tuning here; capture adjustments for Batch 8.
 - One trial runs uninterrupted through all seven phases.
 - Dose locks after start and unlocks only after refill.
 - Measurement occurs once at the fixed endpoint and creates one result.
+- The immutable completed result remains the only source for the hero tank endpoint, complete plot/log, and any later static canonical summary.
 - Refill restores identical raw water with no surviving floc or timers.
 - Same seed/dose/config remains reproducible.
 - Desktop and Quest both complete the same domain sequence.

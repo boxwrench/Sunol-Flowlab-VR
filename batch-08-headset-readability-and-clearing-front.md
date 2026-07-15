@@ -6,6 +6,8 @@
 **May run in parallel with:** Recorded review, user comprehension testing, optional charge-vision spike  
 **Primary gate:** At arm’s length in stereo, the player can see floc growth, falling floc, top-down clearing, and a final appearance consistent with the gauge while the Quest sustains the performance target.
 
+> This batch must also follow [the hybrid jar-test design direction](docs/DESIGN_DIRECTION_JAR_TEST_HYBRID.md). The design brief governs product intent and presentation meaning; this batch remains authoritative for timing, scope, tests, evidence, and acceptance.
+
 ## Goal
 
 Tune the already-correct treatment loop for visual comprehension in the real headset. This batch may change display transforms and accepted simulation tuning only through controlled regression review.
@@ -41,6 +43,8 @@ Create a repeatable test matrix covering:
 - early flocculation, late flocculation, early settling, endpoint;
 - bright and dim scene-lighting variants if relevant;
 - clean experiment sheet and partially populated plot.
+- empty and populated static canonical jar summaries;
+- hero-tank dominance with the full six-jar rack visible.
 
 Capture video or screenshots with build hash and config hash.
 
@@ -78,6 +82,8 @@ Tune display-only transforms for:
 
 Gauge and plot numeric mapping may differ in scale but must preserve ordering and derive from the same data.
 
+Canonical jar summaries use their documented completed-result transform and remain static. Display tuning must not turn them into live process views or make them compete with the hero tank.
+
 ## Work package 08.4 - Clearing-front legibility
 
 Refine the top-down read by testing:
@@ -113,6 +119,7 @@ Audit:
 - particle material transparency;
 - detector/beam effects;
 - overlapping instrument glass;
+- stacked canonical jar walls and jar-summary gradients;
 - sorting artifacts.
 
 Simplification order when performance or clarity fails:
@@ -192,6 +199,8 @@ It is not required for this batch to pass.
 - Are floc and haze both visible without excessive transparency?
 - Is the optimum clearly better without misleading theatrics?
 - Do gauge and endpoint appearance agree?
+- Do the jars read as canonical preset summaries rather than complete history or six live simulations?
+- Does the hero tank remain the most readable and compelling element?
 - Were user observations recorded rather than assumed?
 - Does the target headset maintain 72 fps through worst-case moments?
 
@@ -201,6 +210,8 @@ It is not required for this batch to pass.
 - Floc visibly grows and settles below the clearing region.
 - Low, optimum, and high remain distinguishable.
 - Final tank appearance agrees with the gauge and plot result.
+- Static canonical jar summaries agree with their completed results without obscuring the complete plot.
+- The hero tank remains visually dominant and the jars read as presets, not complete memory.
 - Visuals remain legible from common standing/seated angles.
 - One turbidity authority remains intact.
 - Quest sustains the required performance target with documented metrics.

@@ -6,6 +6,8 @@
 **May run in parallel with:** Asset and audio preparation after Batch 03, but final integration occurs here  
 **Primary gate:** The scene reads as a stylized drinking-water plant, preserves instrument dominance and parallax, and maintains the Quest performance target.
 
+> This batch must also follow [the hybrid jar-test design direction](docs/DESIGN_DIRECTION_JAR_TEST_HYBRID.md). The design brief governs product intent and presentation meaning; this batch remains authoritative for timing, scope, tests, evidence, and acceptance.
+
 ## Goal
 
 Add the minimum environmental and audio context needed for presence without turning the project into a plant walkthrough or spending the frame budget on scenery.
@@ -26,7 +28,7 @@ Add the minimum environmental and audio context needed for presence without turn
 
 - Stylized low-poly modular geometry.
 - Only what can be seen from the experiment station.
-- Apparatus remains the hero.
+- The hero observation tank remains the primary visual; active control and selected canonical jar are secondary, followed by instruments, static jar summaries, and environment.
 - Flat or lightly shaded materials.
 - Baked/fake lighting; no dynamic shadows.
 - Sparse textures and repeated modules.
@@ -114,6 +116,8 @@ Add phase-linked layers:
 
 No sound layer should be required to understand the process.
 
+Audio may clarify authoritative events but must not imply better flocculation or clarity than the completed result produced.
+
 ### Work package 10B.3 - Ambient opening with clarity
 
 Prototype a subtle ambience change as turbidity falls, driven by the authoritative turbidity record through a display/audio transform.
@@ -134,6 +138,8 @@ Requirements:
 - No dynamic shadows.
 - Add a brief measurement lighting cue only if inexpensive.
 - Preserve readable contrast on gauge, plot, labels, particles, and turbidity quad.
+- Preserve canonical jar labels and summaries without letting six jars overpower the hero tank.
+- Drive any result-responsive light from authoritative turbidity or completed-result data.
 
 ### Work package 10C.2 - Materials and palette
 
@@ -224,6 +230,8 @@ Do not sacrifice the treatment loop to preserve scenery.
 - Scene feels like a small window into a stylized drinking-water plant.
 - Real near-field geometry creates believable parallax.
 - Instruments, tank, floc, and clearing front remain legible.
+- Hero-tank dominance and the canonical-preset meaning of the jar rack survive final lighting and materials.
+- Audio and lighting never communicate an outcome that disagrees with the authoritative result.
 - Audio adds tactile and process feedback but is not required for comprehension.
 - Environment remains intentionally sparse and non-explorable.
 - Quest sustains the required performance target with documented final metrics.

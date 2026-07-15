@@ -6,6 +6,8 @@
 **May run in parallel with:** Independent release review and documentation verification only  
 **Primary gate:** A reproducible public release works on Quest, desktop, and mobile fallback, preserves the accepted dose-response behavior, contains no development or sensitive material, and can be rolled back safely.
 
+> This batch must also follow [the hybrid jar-test design direction](docs/DESIGN_DIRECTION_JAR_TEST_HYBRID.md). The design brief governs product intent and presentation meaning; this batch remains authoritative for timing, scope, tests, evidence, and acceptance.
+
 ## Goal
 
 Freeze the accepted feature set, prove the complete system under release conditions, deploy it, document it, and preserve known-good artifacts.
@@ -45,6 +47,8 @@ Create a checklist of:
 - environment variables and host configuration;
 - persistence schema version;
 - accepted simulation config hash and dose-sweep baseline.
+- approved hybrid design brief and recognition evidence;
+- proof that the hero tank is the only live simulation, the plot/log are complete memory, and jars are static canonical summaries.
 
 Classify defects:
 
@@ -207,6 +211,10 @@ The release cannot proceed with:
 
 - failing dose-sweep contract;
 - discrepancy between visible water, gauge, plot, or stored result;
+- canonical jar summary disagreement with its completed result;
+- an odd-dose result missing from the complete plot or experiment log;
+- jars presented as complete history or implemented as unapproved live simulations;
+- missing recognition-validation evidence in docs/UX_VALIDATION.md;
 - inability to clear inherited plot data;
 - unresolved memory growth;
 - Quest performance below the accepted target;
@@ -220,6 +228,8 @@ The release cannot proceed with:
 - Can a new visitor understand the desktop experience without instructions?
 - Can a Quest user enter VR, choose a dose, run, measure, plot, refill, and repeat?
 - Is the U-shaped curve still present and discoverable?
+- Does an unlabeled image retain the validated jar-test and comparative-experiment recognition?
+- Do users understand that the hero tank is live, jars are canonical presets, and the plot is complete memory?
 - Are all public claims appropriately phenomenological?
 - Do automated and device tests match the release commit?
 - Are performance results measured on the real target device?
@@ -239,9 +249,10 @@ A new visitor can:
 7. see clear water move downward;
 8. receive a consistent measurement;
 9. record and persist a plot point;
-10. refill identical raw water and repeat;
-11. clear the experiment log physically;
-12. discover the U-shaped dose-response curve.
+10. see exact canonical-dose trials update one static matching jar while odd doses remain in the complete plot without changing a jar;
+11. refill identical raw water and repeat;
+12. clear the experiment log, plot, and canonical summaries physically;
+13. discover the U-shaped dose-response curve.
 
 Additionally:
 
@@ -249,6 +260,7 @@ Additionally:
 - final Quest performance and endurance gates pass;
 - no restricted material or development chrome ships;
 - docs, artifacts, deployment record, rollback plan, and release tag are complete.
+- recognition validation is recorded, hero-tank dominance is preserved, and no jar owns continuous process state.
 
 ## Suggested tags and commit
 

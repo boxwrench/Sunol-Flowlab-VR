@@ -6,6 +6,8 @@
 **May run in parallel with:** Instrument geometry and data wiring after interfaces freeze  
 **Primary gate:** The apparatus explains itself physically, records exactly one result per trial, persists the curve, and lets a visitor clear inherited data without software chrome.
 
+> This batch must also follow [the hybrid jar-test design direction](docs/DESIGN_DIRECTION_JAR_TEST_HYBRID.md). The design brief governs product intent and presentation meaning; this batch remains authoritative for timing, scope, tests, evidence, and acceptance.
+
 ## Goal
 
 Turn the complete treatment loop into an understandable experimental instrument through diegetic controls, readouts, plotting, and persistent experiment memory.
@@ -24,7 +26,7 @@ Turn the complete treatment loop into an understandable experimental instrument 
 
 ## Core rule
 
-Every display derives from the same authoritative turbidity-band record captured by Batch 06. Different display mappings are allowed; independent process calculations are not.
+Every display derives from the same authoritative turbidity-band record captured by Batch 06. Different display mappings are allowed; independent process calculations are not. The mounted dose-response plot and versioned experiment log are the sole complete memory for all doses 0 through 10. The six jars are static summaries for canonical presets 0, 2, 4, 6, 8, and 10 only.
 
 ## Workstream 07A - Read-only physical instrumentation
 
@@ -80,6 +82,35 @@ Build a physical board that:
 
 Document the repeated-dose policy before implementation.
 
+The plot must accept every integer dose. Odd-dose trials remain fully visible and persisted even though no canonical jar summary changes.
+
+### Work package 07A.6 - Static canonical jar summaries
+
+Implement application-owned, write-on-completion summaries for canonical doses 0, 2, 4, 6, 8, and 10.
+
+Intended record:
+
+    interface CanonicalJarSummary {
+      readonly dose: 0 | 2 | 4 | 6 | 8 | 10
+      readonly trialId: string
+      readonly endpointTurbidity: number
+      readonly displayClarity: number
+    }
+
+Rules:
+
+- update only after an immutable completed result exactly matches a canonical dose;
+- use the latest completed result for that canonical dose;
+- derive displayClarity through a documented transform of the authoritative result;
+- update one matching jar once and store the associated result ID;
+- leave all jars unchanged for odd-dose results;
+- remain static between completed-result updates;
+- contain no simulation clock, moving particles, per-frame process logic, or independent turbidity;
+- clear when experiment history clears;
+- rebuild deterministically from the persisted experiment log on restore rather than becoming a second history source.
+
+Allowed presentations include a restrained clarity gradient, settled-material silhouette, tested marker, or small result token. They remain subordinate to the hero tank and complete plot.
+
 ## Workstream 07B - Experiment actions and persistence
 
 ### Work package 07B.1 - Experiment-log domain model
@@ -107,6 +138,7 @@ Requirements:
 
 - Save after a valid completed trial.
 - Restore on app start.
+- Restore the complete plot from all results and rebuild each static canonical jar summary from the latest matching canonical result.
 - Handle unavailable storage and quota errors gracefully.
 - Add schema version and migration hook.
 - Avoid writing every frame.
@@ -127,6 +159,7 @@ Requirements:
 - Animate removal of the current sheet.
 - Clear the persisted experiment log at the defined commit point.
 - Reveal a fresh blank sheet.
+- Clear all static canonical jar summaries at the same commit point as the plot and persisted log.
 - Prevent accidental clears from hover or minor movement.
 - Provide an undo only if it can remain fully diegetic and simple; otherwise require a deliberate threshold and accept the clear as final.
 
@@ -141,6 +174,10 @@ Add automated checks proving:
 - refill adds no point;
 - app restart restores the same plotted values;
 - tear-off clear removes stored and visible points together.
+- canonical completion updates exactly one matching jar once;
+- odd-dose completion updates no jar while still updating the complete plot and log;
+- restored canonical summaries reference the same completed results as persistence;
+- history clearing removes plot points and canonical summaries together.
 
 ## Work package 07C - Instrument layout and comprehension test
 
@@ -150,6 +187,7 @@ Test:
 - phase indicator understandable without text overlay;
 - tank remains the visual focus;
 - gauge and plot are readable but not dominant;
+- canonical jars read as preset summaries rather than complete history or six live experiments;
 - refill and clear-log controls cannot be confused;
 - a new visitor can complete a second trial after seeing the first result;
 - players begin deliberately changing dose to seek a lower plotted result.
@@ -168,6 +206,7 @@ Use short observation sessions rather than explanatory tutorials.
 ## Required tests and evidence
 
 - gauge/plot/source-of-truth unit tests;
+- canonical-summary exact-dose, odd-dose no-op, latest-result, restore, and clear tests;
 - experiment-log schema and migration tests;
 - localStorage failure handling;
 - exactly-once append test;
@@ -182,6 +221,8 @@ Use short observation sessions rather than explanatory tutorials.
 - Does any instrument calculate its own turbidity?
 - Is fake precision introduced by labels or units?
 - Can inherited data be cleared physically?
+- Are the plot and log clearly the complete memory while jars remain static canonical summaries?
+- Does any jar own a clock, moving particles, per-frame logic, or independent outcome?
 - Can one trial create multiple points?
 - Are refill and experiment-log clear separate actions?
 - Does persistence stay outside `/sim`?
@@ -191,6 +232,9 @@ Use short observation sessions rather than explanatory tutorials.
 
 - Physical dose marks, status indicator, gauge, nephelometer, plot, refill handle, and clear-sheet action are present.
 - Every completed trial creates exactly one plotted/persisted result.
+- The complete plot and experiment log retain every integer dose from 0 through 10.
+- Exact canonical-dose completion updates one static matching jar once; odd-dose completion updates no jar.
+- Canonical summaries rebuild from persisted completed results and clear with experiment history.
 - Gauge, water appearance, recorded result, and plot agree through the band authority.
 - Experiment data survives browser sessions.
 - A visitor can deliberately clear inherited data and receive a blank sheet.

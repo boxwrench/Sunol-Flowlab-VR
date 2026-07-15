@@ -6,6 +6,8 @@
 **May run in parallel with:** Batch 04 in an isolated worktree  
 **Primary gate:** Low, near-optimal, and high dose outcomes are numerically U-shaped and visibly distinct on desktop before any XR integration begins.
 
+> This batch must also follow [the hybrid jar-test design direction](docs/DESIGN_DIRECTION_JAR_TEST_HYBRID.md). The design brief governs product intent and presentation meaning; this batch remains authoritative for timing, scope, tests, evidence, and acceptance.
+
 ## Goal
 
 Prove the product’s central teaching claim using a deterministic desktop prototype: dose changes collision success, floc grows, larger floc settles faster, and too little or too much dose leaves worse residual turbidity.
@@ -81,7 +83,7 @@ Tests:
 - fine particles remain suspended long enough to preserve underdose haze;
 - no claim or unit implies calibrated plant prediction.
 
-### Work package 03A.4 - Three canonical presets
+### Work package 03A.4 - Three comparison trial presets
 
 Create development presets for:
 
@@ -134,6 +136,21 @@ Derive diagnostic values from the band record:
 - endpoint upper-zone turbidity.
 
 Use these for testing and tuning, not as a second process model.
+
+### Work package 03B.5 - Hybrid apparatus blockout and recognition validation
+
+- Block out one visually dominant hero observation tank and one recognizable six-jar rack.
+- Treat the rack as static canonical preset geometry for doses 0, 2, 4, 6, 8, and 10.
+- Preserve all eleven integer dose values through the primary control; do not imply the jars contain complete history.
+- Keep the mounted plot reserved as the complete visual memory for all doses in Batch 07.
+- Do not create six live simulations, moving jar particles, or jar-owned turbidity.
+- Capture one unlabeled screenshot once the composition reads clearly.
+- Show it to at least one water-treatment operator or educator and preferably one non-operator before instrumentation is finalized.
+- Ask what the apparatus represents and what they expect to do before explaining the project.
+- Record responses in docs/UX_VALIDATION.md.
+- Reconsider the composition if the jar-test connection, comparative-experiment purpose, hero-tank dominance, or one-live-simulation relationship is unclear.
+
+The canonical jars may remain static unfilled geometry throughout this batch. Static write-on-completion summaries arrive in Batch 07.
 
 ## Workstream 03C - Tuning and permanent regression harness
 
@@ -205,7 +222,7 @@ Do not allow two agents to tune constants independently.
 
 - Add a stable route or mode for the Phase 1 desktop proof.
 - Ensure it does not depend on a headset.
-- Keep the three canonical presets and sweep visualization accessible in development.
+- Keep the three comparison trial presets and sweep visualization accessible in development.
 - Document how to run and record it.
 
 ## Stop conditions
@@ -226,7 +243,8 @@ Stop and do not proceed to Batch 5 when any of the following is true:
 - No physical gauge or plot board.
 - No localStorage.
 - No plant environment.
-- No temperature control, breakup, short-circuiting, or six-jar rack.
+- No temperature control, breakup, or short-circuiting.
+- No live jar simulations or canonical jar summaries; the six-jar rack is recognition blockout geometry only.
 - No particle-count increase above 500 without a documented reason.
 
 ## Required tests and evidence
@@ -241,6 +259,7 @@ Stop and do not proceed to Batch 5 when any of the following is true:
 - exported accepted config;
 - curve artifact committed or attached to the acceptance packet;
 - three comparable video or screenshot sequences;
+- unlabeled hybrid-apparatus screenshot and recognition responses in docs/UX_VALIDATION.md;
 - desktop performance metrics and remaining allocations.
 
 ## Review-agent checklist
@@ -259,6 +278,8 @@ Stop and do not proceed to Batch 5 when any of the following is true:
 - Same seed and dose reproduce comparable results.
 - Low, optimum, and high runs begin from identical raw water.
 - An uninformed observer can identify the optimum run without reading an explanation.
+- A water-treatment operator or educator recognizes the jar-test connection from an unlabeled screenshot, and a non-operator is sought to validate comparative-experiment comprehension.
+- The hero tank remains visually dominant and viewers do not mistake the jars for six simultaneous simulations or complete history.
 - Clear water visibly progresses downward in the optimum case.
 - The desktop proof remains runnable independently.
 - One turbidity-band record drives all current outputs.

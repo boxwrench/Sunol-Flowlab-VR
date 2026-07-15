@@ -8,6 +8,8 @@ This is a **phenomenological coagulation model**, not dose-prediction software, 
 
 Implementation is in progress. Batch 00 is substantially complete, and the headset-independent Batch 01A foundation now includes an app-owned deterministic runtime, 500-particle instanced rendering, telemetry, and benchmark evidence. Batch 01A still requires an uninterrupted five-minute post-fix emulator observation. Physical Quest 3 and hosted-route criteria remain open. See [PROGRESS.md](PROGRESS.md) and the [implementation-plan index](IMPLEMENTATION_PLAN.md).
 
+The approved presentation direction is a [hybrid six-jar test bench and hero observation tank](docs/DESIGN_DIRECTION_JAR_TEST_HYBRID.md): one live authoritative simulation, six static canonical preset summaries, and a complete plot/log covering all eleven dose values.
+
 ## Toolchain
 
 - Node.js 24.12.x and npm 11.18.x

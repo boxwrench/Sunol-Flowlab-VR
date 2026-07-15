@@ -6,6 +6,8 @@
 **May run in parallel with:** Final environment asset preparation and audio preparation  
 **Primary gate:** A person without a headset understands the project, sees the U-shaped dose response, and reaches the main portfolio takeaway in under one minute from the root URL.
 
+> This batch must also follow [the hybrid jar-test design direction](docs/DESIGN_DIRECTION_JAR_TEST_HYBRID.md). The design brief governs product intent and presentation meaning; this batch remains authoritative for timing, scope, tests, evidence, and acceptance.
+
 ## Goal
 
 Create a lightweight, scripted desktop experience that reuses the real simulation and instrumentation rather than substituting a video or separate fake logic.
@@ -26,6 +28,7 @@ Create a lightweight, scripted desktop experience that reuses the real simulatio
 
 - Same deployed root URL as VR.
 - Same simulation, phase state machine, turbidity authority, gauge mapping, and plot logic.
+- Same hybrid hierarchy: one live hero tank, six static canonical preset jars, and one complete plot for all doses.
 - No headset required.
 - Scripted comprehension is required; full mouse parity is optional.
 - Camera and pacing may be spectator-specific.
@@ -55,6 +58,8 @@ Implement a spectator-only orchestration layer that uses the real trial APIs:
 9. record the result;
 10. reveal the resulting curve and hold.
 
+The complete plot, not the canonical jars, carries the three-trial story. If the near-optimum trial uses odd dose 5, it must appear in the plot and ephemeral log while leaving all jar summaries unchanged.
+
 Requirements:
 
 - cannot change chemistry constants;
@@ -74,6 +79,7 @@ Use a repeatable camera language across all three trials:
 - tank profile or quarter view for floc and clearing front;
 - gauge/plot result view;
 - final curve reveal.
+- optional static jar-summary close-up only when it helps explain canonical presets without implying complete memory.
 
 Keep the same core tank angle across conditions so differences read as process behavior, not cinematography.
 
@@ -131,6 +137,7 @@ Ask new viewers after one autoplay cycle:
 - Which dose worked best?
 - What did the particles do?
 - What did the plot show?
+- What do the jars represent, and how do they relate to the hero tank?
 - Would they know how to enter VR if available?
 
 Pass when viewers can explain the main idea without a spoken tutorial.
@@ -169,6 +176,8 @@ Pass when viewers can explain the main idea without a spoken tutorial.
 
 - Root URL provides a coherent desktop spectator experience.
 - The complete low/optimum/high sequence and U-curve reveal finish in roughly one minute or less.
+- Odd-dose results remain visible in the complete plot even when no canonical jar summary updates.
+- The hero tank reads as the live experiment and jars read as static canonical presets.
 - The experience works without audio and enables audio after user gesture.
 - A viewer can explain the experiment and identify the optimum without instructions.
 - XR entry is available where supported and failure returns safely to spectator mode.

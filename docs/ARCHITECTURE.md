@@ -33,7 +33,9 @@ Forbidden dependencies:
 
 ## Runtime data flow
 
-Physical or spectator input becomes a validated discrete command. The application layer applies it to lifecycle/domain code. src/app/SimulationRuntime.ts owns the deterministic state and fixed-step clock, while an app-owned frame driver advances that runtime inside the React Three Fiber canvas. Rendering receives a read-only state view and synchronizes reusable Three.js objects. Turbidity bands produced by the simulation are the sole process source for water appearance, clearing-front diagnostics, instruments, results, persistence, and replay.
+Physical or spectator input becomes a validated discrete command. The application layer applies it to lifecycle/domain code. src/app/SimulationRuntime.ts owns the deterministic state and fixed-step clock, while an app-owned frame driver advances that runtime inside the React Three Fiber canvas. Rendering receives a read-only state view and synchronizes reusable Three.js objects. Turbidity bands produced by the simulation are the sole process source for hero-tank appearance, clearing-front diagnostics, instruments, completed results, static canonical jar summaries, persistence, and replay.
+
+The hero tank is the only live process presentation. Canonical jars are application-owned write-on-completion summaries derived from completed results. The complete dose-response plot and versioned experiment log retain all eleven dose values and rebuild canonical summaries on restore; jars are never simulation owners or complete history.
 
 ## Determinism and performance
 

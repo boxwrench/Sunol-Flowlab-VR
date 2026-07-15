@@ -2,7 +2,7 @@
 
 ## Product boundary
 
-Version 1 is **Sunol FlowLab VR: Coagulation only**: one tabletop tank, one world scale, and one scene. It is VR-first, with a desktop spectator experience at the same URL. The shipped experience uses physical instrumentation rather than floating application panels.
+Version 1 is **Sunol FlowLab VR: Coagulation only**: one live authoritative simulation in a hero observation tank, one six-jar rack of static canonical dose presets, one world scale, and one scene. It is VR-first, with a desktop spectator experience at the same URL. The shipped experience uses physical instrumentation rather than floating application panels.
 
 The simulation is a phenomenological teaching model. It is not a dose-prediction tool, CFD model, calibrated plant simulator, or source of operating guidance. The initial Quest 2-class performance posture is 500 representative particles; increasing toward 1,000 requires measurements on a real target headset.
 
@@ -17,6 +17,7 @@ Do not build a universal FlowLab engine until a second process module ships.
 - React state updates are forbidden in the hot simulation loop.
 - Per-frame allocation requires an explicit documented reason.
 - One turbidity-band record is authoritative for water appearance, clearing front, gauge, score, plot, and ghost replay.
+- The mounted plot and versioned experiment log are the complete memory for all eleven doses. The six jars are static summaries for canonical presets 0, 2, 4, 6, 8, and 10 only.
 
 The stable command and data contracts are defined in `docs/CONTRACTS.md`; regression rules are in `docs/REGRESSION_CONTRACT.md`. The Markdown series indexed by `IMPLEMENTATION_PLAN.md` is the active plan authority.
 
