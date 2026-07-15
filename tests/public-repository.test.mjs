@@ -19,3 +19,11 @@ test('public repository has licensing, safety, contribution, and plan authority'
   assert.match(architecture, /sim.*browser.*React.*Three\.js.*rendering.*XR/s)
 })
 
+test('session handoff identifies the authoritative plan, open device gate, and validation route', async () => {
+  const handoff = await read('HANDOFF.md')
+
+  assert.match(handoff, /Active plan authority: \[IMPLEMENTATION_PLAN\.md\]/)
+  assert.match(handoff, /Do not mark real-device criteria complete/)
+  assert.match(handoff, /npm test/)
+  assert.match(handoff, /Recommended next session/)
+})
