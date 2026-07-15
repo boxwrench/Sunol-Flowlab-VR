@@ -17,3 +17,16 @@ test('simulation sources do not import UI/XR libraries or use Math.random', asyn
   assert.doesNotMatch(source, /Math\.random\s*\(/)
   assert.equal(path.extname('particleState.ts'), '.ts')
 })
+
+test('Batch 02A does not introduce conditional engine mechanics', async () => {
+  const directory = new URL('../src/sim/', import.meta.url)
+  const names = await readdir(directory)
+  for (const forbidden of ['spatialHash.ts', 'slotPool.ts', 'collision.ts'])
+    assert.equal(names.includes(forbidden), false)
+
+  const particleState = await readFile(
+    new URL('../src/sim/particleState.ts', import.meta.url),
+    'utf8',
+  )
+  assert.doesNotMatch(particleState, /effectiveDensity|mergeTween|particleMass/)
+})

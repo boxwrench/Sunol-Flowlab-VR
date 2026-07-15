@@ -6,12 +6,39 @@ export {
 } from './benchmark'
 export { stepParticleDrift } from './drift'
 export {
+  DEFAULT_COAGULATION_CONFIG,
+  stepCoagulation,
+  totalTreatmentSteps,
+  treatmentPhaseAtStep,
+  type CoagulationConfig,
+  type TreatmentPhase,
+} from './coagulation'
+export {
+  DEFAULT_DOSE_EFFICIENCY_CONFIG,
+  calculateDoseEfficiency,
+  validateDoseDetent,
+  validateDoseEfficiencyConfig,
+  type DoseDetent,
+  type DoseEfficiencyConfig,
+} from './doseEfficiency'
+export {
+  ALL_DOSE_DETENTS,
+  formatDoseSweepFailure,
+  formatDoseSweepMarkdown,
+  runDoseSweep,
+  type DoseSweepReport,
+} from './doseSweep'
+export {
   FixedStepClock,
   type FixedStepSnapshot,
   type StepFunction,
 } from './fixedStep'
 export {
   DEFAULT_PARTICLE_BOUNDS,
+  INITIAL_NORMALIZED_SIZE_MAX,
+  INITIAL_NORMALIZED_SIZE_MIN,
+  PARTICLE_SETTLED,
+  PARTICLE_SUSPENDED,
   createParticleState,
   resetParticleState,
   type ParticleBounds,
@@ -19,5 +46,27 @@ export {
 } from './particleState'
 export type { ParticleStateView } from './particleState'
 export { SeededRng } from './rng'
+export {
+  DEFAULT_PHENOMENON_CONFIG,
+  createPhenomenonWorkspace,
+  hashPhenomenonConfig,
+  resetPhenomenonWorkspace,
+  runPhenomenonTrial,
+  stepPhenomenonWorkspace,
+  type PhenomenonConfig,
+  type PhenomenonTrialResult,
+  type PhenomenonWorkspace,
+} from './phenomenon'
+export {
+  DEFAULT_TURBIDITY_CONFIG,
+  createTurbidityBands,
+  endpointTurbidity,
+  resetTurbidityBands,
+  sampleTurbidityBands,
+  upperColumnTurbidity,
+  type TurbidityBandsState,
+  type TurbidityBandsView,
+  type TurbidityConfig,
+} from './turbidity'
 
 export const DEFAULT_PARTICLE_CAPACITY = 500

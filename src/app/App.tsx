@@ -1,11 +1,18 @@
 import { useEffect, useRef, useState } from 'react'
 
 import { FoundationScene } from '../render/FoundationScene'
+import { endpointTurbidity } from '../sim'
 import { xrStore } from '../xr/store'
 import { MetricsOverlay } from './MetricsOverlay'
 import { developmentPerformance } from './performance'
 import { SimulationDriver } from './SimulationDriver'
 import { SimulationRuntime } from './SimulationRuntime'
+
+declare global {
+  interface Window {
+    render_game_to_text?: () => string
+  }
+}
 
 function recordParticleFrame(
   frameMs: number,
@@ -30,6 +37,23 @@ export function App() {
   useEffect(() => {
     runtime.start()
     return () => runtime.pause()
+  }, [runtime])
+
+  useEffect(() => {
+    if (!import.meta.env.DEV) return
+    window.render_game_to_text = () =>
+      JSON.stringify({
+        coordinateSystem: 'meters; origin tank center-bottom; +Y upward',
+        mode: 'phenomenon-trial',
+        dose: runtime.dose,
+        phase: runtime.phase,
+        simulationTimeSeconds: runtime.simulationTimeSeconds,
+        activeParticles: runtime.state.activeCount,
+        endpointTurbidity: endpointTurbidity(runtime.turbidityBands),
+      })
+    return () => {
+      delete window.render_game_to_text
+    }
   }, [runtime])
 
   async function enterVr() {

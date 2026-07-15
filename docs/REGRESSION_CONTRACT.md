@@ -26,3 +26,7 @@ These initial thresholds may change only after the desktop phenomenon prototype 
 ## Failure artifact
 
 A failure writes JSON containing the seed, config hash, timestep, phase durations, eleven endpoints, band summaries, minimum index, tail margins, reversals, runtime, and failed assertions. A human-readable Markdown table or SVG curve accompanies extended-validation failures.
+
+## Accepted Batch 02A baseline
+
+The first accepted implementation uses config hash `fnv1a32-056c0563`. Its canonical minimum is Dose 5, tail margins are 0.550568 and 0.476090, and both shoulders have zero reversals. Natural and reverse orders are identical, and the nine-seed corpus passes. The complete curve, configuration, benchmark, browser evidence, and limitations are recorded in [the Batch 02A acceptance packet](BATCH_02A_ACCEPTANCE.md).

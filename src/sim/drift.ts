@@ -14,7 +14,7 @@ export function stepParticleDrift(
   }
 
   for (let index = 0; index < state.capacity; index += 1) {
-    if (state.active[index] === 0) continue
+    if (state.active[index] === 0 || state.settled[index] === 1) continue
 
     state.positionX[index] = advanceAxis(
       state.positionX[index],

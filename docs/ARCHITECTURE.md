@@ -51,4 +51,4 @@ Invalid external commands fail at the app boundary. Unsupported XR and session f
 
 ## Current state
 
-Batch 00 is substantially complete. Batch 01A has a deterministic app-owned runtime, seeded fixed-capacity particle state, one-draw-call particle rendering, permanent telemetry, and benchmark evidence. The uninterrupted five-minute post-fix emulator observation remains open. Batch 01B physical-device and hosted-route validation remains blocked until the Quest 3 is available and deployment is authorized. Batch 02 has not started; its reduced plan targets the minimum 11-dose phenomenon substrate before optional performance mechanics.
+Batch 00 is substantially complete and Batch 01A is accepted. Batch 02A has an app-owned deterministic phenomenon runtime, fixed-capacity size and settled state, simplified aggregation/settling, one authoritative turbidity-band record, an accepted 11-dose/nine-seed sweep, and production-path benchmark evidence. Batch 02B engine mechanics remain deferred. Batch 01B physical-device and hosted-route validation remains open until the Quest is detected and tested; Batch 03 desktop presentation is ready to begin.

@@ -18,6 +18,14 @@ export interface ParticleState {
   readonly velocityX: Float32Array
   readonly velocityY: Float32Array
   readonly velocityZ: Float32Array
+  /**
+   * Unitless representative particle/floc size. Active values are normalized
+   * to (0, 1], where 1 is the largest representative size supported by the
+   * phenomenon model. Inactive slots use 0.
+   */
+  readonly normalizedSize: Float32Array
+  /** 0 means suspended and 1 means settled; inactive slots also use 0. */
+  readonly settled: Uint8Array
   readonly active: Uint8Array
 }
 
@@ -35,8 +43,17 @@ export interface ParticleStateView {
   readonly velocityX: ReadonlyNumericArray
   readonly velocityY: ReadonlyNumericArray
   readonly velocityZ: ReadonlyNumericArray
+  readonly normalizedSize: ReadonlyNumericArray
+  readonly settled: ReadonlyNumericArray
   readonly active: ReadonlyNumericArray
 }
+
+export const PARTICLE_SUSPENDED = 0 as const
+export const PARTICLE_SETTLED = 1 as const
+
+/** Raw-water particles begin near the small end of the normalized size scale. */
+export const INITIAL_NORMALIZED_SIZE_MIN = 0.08
+export const INITIAL_NORMALIZED_SIZE_MAX = 0.12
 
 export const DEFAULT_PARTICLE_BOUNDS: ParticleBounds = Object.freeze({
   minX: -0.7,
@@ -61,6 +78,8 @@ export function createParticleState(capacity: number): ParticleState {
     velocityX: new Float32Array(capacity),
     velocityY: new Float32Array(capacity),
     velocityZ: new Float32Array(capacity),
+    normalizedSize: new Float32Array(capacity),
+    settled: new Uint8Array(capacity),
     active: new Uint8Array(capacity),
   }
 }
@@ -73,10 +92,14 @@ export function resetParticleState(
 ): void {
   validateReset(state, activeCount, bounds)
   const rng = new SeededRng(seed)
+  // Keep size sampling independent so adding this state does not change the
+  // established seeded position and velocity sequence.
+  const sizeRng = new SeededRng((seed ^ 0x9e3779b9) >>> 0)
 
   for (let index = 0; index < state.capacity; index += 1) {
     const active = index < activeCount
     state.active[index] = active ? 1 : 0
+    state.settled[index] = PARTICLE_SUSPENDED
 
     if (!active) {
       state.positionX[index] = 0
@@ -85,6 +108,7 @@ export function resetParticleState(
       state.velocityX[index] = 0
       state.velocityY[index] = 0
       state.velocityZ[index] = 0
+      state.normalizedSize[index] = 0
       continue
     }
 
@@ -94,6 +118,10 @@ export function resetParticleState(
     state.velocityX[index] = rng.nextRange(-0.02, 0.02)
     state.velocityY[index] = rng.nextRange(-0.01, 0.01)
     state.velocityZ[index] = rng.nextRange(-0.02, 0.02)
+    state.normalizedSize[index] = sizeRng.nextRange(
+      INITIAL_NORMALIZED_SIZE_MIN,
+      INITIAL_NORMALIZED_SIZE_MAX,
+    )
   }
 
   state.activeCount = activeCount

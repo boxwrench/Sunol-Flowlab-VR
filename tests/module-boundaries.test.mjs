@@ -22,6 +22,10 @@ test('rendering cannot own simulation lifecycle or import the app layer', async 
     'createParticleState',
     'resetParticleState',
     'stepParticleDrift',
+    'stepPhenomenonWorkspace',
+    'sampleTurbidityBands',
+    'endpointTurbidity',
+    'calculateDoseEfficiency',
     'FixedStepClock',
   ]
 
@@ -47,8 +51,8 @@ test('the app runtime owns deterministic state and clock lifecycle', async () =>
     'utf8',
   )
 
-  assert.match(source, /createParticleState/)
+  assert.match(source, /createPhenomenonWorkspace/)
   assert.match(source, /new FixedStepClock/)
-  assert.match(source, /resetParticleState/)
-  assert.match(source, /stepParticleDrift/)
+  assert.match(source, /resetPhenomenonWorkspace/)
+  assert.match(source, /stepPhenomenonWorkspace/)
 })

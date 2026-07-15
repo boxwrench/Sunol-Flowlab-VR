@@ -37,3 +37,9 @@ Batch 02 adds only the particle state, deterministic dose efficiency, simplified
 ## ADR-006: Hybrid jar-test presentation and memory
 
 The approved experience uses one live authoritative hero tank and six static canonical jar summaries at doses 0, 2, 4, 6, 8, and 10. A jar is updated once from an immutable completed result and owns no simulation state, clock, particle state, or per-frame process logic. The plot and trial log are the sole complete memory for every dose from 0 through 10; odd-dose trials therefore remain fully recorded without creating a jar. Visual acceptance also requires an unlabeled-screenshot recognition check recorded in `docs/UX_VALIDATION.md`.
+
+## ADR-007: Statistical aggregation and unresolved-fines floor
+
+Batch 02A models aggregation as independent deterministic growth of representative floc toward a dose-dependent normalized target. Settling speed increases with the square of normalized size above a threshold, and settlement is irreversible. This proves the causal lesson without pairwise collisions, spatial hashing, merging, mass, or density fields.
+
+Authoritative turbidity bands blend suspended-particle optical load with a documented dose-dependent unresolved-fines floor. The floor is a phenomenological teaching stabilizer, not calibrated chemistry. Size and settlement must materially change the bands at fixed dose, endpoints derive only from the band record, and the permanent sweep guards the accepted basin. The accepted config and evidence are in `docs/BATCH_02A_ACCEPTANCE.md`.

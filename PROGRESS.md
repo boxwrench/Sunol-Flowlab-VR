@@ -1,5 +1,7 @@
 # Progress
 
+Original prompt: ok deploy agents ase resonable and complete batch. also i now have my headset present
+
 - 2026-07-14: Established Batch 00 product, architecture, command/data, regression, visual, and public-data contracts; next pin and scaffold the verified toolchain.
 - 2026-07-14: Pinned the Node/npm and React/Three/WebXR development stack with toolchain contract tests; next generate and verify the lockfile.
 - 2026-07-14: Generated and clean-installed the exact npm lockfile with zero audit findings; next confirm the physical Quest/HTTPS test route before Batch 01.
@@ -19,3 +21,5 @@
 - 2026-07-15: Corrected runtime ownership, enforced render/app boundaries, added CI and a desktop browser smoke test, established a passing formatting baseline, synchronized status documents, and reduced Batch 02 to a phenomenon-first plan; next complete the uninterrupted five-minute emulator observation.
 - 2026-07-15: Adopted and validated the approved hybrid jar-test design direction in repository-native form, mapped it into the implementation plan and affected batches, defined static canonical jar summaries and complete plot/log memory, and added recognition-validation and design-contract requirements; next complete the uninterrupted five-minute emulator observation.
 - 2026-07-15: Completed the post-fix desktop Chrome/IWER observation for 310 uninterrupted seconds with 500 particles, three draw calls, 34.9-35.5 MB heap, intact presentation, and zero console errors; accepted Batch 01A and made the reduced Batch 02A phenomenon substrate ready to begin.
+- 2026-07-15: Added fixed-capacity normalized floc size and suspended/settled state plus a pure configurable dose-efficiency mapping, with deterministic reset, range, and architecture coverage; next integrate the minimum aggregation, settling, and turbidity behavior.
+- 2026-07-15: Completed and accepted Batch 02A with a 43-second statistical aggregation/settling model, one authoritative 12-band turbidity record, canonical and nine-seed 11-dose sweeps, config hash `fnv1a32-056c0563`, a 28.13 ms production-path benchmark, and visually inspected browser evidence; next connect the present Quest over a data-capable USB route and begin Batch 03 presentation.

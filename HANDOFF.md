@@ -6,8 +6,8 @@ Updated: 2026-07-15
 
 - Repository: <https://github.com/boxwrench/Sunol-Flowlab-VR>
 - Branch: `main`
-- Published baseline before this increment: `bed6438` (`Archive superseded planning artifacts`)
-- Current increment: Batch 01A rendered-stability closeout
+- Published baseline before this increment: `2eecb92` (`Record Batch 01A stability observation`)
+- Current increment: accepted Batch 02A deterministic phenomenon substrate
 - Active plan authority: [IMPLEMENTATION_PLAN.md](IMPLEMENTATION_PLAN.md) and its ordered `batch-00` through `batch-11` Markdown files
 - The superseded Godot plan is isolated under `docs/archive/` for provenance. Its stale duplicate Batch 03 snapshot was removed; use only the active indexed Batch 03 plan.
 
@@ -20,19 +20,22 @@ Updated: 2026-07-15
 - Verified emulated immersive entry and both controller poses
 - Deterministic fixed-step simulation clock and seeded PRNG
 - App-owned `SimulationRuntime` with start, pause, reset, rendered stepping, and headless stepping
-- Fixed-capacity 500-particle typed-array state with bounded drift
-- Read-only one-draw-call instanced particle rendering without lifecycle ownership or per-frame React state
+- Fixed-capacity 500-particle typed-array state with normalized floc size, irreversible settlement, and no hot-step allocation
+- Pure deterministic dose efficiency, four-phase aggregation/settling, and one authoritative 12-band turbidity record
+- Read-only one-draw-call instanced particle rendering with visible floc growth and settling, without lifecycle ownership or per-frame React state
 - Preallocated performance telemetry, Chrome heap reporting, and machine-readable headless benchmark
 - Automated module-boundary regression tests, a desktop Playwright smoke test, and a minimal GitHub Actions workflow
 - Visible startup error boundary
 - Approved hybrid presentation direction: one live authoritative hero tank, six static canonical preset jars, and a complete eleven-dose plot/log
 - Accepted uninterrupted 310-second post-fix Chrome observation with stable heap, 500 particles, three draw calls, and zero console errors
+- Accepted Batch 02A canonical and nine-seed 11-dose sweeps with a single Dose 5 minimum and both tail margins above threshold
+- Accepted full 43-second browser/text-state/visual path and schema-2 production phenomenon benchmark
 
-The current local validation includes 12 passing repository contract tests, 33 passing Vitest tests, a passing Playwright desktop smoke test, type checking, lint, formatting, production build, and the 500-particle benchmark. The copied 20-page design PDF matches the supplied source SHA-256 exactly and was visually reviewed before integration. The production build reports expected non-failing large-chunk warnings from emulator environment assets.
+The current local validation includes 13 passing repository contract tests, 63 passing Vitest tests across 14 files, canonical and nine-seed dose sweeps, reverse-order equality, type checking, lint, formatting, production build, the 500-particle production-path benchmark, the ordinary desktop browser smoke, and a full 43-second Playwright/text-state/visual pass. Full Batch 02A evidence is in [docs/BATCH_02A_ACCEPTANCE.md](docs/BATCH_02A_ACCEPTANCE.md). The production build retains the expected non-failing large-chunk warnings from emulator environment assets.
 
 ## Open gates and constraints
 
-- The Quest 3 has Developer Mode enabled but was not physically available. Do not mark real-device criteria complete until tested on the headset.
+- The Quest 3 is now physically present, but `adb devices -l` and Windows device discovery return no connected Quest/Android device. Use a known data-capable direct USB cable, unlock/wear the headset, and accept USB/debugging prompts before rerunning the device route. Do not mark real-device criteria complete until ADB reports exactly one device in state `device` and the headset checks pass.
 - The accepted post-fix desktop observation kept Chrome heap within 34.9-35.5 MB for 310 uninterrupted seconds with 500 particles, three draw calls, and no console errors. The final exported report is recorded in `docs/PERFORMANCE.md`.
 - A hosted HTTPS deployment is not authorized yet. Localhost and the documented ADB reverse route are the approved development paths.
 - Public-data and fictionalization restrictions in [docs/DATA_BOUNDARY.md](docs/DATA_BOUNDARY.md) are binding.
@@ -55,11 +58,11 @@ The hybrid presentation direction does not create six simulations. The hero tank
 
 ## Recommended next session
 
-1. Confirm the CI workflow passes after the next publication; ordinary CI intentionally excludes emulator interaction and physical Quest testing.
-2. Begin reduced Batch 02A with minimum particle/floc size, suspended/settled state, and deterministic dose-efficiency mapping for detents 0 through 10.
-3. Preserve reset purity, fixed-step determinism, fixed-capacity storage, and the approved hybrid presentation semantics from the first Batch 02A change.
-4. Require measured evidence before adding Batch 02B spatial hashing, pooling, mass/density fidelity, or merge-animation metadata.
-5. Keep all physical Quest criteria open unless explicitly resolved; archived source artifacts remain non-authoritative.
+1. Connect and authorize the present Quest 3 until `adb devices -l` reports one device in state `device`; then run the documented reverse, Quest Browser, immersive-entry, controller, and remote-debug checks.
+2. Confirm CI passes after publication; ordinary CI intentionally excludes emulator interaction and physical Quest testing.
+3. Begin Batch 03 desktop presentation from the accepted Batch 02A state and turbidity bands, including hero-tank/jar-rack blockout and later recognition validation.
+4. Keep Batch 02B spatial hashing, pooling, mass/density fidelity, and merge-animation metadata deferred unless new measurements or visible limitations justify one.
+5. Keep hosted deployment and every unverified physical Quest criterion open; archived source artifacts remain non-authoritative.
 
 ## Commands
 

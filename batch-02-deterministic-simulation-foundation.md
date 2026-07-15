@@ -1,6 +1,6 @@
 # Batch 02 Implementation Plan: Minimum Phenomenon Substrate
 
-**Status:** Ready — Batch 01A accepted; implementation not started  
+**Status:** Batch 02A accepted — Batch 02B deferred pending evidence  
 **Branch:** `batch-02-phenomenon-substrate`  
 **Depends on:** Batch 01A accepted, including the uninterrupted rendered observation  
 **May run in parallel with:** Isolated XR shell planning and review only  
@@ -138,6 +138,10 @@ Before adding one of these, record the baseline workload, the observed bottlenec
 ## Suggested commit
 
 `feat(sim): prove deterministic dose-response substrate`
+
+## Acceptance result
+
+Batch 02A passed on 2026-07-15. The complete configuration, canonical curve, nine-seed results, benchmark, allocation audit, browser evidence, limitations, and intentional Batch 02B deferrals are recorded in [the acceptance packet](docs/BATCH_02A_ACCEPTANCE.md).
 
 ## Required closing acceptance packet
 

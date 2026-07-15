@@ -37,13 +37,15 @@ The jar rack never requires six live simulations and never replaces the complete
 | 00    | Substantially complete | Physical Quest route remains open                    |
 | 01A   | Accepted               | Uninterrupted post-fix rendered observation recorded |
 | 01B   | Blocked                | Physical Quest 3 and hosted smoke route              |
-| 02    | Ready                  | Begin minimum deterministic phenomenon substrate     |
-| 03–11 | Not started            | Predecessor gates                                    |
+| 02A   | Accepted               | Deterministic 11-dose phenomenon proof recorded      |
+| 02B   | Deferred               | Requires measured performance or visible need        |
+| 03    | Ready                  | Begin desktop phenomenon presentation and tuning     |
+| 04–11 | Not started            | Predecessor gates                                    |
 
 An [earlier Godot implementation plan](docs/archive/Sunol%20FlowLab%20Implementation%20Plan%20%28superseded%20Godot%29.pdf) is retained only as a superseded source artifact for provenance and is non-binding for this greenfield WebXR repository. The stale duplicate Batch 03 snapshot was removed; Git history preserves it. Only [the indexed Batch 03 plan](batch-03-desktop-phenomenon-proof.md) is authoritative.
 
 Batch 01A has an app-owned deterministic runtime, read-only rendering consumption, permanent telemetry, a measured 500-particle foundation, and an accepted uninterrupted 310-second post-fix Chrome observation. Batch 01B and every real-device acceptance criterion remain open until verified on the physical headset.
 
-Batch 02 now prioritizes the minimum deterministic substrate for the 11-dose phenomenon proof. Generalized collision, pooling, mass/density, and merge-animation machinery belong to conditional Batch 02B work and require benchmark or visible-behavior evidence.
+Batch 02A is accepted in [its closing packet](docs/BATCH_02A_ACCEPTANCE.md): the canonical minimum is Dose 5, both tail margins exceed the regression threshold, the extended nine-seed suite passes, and the complete 500-particle phenomenon path remains well inside the desktop benchmark ceiling. Generalized collision, pooling, mass/density, and merge-animation machinery remain deferred under Batch 02B because no benchmark or visible-behavior evidence justifies them.
 
 The hybrid direction maps runtime ownership to Batch 01A closure; hero-tank and jar-rack blockout plus recognition validation to Batch 03; interaction to Batch 04; integration to Batches 05-06; static jar summaries and complete memory to Batch 07; readability to Batch 08; spectator presentation to Batch 09; presence to Batch 10; and release evidence to Batch 11.

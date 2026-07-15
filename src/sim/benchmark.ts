@@ -1,32 +1,42 @@
-import { stepParticleDrift } from './drift'
+import { type DoseDetent } from './doseEfficiency'
 import { FixedStepClock } from './fixedStep'
-import { createParticleState, resetParticleState } from './particleState'
+import {
+  DEFAULT_PHENOMENON_CONFIG,
+  createPhenomenonWorkspace,
+  resetPhenomenonWorkspace,
+  stepPhenomenonWorkspace,
+} from './phenomenon'
+import { endpointTurbidity } from './turbidity'
 
 export interface HeadlessBenchmarkOptions {
   readonly particleCount: number
   readonly steps: number
   readonly seed: number
   readonly fixedTimestepSeconds: number
+  readonly dose?: DoseDetent
 }
 
 export interface HeadlessBenchmarkReport {
-  readonly schemaVersion: 1
+  readonly schemaVersion: 2
   readonly particleCount: number
   readonly steps: number
   readonly seed: number
   readonly fixedTimestepSeconds: number
+  readonly dose: DoseDetent
   readonly totalMs: number
   readonly averageStepMs: number
   readonly p95StepMs: number
   readonly activeParticles: number
-  readonly stateArrayAllocations: 7
+  readonly stateArrayAllocations: 9
+  readonly turbidityArrayAllocations: 3
+  readonly endpointTurbidity: number
   readonly finite: boolean
 }
 
 export const DEFAULT_BENCHMARK_OPTIONS: HeadlessBenchmarkOptions =
   Object.freeze({
     particleCount: 500,
-    steps: 10_000,
+    steps: 2_580,
     seed: 0x5f3759df,
     fixedTimestepSeconds: 1 / 60,
   })
@@ -36,12 +46,17 @@ export function runHeadlessBenchmark(
   now: () => number = () => performance.now(),
 ): HeadlessBenchmarkReport {
   validateOptions(options)
-  const state = createParticleState(options.particleCount)
-  resetParticleState(state, options.seed)
+  const dose = options.dose ?? 5
+  const config = Object.freeze({
+    ...DEFAULT_PHENOMENON_CONFIG,
+    particleCount: options.particleCount,
+    fixedTimestepSeconds: options.fixedTimestepSeconds,
+  })
+  const workspace = createPhenomenonWorkspace(config)
+  resetPhenomenonWorkspace(workspace, dose, options.seed, config)
   const clock = new FixedStepClock(options.fixedTimestepSeconds)
   const samples = new Float64Array(options.steps)
-  const step = (timestepSeconds: number) =>
-    stepParticleDrift(state, timestepSeconds)
+  const step = () => stepPhenomenonWorkspace(workspace, config)
 
   const benchmarkStart = now()
   for (let index = 0; index < options.steps; index += 1) {
@@ -57,21 +72,27 @@ export function runHeadlessBenchmark(
     sampleTotal += samples[index]
 
   return {
-    schemaVersion: 1,
+    schemaVersion: 2,
     particleCount: options.particleCount,
     steps: options.steps,
     seed: options.seed,
     fixedTimestepSeconds: options.fixedTimestepSeconds,
+    dose,
     totalMs,
     averageStepMs: sampleTotal / options.steps,
     p95StepMs: sortedSamples[Math.ceil(options.steps * 0.95) - 1],
-    activeParticles: state.activeCount,
-    stateArrayAllocations: 7,
-    finite: stateIsFinite(state),
+    activeParticles: workspace.particles.activeCount,
+    stateArrayAllocations: 9,
+    turbidityArrayAllocations: 3,
+    endpointTurbidity: endpointTurbidity(workspace.bands, config.turbidity),
+    finite: workspaceIsFinite(workspace),
   }
 }
 
-function stateIsFinite(state: ReturnType<typeof createParticleState>): boolean {
+function workspaceIsFinite(
+  workspace: ReturnType<typeof createPhenomenonWorkspace>,
+): boolean {
+  const state = workspace.particles
   for (let index = 0; index < state.capacity; index += 1) {
     if (
       !Number.isFinite(state.positionX[index]) ||
@@ -79,10 +100,16 @@ function stateIsFinite(state: ReturnType<typeof createParticleState>): boolean {
       !Number.isFinite(state.positionZ[index]) ||
       !Number.isFinite(state.velocityX[index]) ||
       !Number.isFinite(state.velocityY[index]) ||
-      !Number.isFinite(state.velocityZ[index])
+      !Number.isFinite(state.velocityZ[index]) ||
+      !Number.isFinite(state.normalizedSize[index]) ||
+      state.normalizedSize[index] < 0 ||
+      state.normalizedSize[index] > 1 ||
+      (state.settled[index] !== 0 && state.settled[index] !== 1)
     )
       return false
   }
+  for (const value of workspace.bands.values)
+    if (!Number.isFinite(value) || value < 0 || value > 1) return false
   return true
 }
 

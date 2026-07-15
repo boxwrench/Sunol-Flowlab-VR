@@ -1,18 +1,26 @@
 import {
+  DEFAULT_PHENOMENON_CONFIG,
   DEFAULT_PARTICLE_CAPACITY,
   FixedStepClock,
-  createParticleState,
-  resetParticleState,
-  stepParticleDrift,
+  createPhenomenonWorkspace,
+  resetPhenomenonWorkspace,
+  stepPhenomenonWorkspace,
+  treatmentPhaseAtStep,
+  type DoseDetent,
+  type PhenomenonConfig,
   type ParticleStateView,
+  type TurbidityBandsView,
+  type TreatmentPhase,
 } from '../sim'
 
 export const CANONICAL_SIMULATION_SEED = 0x5f3759df
 
 export class SimulationRuntime {
   readonly state: ParticleStateView
+  readonly turbidityBands: TurbidityBandsView
 
-  private readonly mutableState
+  private readonly config: Readonly<PhenomenonConfig>
+  private readonly workspace
   private readonly clock: FixedStepClock
 
   constructor(
@@ -20,11 +28,18 @@ export class SimulationRuntime {
     seed = CANONICAL_SIMULATION_SEED,
     fixedTimestepSeconds = 1 / 60,
     maxCatchUpSteps = 5,
+    dose: DoseDetent = DEFAULT_PHENOMENON_CONFIG.doseEfficiency.optimumDose,
   ) {
-    this.mutableState = createParticleState(capacity)
-    this.state = this.mutableState
+    this.config = Object.freeze({
+      ...DEFAULT_PHENOMENON_CONFIG,
+      particleCount: capacity,
+      fixedTimestepSeconds,
+    })
+    this.workspace = createPhenomenonWorkspace(this.config)
+    this.state = this.workspace.particles
+    this.turbidityBands = this.workspace.bands
     this.clock = new FixedStepClock(fixedTimestepSeconds, maxCatchUpSteps)
-    this.reset(seed)
+    this.reset(seed, dose)
   }
 
   start(): void {
@@ -35,9 +50,28 @@ export class SimulationRuntime {
     this.clock.pause()
   }
 
-  reset(seed = CANONICAL_SIMULATION_SEED): void {
-    resetParticleState(this.mutableState, seed)
+  reset(
+    seed = CANONICAL_SIMULATION_SEED,
+    dose: DoseDetent = this.workspace.dose,
+  ): void {
+    resetPhenomenonWorkspace(this.workspace, dose, seed, this.config)
     this.clock.reset()
+  }
+
+  get dose(): DoseDetent {
+    return this.workspace.dose
+  }
+
+  get phase(): TreatmentPhase {
+    return treatmentPhaseAtStep(
+      this.workspace.stepIndex,
+      this.config.fixedTimestepSeconds,
+      this.config.coagulation,
+    )
+  }
+
+  get simulationTimeSeconds(): number {
+    return this.workspace.bands.sampledAtSimulationTime
   }
 
   step(elapsedSeconds: number): number {
@@ -49,6 +83,8 @@ export class SimulationRuntime {
   }
 
   private readonly stepSimulation = (timestepSeconds: number): void => {
-    stepParticleDrift(this.mutableState, timestepSeconds)
+    if (timestepSeconds !== this.config.fixedTimestepSeconds)
+      throw new RangeError('Runtime and phenomenon timesteps must match')
+    stepPhenomenonWorkspace(this.workspace, this.config)
   }
 }

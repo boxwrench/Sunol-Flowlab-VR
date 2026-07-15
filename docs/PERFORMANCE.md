@@ -78,3 +78,23 @@ The final exported 300-frame rolling report was captured at `2026-07-15T15:14:54
 | Heap used               | 37,314,210 bytes |
 
 The exported user-agent identifies Oculus Browser on Quest 3 because it is supplied by the IWER emulation profile. This remains desktop Chrome evidence, not a physical-headset measurement. Track 1A's rendered stability gate is accepted. Real Quest performance remains device-blocked.
+
+## 2026-07-15 - Batch 02A production phenomenon benchmark
+
+The benchmark schema now covers the full accepted Dose 5 phenomenon path rather than foundation drift alone: 500 particles, 2,580 fixed steps, four phases totaling 43 simulated seconds, normalized size and settled state, and authoritative 12-band turbidity sampling.
+
+| Metric                |       Value |
+| --------------------- | ----------: |
+| Schema                |           2 |
+| Total                 |  28.1278 ms |
+| Average step          | 0.010807 ms |
+| p95 step              | 0.023800 ms |
+| Active particles      |         500 |
+| Particle-state arrays |           9 |
+| Turbidity arrays      |           3 |
+| Endpoint turbidity    |    0.200000 |
+| Final state finite    |         yes |
+
+The canonical 11-dose sweep completed in 214.22 ms during focused validation, and the nine-seed acceptance corpus completed in 1.78 seconds. Both are far below the 30-second canonical sweep ceiling on the development machine.
+
+The phenomenon step allocates no arrays, objects, closures, PRNGs, or rendering values. Its nine particle arrays and three turbidity value/scratch arrays are fixed and reused. Completed result snapshots, failure JSON, Markdown tables, and sorted benchmark samples allocate outside the hot step. No evidence justifies Batch 02B spatial hashing, pooling, collision, mass/density, or merge-animation work. Full evidence is in [the Batch 02A acceptance packet](BATCH_02A_ACCEPTANCE.md).

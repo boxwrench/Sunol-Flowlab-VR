@@ -1,6 +1,6 @@
 # Batch 03 Implementation Plan: Desktop Phenomenon Proof
 
-**Status:** Not started — depends on the reduced Batch 02A gate
+**Status:** Ready — reduced Batch 02A accepted  
 **Branch:** `batch-03-desktop-proof`  
 **Depends on:** Batch 02 accepted; Batch 00 regression and visual contracts available  
 **May run in parallel with:** Batch 04 in an isolated worktree  

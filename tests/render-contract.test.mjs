@@ -14,5 +14,6 @@ test('particle renderer is a read-only state consumer with one instanced mesh', 
   assert.doesNotMatch(frameCallback, /new (?:Matrix4|Vector3|Array)\b/)
   assert.doesNotMatch(source, /(?:create|reset|step)Particle|FixedStepClock/)
   assert.match(source, /state: ParticleStateView/)
+  assert.match(source, /state\.normalizedSize\[index\]/)
   assert.match(source, /instanceMatrix\.needsUpdate = true/)
 })

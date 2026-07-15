@@ -15,19 +15,23 @@ describe('headless benchmark', () => {
       () => tick++,
     )
 
-    expect(report).toEqual({
-      schemaVersion: 1,
+    expect(report).toMatchObject({
+      schemaVersion: 2,
       particleCount: 500,
       steps: 120,
       seed: 123,
       fixedTimestepSeconds: 1 / 60,
+      dose: 5,
       totalMs: 241,
       averageStepMs: 1,
       p95StepMs: 1,
       activeParticles: 500,
-      stateArrayAllocations: 7,
+      stateArrayAllocations: 9,
+      turbidityArrayAllocations: 3,
       finite: true,
     })
+    expect(report.endpointTurbidity).toBeGreaterThan(0)
+    expect(report.endpointTurbidity).toBeLessThanOrEqual(1)
   })
 
   it('rejects nonsensical workloads', () => {

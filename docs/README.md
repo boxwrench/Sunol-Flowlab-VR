@@ -4,6 +4,7 @@
 - [Architecture decisions](DECISIONS.md)
 - [Commands and data contracts](CONTRACTS.md)
 - [Dose-sweep regression contract](REGRESSION_CONTRACT.md)
+- [Batch 02A acceptance evidence](BATCH_02A_ACCEPTANCE.md)
 - [Visual behavior target](VISUAL_BEHAVIOR.md)
 - [Hybrid jar-test design direction](DESIGN_DIRECTION_JAR_TEST_HYBRID.md)
 - [Public-data and branding boundary](DATA_BOUNDARY.md)
