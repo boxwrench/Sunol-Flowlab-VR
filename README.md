@@ -10,6 +10,80 @@ Implementation is in progress. Batch 00 is substantially complete, Batch 01A is 
 
 The approved presentation direction is a [hybrid six-jar test bench and hero observation tank](docs/DESIGN_DIRECTION_JAR_TEST_HYBRID.md): one live authoritative simulation, six static canonical preset summaries, and a complete plot/log covering all eleven dose values.
 
+## Built With
+
+- **OpenAI Codex**
+- **GPT-5.6 Thinking**
+- WebXR
+- React
+- TypeScript
+- Three.js
+- React Three Fiber
+- Vite
+- Vitest
+- Playwright
+- Node.js
+
+## How Codex and GPT-5.6 Were Used
+
+Sunol FlowLab VR was built through an AI-assisted development workflow using both **OpenAI Codex** and **GPT-5.6 Thinking**.
+
+### OpenAI Codex
+
+Codex worked directly with the repository and was used to:
+
+- scaffold and implement the WebXR application;
+- create the deterministic simulation foundation;
+- refactor simulation ownership out of the rendering layer;
+- write and run unit, architecture, and repository-contract tests;
+- build performance telemetry and headless benchmarks;
+- review code against the project's architecture rules;
+- update implementation plans, handoff notes, and technical documentation;
+- break larger milestones into small, testable repository changes.
+
+Work was divided into narrow batches with explicit scope, tests, non-goals, and completion evidence. Codex-generated changes were reviewed before being accepted.
+
+### GPT-5.6 Thinking
+
+GPT-5.6 was used for the higher-level product and engineering work around the implementation, including:
+
+- turning the original idea into a focused product concept;
+- reviewing the repository architecture and identifying boundary problems;
+- designing the hybrid six-jar bench and hero observation tank;
+- deciding how the project should balance realism, readability, and headset performance;
+- challenging unnecessary scope and premature engine design;
+- developing the implementation roadmap and acceptance criteria;
+- reviewing feedback from other models and consolidating it into repository-ready briefs;
+- helping explain the project clearly for operators, developers, and hackathon judges.
+
+### Human Role
+
+The project direction and treatment knowledge came from my experience working in drinking-water treatment.
+
+I made the final decisions about:
+
+- what the simulation should teach;
+- which treatment behaviors were appropriate to simplify;
+- what could be presented responsibly;
+- which AI recommendations to accept or reject;
+- whether generated code and documentation matched the intended experience.
+
+Codex and GPT-5.6 accelerated the engineering and design process, but they did not replace operator judgment, testing, or human review.
+
+## Development Approach
+
+The project was not generated from one large prompt. It was built in small increments:
+
+1. Define the product and safety boundaries.
+2. Establish the architecture and pinned toolchain.
+3. Implement deterministic simulation primitives.
+4. Add tests and performance evidence.
+5. Review the result.
+6. Correct architecture drift before adding more features.
+7. Continue into the next bounded implementation batch.
+
+This workflow made the AI contribution traceable and kept the project from expanding into a general-purpose simulator before the central educational idea was proven.
+
 ## Toolchain
 
 - Node.js 24.12.x and npm 11.18.x
