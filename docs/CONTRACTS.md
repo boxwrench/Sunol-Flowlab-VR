@@ -49,4 +49,3 @@ export interface PerformanceMetrics {
 Runtime input validation must reject non-integer or out-of-range doses even when TypeScript types are bypassed. Reset with identical inputs must restore identical initial arrays without reallocating their capacity.
 
 Persistence is owned outside `/src/sim`. Every stored document has an integer `schemaVersion`; unsupported future versions fail closed, corrupt input is discarded safely, and stored results never alter raw-water initialization.
-

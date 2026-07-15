@@ -23,12 +23,13 @@ export interface HeadlessBenchmarkReport {
   readonly finite: boolean
 }
 
-export const DEFAULT_BENCHMARK_OPTIONS: HeadlessBenchmarkOptions = Object.freeze({
-  particleCount: 500,
-  steps: 10_000,
-  seed: 0x5f3759df,
-  fixedTimestepSeconds: 1 / 60,
-})
+export const DEFAULT_BENCHMARK_OPTIONS: HeadlessBenchmarkOptions =
+  Object.freeze({
+    particleCount: 500,
+    steps: 10_000,
+    seed: 0x5f3759df,
+    fixedTimestepSeconds: 1 / 60,
+  })
 
 export function runHeadlessBenchmark(
   options: HeadlessBenchmarkOptions = DEFAULT_BENCHMARK_OPTIONS,
@@ -39,7 +40,8 @@ export function runHeadlessBenchmark(
   resetParticleState(state, options.seed)
   const clock = new FixedStepClock(options.fixedTimestepSeconds)
   const samples = new Float64Array(options.steps)
-  const step = (timestepSeconds: number) => stepParticleDrift(state, timestepSeconds)
+  const step = (timestepSeconds: number) =>
+    stepParticleDrift(state, timestepSeconds)
 
   const benchmarkStart = now()
   for (let index = 0; index < options.steps; index += 1) {
@@ -51,7 +53,8 @@ export function runHeadlessBenchmark(
 
   const sortedSamples = Array.from(samples).sort((a, b) => a - b)
   let sampleTotal = 0
-  for (let index = 0; index < samples.length; index += 1) sampleTotal += samples[index]
+  for (let index = 0; index < samples.length; index += 1)
+    sampleTotal += samples[index]
 
   return {
     schemaVersion: 1,
@@ -71,10 +74,14 @@ export function runHeadlessBenchmark(
 function stateIsFinite(state: ReturnType<typeof createParticleState>): boolean {
   for (let index = 0; index < state.capacity; index += 1) {
     if (
-      !Number.isFinite(state.positionX[index]) || !Number.isFinite(state.positionY[index]) ||
-      !Number.isFinite(state.positionZ[index]) || !Number.isFinite(state.velocityX[index]) ||
-      !Number.isFinite(state.velocityY[index]) || !Number.isFinite(state.velocityZ[index])
-    ) return false
+      !Number.isFinite(state.positionX[index]) ||
+      !Number.isFinite(state.positionY[index]) ||
+      !Number.isFinite(state.positionZ[index]) ||
+      !Number.isFinite(state.velocityX[index]) ||
+      !Number.isFinite(state.velocityY[index]) ||
+      !Number.isFinite(state.velocityZ[index])
+    )
+      return false
   }
   return true
 }
@@ -87,4 +94,3 @@ function validateOptions(options: HeadlessBenchmarkOptions) {
     throw new RangeError('Benchmark steps must be a positive integer')
   }
 }
-

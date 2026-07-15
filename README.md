@@ -6,7 +6,7 @@ This is a **phenomenological coagulation model**, not dose-prediction software, 
 
 ## Project status
 
-Implementation is in progress. Batch 00 contracts and the exact toolchain are validated; headset-independent Batch 01A work is underway. Quest 3 device validation remains pending until the physical headset is available. See [PROGRESS.md](PROGRESS.md) and the [implementation-plan index](IMPLEMENTATION_PLAN.md).
+Implementation is in progress. Batch 00 is substantially complete, and the headset-independent Batch 01A foundation now includes an app-owned deterministic runtime, 500-particle instanced rendering, telemetry, and benchmark evidence. Batch 01A still requires an uninterrupted five-minute post-fix emulator observation. Physical Quest 3 and hosted-route criteria remain open. See [PROGRESS.md](PROGRESS.md) and the [implementation-plan index](IMPLEMENTATION_PLAN.md).
 
 ## Toolchain
 
@@ -33,8 +33,12 @@ Validation commands:
 npm test
 npm run typecheck
 npm run lint
+npm run format:check
 npm run build
+npm run benchmark
 ```
+
+An optional desktop browser smoke test is available through npm run test:browser when Playwright Chromium is installed. Emulator interaction and physical Quest testing remain manual device gates.
 
 The physical XR route and Quest debugging workflow are documented in [docs/DEVICE_TESTING.md](docs/DEVICE_TESTING.md).
 
@@ -47,4 +51,3 @@ Contributions from water professionals, educators, designers, and developers are
 ## License
 
 Licensed under the [MIT License](LICENSE).
-

@@ -10,9 +10,11 @@ describe('dose command boundary', () => {
     }
   })
 
-  it.each([-1, 11, 2.5, Number.NaN, '5', null])('rejects invalid dose %s', (dose) => {
-    expect(isDoseIndex(dose)).toBe(false)
-    expect(() => requireDoseIndex(dose)).toThrow(RangeError)
-  })
+  it.each([-1, 11, 2.5, Number.NaN, '5', null])(
+    'rejects invalid dose %s',
+    (dose) => {
+      expect(isDoseIndex(dose)).toBe(false)
+      expect(() => requireDoseIndex(dose)).toThrow(RangeError)
+    },
+  )
 })
-

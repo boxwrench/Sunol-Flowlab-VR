@@ -26,4 +26,3 @@ These initial thresholds may change only after the desktop phenomenon prototype 
 ## Failure artifact
 
 A failure writes JSON containing the seed, config hash, timestep, phase durations, eleven endpoints, band summaries, minimum index, tail margins, reversals, runtime, and failed assertions. A human-readable Markdown table or SVG curve accompanies extended-validation failures.
-

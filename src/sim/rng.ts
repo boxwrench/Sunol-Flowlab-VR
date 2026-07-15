@@ -38,4 +38,3 @@ export class SeededRng {
     return normalized === 0 ? ZERO_SEED_FALLBACK : normalized
   }
 }
-

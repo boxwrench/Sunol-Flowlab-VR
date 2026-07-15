@@ -1,7 +1,11 @@
 import { describe, expect, it } from 'vitest'
 
 import { stepParticleDrift } from './drift'
-import { DEFAULT_PARTICLE_BOUNDS, createParticleState, resetParticleState } from './particleState'
+import {
+  DEFAULT_PARTICLE_BOUNDS,
+  createParticleState,
+  resetParticleState,
+} from './particleState'
 
 describe('bounded particle drift', () => {
   it('advances active particles using their velocities', () => {
@@ -39,12 +43,16 @@ describe('bounded particle drift', () => {
     const state = createParticleState(500)
     resetParticleState(state, 0x5f3759df)
 
-    for (let step = 0; step < 10_000; step += 1) stepParticleDrift(state, 1 / 60)
+    for (let step = 0; step < 10_000; step += 1)
+      stepParticleDrift(state, 1 / 60)
     for (let index = 0; index < state.capacity; index += 1) {
       expect(Number.isFinite(state.positionX[index])).toBe(true)
-      expect(state.positionX[index]).toBeGreaterThanOrEqual(DEFAULT_PARTICLE_BOUNDS.minX)
-      expect(state.positionX[index]).toBeLessThanOrEqual(DEFAULT_PARTICLE_BOUNDS.maxX)
+      expect(state.positionX[index]).toBeGreaterThanOrEqual(
+        DEFAULT_PARTICLE_BOUNDS.minX,
+      )
+      expect(state.positionX[index]).toBeLessThanOrEqual(
+        DEFAULT_PARTICLE_BOUNDS.maxX,
+      )
     }
   })
 })
-

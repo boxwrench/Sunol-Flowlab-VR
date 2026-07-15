@@ -1,6 +1,6 @@
 # Batch 00 Implementation Plan: Pre-build Contracts
 
-**Status:** Planned  
+**Status:** Substantially complete — physical Quest route remains open
 **Branch:** `batch-00-contracts`  
 **Depends on:** Project brief only  
 **May run in parallel with:** Visual reference gathering, public-data review, package verification  
@@ -165,11 +165,11 @@ Specify:
 
 Create `docs/VISUAL_BEHAVIOR.md` with a compact target for each condition:
 
-| Condition | Collision read | Floc read | Clearing front | Fixed-endpoint appearance |
-|---|---|---|---|---|
-| Underdose | Few successful collisions | Fine particles and microfloc | Minimal or diffuse | Persistent uniform haze |
-| Near optimum | Rapid successful aggregation | Large readable floc | Strong top-down clearing | Clearly improved upper water |
-| Overdose | Reduced sustained sticking | Weak or transient clusters | Limited or late | Residual haze above optimum |
+| Condition    | Collision read               | Floc read                    | Clearing front           | Fixed-endpoint appearance    |
+| ------------ | ---------------------------- | ---------------------------- | ------------------------ | ---------------------------- |
+| Underdose    | Few successful collisions    | Fine particles and microfloc | Minimal or diffuse       | Persistent uniform haze      |
+| Near optimum | Rapid successful aggregation | Large readable floc          | Strong top-down clearing | Clearly improved upper water |
+| Overdose     | Reduced sustained sticking   | Weak or transient clusters   | Limited or late          | Residual haze above optimum  |
 
 Include:
 

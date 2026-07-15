@@ -1,4 +1,8 @@
-import { DEFAULT_PARTICLE_BOUNDS, type ParticleBounds, type ParticleState } from './particleState'
+import {
+  DEFAULT_PARTICLE_BOUNDS,
+  type ParticleBounds,
+  type ParticleState,
+} from './particleState'
 
 export function stepParticleDrift(
   state: ParticleState,
@@ -13,13 +17,28 @@ export function stepParticleDrift(
     if (state.active[index] === 0) continue
 
     state.positionX[index] = advanceAxis(
-      state.positionX[index], state.velocityX, index, timestepSeconds, bounds.minX, bounds.maxX,
+      state.positionX[index],
+      state.velocityX,
+      index,
+      timestepSeconds,
+      bounds.minX,
+      bounds.maxX,
     )
     state.positionY[index] = advanceAxis(
-      state.positionY[index], state.velocityY, index, timestepSeconds, bounds.minY, bounds.maxY,
+      state.positionY[index],
+      state.velocityY,
+      index,
+      timestepSeconds,
+      bounds.minY,
+      bounds.maxY,
     )
     state.positionZ[index] = advanceAxis(
-      state.positionZ[index], state.velocityZ, index, timestepSeconds, bounds.minZ, bounds.maxZ,
+      state.positionZ[index],
+      state.velocityZ,
+      index,
+      timestepSeconds,
+      bounds.minZ,
+      bounds.maxZ,
     )
   }
 }
@@ -43,4 +62,3 @@ function advanceAxis(
 
   return Math.min(maximum, Math.max(minimum, next))
 }
-

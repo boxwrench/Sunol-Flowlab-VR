@@ -1,6 +1,6 @@
 # Batch 07 Implementation Plan: Physical Instrumentation and Experiment Memory
 
-**Status:** Planned  
+**Status:** Not started — predecessor gates remain open
 **Branch:** `batch-07-instrumentation`  
 **Depends on:** Batch 06 accepted  
 **May run in parallel with:** Instrument geometry and data wiring after interfaces freeze  

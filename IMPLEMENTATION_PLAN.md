@@ -15,7 +15,18 @@ The active implementation plan is the ordered Markdown batch series:
 11. [Batch 10 - Presence, environment, and audio](batch-10-presence-environment-and-audio.md)
 12. [Batch 11 - Release hardening and deployment](batch-11-release-hardening-and-deployment.md)
 
+## Current status
+
+| Batch | Status                 | Gate                                                    |
+| ----- | ---------------------- | ------------------------------------------------------- |
+| 00    | Substantially complete | Physical Quest route remains open                       |
+| 01A   | Nearly complete        | Uninterrupted five-minute post-fix rerun                |
+| 01B   | Blocked                | Physical Quest 3 and hosted smoke route                 |
+| 02    | Not started            | Runtime ownership corrected; Batch 01A closeout remains |
+| 03–11 | Not started            | Predecessor gates                                       |
+
 `Sunol FlowLab Implementation Plan.pdf` describes a pre-existing Godot plant-simulation repository and does not match this greenfield WebXR repository. It is retained as a superseded source artifact and is non-binding. `batch-03-desktop-phenomenon-proof (1).md` is a byte-identical duplicate and is also non-authoritative.
 
-Headset-independent work in Batch 01A may proceed while the Quest 3 is unavailable. Batch 01B and every real-device acceptance criterion remain open until verified on the physical headset.
+Batch 01A has an app-owned deterministic runtime, read-only rendering consumption, permanent telemetry, and a measured 500-particle foundation. Its rendered gate remains open until the uninterrupted post-fix observation is recorded. Batch 01B and every real-device acceptance criterion remain open until verified on the physical headset.
 
+Batch 02 now prioritizes the minimum deterministic substrate for the 11-dose phenomenon proof. Generalized collision, pooling, mass/density, and merge-animation machinery belong to conditional Batch 02B work and require benchmark or visible-behavior evidence.

@@ -22,4 +22,3 @@ Use public, licensed, or self-created references only. Do not submit real facili
 Open an issue describing the observed behavior, expected educational interpretation, reproduction steps, and supporting public source. Clearly distinguish a plausibility concern from a software defect. Do not include sensitive plant information.
 
 By contributing, you agree that your contribution is provided under the repository's MIT License.
-

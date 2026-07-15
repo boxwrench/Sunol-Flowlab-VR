@@ -21,6 +21,23 @@ export interface ParticleState {
   readonly active: Uint8Array
 }
 
+export interface ReadonlyNumericArray {
+  readonly length: number
+  readonly [index: number]: number
+}
+
+export interface ParticleStateView {
+  readonly capacity: number
+  readonly activeCount: number
+  readonly positionX: ReadonlyNumericArray
+  readonly positionY: ReadonlyNumericArray
+  readonly positionZ: ReadonlyNumericArray
+  readonly velocityX: ReadonlyNumericArray
+  readonly velocityY: ReadonlyNumericArray
+  readonly velocityZ: ReadonlyNumericArray
+  readonly active: ReadonlyNumericArray
+}
+
 export const DEFAULT_PARTICLE_BOUNDS: ParticleBounds = Object.freeze({
   minX: -0.7,
   maxX: 0.7,
@@ -87,16 +104,27 @@ function validateReset(
   activeCount: number,
   bounds: ParticleBounds,
 ) {
-  if (!Number.isInteger(activeCount) || activeCount < 0 || activeCount > state.capacity) {
+  if (
+    !Number.isInteger(activeCount) ||
+    activeCount < 0 ||
+    activeCount > state.capacity
+  ) {
     throw new RangeError('Active particle count must fit within capacity')
   }
 
   if (
-    !Number.isFinite(bounds.minX) || !Number.isFinite(bounds.maxX) || bounds.minX >= bounds.maxX ||
-    !Number.isFinite(bounds.minY) || !Number.isFinite(bounds.maxY) || bounds.minY >= bounds.maxY ||
-    !Number.isFinite(bounds.minZ) || !Number.isFinite(bounds.maxZ) || bounds.minZ >= bounds.maxZ
+    !Number.isFinite(bounds.minX) ||
+    !Number.isFinite(bounds.maxX) ||
+    bounds.minX >= bounds.maxX ||
+    !Number.isFinite(bounds.minY) ||
+    !Number.isFinite(bounds.maxY) ||
+    bounds.minY >= bounds.maxY ||
+    !Number.isFinite(bounds.minZ) ||
+    !Number.isFinite(bounds.maxZ) ||
+    bounds.minZ >= bounds.maxZ
   ) {
-    throw new RangeError('Particle bounds must contain finite increasing ranges')
+    throw new RangeError(
+      'Particle bounds must contain finite increasing ranges',
+    )
   }
 }
-

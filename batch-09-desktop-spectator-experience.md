@@ -1,6 +1,6 @@
 # Batch 09 Implementation Plan: Desktop Spectator Experience
 
-**Status:** Planned  
+**Status:** Not started — predecessor gates remain open
 **Branch:** `batch-09-spectator`  
 **Depends on:** Batches 06-08 stable; Batch 07 plot available  
 **May run in parallel with:** Final environment asset preparation and audio preparation  

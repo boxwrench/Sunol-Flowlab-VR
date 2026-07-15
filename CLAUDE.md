@@ -27,4 +27,3 @@ Use Node.js 24.12.x with npm 11.18.x. Runtime and development packages are pinne
 ## Data and release policy
 
 Only public, licensed, or self-created source material may enter the project. `docs/DATA_BOUNDARY.md` is binding. The repository is public under the MIT License. Public descriptions use "personal educational portfolio project" and "phenomenological coagulation model."
-

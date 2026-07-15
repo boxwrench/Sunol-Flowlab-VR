@@ -17,4 +17,3 @@ test('simulation sources do not import UI/XR libraries or use Math.random', asyn
   assert.doesNotMatch(source, /Math\.random\s*\(/)
   assert.equal(path.extname('particleState.ts'), '.ts')
 })
-

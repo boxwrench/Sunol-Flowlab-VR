@@ -9,4 +9,3 @@
 - Public copy uses "personal educational portfolio project" and "phenomenological coagulation model."
 
 Asset provenance will live in `docs/ASSET_PROVENANCE.md` when the first external asset is introduced.
-

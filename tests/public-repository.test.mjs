@@ -5,10 +5,15 @@ import test from 'node:test'
 const read = (path) => readFile(new URL(`../${path}`, import.meta.url), 'utf8')
 
 test('public repository has licensing, safety, contribution, and plan authority', async () => {
-  const [license, readme, contributing, security, plan, architecture] = await Promise.all([
-    read('LICENSE'), read('README.md'), read('CONTRIBUTING.md'), read('SECURITY.md'),
-    read('IMPLEMENTATION_PLAN.md'), read('docs/ARCHITECTURE.md'),
-  ])
+  const [license, readme, contributing, security, plan, architecture] =
+    await Promise.all([
+      read('LICENSE'),
+      read('README.md'),
+      read('CONTRIBUTING.md'),
+      read('SECURITY.md'),
+      read('IMPLEMENTATION_PLAN.md'),
+      read('docs/ARCHITECTURE.md'),
+    ])
 
   assert.match(license, /^MIT License/)
   assert.match(readme, /drinking-water treatment/)

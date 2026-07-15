@@ -16,3 +16,4 @@
 - 2026-07-14: Recorded benchmark evidence and the hot-path allocation audit; next complete the five-minute rendered Chrome memory observation.
 - 2026-07-14: Added Chrome heap telemetry and observed flat post-GC memory through a five-minute window; disabled automatic XR session offers, with an uninterrupted post-fix rerun next.
 - 2026-07-14: Created a restart-ready session handoff covering repository state, constraints, validation, and the next increment; next synchronize roadmap status documentation.
+- 2026-07-15: Corrected runtime ownership, enforced render/app boundaries, added CI and a desktop browser smoke test, established a passing formatting baseline, synchronized status documents, and reduced Batch 02 to a phenomenon-first plan; next complete the uninterrupted five-minute emulator observation.

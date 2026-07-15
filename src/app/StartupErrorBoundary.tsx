@@ -24,7 +24,10 @@ export class StartupErrorBoundary extends Component<Props, State> {
       return (
         <main className="startup-error" role="alert">
           <h1>Sunol FlowLab VR could not start</h1>
-          <p>Reload the page. If the problem continues, report the browser and the message below.</p>
+          <p>
+            Reload the page. If the problem continues, report the browser and
+            the message below.
+          </p>
           <pre>{this.state.error.message}</pre>
         </main>
       )
@@ -33,4 +36,3 @@ export class StartupErrorBoundary extends Component<Props, State> {
     return this.props.children
   }
 }
-

@@ -8,4 +8,3 @@ it('runs the default headless benchmark', () => {
   expect(report.finite).toBe(true)
   expect(report.activeParticles).toBe(500)
 })
-

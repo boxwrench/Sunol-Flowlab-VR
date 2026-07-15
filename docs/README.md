@@ -9,4 +9,3 @@
 - [Quest and browser testing](DEVICE_TESTING.md)
 
 The ordered delivery plan is indexed from [IMPLEMENTATION_PLAN.md](../IMPLEMENTATION_PLAN.md).
-

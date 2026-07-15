@@ -1,6 +1,6 @@
 # Batch 05 Implementation Plan: Simulation and XR Integration
 
-**Status:** Planned  
+**Status:** Not started — predecessor gates remain open
 **Branch:** `batch-05-xr-integration`  
 **Depends on:** Batch 03 and Batch 04 both accepted  
 **May run in parallel with:** Review, parity-test preparation, trace analysis  

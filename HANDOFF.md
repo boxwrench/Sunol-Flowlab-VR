@@ -1,13 +1,13 @@
 # Session Handoff
 
-Updated: 2026-07-14
+Updated: 2026-07-15
 
 ## Resume point
 
 - Repository: <https://github.com/boxwrench/Sunol-Flowlab-VR>
 - Branch: `main`
-- Last published commit: `cdc396d` (`Harden Chrome XR telemetry and session entry`)
-- Working tree at handoff creation: clean and synchronized with `origin/main`
+- Published baseline for this increment: `229a28d` (`Add restart-ready session handoff`)
+- Current increment: runtime-ownership correction, validation repair, CI, status synchronization, and Batch 02 reduction
 - Active plan authority: [IMPLEMENTATION_PLAN.md](IMPLEMENTATION_PLAN.md) and its ordered `batch-00` through `batch-11` Markdown files
 - The PDF plan is a superseded Godot artifact. The duplicate `batch-03-desktop-phenomenon-proof (1).md` is non-authoritative and must not be used as the plan.
 
@@ -19,12 +19,14 @@ Updated: 2026-07-14
 - Explicit **Enter VR** flow with automatic XR session offers disabled
 - Verified emulated immersive entry and both controller poses
 - Deterministic fixed-step simulation clock and seeded PRNG
+- App-owned `SimulationRuntime` with start, pause, reset, rendered stepping, and headless stepping
 - Fixed-capacity 500-particle typed-array state with bounded drift
-- One-draw-call instanced particle rendering without per-frame React state
+- Read-only one-draw-call instanced particle rendering without lifecycle ownership or per-frame React state
 - Preallocated performance telemetry, Chrome heap reporting, and machine-readable headless benchmark
+- Automated module-boundary regression tests, a desktop Playwright smoke test, and a minimal GitHub Actions workflow
 - Visible startup error boundary
 
-At the last validation, 8 repository contract tests and 31 Vitest tests passed. Type checking, lint, the production build, and the 500-particle benchmark also passed. The build reports expected non-failing large-chunk warnings from emulator environment assets.
+The completed local validation includes a clean `npm ci` with zero audit findings, 11 passing repository contract tests, 33 passing Vitest tests, a passing Playwright desktop smoke test, type checking, lint, formatting, production build, and 500-particle benchmark. The production build reports expected non-failing large-chunk warnings from emulator environment assets.
 
 ## Open gates and constraints
 
@@ -42,21 +44,18 @@ Keep the existing boundaries in [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md):
 src/sim/     deterministic process state and behavior; no browser or UI dependencies
 src/render/  read-only visualization of authoritative simulation output
 src/xr/      WebXR session and physical-input adapters
-src/app/     lifecycle, validated commands, modes, telemetry, and composition
+src/app/     runtime lifecycle, validated commands, modes, telemetry, and composition
 ```
 
-Do not place chemistry, turbidity, scoring, or measurement calculations in rendering or XR code. Do not move hot simulation state into React state. Preserve fixed-step determinism, seeded randomness, fixed-capacity storage, and measured allocation discipline.
+Do not place chemistry, turbidity, scoring, or measurement calculations in rendering or XR code. Rendering cannot create, reset, or advance simulation state and cannot import the app layer. Do not move hot simulation state into React state. Preserve fixed-step determinism, seeded randomness, fixed-capacity storage, and measured allocation discipline.
 
 ## Recommended next session
 
-Start with a small documentation-status increment:
-
-1. Add a status table to [IMPLEMENTATION_PLAN.md](IMPLEMENTATION_PLAN.md).
-2. Update the stale project-status text in [README.md](README.md) and the stale current-state text in [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
-3. Do not remove the duplicate Batch 03 file without confirmation because deletion is destructive.
-4. Run the full validation suite and append one line to [PROGRESS.md](PROGRESS.md).
-
-Then rerun the uninterrupted five-minute Chrome emulator observation with the explicit-session fix. Record the final metrics in [docs/PERFORMANCE.md](docs/PERFORMANCE.md). Once that gate is clean, continue with the next incomplete headset-independent behavior in the ordered batch plan; keep physical Quest acceptance criteria open.
+1. Rerun the uninterrupted five-minute Chrome emulator observation with the explicit-session fix and record the exported report in [docs/PERFORMANCE.md](docs/PERFORMANCE.md).
+2. Confirm the new CI workflow passes after publication; ordinary CI intentionally excludes emulator interaction and physical Quest testing.
+3. Begin reduced Batch 02A with the minimum particle state and deterministic dose-efficiency mapping needed by the permanent 11-dose sweep.
+4. Require measured evidence before adding Batch 02B spatial hashing, pooling, mass/density fidelity, or merge-animation metadata.
+5. Keep the duplicate Batch 03 file and all physical Quest criteria open unless explicitly resolved.
 
 ## Commands
 
@@ -66,9 +65,10 @@ npm test
 npm run benchmark
 npm run typecheck
 npm run lint
+npm run format:check
 npm run build
+npm run test:browser
 npm run dev
 ```
 
 Open `http://localhost:5173` in Chrome for the Quest 3 emulator. For later physical-device testing, follow [docs/DEVICE_TESTING.md](docs/DEVICE_TESTING.md).
-

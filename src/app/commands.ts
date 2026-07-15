@@ -7,7 +7,12 @@ export type AppCommand =
   | { type: 'CLEAR_EXPERIMENT_LOG' }
 
 export function isDoseIndex(value: unknown): value is DoseIndex {
-  return typeof value === 'number' && Number.isInteger(value) && value >= 0 && value <= 10
+  return (
+    typeof value === 'number' &&
+    Number.isInteger(value) &&
+    value >= 0 &&
+    value <= 10
+  )
 }
 
 export function requireDoseIndex(value: unknown): DoseIndex {
@@ -17,4 +22,3 @@ export function requireDoseIndex(value: unknown): DoseIndex {
 
   return value
 }
-

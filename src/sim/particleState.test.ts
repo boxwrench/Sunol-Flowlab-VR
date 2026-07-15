@@ -37,12 +37,24 @@ describe('seeded particle initialization', () => {
     resetParticleState(state, 42)
 
     for (let index = 0; index < state.activeCount; index += 1) {
-      expect(state.positionX[index]).toBeGreaterThanOrEqual(DEFAULT_PARTICLE_BOUNDS.minX)
-      expect(state.positionX[index]).toBeLessThanOrEqual(DEFAULT_PARTICLE_BOUNDS.maxX)
-      expect(state.positionY[index]).toBeGreaterThanOrEqual(DEFAULT_PARTICLE_BOUNDS.minY)
-      expect(state.positionY[index]).toBeLessThanOrEqual(DEFAULT_PARTICLE_BOUNDS.maxY)
-      expect(state.positionZ[index]).toBeGreaterThanOrEqual(DEFAULT_PARTICLE_BOUNDS.minZ)
-      expect(state.positionZ[index]).toBeLessThanOrEqual(DEFAULT_PARTICLE_BOUNDS.maxZ)
+      expect(state.positionX[index]).toBeGreaterThanOrEqual(
+        DEFAULT_PARTICLE_BOUNDS.minX,
+      )
+      expect(state.positionX[index]).toBeLessThanOrEqual(
+        DEFAULT_PARTICLE_BOUNDS.maxX,
+      )
+      expect(state.positionY[index]).toBeGreaterThanOrEqual(
+        DEFAULT_PARTICLE_BOUNDS.minY,
+      )
+      expect(state.positionY[index]).toBeLessThanOrEqual(
+        DEFAULT_PARTICLE_BOUNDS.maxY,
+      )
+      expect(state.positionZ[index]).toBeGreaterThanOrEqual(
+        DEFAULT_PARTICLE_BOUNDS.minZ,
+      )
+      expect(state.positionZ[index]).toBeLessThanOrEqual(
+        DEFAULT_PARTICLE_BOUNDS.maxZ,
+      )
       expect(Number.isFinite(state.velocityX[index])).toBe(true)
     }
   })
@@ -67,7 +79,12 @@ describe('seeded particle initialization', () => {
     const state = createParticleState(2)
     expect(() => resetParticleState(state, 1, 3)).toThrow(RangeError)
     expect(() => resetParticleState(state, Number.NaN)).toThrow(RangeError)
-    expect(() => resetParticleState(state, 1, 2, { ...DEFAULT_PARTICLE_BOUNDS, minX: 1, maxX: 1 })).toThrow(RangeError)
+    expect(() =>
+      resetParticleState(state, 1, 2, {
+        ...DEFAULT_PARTICLE_BOUNDS,
+        minX: 1,
+        maxX: 1,
+      }),
+    ).toThrow(RangeError)
   })
 })
-

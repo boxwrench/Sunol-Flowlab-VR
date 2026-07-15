@@ -12,7 +12,10 @@ describe('FixedStepClock', () => {
     expect(clock.advance(0.025, step)).toBe(3)
     expect(step).toHaveBeenCalledTimes(5)
     expect(step).toHaveBeenLastCalledWith(0.01)
-    expect(clock.snapshot()).toMatchObject({ stepCount: 5, simulationTimeSeconds: 0.05 })
+    expect(clock.snapshot()).toMatchObject({
+      stepCount: 5,
+      simulationTimeSeconds: 0.05,
+    })
   })
 
   it('caps catch-up work and records discarded wall-clock time', () => {
@@ -30,7 +33,11 @@ describe('FixedStepClock', () => {
 
     expect(clock.advance(1, step)).toBe(0)
     clock.stepHeadless(4, step)
-    expect(clock.snapshot()).toMatchObject({ running: false, stepCount: 4, simulationTimeSeconds: 0.08 })
+    expect(clock.snapshot()).toMatchObject({
+      running: false,
+      stepCount: 4,
+      simulationTimeSeconds: 0.08,
+    })
   })
 
   it('reset restores the complete clock state', () => {
@@ -58,4 +65,3 @@ describe('FixedStepClock', () => {
     expect(() => clock.stepHeadless(1.5, () => undefined)).toThrow(RangeError)
   })
 })
-

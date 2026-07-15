@@ -1,6 +1,6 @@
 # Batch 04 Implementation Plan: Standalone XR Interaction Shell
 
-**Status:** Planned  
+**Status:** Not started — predecessor gates remain open
 **Branch:** `batch-04-xr-shell`  
 **Depends on:** Batch 01B accepted; Batch 00 command contract fixed  
 **May run in parallel with:** Batch 03 under a separate worktree  

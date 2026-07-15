@@ -3,7 +3,10 @@ import { readFile } from 'node:fs/promises'
 import test from 'node:test'
 
 test('Quest test contract names an authorized device and reproducible local route', async () => {
-  const contract = await readFile(new URL('../docs/DEVICE_TESTING.md', import.meta.url), 'utf8')
+  const contract = await readFile(
+    new URL('../docs/DEVICE_TESTING.md', import.meta.url),
+    'utf8',
+  )
 
   assert.match(contract, /Meta Quest 3/)
   assert.match(contract, /Developer Mode: enabled/)
@@ -12,4 +15,3 @@ test('Quest test contract names an authorized device and reproducible local rout
   assert.match(contract, /both controller poses\/select input/)
   assert.match(contract, /hosted HTTPS smoke URL/)
 })
-

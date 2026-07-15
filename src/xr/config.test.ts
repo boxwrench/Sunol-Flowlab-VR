@@ -1,6 +1,10 @@
 import { describe, expect, it } from 'vitest'
 
-import { XR_AUTO_SESSION_OFFER, XR_DEVELOPMENT_HOST, XR_EMULATOR_PROFILE } from './config'
+import {
+  XR_AUTO_SESSION_OFFER,
+  XR_DEVELOPMENT_HOST,
+  XR_EMULATOR_PROFILE,
+} from './config'
 
 describe('desktop XR preflight configuration', () => {
   it('uses the confirmed target headset profile on localhost', () => {
@@ -12,4 +16,3 @@ describe('desktop XR preflight configuration', () => {
     expect(XR_AUTO_SESSION_OFFER).toBe(false)
   })
 })
-

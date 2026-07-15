@@ -1,6 +1,6 @@
 # Batch 10 Implementation Plan: Presence, Environment, and Audio
 
-**Status:** Planned  
+**Status:** Not started — predecessor gates remain open
 **Branch:** `batch-10-presence`  
 **Depends on:** Core apparatus, instrumentation, readability, and spectator flow accepted  
 **May run in parallel with:** Asset and audio preparation after Batch 03, but final integration occurs here  

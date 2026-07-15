@@ -1,6 +1,6 @@
 # Batch 11 Implementation Plan: Release Hardening and Deployment
 
-**Status:** Planned  
+**Status:** Not started — predecessor gates remain open
 **Branch:** `batch-11-release`  
 **Depends on:** All prior batch gates accepted  
 **May run in parallel with:** Independent release review and documentation verification only  

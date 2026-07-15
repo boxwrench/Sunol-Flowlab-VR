@@ -1,6 +1,6 @@
 # Batch 08 Implementation Plan: Headset Readability and Clearing-Front Refinement
 
-**Status:** Planned  
+**Status:** Not started — predecessor gates remain open
 **Branch:** `batch-08-clearing-front`  
 **Depends on:** Batch 07 accepted  
 **May run in parallel with:** Recorded review, user comprehension testing, optional charge-vision spike  

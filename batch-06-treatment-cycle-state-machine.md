@@ -1,6 +1,6 @@
 # Batch 06 Implementation Plan: Complete Treatment-Cycle State Machine
 
-**Status:** Planned  
+**Status:** Not started — predecessor gates remain open
 **Branch:** `batch-06-treatment-cycle`  
 **Depends on:** Batch 05 accepted  
 **May run in parallel with:** State-test authoring, instrument concepts, pacing review  
