@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict'
-import { readFile, stat } from 'node:fs/promises'
+import { access, readFile, stat } from 'node:fs/promises'
 import test from 'node:test'
 
 const read = (path) => readFile(new URL(`../${path}`, import.meta.url), 'utf8')
@@ -29,8 +29,20 @@ test('hybrid design direction is present and wired into governing plans', async 
   const pdf = await stat(
     new URL('../docs/Sunol FlowLab VR Design Brief.pdf', import.meta.url),
   )
+  const archivedPlan = await stat(
+    new URL(
+      '../docs/archive/Sunol FlowLab Implementation Plan (superseded Godot).pdf',
+      import.meta.url,
+    ),
+  )
 
   assert.ok(pdf.size > 10_000)
+  assert.ok(archivedPlan.size > 10_000)
+  await assert.rejects(() =>
+    access(
+      new URL('../batch-03-desktop-phenomenon-proof (1).md', import.meta.url),
+    ),
+  )
   assert.match(plan, /Approved design direction/)
   assert.match(
     brief,

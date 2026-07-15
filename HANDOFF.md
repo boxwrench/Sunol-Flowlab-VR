@@ -9,7 +9,7 @@ Updated: 2026-07-15
 - Published baseline before this increment: `d368558` (`Correct runtime ownership and validation`)
 - Current increment: adoption of the approved hybrid six-jar test bench and hero observation tank design direction
 - Active plan authority: [IMPLEMENTATION_PLAN.md](IMPLEMENTATION_PLAN.md) and its ordered `batch-00` through `batch-11` Markdown files
-- The PDF plan is a superseded Godot artifact. The duplicate `batch-03-desktop-phenomenon-proof (1).md` is non-authoritative and must not be used as the plan.
+- The superseded Godot plan is isolated under `docs/archive/` for provenance. Its stale duplicate Batch 03 snapshot was removed; use only the active indexed Batch 03 plan.
 
 ## What is working
 
@@ -59,7 +59,7 @@ The hybrid presentation direction does not create six simulations. The hero tank
 2. Confirm the new CI workflow passes after publication; ordinary CI intentionally excludes emulator interaction and physical Quest testing.
 3. Begin reduced Batch 02A with the minimum particle state and deterministic dose-efficiency mapping needed by the permanent 11-dose sweep, preserving the approved hybrid presentation semantics.
 4. Require measured evidence before adding Batch 02B spatial hashing, pooling, mass/density fidelity, or merge-animation metadata.
-5. Keep the duplicate Batch 03 file and all physical Quest criteria open unless explicitly resolved.
+5. Keep all physical Quest criteria open unless explicitly resolved; archived source artifacts remain non-authoritative.
 
 ## Commands
 

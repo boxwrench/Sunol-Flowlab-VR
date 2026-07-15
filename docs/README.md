@@ -8,5 +8,6 @@
 - [Hybrid jar-test design direction](DESIGN_DIRECTION_JAR_TEST_HYBRID.md)
 - [Public-data and branding boundary](DATA_BOUNDARY.md)
 - [Quest and browser testing](DEVICE_TESTING.md)
+- [Archived source artifacts](archive/README.md)
 
 The ordered delivery plan is indexed from [IMPLEMENTATION_PLAN.md](../IMPLEMENTATION_PLAN.md).
