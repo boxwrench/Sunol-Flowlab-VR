@@ -1,6 +1,6 @@
 # Batch 01 Implementation Plan: Foundation and WebXR Preflight
 
-**Status:** In progress — Track 1A nearly complete; Track 1B device-blocked
+**Status:** In progress — Track 1A accepted; Track 1B device-blocked
 **Branch:** `batch-01-foundation`  
 **Depends on:** Batch 00 accepted  
 **May run in parallel with:** Track 1A and Track 1B only under isolated ownership  

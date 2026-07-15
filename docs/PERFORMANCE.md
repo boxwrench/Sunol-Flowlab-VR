@@ -44,6 +44,37 @@ Chrome's optional `performance.memory.usedJSHeapSize` counter was added to devel
 | ~200 s   | 64.6 MB |       5.81 ms |   10.1 ms |   0.007 ms |      0.021 ms |
 | ~250 s   | 64.0 MB |       6.03 ms |    9.5 ms |   0.006 ms |      0.021 ms |
 
-Near the end of the window, the emulator presentation surface became blank without a new application error and recovered immediately on reload. The only recorded console error predated the observation and reported that an XR session offer had been superseded. The app now disables automatic session offers and retains its explicit **Enter VR** action. The flat memory trend is accepted as evidence; an uninterrupted five-minute post-fix presentation rerun remains pending because work was paused for publication.
+Near the end of the window, the emulator presentation surface became blank without a new application error and recovered immediately on reload. The only recorded console error predated the observation and reported that an XR session offer had been superseded. The app now disables automatic session offers and retains its explicit **Enter VR** action. The flat memory trend was accepted as evidence, but the presentation interruption required the post-fix rerun recorded below.
 
-Real Quest measurements remain device-blocked. The Batch 01A rendered gate also remains open until the post-fix uninterrupted rerun captures its final metrics report.
+## 2026-07-15 - Post-fix uninterrupted Chrome observation
+
+The desktop idle path was rerun in a visible Chrome window with the IWER Meta Quest 3 profile installed and automatic session offers disabled. The explicit **Enter VR** control was intentionally left untouched because Track 1A measures the rendered desktop harness; emulator immersive entry and controllers were already established separately. The presentation remained intact for 310 seconds with no console errors, no automatic XR offer, 500 particles, and three draw calls throughout.
+
+| Elapsed  |    Heap | Average frame | p95 frame | Simulation | Instance sync |
+| -------- | ------: | ------------: | --------: | ---------: | ------------: |
+| baseline | 34.9 MB |      16.66 ms |  16.90 ms |   0.009 ms |      0.012 ms |
+| ~50 s    | 35.5 MB |      16.66 ms |  17.00 ms |   0.009 ms |      0.011 ms |
+| ~95 s    | 35.2 MB |      16.66 ms |  16.90 ms |   0.006 ms |      0.010 ms |
+| ~140 s   | 35.5 MB |      16.66 ms |  16.90 ms |   0.009 ms |      0.014 ms |
+| ~185 s   | 35.3 MB |      16.66 ms |  17.10 ms |   0.009 ms |      0.010 ms |
+| ~230 s   | 35.2 MB |       5.55 ms |  12.00 ms |   0.004 ms |      0.005 ms |
+| ~275 s   | 35.2 MB |       4.30 ms |   5.80 ms |   0.003 ms |      0.010 ms |
+| ~310 s   | 35.3 MB |       4.31 ms |   5.70 ms |   0.002 ms |      0.006 ms |
+
+The visible presentation cadence changed during the observation from a 60 Hz cap to a higher-rate compositor path; the table preserves both regimes instead of averaging them together. The valid run never dropped below the initial 60 FPS cadence. Heap remained within 34.9-35.5 MB with no upward trend.
+
+The final exported 300-frame rolling report was captured at `2026-07-15T15:14:54.092Z` in development mode:
+
+| Report field            |            Value |
+| ----------------------- | ---------------: |
+| Average FPS             |       229.550846 |
+| Average frame           |      4.356333 ms |
+| p95 frame               |      5.600000 ms |
+| Average simulation step |      0.002667 ms |
+| Average instance sync   |      0.009333 ms |
+| Active particles        |              500 |
+| Draw calls              |                3 |
+| Rolling sample count    |              300 |
+| Heap used               | 37,314,210 bytes |
+
+The exported user-agent identifies Oculus Browser on Quest 3 because it is supplied by the IWER emulation profile. This remains desktop Chrome evidence, not a physical-headset measurement. Track 1A's rendered stability gate is accepted. Real Quest performance remains device-blocked.

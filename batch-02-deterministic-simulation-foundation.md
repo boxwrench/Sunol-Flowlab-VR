@@ -1,6 +1,6 @@
 # Batch 02 Implementation Plan: Minimum Phenomenon Substrate
 
-**Status:** Not started — begins after Batch 01A closeout  
+**Status:** Ready — Batch 01A accepted; implementation not started  
 **Branch:** `batch-02-phenomenon-substrate`  
 **Depends on:** Batch 01A accepted, including the uninterrupted rendered observation  
 **May run in parallel with:** Isolated XR shell planning and review only  

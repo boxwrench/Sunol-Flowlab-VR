@@ -32,17 +32,17 @@ The jar rack never requires six live simulations and never replaces the complete
 
 ## Current status
 
-| Batch | Status                 | Gate                                                                      |
-| ----- | ---------------------- | ------------------------------------------------------------------------- |
-| 00    | Substantially complete | Physical Quest route remains open                                         |
-| 01A   | Nearly complete        | Uninterrupted five-minute post-fix rerun                                  |
-| 01B   | Blocked                | Physical Quest 3 and hosted smoke route                                   |
-| 02    | Not started            | Named runtime-ownership package complete; Batch 01A rendered gate remains |
-| 03–11 | Not started            | Predecessor gates                                                         |
+| Batch | Status                 | Gate                                                 |
+| ----- | ---------------------- | ---------------------------------------------------- |
+| 00    | Substantially complete | Physical Quest route remains open                    |
+| 01A   | Accepted               | Uninterrupted post-fix rendered observation recorded |
+| 01B   | Blocked                | Physical Quest 3 and hosted smoke route              |
+| 02    | Ready                  | Begin minimum deterministic phenomenon substrate     |
+| 03–11 | Not started            | Predecessor gates                                    |
 
 An [earlier Godot implementation plan](docs/archive/Sunol%20FlowLab%20Implementation%20Plan%20%28superseded%20Godot%29.pdf) is retained only as a superseded source artifact for provenance and is non-binding for this greenfield WebXR repository. The stale duplicate Batch 03 snapshot was removed; Git history preserves it. Only [the indexed Batch 03 plan](batch-03-desktop-phenomenon-proof.md) is authoritative.
 
-Batch 01A has an app-owned deterministic runtime, read-only rendering consumption, permanent telemetry, and a measured 500-particle foundation. Its rendered gate remains open until the uninterrupted post-fix observation is recorded. Batch 01B and every real-device acceptance criterion remain open until verified on the physical headset.
+Batch 01A has an app-owned deterministic runtime, read-only rendering consumption, permanent telemetry, a measured 500-particle foundation, and an accepted uninterrupted 310-second post-fix Chrome observation. Batch 01B and every real-device acceptance criterion remain open until verified on the physical headset.
 
 Batch 02 now prioritizes the minimum deterministic substrate for the 11-dose phenomenon proof. Generalized collision, pooling, mass/density, and merge-animation machinery belong to conditional Batch 02B work and require benchmark or visible-behavior evidence.
 

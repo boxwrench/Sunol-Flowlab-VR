@@ -6,8 +6,8 @@ Updated: 2026-07-15
 
 - Repository: <https://github.com/boxwrench/Sunol-Flowlab-VR>
 - Branch: `main`
-- Published baseline before this increment: `d368558` (`Correct runtime ownership and validation`)
-- Current increment: adoption of the approved hybrid six-jar test bench and hero observation tank design direction
+- Published baseline before this increment: `bed6438` (`Archive superseded planning artifacts`)
+- Current increment: Batch 01A rendered-stability closeout
 - Active plan authority: [IMPLEMENTATION_PLAN.md](IMPLEMENTATION_PLAN.md) and its ordered `batch-00` through `batch-11` Markdown files
 - The superseded Godot plan is isolated under `docs/archive/` for provenance. Its stale duplicate Batch 03 snapshot was removed; use only the active indexed Batch 03 plan.
 
@@ -26,14 +26,14 @@ Updated: 2026-07-15
 - Automated module-boundary regression tests, a desktop Playwright smoke test, and a minimal GitHub Actions workflow
 - Visible startup error boundary
 - Approved hybrid presentation direction: one live authoritative hero tank, six static canonical preset jars, and a complete eleven-dose plot/log
+- Accepted uninterrupted 310-second post-fix Chrome observation with stable heap, 500 particles, three draw calls, and zero console errors
 
 The current local validation includes 12 passing repository contract tests, 33 passing Vitest tests, a passing Playwright desktop smoke test, type checking, lint, formatting, production build, and the 500-particle benchmark. The copied 20-page design PDF matches the supplied source SHA-256 exactly and was visually reviewed before integration. The production build reports expected non-failing large-chunk warnings from emulator environment assets.
 
 ## Open gates and constraints
 
 - The Quest 3 has Developer Mode enabled but was not physically available. Do not mark real-device criteria complete until tested on the headset.
-- Chrome heap use stayed flat at approximately 64-65 MB after garbage collection through about 250 seconds with 500 particles and three draw calls.
-- The previous five-minute observation ended with an emulator presentation interruption caused by competing automatic session offers. The cause was fixed with `offerSession: false`, but an uninterrupted five-minute post-fix Chrome run and final exported metrics report are still required.
+- The accepted post-fix desktop observation kept Chrome heap within 34.9-35.5 MB for 310 uninterrupted seconds with 500 particles, three draw calls, and no console errors. The final exported report is recorded in `docs/PERFORMANCE.md`.
 - A hosted HTTPS deployment is not authorized yet. Localhost and the documented ADB reverse route are the approved development paths.
 - Public-data and fictionalization restrictions in [docs/DATA_BOUNDARY.md](docs/DATA_BOUNDARY.md) are binding.
 - Before visual acceptance, record the required unlabeled-screenshot recognition check in `docs/UX_VALIDATION.md`; at least one operator or educator must participate, with a nonoperator preferred as an additional participant.
@@ -55,9 +55,9 @@ The hybrid presentation direction does not create six simulations. The hero tank
 
 ## Recommended next session
 
-1. Rerun the uninterrupted five-minute Chrome emulator observation with the explicit-session fix and record the exported report in [docs/PERFORMANCE.md](docs/PERFORMANCE.md).
-2. Confirm the new CI workflow passes after publication; ordinary CI intentionally excludes emulator interaction and physical Quest testing.
-3. Begin reduced Batch 02A with the minimum particle state and deterministic dose-efficiency mapping needed by the permanent 11-dose sweep, preserving the approved hybrid presentation semantics.
+1. Confirm the CI workflow passes after the next publication; ordinary CI intentionally excludes emulator interaction and physical Quest testing.
+2. Begin reduced Batch 02A with minimum particle/floc size, suspended/settled state, and deterministic dose-efficiency mapping for detents 0 through 10.
+3. Preserve reset purity, fixed-step determinism, fixed-capacity storage, and the approved hybrid presentation semantics from the first Batch 02A change.
 4. Require measured evidence before adding Batch 02B spatial hashing, pooling, mass/density fidelity, or merge-animation metadata.
 5. Keep all physical Quest criteria open unless explicitly resolved; archived source artifacts remain non-authoritative.
 
