@@ -46,6 +46,10 @@
 - The isolated unlabeled proof capture was visually inspected. The hero tank is
   dominant, the six jars are distinct and secondary, and no console-error
   artifact was produced.
+- A normal real-time 12-second Chromium/SwiftShader observation recorded 60.0
+  FPS, 16.67 ms average frame time, 18.00 ms p95, 0.023 ms average simulation
+  time, 0.006 ms average instance synchronization, 500 particles, 20 draw
+  calls, 23.4 MB JavaScript heap, and zero console errors.
 
 ## Architecture and cost notes
 
@@ -66,8 +70,6 @@ evidence justifies Batch 02B collision, pooling, density, or spatial-hash work.
 - Complete the blinded low/optimum/high visual rubric with an operator-informed
   reviewer and a non-operator reviewer; confirm the best outcome is identifiable
   without labels or a plot.
-- Record a normal real-time desktop performance observation for the expanded
-  apparatus. Virtual-time screenshot captures are not performance evidence.
 - Keep the physical Quest route open until ADB reports one authorized device and
   the documented headset checks pass. This does not convert emulator evidence
   into real-device evidence.

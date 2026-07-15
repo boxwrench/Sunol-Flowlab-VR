@@ -33,7 +33,7 @@ Updated: 2026-07-15
 - Band-driven hero observation tank, static six-jar recognition blockout, and deterministic low/optimum/high desktop presets
 - Unlabeled proof mode and authoritative clearing-front diagnostics
 
-The current local validation includes 15 passing repository contract tests, 64 passing Vitest tests across 14 files, canonical and nine-seed dose sweeps, reverse-order equality, type checking, lint, formatting, production build, a 28.38 ms 500-particle production-path benchmark, three passing desktop browser tests, deterministic low/optimum/high endpoint captures, and an inspected unlabeled apparatus capture. Full Batch 02A evidence is in [docs/BATCH_02A_ACCEPTANCE.md](docs/BATCH_02A_ACCEPTANCE.md); current Batch 03 evidence and open gates are in [docs/BATCH_03_PROGRESS.md](docs/BATCH_03_PROGRESS.md). The production build retains the expected non-failing large-chunk warnings from emulator environment assets.
+The current local validation includes 15 passing repository contract tests, 64 passing Vitest tests across 14 files, canonical and nine-seed dose sweeps, reverse-order equality, type checking, lint, formatting, production build, a 28.38 ms 500-particle production-path benchmark, three passing desktop browser tests, deterministic low/optimum/high endpoint captures, an inspected unlabeled apparatus capture, and a 60 FPS 12-second real-time desktop apparatus observation with zero console errors. Full Batch 02A evidence is in [docs/BATCH_02A_ACCEPTANCE.md](docs/BATCH_02A_ACCEPTANCE.md); current Batch 03 evidence and open gates are in [docs/BATCH_03_PROGRESS.md](docs/BATCH_03_PROGRESS.md). The production build retains the expected non-failing large-chunk warnings from emulator environment assets.
 
 ## Open gates and constraints
 
@@ -63,7 +63,7 @@ The hybrid presentation direction does not create six simulations. The hero tank
 1. Connect and authorize the present Quest 3 until `adb devices -l` reports one device in state `device`; then run the documented reverse, Quest Browser, immersive-entry, controller, and remote-debug checks.
 2. Confirm CI passes after publication; ordinary CI intentionally excludes emulator interaction and physical Quest testing.
 3. Run the blinded apparatus-recognition protocol in `docs/UX_VALIDATION.md` with at least one operator or educator and preferably one non-operator.
-4. Complete the blinded low/optimum/high review and a normal real-time desktop performance observation before accepting Batch 03.
+4. Complete the blinded low/optimum/high review before accepting Batch 03.
 5. Keep Batch 02B spatial hashing, pooling, mass/density fidelity, and merge-animation metadata deferred unless new measurements or visible limitations justify one.
 6. Keep hosted deployment and every unverified physical Quest criterion open; archived source artifacts remain non-authoritative.
 

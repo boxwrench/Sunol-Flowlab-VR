@@ -98,3 +98,18 @@ The benchmark schema now covers the full accepted Dose 5 phenomenon path rather 
 The canonical 11-dose sweep completed in 214.22 ms during focused validation, and the nine-seed acceptance corpus completed in 1.78 seconds. Both are far below the 30-second canonical sweep ceiling on the development machine.
 
 The phenomenon step allocates no arrays, objects, closures, PRNGs, or rendering values. Its nine particle arrays and three turbidity value/scratch arrays are fixed and reused. Completed result snapshots, failure JSON, Markdown tables, and sorted benchmark samples allocate outside the hot step. No evidence justifies Batch 02B spatial hashing, pooling, collision, mass/density, or merge-animation work. Full evidence is in [the Batch 02A acceptance packet](BATCH_02A_ACCEPTANCE.md).
+
+## 2026-07-15 - Batch 03 desktop apparatus observation
+
+The expanded desktop apparatus was observed for 12 seconds in a normal
+real-time headless Chromium session using SwiftShader at 1280 × 720. This run
+did not use the virtual-time screenshot hook.
+
+|  FPS | Average frame | p95 frame | Simulation | Instance sync | Particles | Draw calls | JS heap |
+| ---: | ------------: | --------: | ---------: | ------------: | --------: | ---------: | ------: |
+| 60.0 |      16.67 ms |  18.00 ms |   0.023 ms |      0.006 ms |       500 |         20 | 23.4 MB |
+
+No console or page errors were recorded. The 20 draw calls include the
+authoritative gradient surface, one instanced particle draw, three static
+instanced jar-rack draws, minimal tank/rack structure, and the development
+grid. This desktop result is not physical Quest evidence.
