@@ -32,7 +32,7 @@ describe('SimulationRuntime', () => {
   })
 
   it('owns dose, phenomenon stepping, and authoritative turbidity storage', () => {
-    const runtime = new SimulationRuntime(50, 123, 1 / 60, 5, 0)
+    const runtime = new SimulationRuntime(500, 123, 1 / 60, 5, 0)
     const bands = runtime.turbidityBands.values
     runtime.stepHeadless(2580)
     const underdose = endpointTurbidity(runtime.turbidityBands)

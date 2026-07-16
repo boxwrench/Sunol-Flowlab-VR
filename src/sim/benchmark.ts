@@ -86,12 +86,13 @@ export function runHeadlessBenchmark(
     stateArrayAllocations: 10,
     turbidityArrayAllocations: 3,
     endpointTurbidity: endpointTurbidity(workspace.bands, config.turbidity),
-    finite: workspaceIsFinite(workspace),
+    finite: workspaceIsFinite(workspace, config),
   }
 }
 
 function workspaceIsFinite(
   workspace: ReturnType<typeof createPhenomenonWorkspace>,
+  config: Readonly<typeof DEFAULT_PHENOMENON_CONFIG>,
 ): boolean {
   const state = workspace.particles
   for (let index = 0; index < state.capacity; index += 1) {
@@ -107,8 +108,7 @@ function workspaceIsFinite(
       (isActive ? state.mass[index] <= 0 : state.mass[index] !== 0) ||
       !Number.isFinite(state.diameter[index]) ||
       (isActive ? state.diameter[index] <= 0 : state.diameter[index] !== 0) ||
-      state.diameter[index] > 1 ||
-      !particleDiameterIsConsistent(state, index) ||
+      !particleDiameterIsConsistent(state, index, config.geometry) ||
       (state.settled[index] !== 0 && state.settled[index] !== 1)
     )
       return false

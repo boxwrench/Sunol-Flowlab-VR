@@ -1,9 +1,10 @@
 import { stepParticleDrift } from './drift'
 import {
+  DEFAULT_AGGREGATE_GEOMETRY_CONFIG,
   DEFAULT_PARTICLE_BOUNDS,
   PARTICLE_SETTLED,
-  massFromDiameter,
-  setParticleMass,
+  validateAggregateGeometryConfig,
+  type AggregateGeometryConfig,
   type ParticleBounds,
   type ParticleState,
 } from './particleState'
@@ -16,13 +17,9 @@ export interface CoagulationConfig {
   readonly flocculationSeconds: number
   readonly settlingSeconds: number
   readonly measurementSeconds: number
-  readonly flocTargetMinimum: number
-  readonly flocTargetRange: number
-  readonly flocTargetExponent: number
-  readonly flocGrowthRatePerSecond: number
-  readonly settlingThreshold: number
   readonly settlingBaseSpeedPerSecond: number
-  readonly settlingSpeedRangePerSecond: number
+  readonly settlingVelocityScalePerSecond: number
+  readonly settlingMaximumSpeedPerSecond: number
 }
 
 export const DEFAULT_COAGULATION_CONFIG: Readonly<CoagulationConfig> =
@@ -31,13 +28,9 @@ export const DEFAULT_COAGULATION_CONFIG: Readonly<CoagulationConfig> =
     flocculationSeconds: 15,
     settlingSeconds: 20,
     measurementSeconds: 2,
-    flocTargetMinimum: 0.15,
-    flocTargetRange: 0.8,
-    flocTargetExponent: 1.5,
-    flocGrowthRatePerSecond: 0.22,
-    settlingThreshold: 0.18,
-    settlingBaseSpeedPerSecond: 0.006,
-    settlingSpeedRangePerSecond: 0.07,
+    settlingBaseSpeedPerSecond: 0.001,
+    settlingVelocityScalePerSecond: 0.012,
+    settlingMaximumSpeedPerSecond: 0.06,
   })
 
 export function totalTreatmentSteps(
@@ -82,6 +75,7 @@ export function stepCoagulation(
   timestepSeconds: number,
   efficiency: number,
   config: Readonly<CoagulationConfig> = DEFAULT_COAGULATION_CONFIG,
+  geometry: Readonly<AggregateGeometryConfig> = DEFAULT_AGGREGATE_GEOMETRY_CONFIG,
   bounds: ParticleBounds = DEFAULT_PARTICLE_BOUNDS,
 ): void {
   validateCoagulationInputs(timestepSeconds, efficiency, config)
@@ -94,39 +88,55 @@ export function stepCoagulation(
 
   if (phase === 'flocculation') {
     stepParticleDrift(state, timestepSeconds, bounds)
-    const target = Math.min(
-      1,
-      config.flocTargetMinimum +
-        config.flocTargetRange * efficiency ** config.flocTargetExponent,
-    )
-    for (let index = 0; index < state.capacity; index += 1) {
-      if (state.active[index] === 0 || state.settled[index] === 1) continue
-      const size = state.diameter[index]
-      const growth =
-        config.flocGrowthRatePerSecond * (target - size) * timestepSeconds
-      const nextDiameter = Math.min(target, size + Math.max(0, growth))
-      setParticleMass(state, index, massFromDiameter(nextDiameter))
-    }
     return
   }
 
   for (let index = 0; index < state.capacity; index += 1) {
     if (state.active[index] === 0 || state.settled[index] === 1) continue
-    const drive = Math.max(
-      0,
-      Math.min(
-        1,
-        (state.diameter[index] - config.settlingThreshold) /
-          (1 - config.settlingThreshold),
-      ),
+    const speed = settlingSpeedForDiameter(
+      state.diameter[index],
+      config,
+      geometry,
     )
-    const speed =
-      config.settlingBaseSpeedPerSecond +
-      config.settlingSpeedRangePerSecond * drive * drive
     const nextY = state.positionY[index] - speed * timestepSeconds
     if (nextY <= bounds.minY) settleParticle(state, index, bounds.minY)
     else state.positionY[index] = nextY
   }
+}
+
+export function relativeExcessDensity(
+  diameter: number,
+  geometry: Readonly<AggregateGeometryConfig> = DEFAULT_AGGREGATE_GEOMETRY_CONFIG,
+): number {
+  validateAggregateGeometryConfig(geometry)
+  if (!Number.isFinite(diameter) || diameter <= 0)
+    throw new RangeError('Aggregate diameter must be positive and finite')
+  const diameterRatio = diameter / geometry.primaryParticleDiameter
+  if (geometry.fractalDimension === 2) return 1 / diameterRatio
+  return diameterRatio ** (geometry.fractalDimension - 3)
+}
+
+export function settlingSpeedForDiameter(
+  diameter: number,
+  config: Readonly<CoagulationConfig> = DEFAULT_COAGULATION_CONFIG,
+  geometry: Readonly<AggregateGeometryConfig> = DEFAULT_AGGREGATE_GEOMETRY_CONFIG,
+): number {
+  validateCoagulationInputs(1, 1, config)
+  validateAggregateGeometryConfig(geometry)
+  if (!Number.isFinite(diameter) || diameter <= 0)
+    throw new RangeError('Aggregate diameter must be positive and finite')
+  const diameterRatio = diameter / geometry.primaryParticleDiameter
+  const drive =
+    geometry.fractalDimension === 2
+      ? diameterRatio
+      : relativeExcessDensity(diameter, geometry) *
+        diameterRatio *
+        diameterRatio
+  return Math.min(
+    config.settlingMaximumSpeedPerSecond,
+    config.settlingBaseSpeedPerSecond +
+      config.settlingVelocityScalePerSecond * drive,
+  )
 }
 
 function secondsToSteps(seconds: number, timestepSeconds: number): number {
@@ -165,24 +175,18 @@ function validateCoagulationInputs(
       'Treatment phase durations must be positive and finite',
     )
   if (
-    !isNonNegativeFinite(config.flocTargetMinimum) ||
-    !isNonNegativeFinite(config.flocTargetRange) ||
-    !isNonNegativeFinite(config.flocTargetExponent) ||
-    !isNonNegativeFinite(config.flocGrowthRatePerSecond) ||
-    !isNonNegativeFinite(config.settlingThreshold) ||
     !isNonNegativeFinite(config.settlingBaseSpeedPerSecond) ||
-    !isNonNegativeFinite(config.settlingSpeedRangePerSecond)
+    !isNonNegativeFinite(config.settlingVelocityScalePerSecond) ||
+    !isNonNegativeFinite(config.settlingMaximumSpeedPerSecond)
   )
     throw new RangeError(
       'Coagulation parameters must be finite and non-negative',
     )
   if (
-    config.flocTargetMinimum > 1 ||
-    config.flocTargetMinimum + config.flocTargetRange > 1 ||
-    config.flocTargetExponent === 0 ||
-    config.settlingThreshold >= 1
+    config.settlingMaximumSpeedPerSecond === 0 ||
+    config.settlingBaseSpeedPerSecond > config.settlingMaximumSpeedPerSecond
   )
-    throw new RangeError('Normalized coagulation parameters are invalid')
+    throw new RangeError('Settling-speed parameters are invalid')
 }
 
 function isPositiveFinite(value: number): boolean {

@@ -3,6 +3,8 @@ import { describe, expect, it } from 'vitest'
 import {
   DEFAULT_DOSE_EFFICIENCY_CONFIG,
   calculateDoseEfficiency,
+  createDoseEfficiencyTable,
+  fillDoseEfficiencyTable,
   type DoseDetent,
   type DoseEfficiencyConfig,
 } from './doseEfficiency'
@@ -62,6 +64,20 @@ describe('phenomenological dose efficiency', () => {
 
     expect(second).toEqual(first)
     expect(DEFAULT_DOSE_EFFICIENCY_CONFIG).toEqual(before)
+  })
+
+  it('precomputes all eleven detents into reusable storage', () => {
+    const table = createDoseEfficiencyTable()
+    expect(table).toHaveLength(11)
+    for (const dose of ALL_DOSES)
+      expect(table[dose]).toBeCloseTo(calculateDoseEfficiency(dose))
+
+    const storage = table
+    fillDoseEfficiencyTable(table, DEFAULT_DOSE_EFFICIENCY_CONFIG)
+    expect(table).toBe(storage)
+    expect(() => fillDoseEfficiencyTable(new Float32Array(10))).toThrow(
+      RangeError,
+    )
   })
 
   it.each([-1, 11, 1.5, Number.NaN, Number.POSITIVE_INFINITY])(

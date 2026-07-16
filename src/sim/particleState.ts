@@ -101,8 +101,10 @@ export function resetParticleState(
   seed: number,
   activeCount = state.capacity,
   bounds: ParticleBounds = DEFAULT_PARTICLE_BOUNDS,
+  geometry: Readonly<AggregateGeometryConfig> = DEFAULT_AGGREGATE_GEOMETRY_CONFIG,
 ): void {
   validateReset(state, activeCount, bounds)
+  validateAggregateGeometryConfig(geometry)
   const rng = new SeededRng(seed)
   for (let index = 0; index < state.capacity; index += 1) {
     const active = index < activeCount
@@ -127,9 +129,8 @@ export function resetParticleState(
     state.velocityX[index] = rng.nextRange(-0.02, 0.02)
     state.velocityY[index] = rng.nextRange(-0.01, 0.01)
     state.velocityZ[index] = rng.nextRange(-0.02, 0.02)
-    state.mass[index] = DEFAULT_AGGREGATE_GEOMETRY_CONFIG.primaryParticleMass
-    state.diameter[index] =
-      DEFAULT_AGGREGATE_GEOMETRY_CONFIG.primaryParticleDiameter
+    state.mass[index] = geometry.primaryParticleMass
+    state.diameter[index] = geometry.primaryParticleDiameter
   }
 
   state.activeCount = activeCount
@@ -220,7 +221,7 @@ function validateReset(
   }
 }
 
-function validateAggregateGeometryConfig(
+export function validateAggregateGeometryConfig(
   config: Readonly<AggregateGeometryConfig>,
 ): void {
   if (

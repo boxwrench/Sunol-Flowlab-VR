@@ -1,4 +1,13 @@
 export {
+  DEFAULT_AGGREGATION_CONFIG,
+  createMergeDiagnostics,
+  mergeParticlePair,
+  resetMergeDiagnostics,
+  stepDeterministicAggregation,
+  type AggregationConfig,
+  type MergeDiagnosticsState,
+} from './aggregation'
+export {
   DEFAULT_BENCHMARK_OPTIONS,
   runHeadlessBenchmark,
   type HeadlessBenchmarkOptions,
@@ -7,6 +16,8 @@ export {
 export { stepParticleDrift } from './drift'
 export {
   DEFAULT_COAGULATION_CONFIG,
+  relativeExcessDensity,
+  settlingSpeedForDiameter,
   stepCoagulation,
   totalTreatmentSteps,
   treatmentPhaseAtStep,
@@ -15,7 +26,10 @@ export {
 } from './coagulation'
 export {
   DEFAULT_DOSE_EFFICIENCY_CONFIG,
+  DOSE_DETENT_COUNT,
   calculateDoseEfficiency,
+  createDoseEfficiencyTable,
+  fillDoseEfficiencyTable,
   validateDoseDetent,
   validateDoseEfficiencyConfig,
   type DoseDetent,
@@ -45,6 +59,7 @@ export {
   particleDiameterIsConsistent,
   resetParticleState,
   setParticleMass,
+  validateAggregateGeometryConfig,
   type AggregateGeometryConfig,
   type ParticleBounds,
   type ParticleState,

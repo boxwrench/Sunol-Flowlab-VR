@@ -25,6 +25,27 @@ export const DEFAULT_DOSE_EFFICIENCY_CONFIG: Readonly<DoseEfficiencyConfig> =
     overdoseFalloffPerDetent: 0.1,
   })
 
+export const DOSE_DETENT_COUNT = 11
+
+export function createDoseEfficiencyTable(
+  config: Readonly<DoseEfficiencyConfig> = DEFAULT_DOSE_EFFICIENCY_CONFIG,
+): Float32Array {
+  const table = new Float32Array(DOSE_DETENT_COUNT)
+  fillDoseEfficiencyTable(table, config)
+  return table
+}
+
+export function fillDoseEfficiencyTable(
+  table: Float32Array,
+  config: Readonly<DoseEfficiencyConfig> = DEFAULT_DOSE_EFFICIENCY_CONFIG,
+): void {
+  if (table.length !== DOSE_DETENT_COUNT)
+    throw new RangeError('Dose-efficiency table must contain eleven detents')
+  validateDoseEfficiencyConfig(config)
+  for (let dose = 0; dose < DOSE_DETENT_COUNT; dose += 1)
+    table[dose] = calculateDoseEfficiency(dose as DoseDetent, config)
+}
+
 /**
  * Returns normalized treatment effectiveness in [minimumEfficiency,
  * maximumEfficiency]. The function is pure and presentation-independent.
