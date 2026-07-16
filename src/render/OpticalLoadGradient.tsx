@@ -9,7 +9,7 @@ import {
   UnsignedByteType,
 } from 'three'
 
-import type { TurbidityBandsView } from '../sim'
+import type { OpticalLoadBandsView } from '../sim'
 
 const vertexShader = /* glsl */ `
   varying vec2 vUv;
@@ -25,8 +25,8 @@ const fragmentShader = /* glsl */ `
   varying vec2 vUv;
 
   void main() {
-    float turbidity = texture2D(bandTexture, vec2(0.5, vUv.y)).r;
-    float response = smoothstep(0.04, 0.95, turbidity);
+    float opticalLoad = texture2D(bandTexture, vec2(0.5, vUv.y)).r;
+    float response = smoothstep(0.04, 0.95, opticalLoad);
     vec3 clearWater = vec3(0.055, 0.31, 0.32);
     vec3 cloudyWater = vec3(0.42, 0.49, 0.34);
     vec3 color = mix(clearWater, cloudyWater, response);
@@ -35,11 +35,11 @@ const fragmentShader = /* glsl */ `
   }
 `
 
-interface TurbidityGradientProps {
-  readonly bands: TurbidityBandsView
+interface OpticalLoadGradientProps {
+  readonly bands: OpticalLoadBandsView
 }
 
-export function TurbidityGradient({ bands }: TurbidityGradientProps) {
+export function OpticalLoadGradient({ bands }: OpticalLoadGradientProps) {
   const bandPixels = useMemo(
     () => new Uint8Array(bands.values.length),
     [bands.values.length],

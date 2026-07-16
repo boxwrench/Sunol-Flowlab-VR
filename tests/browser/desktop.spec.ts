@@ -45,8 +45,10 @@ test('comparison presets deterministically expose the U-shaped endpoint', async 
   expect(underdose.dose).toBe(0)
   expect(optimum.dose).toBe(5)
   expect(overdose.dose).toBe(10)
-  expect(optimum.endpointTurbidity).toBeLessThan(underdose.endpointTurbidity)
-  expect(optimum.endpointTurbidity).toBeLessThan(overdose.endpointTurbidity)
+  expect(optimum.endpointOpticalLoad).toBeLessThan(
+    underdose.endpointOpticalLoad,
+  )
+  expect(optimum.endpointOpticalLoad).toBeLessThan(overdose.endpointOpticalLoad)
 })
 
 test('proof mode leaves an unlabeled canvas for recognition review', async ({

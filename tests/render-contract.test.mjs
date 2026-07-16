@@ -18,22 +18,22 @@ test('particle renderer is a read-only state consumer with one instanced mesh', 
   assert.match(source, /instanceMatrix\.needsUpdate = true/)
 })
 
-test('turbidity renderer uses one preallocated band-driven gradient surface', async () => {
+test('optical-load renderer uses one preallocated band-driven gradient surface', async () => {
   const source = await readFile(
-    new URL('../src/render/TurbidityGradient.tsx', import.meta.url),
+    new URL('../src/render/OpticalLoadGradient.tsx', import.meta.url),
     'utf8',
   )
   const frameCallback = source.slice(source.indexOf('useFrame('))
 
   assert.equal((source.match(/<mesh\b/g) ?? []).length, 1)
-  assert.match(source, /bands: TurbidityBandsView/)
+  assert.match(source, /bands: OpticalLoadBandsView/)
   assert.match(source, /new Uint8Array\(bands\.values\.length\)/)
   assert.match(source, /new DataTexture/)
   assert.doesNotMatch(
     frameCallback,
     /new (?:DataTexture|ShaderMaterial|Uint8Array)/,
   )
-  assert.doesNotMatch(source, /endpointTurbidity|sampleTurbidityBands|Dose/)
+  assert.doesNotMatch(source, /endpointOpticalLoad|sampleOpticalLoadBands|Dose/)
 })
 
 test('jar-test bench is a table-mounted six-preset static geometry consumer', async () => {
@@ -52,5 +52,5 @@ test('jar-test bench is a table-mounted six-preset static geometry consumer', as
   assert.match(source, /JAR_VESSEL_DIMENSIONS/)
   assert.match(source, /JAR_RIM_DIMENSIONS/)
   assert.doesNotMatch(source, /cylinderGeometry|torusGeometry/)
-  assert.doesNotMatch(source, /useFrame|Particle|Turbidity|SimulationRuntime/)
+  assert.doesNotMatch(source, /useFrame|Particle|OpticalLoad|SimulationRuntime/)
 })

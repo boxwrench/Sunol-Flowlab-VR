@@ -29,8 +29,8 @@ export const DEFAULT_COAGULATION_CONFIG: Readonly<CoagulationConfig> =
     settlingSeconds: 20,
     measurementSeconds: 2,
     settlingBaseSpeedPerSecond: 0.001,
-    settlingVelocityScalePerSecond: 0.012,
-    settlingMaximumSpeedPerSecond: 0.06,
+    settlingVelocityScalePerSecond: 0.009,
+    settlingMaximumSpeedPerSecond: 0.05,
   })
 
 export function totalTreatmentSteps(

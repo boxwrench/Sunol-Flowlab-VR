@@ -9,7 +9,7 @@ import {
   type DoseDetent,
   type PhenomenonConfig,
   type ParticleStateView,
-  type TurbidityBandsView,
+  type OpticalLoadBandsView,
   type TreatmentPhase,
 } from '../sim'
 
@@ -17,7 +17,7 @@ export const CANONICAL_SIMULATION_SEED = 0x5f3759df
 
 export class SimulationRuntime {
   readonly state: ParticleStateView
-  readonly turbidityBands: TurbidityBandsView
+  readonly opticalLoadBands: OpticalLoadBandsView
 
   private readonly config: Readonly<PhenomenonConfig>
   private readonly workspace
@@ -37,7 +37,7 @@ export class SimulationRuntime {
     })
     this.workspace = createPhenomenonWorkspace(this.config)
     this.state = this.workspace.particles
-    this.turbidityBands = this.workspace.bands
+    this.opticalLoadBands = this.workspace.bands
     this.clock = new FixedStepClock(fixedTimestepSeconds, maxCatchUpSteps)
     this.reset(seed, dose)
   }

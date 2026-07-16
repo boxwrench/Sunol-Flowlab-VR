@@ -20,7 +20,7 @@ describe('deterministic phenomenon trial', () => {
 
     runPhenomenonTrial(0, 123, undefined, workspace)
     const replay = runPhenomenonTrial(5, 0x5f3759df, undefined, workspace)
-    expect(replay.endpointTurbidity).toBe(first.endpointTurbidity)
+    expect(replay.endpointOpticalLoad).toBe(first.endpointOpticalLoad)
     expect(replay.bandSnapshot).toEqual(first.bandSnapshot)
     expect(Array.from(workspace.particles.positionY)).toEqual(finalPositions)
     expect(Array.from(workspace.particles.diameter)).toEqual(finalDiameters)
@@ -73,6 +73,6 @@ describe('deterministic phenomenon trial', () => {
     const first = hashPhenomenonConfig()
     expect(first).toMatch(/^fnv1a32-[0-9a-f]{8}$/)
     expect(hashPhenomenonConfig()).toBe(first)
-    expect(DEFAULT_PHENOMENON_CONFIG.schemaVersion).toBe(2)
+    expect(DEFAULT_PHENOMENON_CONFIG.schemaVersion).toBe(3)
   })
 })

@@ -23,8 +23,8 @@ test('rendering cannot own simulation lifecycle or import the app layer', async 
     'resetParticleState',
     'stepParticleDrift',
     'stepPhenomenonWorkspace',
-    'sampleTurbidityBands',
-    'endpointTurbidity',
+    'sampleOpticalLoadBands',
+    'endpointOpticalLoad',
     'calculateDoseEfficiency',
     'FixedStepClock',
   ]

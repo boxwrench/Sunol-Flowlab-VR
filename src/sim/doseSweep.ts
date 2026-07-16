@@ -20,7 +20,7 @@ export interface DoseSweepReport {
   readonly phaseDurationsSeconds: readonly [number, number, number, number]
   readonly results: readonly PhenomenonTrialResult[]
   readonly minimumDose: DoseDetent
-  readonly minimumTurbidity: number
+  readonly minimumOpticalLoad: number
   readonly tailMargins: readonly [number, number]
   readonly leftShoulderReversals: number
   readonly rightShoulderReversals: number
@@ -52,7 +52,7 @@ export function formatDoseSweepMarkdown(report: DoseSweepReport): string {
   ]
   for (const result of report.results)
     lines.push(
-      `| ${result.dose} | ${result.endpointTurbidity.toFixed(6)} | ${result.settledParticles} | ${result.meanNormalizedSize.toFixed(6)} | ${result.clarityReachedAtSimulationTime?.toFixed(3) ?? 'never'} |`,
+      `| ${result.dose} | ${result.endpointOpticalLoad.toFixed(6)} | ${result.settledParticles} | ${result.meanNormalizedSize.toFixed(6)} | ${result.clarityReachedAtSimulationTime?.toFixed(3) ?? 'never'} |`,
     )
   return lines.join('\n')
 }
@@ -70,20 +70,21 @@ function analyzeDoseSweep(
   let minimumDose: DoseDetent = 0
   for (let dose = 1; dose <= 10; dose += 1)
     if (
-      results[dose].endpointTurbidity < results[minimumDose].endpointTurbidity
+      results[dose].endpointOpticalLoad <
+      results[minimumDose].endpointOpticalLoad
     )
       minimumDose = dose as DoseDetent
-  const minimumTurbidity = results[minimumDose].endpointTurbidity
+  const minimumOpticalLoad = results[minimumDose].endpointOpticalLoad
   const tailMargins: readonly [number, number] = [
-    results[0].endpointTurbidity - minimumTurbidity,
-    results[10].endpointTurbidity - minimumTurbidity,
+    results[0].endpointOpticalLoad - minimumOpticalLoad,
+    results[10].endpointOpticalLoad - minimumOpticalLoad,
   ]
   let leftShoulderReversals = 0
   let rightShoulderReversals = 0
   let maximumShoulderReversal = 0
   for (let dose = 1; dose <= minimumDose; dose += 1) {
     const reversal =
-      results[dose].endpointTurbidity - results[dose - 1].endpointTurbidity
+      results[dose].endpointOpticalLoad - results[dose - 1].endpointOpticalLoad
     if (reversal > 0) {
       leftShoulderReversals += 1
       maximumShoulderReversal = Math.max(maximumShoulderReversal, reversal)
@@ -91,7 +92,7 @@ function analyzeDoseSweep(
   }
   for (let dose = minimumDose + 1; dose <= 10; dose += 1) {
     const reversal =
-      results[dose - 1].endpointTurbidity - results[dose].endpointTurbidity
+      results[dose - 1].endpointOpticalLoad - results[dose].endpointOpticalLoad
     if (reversal > 0) {
       rightShoulderReversals += 1
       maximumShoulderReversal = Math.max(maximumShoulderReversal, reversal)
@@ -134,7 +135,7 @@ function analyzeDoseSweep(
     ],
     results,
     minimumDose,
-    minimumTurbidity,
+    minimumOpticalLoad,
     tailMargins,
     leftShoulderReversals,
     rightShoulderReversals,
@@ -146,9 +147,9 @@ function analyzeDoseSweep(
 
 function trialIsFiniteAndBounded(result: PhenomenonTrialResult): boolean {
   if (
-    !Number.isFinite(result.endpointTurbidity) ||
-    result.endpointTurbidity < 0 ||
-    result.endpointTurbidity > 1 ||
+    !Number.isFinite(result.endpointOpticalLoad) ||
+    result.endpointOpticalLoad < 0 ||
+    result.endpointOpticalLoad > 1 ||
     !Number.isFinite(result.meanNormalizedSize) ||
     result.meanNormalizedSize <= 0 ||
     result.meanNormalizedSize > 1

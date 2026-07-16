@@ -7,7 +7,7 @@ import {
   stepPhenomenonWorkspace,
 } from './phenomenon'
 import { particleDiameterIsConsistent } from './particleState'
-import { endpointTurbidity } from './turbidity'
+import { endpointOpticalLoad } from './opticalLoad'
 
 export interface HeadlessBenchmarkOptions {
   readonly particleCount: number
@@ -29,8 +29,8 @@ export interface HeadlessBenchmarkReport {
   readonly p95StepMs: number
   readonly activeParticles: number
   readonly stateArrayAllocations: 10
-  readonly turbidityArrayAllocations: 3
-  readonly endpointTurbidity: number
+  readonly opticalLoadArrayAllocations: 3
+  readonly endpointOpticalLoad: number
   readonly finite: boolean
 }
 
@@ -84,8 +84,11 @@ export function runHeadlessBenchmark(
     p95StepMs: sortedSamples[Math.ceil(options.steps * 0.95) - 1],
     activeParticles: workspace.particles.activeCount,
     stateArrayAllocations: 10,
-    turbidityArrayAllocations: 3,
-    endpointTurbidity: endpointTurbidity(workspace.bands, config.turbidity),
+    opticalLoadArrayAllocations: 3,
+    endpointOpticalLoad: endpointOpticalLoad(
+      workspace.bands,
+      config.opticalLoad,
+    ),
     finite: workspaceIsFinite(workspace, config),
   }
 }

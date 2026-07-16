@@ -27,11 +27,11 @@ describe('headless benchmark', () => {
       p95StepMs: 1,
       activeParticles: 500,
       stateArrayAllocations: 10,
-      turbidityArrayAllocations: 3,
+      opticalLoadArrayAllocations: 3,
       finite: true,
     })
-    expect(report.endpointTurbidity).toBeGreaterThan(0)
-    expect(report.endpointTurbidity).toBeLessThanOrEqual(1)
+    expect(report.endpointOpticalLoad).toBeGreaterThan(0)
+    expect(report.endpointOpticalLoad).toBeLessThanOrEqual(1)
   })
 
   it('rejects nonsensical workloads', () => {

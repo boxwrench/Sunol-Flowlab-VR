@@ -78,17 +78,19 @@ export {
   type PhenomenonWorkspace,
 } from './phenomenon'
 export {
-  DEFAULT_TURBIDITY_CONFIG,
+  DEFAULT_OPTICAL_LOAD_CONFIG,
   clearingFrontDiagnostics,
-  createTurbidityBands,
-  endpointTurbidity,
-  resetTurbidityBands,
-  sampleTurbidityBands,
-  upperColumnTurbidity,
+  createOpticalLoadBands,
+  endpointOpticalLoad,
+  resetOpticalLoadBands,
+  sampleOpticalLoadBands,
+  sampleZoneOpticalLoad,
+  suspendedOpticalLoad,
+  upperColumnOpticalLoad,
   type ClearingFrontDiagnostics,
-  type TurbidityBandsState,
-  type TurbidityBandsView,
-  type TurbidityConfig,
-} from './turbidity'
+  type OpticalLoadBandsState,
+  type OpticalLoadBandsView,
+  type OpticalLoadConfig,
+} from './opticalLoad'
 
 export const DEFAULT_PARTICLE_CAPACITY = 500

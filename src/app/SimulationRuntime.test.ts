@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 
-import { endpointTurbidity } from '../sim'
+import { endpointOpticalLoad } from '../sim'
 import { SimulationRuntime } from './SimulationRuntime'
 
 describe('SimulationRuntime', () => {
@@ -31,18 +31,18 @@ describe('SimulationRuntime', () => {
     expect(runtime.step(1)).toBe(0)
   })
 
-  it('owns dose, phenomenon stepping, and authoritative turbidity storage', () => {
+  it('owns dose, phenomenon stepping, and optical-load storage', () => {
     const runtime = new SimulationRuntime(500, 123, 1 / 60, 5, 0)
-    const bands = runtime.turbidityBands.values
+    const bands = runtime.opticalLoadBands.values
     runtime.stepHeadless(2580)
-    const underdose = endpointTurbidity(runtime.turbidityBands)
+    const underdose = endpointOpticalLoad(runtime.opticalLoadBands)
 
     runtime.reset(123, 5)
     runtime.stepHeadless(2580)
-    const optimum = endpointTurbidity(runtime.turbidityBands)
+    const optimum = endpointOpticalLoad(runtime.opticalLoadBands)
 
     expect(runtime.dose).toBe(5)
-    expect(runtime.turbidityBands.values).toBe(bands)
+    expect(runtime.opticalLoadBands.values).toBe(bands)
     expect(optimum).toBeLessThan(underdose)
     expect(runtime.clarityReachedAtSimulationTime).not.toBeNull()
   })

@@ -2,7 +2,7 @@ import { Canvas } from '@react-three/fiber'
 import { XR } from '@react-three/xr'
 import type { ReactNode } from 'react'
 
-import type { ParticleStateView, TurbidityBandsView } from '../sim'
+import type { OpticalLoadBandsView, ParticleStateView } from '../sim'
 import { xrStore } from '../xr/store'
 import { HeroObservationTank } from './HeroObservationTank'
 import { JarTestBench } from './JarTestBench'
@@ -16,14 +16,14 @@ import type { ParticleFrameRecorder } from './ParticleCloud'
 interface FoundationSceneProps {
   readonly children?: ReactNode
   readonly particleState: ParticleStateView
-  readonly turbidityBands: TurbidityBandsView
+  readonly opticalLoadBands: OpticalLoadBandsView
   readonly recordParticleFrame: ParticleFrameRecorder
 }
 
 export function FoundationScene({
   children,
   particleState,
-  turbidityBands,
+  opticalLoadBands,
   recordParticleFrame,
 }: FoundationSceneProps) {
   return (
@@ -40,7 +40,7 @@ export function FoundationScene({
         <group position={[...APPARATUS_WORLD_POSITION]}>
           <HeroObservationTank
             particleState={particleState}
-            turbidityBands={turbidityBands}
+            opticalLoadBands={opticalLoadBands}
             recordParticleFrame={recordParticleFrame}
           />
           <JarTestBench />

@@ -30,30 +30,30 @@ import {
   type ParticleState,
 } from './particleState'
 import {
-  DEFAULT_TURBIDITY_CONFIG,
-  createTurbidityBands,
-  endpointTurbidity,
-  resetTurbidityBands,
-  sampleTurbidityBands,
-  upperColumnTurbidity,
-  type TurbidityBandsState,
-  type TurbidityConfig,
-} from './turbidity'
+  DEFAULT_OPTICAL_LOAD_CONFIG,
+  createOpticalLoadBands,
+  endpointOpticalLoad,
+  resetOpticalLoadBands,
+  sampleOpticalLoadBands,
+  upperColumnOpticalLoad,
+  type OpticalLoadBandsState,
+  type OpticalLoadConfig,
+} from './opticalLoad'
 
 export interface PhenomenonConfig {
-  readonly schemaVersion: 2
+  readonly schemaVersion: 3
   readonly particleCount: number
   readonly fixedTimestepSeconds: number
   readonly coagulation: Readonly<CoagulationConfig>
   readonly aggregation: Readonly<AggregationConfig>
   readonly geometry: Readonly<AggregateGeometryConfig>
   readonly doseEfficiency: Readonly<DoseEfficiencyConfig>
-  readonly turbidity: Readonly<TurbidityConfig>
+  readonly opticalLoad: Readonly<OpticalLoadConfig>
 }
 
 export interface PhenomenonWorkspace {
   readonly particles: ParticleState
-  readonly bands: TurbidityBandsState
+  readonly bands: OpticalLoadBandsState
   readonly doseEfficiencies: Float32Array
   readonly mergeDiagnostics: MergeDiagnosticsState
   dose: DoseDetent
@@ -66,7 +66,7 @@ export interface PhenomenonWorkspace {
 export interface PhenomenonTrialResult {
   readonly dose: DoseDetent
   readonly seed: number
-  readonly endpointTurbidity: number
+  readonly endpointOpticalLoad: number
   readonly bandSnapshot: readonly number[]
   readonly clarityReachedAtSimulationTime: number | null
   readonly settledParticles: number
@@ -79,14 +79,14 @@ export interface PhenomenonTrialResult {
 
 export const DEFAULT_PHENOMENON_CONFIG: Readonly<PhenomenonConfig> =
   Object.freeze({
-    schemaVersion: 2,
+    schemaVersion: 3,
     particleCount: 500,
     fixedTimestepSeconds: 1 / 60,
     coagulation: DEFAULT_COAGULATION_CONFIG,
     aggregation: DEFAULT_AGGREGATION_CONFIG,
     geometry: DEFAULT_AGGREGATE_GEOMETRY_CONFIG,
     doseEfficiency: DEFAULT_DOSE_EFFICIENCY_CONFIG,
-    turbidity: DEFAULT_TURBIDITY_CONFIG,
+    opticalLoad: DEFAULT_OPTICAL_LOAD_CONFIG,
   })
 
 export function createPhenomenonWorkspace(
@@ -95,7 +95,7 @@ export function createPhenomenonWorkspace(
   validatePhenomenonConfig(config)
   return {
     particles: createParticleState(config.particleCount),
-    bands: createTurbidityBands(config.turbidity),
+    bands: createOpticalLoadBands(config.opticalLoad),
     doseEfficiencies: createDoseEfficiencyTable(config.doseEfficiency),
     mergeDiagnostics: createMergeDiagnostics(),
     dose: config.doseEfficiency.optimumDose,
@@ -129,7 +129,11 @@ export function resetPhenomenonWorkspace(
     undefined,
     config.geometry,
   )
-  resetTurbidityBands(workspace.bands, workspace.particles, config.turbidity)
+  resetOpticalLoadBands(
+    workspace.bands,
+    workspace.particles,
+    config.opticalLoad,
+  )
 }
 
 export function stepPhenomenonWorkspace(
@@ -166,17 +170,16 @@ export function stepPhenomenonWorkspace(
     )
   workspace.stepIndex += 1
   const simulationTime = workspace.stepIndex * config.fixedTimestepSeconds
-  sampleTurbidityBands(
+  sampleOpticalLoadBands(
     workspace.bands,
     workspace.particles,
-    workspace.efficiency,
     simulationTime,
-    config.turbidity,
+    config.opticalLoad,
   )
   if (
     workspace.clarityReachedAtSimulationTime === null &&
-    upperColumnTurbidity(workspace.bands, config.turbidity) <=
-      config.turbidity.upperClarityThreshold
+    upperColumnOpticalLoad(workspace.bands, config.opticalLoad) <=
+      config.opticalLoad.upperClarityThreshold
   )
     workspace.clarityReachedAtSimulationTime = simulationTime
   return true
@@ -203,7 +206,10 @@ export function runPhenomenonTrial(
   return {
     dose,
     seed,
-    endpointTurbidity: endpointTurbidity(workspace.bands, config.turbidity),
+    endpointOpticalLoad: endpointOpticalLoad(
+      workspace.bands,
+      config.opticalLoad,
+    ),
     bandSnapshot: Array.from(workspace.bands.values),
     clarityReachedAtSimulationTime: workspace.clarityReachedAtSimulationTime,
     settledParticles,
@@ -224,15 +230,15 @@ export function hashPhenomenonConfig(
   const a = config.aggregation
   const g = config.geometry
   const d = config.doseEfficiency
-  const t = config.turbidity
+  const o = config.opticalLoad
   const canonical =
     `v=${config.schemaVersion}|particles=${config.particleCount}|dt=${config.fixedTimestepSeconds}` +
     `|phases=${c.rapidMixSeconds},${c.flocculationSeconds},${c.settlingSeconds},${c.measurementSeconds}` +
     `|geometry=${g.primaryParticleMass},${g.primaryParticleDiameter},${g.fractalDimension}` +
     `|aggregation=${a.collisionRadiusMultiplier},${a.maximumAggregateMass}` +
     `|settling=${c.settlingBaseSpeedPerSecond},${c.settlingVelocityScalePerSecond},${c.settlingMaximumSpeedPerSecond}` +
-    `|dose=${d.optimumDose},${d.minimumEfficiency},${d.maximumEfficiency},${d.underdoseFalloffPerDetent},${d.overdoseFalloffPerDetent}` +
-    `|turbidity=${t.bandCount},${t.rawTurbidity},${t.treatmentRange},${t.efficiencyExponent},${t.globalLoadWeight},${t.excludedBottomBands},${t.upperClarityBandCount},${t.upperClarityThreshold}`
+    `|dose=${d.optimumDose},${d.maximumEfficiency},${d.doseWindowSigma}` +
+    `|opticalLoad=${o.bandCount},${o.excludedBottomBands},${o.upperClarityBandCount},${o.upperClarityThreshold}`
   let hash = 0x811c9dc5
   for (let index = 0; index < canonical.length; index += 1) {
     hash ^= canonical.charCodeAt(index)
@@ -242,7 +248,7 @@ export function hashPhenomenonConfig(
 }
 
 function validatePhenomenonConfig(config: Readonly<PhenomenonConfig>): void {
-  if (config.schemaVersion !== 2)
+  if (config.schemaVersion !== 3)
     throw new RangeError('Unsupported phenomenon config schema')
   if (!Number.isInteger(config.particleCount) || config.particleCount < 1)
     throw new RangeError('Phenomenon particle count must be a positive integer')

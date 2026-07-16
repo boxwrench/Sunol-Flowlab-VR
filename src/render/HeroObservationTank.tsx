@@ -1,22 +1,22 @@
-import type { ParticleStateView, TurbidityBandsView } from '../sim'
+import type { OpticalLoadBandsView, ParticleStateView } from '../sim'
 import { HERO_TANK_LOCAL_POSITION } from './layout'
 import { ParticleCloud, type ParticleFrameRecorder } from './ParticleCloud'
-import { TurbidityGradient } from './TurbidityGradient'
+import { OpticalLoadGradient } from './OpticalLoadGradient'
 
 interface HeroObservationTankProps {
   readonly particleState: ParticleStateView
-  readonly turbidityBands: TurbidityBandsView
+  readonly opticalLoadBands: OpticalLoadBandsView
   readonly recordParticleFrame: ParticleFrameRecorder
 }
 
 export function HeroObservationTank({
   particleState,
-  turbidityBands,
+  opticalLoadBands,
   recordParticleFrame,
 }: HeroObservationTankProps) {
   return (
     <group position={[...HERO_TANK_LOCAL_POSITION]}>
-      <TurbidityGradient bands={turbidityBands} />
+      <OpticalLoadGradient bands={opticalLoadBands} />
       <ParticleCloud state={particleState} recordFrame={recordParticleFrame} />
 
       <mesh position={[0, -0.025, 0]}>

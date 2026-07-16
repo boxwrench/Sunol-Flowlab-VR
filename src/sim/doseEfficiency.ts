@@ -10,19 +10,15 @@ export type DoseDetent = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10
  */
 export interface DoseEfficiencyConfig {
   readonly optimumDose: DoseDetent
-  readonly minimumEfficiency: number
   readonly maximumEfficiency: number
-  readonly underdoseFalloffPerDetent: number
-  readonly overdoseFalloffPerDetent: number
+  readonly doseWindowSigma: number
 }
 
 export const DEFAULT_DOSE_EFFICIENCY_CONFIG: Readonly<DoseEfficiencyConfig> =
   Object.freeze({
     optimumDose: 5,
-    minimumEfficiency: 0.15,
     maximumEfficiency: 1,
-    underdoseFalloffPerDetent: 0.12,
-    overdoseFalloffPerDetent: 0.1,
+    doseWindowSigma: 3,
   })
 
 export const DOSE_DETENT_COUNT = 11
@@ -47,8 +43,9 @@ export function fillDoseEfficiencyTable(
 }
 
 /**
- * Returns normalized treatment effectiveness in [minimumEfficiency,
- * maximumEfficiency]. The function is pure and presentation-independent.
+ * Returns Gaussian effective sticking probability in (0, maximumEfficiency].
+ * Math.exp is used only while filling the eleven-value configuration table,
+ * never in the fixed-step simulation hot loop.
  */
 export function calculateDoseEfficiency(
   dose: DoseDetent,
@@ -57,17 +54,11 @@ export function calculateDoseEfficiency(
   validateDoseDetent(dose)
   validateDoseEfficiencyConfig(config)
 
-  const distance = dose - config.optimumDose
-  const falloff =
-    distance < 0
-      ? config.underdoseFalloffPerDetent
-      : config.overdoseFalloffPerDetent
-  const unboundedEfficiency =
-    config.maximumEfficiency - Math.abs(distance) * falloff
-
-  return Math.min(
-    config.maximumEfficiency,
-    Math.max(config.minimumEfficiency, unboundedEfficiency),
+  const normalizedDistance =
+    (dose - config.optimumDose) / config.doseWindowSigma
+  return (
+    config.maximumEfficiency *
+    Math.exp(-(normalizedDistance * normalizedDistance))
   )
 }
 
@@ -83,23 +74,14 @@ export function validateDoseEfficiencyConfig(
   validateDoseDetent(config.optimumDose)
 
   if (
-    !Number.isFinite(config.minimumEfficiency) ||
     !Number.isFinite(config.maximumEfficiency) ||
-    config.minimumEfficiency < 0 ||
+    config.maximumEfficiency <= 0 ||
     config.maximumEfficiency > 1 ||
-    config.minimumEfficiency >= config.maximumEfficiency
+    !Number.isFinite(config.doseWindowSigma) ||
+    config.doseWindowSigma <= 0
   ) {
     throw new RangeError(
-      'Dose efficiency bounds must be finite, within [0, 1], and increasing',
+      'Dose efficiency maximum and Gaussian window must be positive and finite',
     )
-  }
-
-  if (
-    !Number.isFinite(config.underdoseFalloffPerDetent) ||
-    config.underdoseFalloffPerDetent <= 0 ||
-    !Number.isFinite(config.overdoseFalloffPerDetent) ||
-    config.overdoseFalloffPerDetent <= 0
-  ) {
-    throw new RangeError('Dose efficiency falloff must be positive and finite')
   }
 }

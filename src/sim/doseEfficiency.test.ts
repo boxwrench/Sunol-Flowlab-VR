@@ -25,34 +25,34 @@ describe('phenomenological dose efficiency', () => {
       expect(efficiencies[dose]).toBeLessThan(efficiencies[dose - 1])
   })
 
-  it('supports a configured optimum and asymmetric falloff', () => {
+  it('supports a configured optimum and Gaussian useful-dose window', () => {
     const config: DoseEfficiencyConfig = {
       optimumDose: 3,
-      minimumEfficiency: 0.2,
       maximumEfficiency: 0.9,
-      underdoseFalloffPerDetent: 0.15,
-      overdoseFalloffPerDetent: 0.08,
+      doseWindowSigma: 2,
     }
 
     expect(calculateDoseEfficiency(3, config)).toBeCloseTo(0.9)
-    expect(calculateDoseEfficiency(2, config)).toBeCloseTo(0.75)
-    expect(calculateDoseEfficiency(4, config)).toBeCloseTo(0.82)
-    expect(calculateDoseEfficiency(10, config)).toBeCloseTo(0.34)
+    expect(calculateDoseEfficiency(2, config)).toBeCloseTo(
+      0.9 * Math.exp(-0.25),
+    )
+    expect(calculateDoseEfficiency(4, config)).toBeCloseTo(
+      calculateDoseEfficiency(2, config),
+    )
+    expect(calculateDoseEfficiency(10, config)).toBeLessThan(0.001)
   })
 
   it('always returns finite values within the configured bounds', () => {
     const config: DoseEfficiencyConfig = {
       optimumDose: 5,
-      minimumEfficiency: 0.25,
       maximumEfficiency: 0.8,
-      underdoseFalloffPerDetent: 10,
-      overdoseFalloffPerDetent: 10,
+      doseWindowSigma: 0.25,
     }
 
     for (const dose of ALL_DOSES) {
       const efficiency = calculateDoseEfficiency(dose, config)
       expect(Number.isFinite(efficiency)).toBe(true)
-      expect(efficiency).toBeGreaterThanOrEqual(config.minimumEfficiency)
+      expect(efficiency).toBeGreaterThanOrEqual(0)
       expect(efficiency).toBeLessThanOrEqual(config.maximumEfficiency)
     }
   })
@@ -90,12 +90,10 @@ describe('phenomenological dose efficiency', () => {
   )
 
   it.each([
-    { minimumEfficiency: Number.NaN },
-    { minimumEfficiency: -0.1 },
     { maximumEfficiency: 1.1 },
-    { minimumEfficiency: 0.8, maximumEfficiency: 0.8 },
-    { underdoseFalloffPerDetent: 0 },
-    { overdoseFalloffPerDetent: Number.POSITIVE_INFINITY },
+    { maximumEfficiency: 0 },
+    { doseWindowSigma: 0 },
+    { doseWindowSigma: Number.POSITIVE_INFINITY },
   ])('rejects invalid configuration %o', (override) => {
     const config = {
       ...DEFAULT_DOSE_EFFICIENCY_CONFIG,

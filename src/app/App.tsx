@@ -3,7 +3,7 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import { FoundationScene } from '../render/FoundationScene'
 import {
   clearingFrontDiagnostics,
-  endpointTurbidity,
+  endpointOpticalLoad,
   type DoseDetent,
 } from '../sim'
 import { xrStore } from '../xr/store'
@@ -105,7 +105,7 @@ export function App() {
   useEffect(() => {
     if (!import.meta.env.DEV) return
     window.render_game_to_text = () => {
-      const clearing = clearingFrontDiagnostics(runtime.turbidityBands)
+      const clearing = clearingFrontDiagnostics(runtime.opticalLoadBands)
       return JSON.stringify({
         coordinateSystem: 'meters; origin tank center-bottom; +Y upward',
         mode: 'phenomenon-trial',
@@ -113,10 +113,11 @@ export function App() {
         phase: runtime.phase,
         simulationTimeSeconds: runtime.simulationTimeSeconds,
         activeParticles: runtime.state.activeCount,
-        endpointTurbidity: endpointTurbidity(runtime.turbidityBands),
+        endpointOpticalLoad: endpointOpticalLoad(runtime.opticalLoadBands),
+        globalRelativeOpticalLoad: runtime.opticalLoadBands.globalRelativeLoad,
         topClearFraction: clearing.topClearFraction,
         clearingFrontDepth: clearing.clearingFrontDepth,
-        upperZoneTurbidity: clearing.upperZoneTurbidity,
+        upperZoneOpticalLoad: clearing.upperZoneOpticalLoad,
         clarityReachedAtSimulationTime: runtime.clarityReachedAtSimulationTime,
       })
     }
@@ -192,7 +193,7 @@ export function App() {
       {import.meta.env.DEV && !presentationMode ? <MetricsOverlay /> : null}
       <FoundationScene
         particleState={runtime.state}
-        turbidityBands={runtime.turbidityBands}
+        opticalLoadBands={runtime.opticalLoadBands}
         recordParticleFrame={recordParticleFrame}
       >
         <SimulationDriver runtime={runtime} />

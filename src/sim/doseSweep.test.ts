@@ -28,8 +28,8 @@ describe('permanent eleven-dose regression sweep', () => {
     const reverse = runDoseSweep(CANONICAL_SEED, REVERSE_DOSE_ORDER)
 
     for (const dose of ALL_DOSE_DETENTS) {
-      expect(reverse.results[dose].endpointTurbidity).toBeCloseTo(
-        natural.results[dose].endpointTurbidity,
+      expect(reverse.results[dose].endpointOpticalLoad).toBeCloseTo(
+        natural.results[dose].endpointOpticalLoad,
         7,
       )
       expect(reverse.results[dose].bandSnapshot).toEqual(

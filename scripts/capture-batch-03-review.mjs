@@ -167,10 +167,11 @@ try {
 
     key.comparisons[letter] = {
       dose: state.dose,
-      endpointTurbidity: state.endpointTurbidity,
+      endpointOpticalLoad: state.endpointOpticalLoad,
+      globalRelativeOpticalLoad: state.globalRelativeOpticalLoad,
       topClearFraction: state.topClearFraction,
       clearingFrontDepth: state.clearingFrontDepth,
-      upperZoneTurbidity: state.upperZoneTurbidity,
+      upperZoneOpticalLoad: state.upperZoneOpticalLoad,
     }
   }
 
