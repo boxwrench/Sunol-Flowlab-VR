@@ -8,6 +8,7 @@
 - [Dose-sweep regression contract](REGRESSION_CONTRACT.md)
 - [Batch 02A acceptance evidence](BATCH_02A_ACCEPTANCE.md)
 - [Batch 03 progress evidence](BATCH_03_PROGRESS.md)
+- [Batch 03 Workstream 03D technical acceptance](BATCH_03_03D_TECHNICAL_ACCEPTANCE.md)
 - [Apparatus recognition validation](UX_VALIDATION.md)
 - [Visual behavior target](VISUAL_BEHAVIOR.md)
 - [Hybrid jar-test design direction](DESIGN_DIRECTION_JAR_TEST_HYBRID.md)

@@ -176,3 +176,37 @@ No console or page errors were recorded. The 20 draw calls include the
 authoritative gradient surface, one instanced particle draw, three static
 instanced jar-rack draws, minimal tank/rack structure, and the development
 grid. This desktop result is not physical Quest evidence.
+
+## 2026-07-15 - Workstream 03D production phenomenon benchmark
+
+The schema-3 benchmark covers the final mass-authoritative Dose 5 path: 500
+primary particles, 2,580 fixed steps, deterministic merges, fractal settling,
+authoritative 12-band relative optical load, and population diagnostics.
+
+| Metric                         |         Value |
+| ------------------------------ | ------------: |
+| Total                          |    70.3864 ms |
+| Average step                   |   0.026997 ms |
+| p95 step                       |   0.076100 ms |
+| Active / suspended / settled   | 105 / 65 / 40 |
+| Mean / maximum aggregate mass  |  4.761905 / 8 |
+| Largest mass fraction          |          1.6% |
+| Particle-state arrays          |            10 |
+| Optical-load arrays            |             3 |
+| Endpoint relative optical load |      0.501182 |
+| Mass error                     |             0 |
+| Final state finite             |           yes |
+
+This is the conservative standalone result captured for the closing packet on
+the development machine. The acceptance command's same-process benchmark
+completed in 29.33 ms; timing variability does not affect the conclusion. Both
+results are negligible relative to the fixed-step budget, so the measured
+O(n^2) pair schedule does not justify spatial hashing.
+
+The earlier physical Quest apparatus observation predates the final 03D model.
+It remains valid for placement, table and jar geometry, controllers, and
+composition, but it is not reused as a replacement-model performance claim.
+The headset was not connected at final 03D evidence collection. A short
+replacement-model Quest visibility and rolling-performance check remains open.
+Full model evidence is in
+[the Workstream 03D technical acceptance packet](BATCH_03_03D_TECHNICAL_ACCEPTANCE.md).

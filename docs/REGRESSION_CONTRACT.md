@@ -35,7 +35,7 @@ This baseline remains immutable historical evidence while Workstream 03D impleme
 
 ## Workstream 03D replacement gates
 
-The candidate mass-authoritative model must continue to pass every dose-shape, order-independence, reset-purity, range, and runtime property above. Its accepted config receives a new hash and a side-by-side closing artifact rather than overwriting the Batch 02A packet.
+The accepted mass-authoritative model must continue to pass every dose-shape, order-independence, reset-purity, range, runtime, and population property below on every change. Its config has a new hash and side-by-side closing artifact; the Batch 02A packet is not overwritten.
 
 It must additionally demonstrate:
 
@@ -51,3 +51,19 @@ It must additionally demonstrate:
 - finite, bounded particle state with no `NaN` or Infinity after at least 10,000 fixed steps.
 
 The largest-aggregate mass-fraction bound is selected through deterministic and visual testing and recorded with the replacement config. No undocumented threshold or exact endpoint is accepted solely to make the curve pass.
+
+## Accepted Workstream 03D replacement
+
+Configuration fnv1a32-e8bf13e7 passes the canonical and nine-seed suites.
+The canonical principal minimum is Dose 5, both tail margins are 0.236407,
+and each permitted shoulder reversal is below 0.03. The seed corpus observes
+a minimum of 93 active aggregates, a minimum of 55 visible suspended
+aggregates during settling, a maximum largest-aggregate fraction of 1.6%,
+and zero recorded mass error.
+
+The permanent population bounds are at least 75 active aggregates, at least 40
+visible suspended aggregates during settling, no more than 2% of initial mass
+in one aggregate, and mass error no greater than 1e-6. The complete old/new
+curve, population, benchmark, browser, allocation, architecture, and open-gate
+evidence is recorded in
+[the Workstream 03D technical acceptance packet](BATCH_03_03D_TECHNICAL_ACCEPTANCE.md).

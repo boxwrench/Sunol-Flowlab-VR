@@ -1,6 +1,6 @@
 # Batch 03 Implementation Plan: Desktop Phenomenon Proof
 
-**Status:** In progress — presentation baseline accepted; Workstream 03D active; human review gates open and parked  
+**Status:** Workstream 03D technically accepted; external human and replacement-model Quest gates open
 **Depends on:** Batch 02A accepted; Batch 00 regression and visual contracts available  
 **Primary gate:** The approved mass-authoritative model produces a deterministic, population-healthy U-shaped response whose low, near-optimal, and high outcomes remain visibly distinct in the retained desktop apparatus.
 
@@ -48,7 +48,9 @@ The retained presentation baseline includes:
 
 [The Batch 03 progress packet](docs/BATCH_03_PROGRESS.md) records that evidence. It is comparison evidence for the pre-03D model, not acceptance of the final version 1 process behavior.
 
-The external apparatus-recognition and blinded low/optimum/high reviews remain required but are parked until Workstream 03D produces replacement captures. Old outcome captures cannot accept changed process behavior.
+The external apparatus-recognition and blinded low/optimum/high reviews remain
+required. Workstream 03D replacement captures are now ready, so those reviews
+may resume; the old outcome captures cannot accept changed process behavior.
 
 ## Execution rules
 
@@ -63,7 +65,7 @@ The external apparatus-recognition and blinded low/optimum/high reviews remain r
 
 ## Workstream 03D - Approved version 1 model refinement
 
-### Work package 03D.1 - Authoritative mass and derived diameter
+### Work package 03D.1 - Authoritative mass and derived diameter - complete
 
 - Add fixed-capacity mass and diameter arrays to authoritative particle state.
 - Make mass authoritative and derive cached diameter from mass with default `Df = 2.0`.
@@ -79,7 +81,7 @@ Required tests:
 - finite state and inactive-slot behavior;
 - no new simulation-to-UI dependency or hot-step allocation.
 
-### Work package 03D.2 - Deterministic encounters and merges
+### Work package 03D.2 - Deterministic encounters and merges - complete
 
 - Precompute the eleven dose-efficiency values outside the hot loop.
 - Traverse particles and candidate pairs in stable order and prevent duplicate pair evaluation.
@@ -97,7 +99,7 @@ Required tests:
 - mass-weighted velocity;
 - identical supported inputs produce identical active state and endpoint bands.
 
-### Work package 03D.3 - Fractal settling and growth bound
+### Work package 03D.3 - Fractal settling and growth bound - complete
 
 - Derive effective excess density and capped settling from mass-derived diameter.
 - Use the default `Df = 2.0` simplified path, with settling approximately linear in diameter after constants are combined.
@@ -113,7 +115,7 @@ Required tests:
 - no mass loss at settlement;
 - no invalid positions, velocities, masses, or diameters after at least 10,000 fixed steps.
 
-### Work package 03D.4 - Relative optical-load authority
+### Work package 03D.4 - Relative optical-load authority - complete
 
 - Replace the Batch 02A unresolved-fines blend with suspended projected simulation area, `sum(D^2)`, normalized to the trial's initial load.
 - Produce one reusable vertical band record and distinguish whole-tank, banded, and local sample-zone values.
@@ -130,7 +132,7 @@ Required tests:
 - local transport can change bands without changing the whole-tank authority;
 - renderer and app code contain no second process calculation.
 
-### Work package 03D.5 - Population health, dose sweep, and performance
+### Work package 03D.5 - Population health, dose sweep, and performance - complete
 
 - Record active, suspended, and settled counts; mean and maximum mass; maximum diameter; largest-mass fraction; and visible suspended-floc count during settling.
 - Select the largest-mass fraction bound through deterministic and visual testing.
@@ -195,9 +197,10 @@ Stop before Batch 04 when any of the following is true:
 - External recognition and blinded outcome responses are recorded after replacement captures are generated.
 - No unresolved model, presentation, terminology, or performance issue would make Batch 04 or later XR integration ambiguous.
 
-## Suggested commit and closing packet
+## Closing packet
 
-- Commit: `feat(sim): implement mass-authoritative phenomenon proof`
-- Accepted tag: `desktop-phenomenon-proven`
-
-The closing packet records changed files, commands and results, old/new sweep evidence, population metrics, desktop and Quest performance when applicable, allocations, known limitations, documentation changes, and whether every human and technical gate passed.
+The [Workstream 03D technical acceptance packet](docs/BATCH_03_03D_TECHNICAL_ACCEPTANCE.md)
+records changed behavior, commands and results, old/new sweep evidence,
+population metrics, desktop performance, allocations, limitations, captures,
+and the open external gates. Do not create the final Batch 03 accepted tag until
+the human and replacement-model Quest gates are recorded.

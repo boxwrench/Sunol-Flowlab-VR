@@ -33,7 +33,10 @@ test('session handoff identifies plan authority, accepted local device evidence,
 
   assert.match(handoff, /Active plan authority: \[IMPLEMENTATION_PLAN\.md\]/)
   assert.match(handoff, /local physical Quest route is accepted/)
-  assert.match(handoff, /hosted deployment.*later headset-specific/s)
+  assert.match(
+    handoff,
+    /hosted HTTPS deployment is not authorized.*later.*headset ergonomics/s,
+  )
   assert.match(handoff, /npm test/)
   assert.match(handoff, /Recommended next session/)
 })

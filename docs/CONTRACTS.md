@@ -2,7 +2,7 @@
 
 These are boundary contracts for parallel implementation. They do not imply that the corresponding runtime features already exist.
 
-The process quantity named below is a dimensionless **relative optical load**, not calibrated turbidity or NTU. Current Batch 02A source identifiers and historical evidence still use `Turbidity*` and `endpointTurbidity`; Workstream 03D must migrate those identifiers and any future persisted schema together. Until that migration lands, the legacy names are aliases for the one normalized optical-load record and may not justify a second calculation.
+The process quantity named below is a dimensionless **relative optical load**, not calibrated turbidity or NTU. Historical Batch 02A evidence retains its original turbidity terminology for provenance. Workstream 03D removed those legacy identifiers from forward source and uses one relative optical-load record; future persisted schemas must use the current name and may not introduce a second calculation.
 
 ```ts
 export type DoseIndex = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10

@@ -1,114 +1,114 @@
 # Batch 03 Desktop Proof Progress
 
-**Status:** In progress; automated presentation slice complete, 03D model refinement next, human gates open and parked
-**Simulation baseline:** `5d2ff8c`  
-**Latest presentation evidence:** `f1c4e13`
+**Status:** Workstream 03D technically accepted; external human and replacement-model Quest gates open
+**Accepted model configuration:** fnv1a32-e8bf13e7
+**Technical acceptance:** [BATCH_03_03D_TECHNICAL_ACCEPTANCE.md](BATCH_03_03D_TECHNICAL_ACCEPTANCE.md)
 **Date:** 2026-07-15
 
-## Implemented
+## Presentation retained
 
 - One open, visually dominant hero observation tank.
-- One shader-driven gradient surface backed by a preallocated 12-byte texture
-  that consumes the authoritative turbidity-band view.
-- Existing one-draw-call instanced particles retained as event cues, including
-  authoritative floc-size scaling and settlement.
-- One static six-jar rack for canonical doses 0, 2, 4, 6, 8, and 10. The rack
-  receives no simulation, turbidity, result, or clock input.
-- One waist-height static lab table supporting the jar rack, added from the
-  project-owner operator review. Its four legs share one instanced draw.
-- Six open rectangular jar vessels with rectangular rims, replacing the first
-  cylindrical blockout from the project-owner operator review. The vessel,
-  rim, and paddle instance counts remain unchanged.
-- Development comparison resets for relative doses 0, 5, and 10 using the same
-  canonical seed and 43-second schedule.
-- An unlabeled `?mode=proof` route that hides headings, metrics, controls, and
-  dose labels for recognition review.
+- One shader-driven gradient surface consuming the authoritative 12-band
+  relative optical-load view.
+- One read-only instanced particle draw showing mass-derived aggregate scale and
+  authoritative settlement.
+- One table-mounted static six-jar rack for canonical doses 0, 2, 4, 6, 8, and 10. The six open rectangular vessels remain static comparison geometry and
+  receive no simulation, result, optical-load, or clock input.
+- Development comparison resets for doses 0, 5, and 10 from the same seed,
+  phase schedule, camera, and raw-water state.
+- An unlabeled proof route for apparatus-recognition review.
 - Clearing-front diagnostics derived from the same authoritative band record:
-  top clear fraction, normalized front depth, upper-zone turbidity, and first
-  clarity-target time.
-- A deterministic `window.advanceTime` development hook and expanded
-  `window.render_game_to_text` state for browser validation.
+  top clear fraction, front depth, upper-zone optical load, and clarity time.
+- The accepted physical composition keeps the apparatus beyond the WebXR floor
+  origin, the jar bench at waist height, and the hero tank primary.
+
+## Workstream 03D complete
+
+- 03D.1: authoritative aggregate mass and cached fractal-derived diameter.
+- 03D.2: stable deterministic pair scheduling, mass-conserving merges,
+  mass-weighted survivor motion, and deterministic merge diagnostics.
+- 03D.3: capped fractal settling and an eight-primary-mass growth prohibition.
+- 03D.4: one projected-area relative optical-load authority for whole-tank,
+  banded, and sample-zone output; legacy forward turbidity identifiers removed.
+- 03D.5: permanent population-health diagnostics, canonical and nine-seed
+  acceptance, benchmark evidence, browser inspection, and regenerated review
+  captures.
+
+No spatial hash was added because the measured production path remains far
+inside budget. Version 1 has no free list. Merge animation metadata, ghost
+runtime, Batch 04 features, and hosted deployment remain out of scope.
 
 ## Objective evidence
 
 - Repository contracts: 16 passing.
-- Vitest: 67 passing tests across 15 files.
-- Playwright: 3 passing desktop tests, including the three-preset U-shape and
-  unlabeled proof mode.
+- Vitest: 81 passing tests across 18 files.
+- Canonical and nine-seed 11-dose suites pass, including dose-order
+  independence, reset purity, mass conservation, population bounds, optical
+  authority, diameter consistency, and a 10,000-step finite-state path.
 - Type checking, lint, formatting, production build, and diff checks pass.
-- Production-path benchmark:
-  - 500 particles;
-  - 2,580 fixed steps;
-  - 28.38 ms total;
-  - 0.0109 ms average step;
-  - 0.0236 ms p95 step;
-  - 9 particle arrays and 3 turbidity arrays;
-  - endpoint turbidity 0.200000;
-  - finite result.
-- Browser-client state at 43 seconds:
-  - Dose 0: 0.750568 endpoint turbidity.
-  - Dose 5: 0.200000 endpoint turbidity.
-  - Dose 10: 0.676090 endpoint turbidity.
-- The isolated unlabeled proof capture was visually inspected. The hero tank is
-  dominant, the six jars are distinct and secondary, and no console-error
-  artifact was produced.
-- A normal real-time 12-second Chromium/SwiftShader observation recorded 60.0
-  FPS, 16.67 ms average frame time, 18.00 ms p95, 0.023 ms average simulation
-  time, 0.006 ms average instance synchronization, 500 particles, 20 draw
-  calls, 23.4 MB JavaScript heap, and zero console errors.
-- The final physical Quest composition was accepted by the project-owner water
-  treatment operator after three bounded corrections: clear the WebXR origin,
-  place the rack on a table, and use open rectangular jars. A live immersive
-  rolling snapshot recorded 120.0 FPS, 8.33 ms average, 8.70 ms p95, 0.005 ms
-  simulation, 0.027 ms instance synchronization, 500 particles, 22 draw calls,
-  and 35.6 MB heap with the Dose 5 run complete.
+- Conservative standalone 500-particle production-path benchmark:
+  - 2,580 fixed steps over 43 simulated seconds;
+  - 70.3864 ms total;
+  - 0.026997 ms average step;
+  - 0.076100 ms p95 step;
+  - 10 particle arrays and 3 optical-load arrays;
+  - 105 active aggregates at Dose 5;
+  - finite result and exact recorded mass conservation.
+- Canonical Dose 5 endpoint:
+  - relative optical load 0.501182;
+  - 105 active, 65 suspended, and 40 settled aggregates;
+  - mean mass 4.761905 and max mass 8;
+  - largest aggregate contains 1.6% of initial mass.
+- Nine-seed observed worst cases:
+  - 93 active aggregates;
+  - 55 visible suspended aggregates during settling;
+  - 1.6% largest-mass fraction;
+  - zero mass error.
+- The bundled browser client completed the optimum trial with the same state,
+  a readable settled bed and clearing front, and no console errors.
+- The randomized apparatus and low/optimum/high packet was regenerated at
+  1280 x 720 and visually inspected with no capture-time browser errors.
 
-## Architecture and cost notes
+The earlier physical Quest composition check remains accepted for start
+placement, table mounting, rectangular vessels, hero-tank hierarchy,
+controllers, and the recorded short rolling snapshot. It predates the final
+03D process model and is not reused as a replacement-model behavior or
+performance claim.
 
-Rendering remains a read-only consumer. The gradient allocates its texture,
-pixel buffer, and shader material once, then updates 12 bytes per frame. The jar
-rack uses three static instanced meshes for vessel walls, rims, and paddles.
-The table adds one top mesh and one instanced four-leg mesh.
-No renderer calculates dose efficiency, turbidity, endpoints, clearing
-diagnostics, or simulation state.
+## Historical comparison
 
-The larger production bundle still emits the previously documented non-failing
-Vite chunk-size warnings from emulator environment assets. Performance evidence
-still does not justify spatial hashing, pooling, or merge-animation metadata.
-The approved modeling amendment separately authorizes the smallest
-mass-authoritative merge and derived-density model for educational fidelity.
+The accepted Batch 02A packet remains immutable prototype evidence. Its
+statistical normalized-size model and unresolved-fines endpoint are not
+numerically interchangeable with the 03D conserved-mass and projected-area
+authority. The old and new curves, populations, allocations, and timings are
+compared without rewriting history in the
+[03D technical acceptance packet](BATCH_03_03D_TECHNICAL_ACCEPTANCE.md).
+
+## Architecture and safety
+
+Simulation state, stepping, merging, settling, optical load, sweeps, and
+diagnostics stay in src/sim. SimulationRuntime owns lifecycle and the fixed-step
+clock. Renderers remain read-only consumers and cannot import src/app. No
+renderer calculates dose efficiency, endpoints, clearing state, or population
+health.
+
+The model remains phenomenological and fictionalized. It is not calibrated
+NTU, dose prediction, operating guidance, mechanistic chemistry, CFD, or a
+connection to plant controls or operational data.
 
 ## Open gates
 
-These human-review gates remain open but are intentionally parked until the
-03D process-model refinement produces replacement captures.
+Replacement evidence is ready in
+[BATCH_03_REVIEW_PACKET.md](BATCH_03_REVIEW_PACKET.md). Final Batch 03
+acceptance still requires:
 
-- Record at least one blinded water-treatment operator or educator response in
-  [UX_VALIDATION.md](UX_VALIDATION.md). Preferably add a non-operator response.
-- Complete the blinded low/optimum/high visual rubric with an operator-informed
-  reviewer and a non-operator reviewer; confirm the best outcome is identifiable
-  without labels or a plot.
-- The local physical Quest preflight is accepted separately in
-  [PERFORMANCE.md](PERFORMANCE.md#2026-07-15---physical-quest-3-local-preflight).
-  The final presentation-specific headset evidence is recorded in the same
-  document under the final Batch 03 apparatus candidate.
+- a blinded external water-treatment operator or educator apparatus-recognition
+  response, preferably with an additional non-operator response;
+- a blinded low/optimum/high outcome review by an operator-informed reviewer
+  and a non-operator;
+- a short physical Quest check of the replacement behavior and rolling
+  performance.
 
-The final physical composition/readability check and short rolling performance
-snapshot are now accepted. This is not an endurance or thermal claim.
-
-Batch 03 is not accepted until Workstream 03D and its replacement evidence pass,
-then its human-comprehension gates and remaining performance evidence are
-recorded.
-
-## Approved next model increment
-
-The [modeling research amendment](MODELING_RESEARCH_AMENDMENT.md) now governs
-the final version 1 process model. The accepted Batch 02A statistical model and
-all presentation evidence above remain comparison evidence, not the final model
-implementation.
-
-Workstream 03D will add mass-authoritative deterministic aggregation,
-fractal-derived diameter and density with default `Df = 2.0`, capped
-size-dependent settling, one projected-area relative optical-load authority, a
-growth bound, and population-health validation. Spatial hashing remains
-measurement-gated and version 1 has no free list.
+Record the responses in [UX_VALIDATION.md](UX_VALIDATION.md) and the device
+measurement in [PERFORMANCE.md](PERFORMANCE.md). The headset was not connected
+at final 03D evidence collection, so those gates remain explicit and open.

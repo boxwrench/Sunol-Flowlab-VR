@@ -1,6 +1,6 @@
 # Apparatus Recognition Validation
 
-**Status:** Project-owner operator composition accepted; external blind recognition open
+**Status:** Project-owner operator composition accepted; replacement captures ready; external blind reviews open
 **Governing requirement:** Batch 03 presentation-retention and human-validation gate
 **Review route:** `http://127.0.0.1:5173/?mode=proof`
 
@@ -36,10 +36,12 @@ before accepting Batch 03.
 
 ## Results
 
-The randomized [Batch 03 review packet](BATCH_03_REVIEW_PACKET.md) was generated
-on 2026-07-15. It contains one unlabeled apparatus image and three shuffled,
-completed low/optimum/high outcomes. The answer key is retained only in an
-ignored local test artifact until responses are recorded.
+The randomized [Batch 03 review packet](BATCH_03_REVIEW_PACKET.md) was
+regenerated on 2026-07-15 after Workstream 03D technical acceptance. It
+contains one unlabeled apparatus image and three shuffled, completed
+low/optimum/high outcomes from configuration fnv1a32-e8bf13e7. The answer key
+is retained only in an ignored local test artifact until responses are
+recorded.
 
 No participant responses have been recorded yet. The project owner's
 operator-informed outcome review may be recorded, but it does not replace the
@@ -67,3 +69,8 @@ rectangular-vessel candidate with "yes good." The project-owner operator
 composition review is accepted for start placement, table mounting, vessel
 shape, and hero-tank priority. This informed review does not replace the open
 external blind-recognition requirement.
+
+Workstream 03D replacement captures have now passed browser-error and visual
+inspection. The parked reviews may resume. No external participant response has
+yet been recorded, so neither apparatus recognition nor outcome comprehension
+is accepted.

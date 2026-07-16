@@ -1,6 +1,8 @@
 # Batch 03 Recognition and Outcome Review
 
-**Candidate status:** Awaiting responses  
+**Candidate status:** Workstream 03D replacement captures ready; awaiting external responses
+**Model configuration:** fnv1a32-e8bf13e7
+**Capture date:** 2026-07-15
 **Instructions:** Review the images before opening source files or implementation
 notes. Do not inspect the local answer key in `test-results`.
 
