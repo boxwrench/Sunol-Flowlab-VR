@@ -1,12 +1,13 @@
 # Batch 09 Implementation Plan: Desktop Spectator Experience
 
 **Status:** Not started — predecessor gates remain open
-**Branch:** `batch-09-spectator`  
 **Depends on:** Batches 06-08 stable; Batch 07 plot available  
 **May run in parallel with:** Final environment asset preparation and audio preparation  
 **Primary gate:** A person without a headset understands the project, sees the U-shaped dose response, and reaches the main portfolio takeaway in under one minute from the root URL.
 
 > This batch must also follow [the hybrid jar-test design direction](docs/DESIGN_DIRECTION_JAR_TEST_HYBRID.md). The design brief governs product intent and presentation meaning; this batch remains authoritative for timing, scope, tests, evidence, and acceptance.
+
+> “Replay” of the scripted spectator sequence means rerunning its orchestration from a clean state. A treatment-result ghost is the separate recorded-band feature governed by [the ghost replay design](docs/GHOST_REPLAY_DESIGN.md); do not conflate the two or use ghost playback to fake a live trial.
 
 ## Goal
 
@@ -27,7 +28,7 @@ Create a lightweight, scripted desktop experience that reuses the real simulatio
 ## Spectator principles
 
 - Same deployed root URL as VR.
-- Same simulation, phase state machine, turbidity authority, gauge mapping, and plot logic.
+- Same simulation, phase state machine, relative optical-load authority, gauge mapping, and plot logic.
 - Same hybrid hierarchy: one live hero tank, six static canonical preset jars, and one complete plot for all doses.
 - No headset required.
 - Scripted comprehension is required; full mouse parity is optional.

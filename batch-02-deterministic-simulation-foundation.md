@@ -1,7 +1,6 @@
 # Batch 02 Implementation Plan: Minimum Phenomenon Substrate
 
 **Status:** Batch 02A accepted — Batch 02B deferred pending evidence  
-**Branch:** `batch-02-phenomenon-substrate`  
 **Depends on:** Batch 01A accepted, including the uninterrupted rendered observation  
 **May run in parallel with:** Isolated XR shell planning and review only  
 **Primary gate:** A deterministic 11-dose headless sweep demonstrates a clear underdose–optimum–overdose response with the least mechanics required to make that lesson visible.
@@ -9,6 +8,14 @@
 ## Goal
 
 Prove the educational phenomenon before building generalized particle mechanics. Batch 02A adds only the state and behavior needed to produce and visualize a deterministic U-shaped treatment response. Batch 02B is conditional performance work and is authorized only by measurements from the working phenomenon proof.
+
+## Post-acceptance version 1 research routing
+
+Batch 02A remains accepted as the minimum phenomenon proof. The later [approved modeling research amendment](docs/MODELING_RESEARCH_AMENDMENT.md) supersedes conflicting version 1 implementation guidance without rewriting the Batch 02A evidence.
+
+The amendment's mass-authoritative state, fractal-derived diameter and density, deterministic merges, projected-area relative optical load, growth bound, and population-health validation are product-model refinements, not generalized engine work. They are routed to Workstream 03D so the replacement model is compared against the accepted curve and presentation before Batch 03 can close.
+
+Spatial hashing remains conditional on profiling. A free list is excluded from version 1 because trials do not create replacement particles.
 
 This plan follows the product boundary in `CLAUDE.md`: do not build a universal FlowLab engine before a second process module ships.
 
@@ -99,10 +106,10 @@ Update `docs/DECISIONS.md`, `docs/PERFORMANCE.md`, `PROGRESS.md`, and the status
 Batch 02B is not automatically authorized by completing 02A. Add these mechanics only when profiling or visible behavior supplies evidence:
 
 - a spatial hash if measured neighbor work is material at 500 particles;
-- a deterministic free-slot pool when actual particle merging requires slot recycling;
-- mass or density fields when they visibly improve aggregation or settling;
 - merge tween metadata when the renderer has an accepted transition to display;
 - additional allocation diagnostics when current telemetry cannot locate a measured problem.
+
+Mass, derived diameter/density, and deterministic merge state are no longer Batch 02B candidates; the approved research amendment requires them in Workstream 03D. Do not add a free-slot pool unless a later shipped feature creates new particle slots.
 
 Before adding one of these, record the baseline workload, the observed bottleneck or visual limitation, the simpler alternatives considered, and the expected acceptance improvement. Re-run the same measurement after implementation.
 
@@ -133,7 +140,7 @@ Before adding one of these, record the baseline workload, the observed bottlenec
 - State remains finite, reset-pure, and independent of React and rendering.
 - The default 500-particle path meets the documented desktop benchmark without unbounded memory growth.
 - No Batch 02B mechanism exists without recorded benchmark or visual evidence.
-- Batch 03 can focus on presentation and tuning rather than inventing the treatment response.
+- Batch 03 inherits an accepted comparison baseline and may replace it only through the approved modeling amendment and replacement gates.
 
 ## Suggested commit
 

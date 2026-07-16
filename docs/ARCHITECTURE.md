@@ -27,19 +27,25 @@ xr -> app command types
 Forbidden dependencies:
 
 - `sim` to browser, React, Three.js, rendering, XR, persistence, or application lifecycle;
-- `render` to independent chemistry, turbidity, scoring, or measurement calculations;
+- `render` to independent chemistry, optical-load, scoring, or measurement calculations;
 - `xr` to particle state or treatment mechanics;
 - hot simulation state to React component state.
 
 ## Runtime data flow
 
-Physical or spectator input becomes a validated discrete command. The application layer applies it to lifecycle/domain code. src/app/SimulationRuntime.ts owns the deterministic state and fixed-step clock, while an app-owned frame driver advances that runtime inside the React Three Fiber canvas. Rendering receives a read-only state view and synchronizes reusable Three.js objects. Turbidity bands produced by the simulation are the sole process source for hero-tank appearance, clearing-front diagnostics, instruments, completed results, static canonical jar summaries, persistence, and replay.
+Physical or spectator input becomes a validated discrete command. The application layer applies it to lifecycle/domain code. src/app/SimulationRuntime.ts owns the deterministic state and fixed-step clock, while an app-owned frame driver advances that runtime inside the React Three Fiber canvas. Rendering receives a read-only state view and synchronizes reusable Three.js objects. Relative optical-load bands produced by the simulation are the sole process source for hero-tank appearance, clearing-front diagnostics, instruments, completed results, static canonical jar summaries, persistence, and replay. Historical Batch 02A code calls this normalized record turbidity; it is not calibrated NTU.
 
 Development-only XR preflight adapters may report session, controller, and
 selection facts to app-owned low-frequency telemetry. They do not own or mutate
 simulation state and are excluded from production presentation.
 
 The hero tank is the only live process presentation. Canonical jars are application-owned write-on-completion summaries derived from completed results. The complete dose-response plot and versioned experiment log retain all eleven dose values and rebuild canonical summaries on restore; jars are never simulation owners or complete history.
+
+## Treatment-result replay data flow
+
+The simulation exposes the same authoritative optical-load band view used by live presentation. An application-owned recorder samples that view at 10 Hz by simulation or application elapsed time, then creates a versioned treatment-ghost record with phase and compatibility metadata. Persistence and schema migration remain outside `/src/sim`.
+
+An application-owned playback clock performs sample lookup and bounded linear interpolation. Rendering may show a subordinate replay gradient, clearing-front marker, gauge trace, or plot line from a read-only replay view. It does not reconstruct particles, calculate clarity, or own playback time. Pure ghost playback pauses the live simulation; live-versus-ghost comparison keeps the two states separate.
 
 ## Determinism and performance
 
@@ -51,8 +57,8 @@ The hero tank is the only live process presentation. Canonical jars are applicat
 
 ## Error boundaries
 
-Invalid external commands fail at the app boundary. Unsupported XR and session failure return to a usable desktop mode. Persistence validates schema versions and cannot mutate simulation initialization. Rendering failures produce a visible application error rather than a silent blank canvas.
+Invalid external commands fail at the app boundary. Unsupported XR and session failure return to a usable desktop mode. Persistence validates schema versions and cannot mutate simulation initialization. Missing, corrupt, truncated, quota-blocked, or incompatible ghost records degrade to a clear refusal or legacy summary without crashing or mutating the live simulation. Rendering failures produce a visible application error rather than a silent blank canvas.
 
 ## Current state
 
-Batch 00 is substantially complete and Batch 01A is accepted. The local physical portion of Batch 01B is accepted on Quest 3; the hosted-HTTPS smoke remains open. Batch 02A has an app-owned deterministic phenomenon runtime, fixed-capacity size and settled state, simplified aggregation/settling, one authoritative turbidity-band record, an accepted 11-dose/nine-seed sweep, and production-path benchmark evidence. Batch 02B engine mechanics remain deferred. Batch 03 desktop presentation is in progress with human recognition gates open.
+Batch 00 is substantially complete and Batch 01A is accepted. The local physical portion of Batch 01B is accepted on Quest 3; the hosted-HTTPS smoke remains open. Batch 02A has an app-owned deterministic phenomenon runtime, fixed-capacity size and settled state, simplified aggregation/settling, one authoritative normalized band record, an accepted 11-dose/nine-seed sweep, and production-path benchmark evidence. The approved modeling amendment now routes the final version 1 mass-authoritative refinement through Workstream 03D; spatial hashing remains deferred and a free list is excluded. The approved treatment-result ghost is planned for app-owned recording, persistence, and playback in Batch 07 plus restrained presentation in Batch 08; no ghost runtime exists yet. Batch 03 presentation evidence is intact, while its external human-review gates are open and parked.

@@ -1,12 +1,15 @@
 # Batch 07 Implementation Plan: Physical Instrumentation and Experiment Memory
 
 **Status:** Not started — predecessor gates remain open
-**Branch:** `batch-07-instrumentation`  
 **Depends on:** Batch 06 accepted  
 **May run in parallel with:** Instrument geometry and data wiring after interfaces freeze  
-**Primary gate:** The apparatus explains itself physically, records exactly one result per trial, persists the curve, and lets a visitor clear inherited data without software chrome.
+**Primary gate:** The apparatus explains itself physically, records exactly one result per trial, persists the curve, and can record and replay a compatible prior treatment result without mutating the live simulation or requiring software chrome.
 
 > This batch must also follow [the hybrid jar-test design direction](docs/DESIGN_DIRECTION_JAR_TEST_HYBRID.md). The design brief governs product intent and presentation meaning; this batch remains authoritative for timing, scope, tests, evidence, and acceptance.
+
+> Instruments, plots, persistence, and static jar summaries consume the dimensionless relative optical-load record governed by [the modeling research amendment](docs/MODELING_RESEARCH_AMENDMENT.md). User-facing labels must not imply calibrated NTU or real-dose guidance.
+
+> Treatment-ghost recording, compatibility, persistence, deletion, and playback follow [the approved ghost replay design](docs/GHOST_REPLAY_DESIGN.md). Version 1 records bands, not particles, and never re-runs the simulation for playback.
 
 ## Goal
 
@@ -26,7 +29,7 @@ Turn the complete treatment loop into an understandable experimental instrument 
 
 ## Core rule
 
-Every display derives from the same authoritative turbidity-band record captured by Batch 06. Different display mappings are allowed; independent process calculations are not. The mounted dose-response plot and versioned experiment log are the sole complete memory for all doses 0 through 10. The six jars are static summaries for canonical presets 0, 2, 4, 6, 8, and 10 only.
+Every display derives from the same authoritative relative optical-load band record captured by Batch 06. Different display mappings are allowed; independent process calculations are not. The mounted dose-response plot and versioned experiment log are the sole complete memory for all doses 0 through 10. The six jars are static summaries for canonical presets 0, 2, 4, 6, 8, and 10 only.
 
 ## Workstream 07A - Read-only physical instrumentation
 
@@ -54,10 +57,10 @@ Requirements:
 - distinguishes ready, active treatment, measuring, complete, and refilling;
 - does not compete visually with the tank.
 
-### Work package 07A.3 - Turbidity gauge
+### Work package 07A.3 - Relative treatment-result gauge
 
 - Build a physical gauge face and needle.
-- Map authoritative endpoint turbidity through a documented display transform.
+- Map authoritative endpoint optical load through a documented display transform.
 - Animate the needle only during measurement.
 - Use relative labels or an explicitly internal scale, not fake calibrated NTU.
 - Add test hooks to compare gauge target with trial result.
@@ -74,7 +77,7 @@ Requirements:
 Build a physical board that:
 
 - displays detents 0-10 on the horizontal axis;
-- uses the same internal/relative turbidity scale as the gauge mapping;
+- uses the same relative optical-load scale as the gauge mapping;
 - plots one point per completed trial;
 - supports repeated testing at one dose through an explicit policy, such as latest result, average, or multiple small points;
 - clearly reveals the U-shape as data accumulates;
@@ -93,7 +96,7 @@ Intended record:
     interface CanonicalJarSummary {
       readonly dose: 0 | 2 | 4 | 6 | 8 | 10
       readonly trialId: string
-      readonly endpointTurbidity: number
+      readonly endpointOpticalLoad: number
       readonly displayClarity: number
     }
 
@@ -105,7 +108,7 @@ Rules:
 - update one matching jar once and store the associated result ID;
 - leave all jars unchanged for odd-dose results;
 - remain static between completed-result updates;
-- contain no simulation clock, moving particles, per-frame process logic, or independent turbidity;
+- contain no simulation clock, moving particles, per-frame process logic, or independent optical-load calculation;
 - clear when experiment history clears;
 - rebuild deterministically from the persisted experiment log on restore rather than becoming a second history source.
 
@@ -179,7 +182,9 @@ Add automated checks proving:
 - restored canonical summaries reference the same completed results as persistence;
 - history clearing removes plot points and canonical summaries together.
 
-## Work package 07C - Instrument layout and comprehension test
+## Workstream 07C - Instrument layout and comprehension
+
+### Work package 07C.1 - Layout and comprehension test
 
 Test:
 
@@ -194,6 +199,52 @@ Test:
 
 Use short observation sessions rather than explanatory tutorials.
 
+## Workstream 07D - Treatment-result ghost recording and playback
+
+The ghost library is a bounded comparison aid, not the complete experiment memory. The plot and experiment log still retain every completed trial; the library retains only a configured subset of recorded histories.
+
+### Work package 07D.1 - App-owned fixed-rate recorder
+
+- Observe the same authoritative relative optical-load band view as live presentation.
+- Record at 10 Hz using simulation or application elapsed time, never render-frame count.
+- Use fixed-capacity or otherwise bounded Float32 storage sized from the phase schedule and band count; do not allocate per sample.
+- Preserve sample-major layout with exactly `sampleCount * bandCount` values.
+- Capture band edges, phase timeline, endpoint result, seed, dose, raw-water config, simulation config hash, simulation version, and optical-proxy version.
+- Finalize one candidate ghost from one completed trial without changing the completed result or simulation state.
+
+### Work package 07D.2 - Schema and compatibility boundary
+
+- Validate schema version, metadata, sample count, finite normalized values, band layout, sample rate, duration, and endpoint agreement before accepting a record.
+- Classify records as directly compatible, tested-migration compatible, legacy-summary-only, or incompatible.
+- Never silently compare ghosts with different optical-proxy versions, raw-water configuration, band layout, normalization, or materially different phase schedules.
+- Preserve a result summary when safe even if full playback is unavailable.
+- Treat corrupt or truncated data as recoverable application data failure, not a simulation failure.
+
+### Work package 07D.3 - Measured small-library persistence
+
+- Measure raw and serialized size using the actual version 1 trial duration and configured ghost limit.
+- Reuse the existing localStorage path only when the measured library fits safely and writes do not noticeably block interaction.
+- Adopt IndexedDB only if measured size or blocking writes establish a real need; do not create a generalized storage abstraction first.
+- Start with straightforward Float32 serialization and no custom compression or quantization.
+- Handle unavailable storage, quota failure, future schemas, and partial writes without silently losing the experiment log or live result.
+- Offer explicit deletion or replacement when the configured limit is reached.
+- Keep ghost deletion separate from plot/log clearing unless a clearly labeled, deliberately tested “clear all local data” action is later approved.
+
+### Work package 07D.4 - Independent playback runtime
+
+- Own play, pause, seek, reset, sample lookup, interpolation, phase labels, and endpoint handling in `/src/app`.
+- Use bounded linear interpolation that returns exact recorded values at sample timestamps and never overshoots `[0, 1]`.
+- Expose one read-only replay view for rendering and instrumentation.
+- During pure ghost playback, do not advance the live simulation clock, mutate particles, consume simulation randomness, or emit a new trial result.
+- During live-versus-ghost comparison, keep live and recorded states separate and validate compatibility first.
+
+### Work package 07D.5 - Minimal library actions
+
+- Route play, pause, seek/reset, selection, and delete through validated application commands.
+- Keep the saved count small and the interaction subordinate to running a treatment trial.
+- Provide clear compatibility, storage-full, deletion, and playback-ended states.
+- Avoid a large searchable library, cloud account, or generalized file manager.
+
 ## Explicit non-goals
 
 - No classroom lesson system.
@@ -201,7 +252,8 @@ Use short observation sessions rather than explanatory tutorials.
 - No calibrated NTU claim.
 - No final plant environment.
 - No spectator autoplay sequence.
-- No charge-vision or ghost replay unless separately approved as optional work.
+- No charge-vision unless separately approved as optional work.
+- No particle-level replay, replay by simulation recomputation, compression codec, cloud sync, WebAssembly rewrite, fixed-point math, or cross-device lockstep.
 
 ## Required tests and evidence
 
@@ -213,12 +265,19 @@ Use short observation sessions rather than explanatory tutorials.
 - refill interaction smoke test;
 - tear-off deliberate-clear test;
 - session restart persistence test;
+- 10 Hz recording-cadence and flat band-layout tests;
+- ghost endpoint-agreement and metadata-validation tests;
+- exact-sample, bounded-interpolation, pause, seek, reset, and playback-end tests;
+- proof that playback does not advance or mutate the live simulation;
+- current, migrated, legacy-summary, malformed, truncated, and incompatible record tests;
+- measured serialized size, configured-library-limit, quota-failure, delete, and replacement evidence;
+- supported-browser playback comparison within serialization/interpolation tolerance;
 - Quest readability screenshots and interaction observations;
 - performance metrics after adding all instruments.
 
 ## Review-agent checklist
 
-- Does any instrument calculate its own turbidity?
+- Does any instrument calculate its own optical load?
 - Is fake precision introduced by labels or units?
 - Can inherited data be cleared physically?
 - Are the plot and log clearly the complete memory while jars remain static canonical summaries?
@@ -226,6 +285,10 @@ Use short observation sessions rather than explanatory tutorials.
 - Can one trial create multiple points?
 - Are refill and experiment-log clear separate actions?
 - Does persistence stay outside `/sim`?
+- Does the recorder consume the existing band authority rather than recalculate optical load?
+- Can a corrupt or incompatible ghost fail without affecting the live trial or complete experiment log?
+- Does playback remain application-owned and particle-free?
+- Are saved ghosts clearly a limited comparison subset rather than complete history?
 - Has instrument geometry added excessive draw calls or transparency?
 
 ## Acceptance criteria
@@ -237,13 +300,17 @@ Use short observation sessions rather than explanatory tutorials.
 - Canonical summaries rebuild from persisted completed results and clear with experiment history.
 - Gauge, water appearance, recorded result, and plot agree through the band authority.
 - Experiment data survives browser sessions.
+- A completed trial can produce one validated 10 Hz treatment ghost whose final sample agrees with its completed result.
+- A compatible ghost plays, pauses, seeks, resets, and ends deterministically without advancing or mutating the live simulation.
+- Incompatible or corrupt ghosts are refused, migrated, or reduced to a clearly labeled legacy summary without silent reinterpretation.
+- The measured small-library persistence path handles its configured limit and quota failure gracefully, with explicit delete or replacement behavior.
 - A visitor can deliberately clear inherited data and receive a blank sheet.
 - No software chrome is required to operate or understand the experiment.
 - Players naturally begin searching for the minimum.
 
 ## Suggested tag and commit
 
-- Commit: `feat: add physical instrumentation and persistent experiment log`
+- Commit: `feat: add instrumentation, persistence, and treatment-result ghosts`
 - Accepted tag: `instrumentation-complete`
 
 ## Required closing acceptance packet

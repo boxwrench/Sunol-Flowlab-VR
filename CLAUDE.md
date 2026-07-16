@@ -10,16 +10,20 @@ Do not build a universal FlowLab engine until a second process module ships.
 
 ## Engineering authority
 
-- `/src/sim` owns deterministic state, seeded randomness, turbidity, and headless sweeps. It must not import React, Three.js, browser rendering, or XR code.
+- `/src/sim` owns deterministic state, seeded randomness, relative optical load, and headless sweeps. It must not import React, Three.js, browser rendering, or XR code.
 - `/src/render` owns Three.js/React Three Fiber presentation and consumes simulation output. It must not derive independent process values.
 - `/src/xr` owns XR session/input handling and emits discrete application commands only.
 - `/src/app` owns lifecycle, mode selection, orchestration, and spectator entry. It does not own per-particle state.
 - React state updates are forbidden in the hot simulation loop.
 - Per-frame allocation requires an explicit documented reason.
-- One turbidity-band record is authoritative for water appearance, clearing front, gauge, score, plot, and ghost replay.
+- One vertically binned relative optical-load record is authoritative for water appearance, clearing front, gauge, score, plot, persistence, static jars, and ghost replay. It is dimensionless and must not be labeled as calibrated NTU.
 - The mounted plot and versioned experiment log are the complete memory for all eleven doses. The six jars are static summaries for canonical presets 0, 2, 4, 6, 8, and 10 only.
 
 The stable command and data contracts are defined in `docs/CONTRACTS.md`; regression rules are in `docs/REGRESSION_CONTRACT.md`. The Markdown series indexed by `IMPLEMENTATION_PLAN.md` is the active plan authority.
+
+The final version 1 process model is governed by `docs/MODELING_RESEARCH_AMENDMENT.md`. Workstream 03D must make mass authoritative, derive diameter with default `Df = 2.0`, conserve mass through stable deterministic merges, use capped fractal-derived settling, and calculate optical load from suspended `sum(D^2)`. Rendered morphology remains non-authoritative. Version 1 has no free list; spatial hashing requires profiling evidence. The accepted Batch 02A statistical model remains a historical comparison baseline until 03D passes.
+
+Treatment-result replay is governed by `docs/GHOST_REPLAY_DESIGN.md`. Version 1 records authoritative optical-load bands at 10 Hz and replays them through an app-owned clock with bounded linear interpolation. It does not record particles or rerun the simulation. Recording, compatibility, storage, and playback belong to `/src/app`; `/src/render` consumes a subordinate read-only replay view. Do not add compression, a generalized storage layer, IndexedDB, WebAssembly, fixed-point math, cloud sync, or cross-device lockstep without the documented measurement or product trigger.
 
 ## Toolchain policy
 

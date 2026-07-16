@@ -6,8 +6,8 @@ Updated: 2026-07-15
 
 - Repository: <https://github.com/boxwrench/Sunol-Flowlab-VR>
 - Branch: `main`
-- Published baseline before this increment: `c55b7c5` (`docs: disclose hackathon AI workflow`)
-- Current increment: Batch 03 operator-review packet and physical XR start-placement correction
+- Published baseline before this increment: `f1c4e13` (`feat: validate Batch 03 apparatus presentation`)
+- Current increment: approved modeling/replay research integration plus repository coherence and stale-guidance cleanup
 - Active plan authority: [IMPLEMENTATION_PLAN.md](IMPLEMENTATION_PLAN.md) and its ordered `batch-00` through `batch-11` Markdown files
 - The superseded Godot plan is isolated under `docs/archive/` for provenance. Its stale duplicate Batch 03 snapshot was removed; use only the active indexed Batch 03 plan.
 
@@ -21,7 +21,7 @@ Updated: 2026-07-15
 - Deterministic fixed-step simulation clock and seeded PRNG
 - App-owned `SimulationRuntime` with start, pause, reset, rendered stepping, and headless stepping
 - Fixed-capacity 500-particle typed-array state with normalized floc size, irreversible settlement, and no hot-step allocation
-- Pure deterministic dose efficiency, four-phase aggregation/settling, and one authoritative 12-band turbidity record
+- Pure deterministic dose efficiency, four-phase aggregation/settling, and one authoritative 12-band normalized record (legacy source identifier: turbidity)
 - Read-only one-draw-call instanced particle rendering with visible floc growth and settling, without lifecycle ownership or per-frame React state
 - Preallocated performance telemetry, Chrome heap reporting, and machine-readable headless benchmark
 - Automated module-boundary regression tests, a desktop Playwright smoke test, and a minimal GitHub Actions workflow
@@ -43,6 +43,16 @@ Updated: 2026-07-15
   followed by open rectangular jar and rim geometry based on the second review
 - Project-owner operator acceptance of the final physical Quest composition,
   plus a 120 FPS, 8.70 ms p95, 22-draw-call live rolling snapshot
+- Approved final-version modeling contract: mass-authoritative deterministic
+  aggregation, default `Df = 2.0`, fractal-derived capped settling, one
+  projected-area relative optical-load authority, and explicit population-health
+  validation, routed to Batch 03 Workstream 03D
+- Approved treatment-result ghost contract: app-owned 10 Hz authoritative-band
+  recording, versioned compatibility metadata, bounded linear interpolation,
+  measured small-library persistence, and read-only subordinate replay, routed
+  to Batches 07-08 without particle recording or simulation recomputation
+- One consolidated post-research Batch 03 plan, plan-wide `main` branch policy,
+  current official Node 24-based CI actions, and no duplicate active mechanics plan
 
 The current local validation includes 16 passing repository contract tests, 67 passing Vitest tests across 15 files, canonical and nine-seed dose sweeps, reverse-order equality, type checking, lint, formatting, production build, a production-path benchmark, three passing desktop browser tests, deterministic low/optimum/high endpoint captures, an inspected unlabeled apparatus capture, and a 60 FPS 12-second real-time desktop apparatus observation with zero console errors. The physical Quest preflight recorded a stable 120 FPS rolling snapshot, 8.33 ms average and 9.00 ms p95 frame time, both controllers and select events, and clean session exit. Full physical evidence is in [docs/PERFORMANCE.md](docs/PERFORMANCE.md#2026-07-15---physical-quest-3-local-preflight); Batch 02A evidence is in [docs/BATCH_02A_ACCEPTANCE.md](docs/BATCH_02A_ACCEPTANCE.md); current Batch 03 evidence and open gates are in [docs/BATCH_03_PROGRESS.md](docs/BATCH_03_PROGRESS.md). The production build retains the expected non-failing large-chunk warnings from emulator environment assets.
 
@@ -62,6 +72,9 @@ The current local validation includes 16 passing repository contract tests, 67 p
 - A hosted HTTPS deployment is not authorized yet. Localhost and the documented ADB reverse route are the approved development paths.
 - Public-data and fictionalization restrictions in [docs/DATA_BOUNDARY.md](docs/DATA_BOUNDARY.md) are binding.
 - Before visual acceptance, record the required unlabeled-screenshot recognition check in `docs/UX_VALIDATION.md`; at least one operator or educator must participate, with a nonoperator preferred as an additional participant.
+- The external recognition and blinded outcome reviews are intentionally parked
+  until Workstream 03D produces replacement behavior captures. They remain open
+  acceptance gates and have not been waived.
 
 ## Architecture constraints
 
@@ -74,17 +87,29 @@ src/xr/      WebXR session and physical-input adapters
 src/app/     runtime lifecycle, validated commands, modes, telemetry, and composition
 ```
 
-Do not place chemistry, turbidity, scoring, or measurement calculations in rendering or XR code. Rendering cannot create, reset, or advance simulation state and cannot import the app layer. Do not move hot simulation state into React state. Preserve fixed-step determinism, seeded randomness, fixed-capacity storage, and measured allocation discipline.
+Do not place chemistry, relative optical load, scoring, or measurement calculations in rendering or XR code. Rendering cannot create, reset, or advance simulation state and cannot import the app layer. Do not move hot simulation state into React state. Preserve fixed-step determinism, seeded randomness, fixed-capacity storage, and measured allocation discipline.
 
 The hybrid presentation direction does not create six simulations. The hero tank is the only live process view. Canonical jars at doses 0, 2, 4, 6, 8, and 10 are application-owned static completion summaries. The plot and trial log are the sole complete memory for all doses 0 through 10, including odd doses.
 
+Treatment ghosts are a separately managed limited subset of recorded result
+histories, not complete memory. Recording, schema checks, persistence, and
+playback timing stay in `/src/app`; rendering consumes a read-only replay view.
+Do not implement ghost particles, replay by recomputation, or ghost runtime work
+inside the current Workstream 03D model change.
+
 ## Recommended next session
 
-1. Confirm CI passes after publication; ordinary CI intentionally excludes emulator interaction and physical Quest testing.
-2. Run the blinded apparatus-recognition protocol in `docs/UX_VALIDATION.md` with at least one operator or educator and preferably one non-operator.
-3. Complete the blinded low/optimum/high review before accepting Batch 03.
-4. Keep Batch 02B spatial hashing, pooling, mass/density fidelity, and merge-animation metadata deferred unless new measurements or visible limitations justify one.
-5. Keep the hosted deployment and later headset-specific ergonomics, readability,
+1. Implement Workstream 03D one package at a time, beginning with authoritative
+   mass and derived diameter plus their invariants.
+2. Preserve the Batch 02A curve and evidence as the comparison baseline; accept
+   a replacement only after the new canonical and nine-seed suites pass.
+3. Keep spatial hashing and merge-animation metadata deferred absent evidence;
+   do not add a version 1 free list.
+4. Keep treatment-ghost implementation staged for Batches 07-08; Workstream 03D
+   only exposes the authoritative samples required by the later app recorder.
+5. Regenerate low/optimum/high captures after model replacement, then resume the
+   parked external recognition and blinded outcome reviews before accepting Batch 03.
+6. Keep the hosted deployment and later headset-specific ergonomics, readability,
    thermal, endurance, and release gates open; archived source artifacts remain
    non-authoritative.
 

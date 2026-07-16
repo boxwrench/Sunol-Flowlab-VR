@@ -12,7 +12,7 @@ Read [the implementation-plan index](IMPLEMENTATION_PLAN.md), [architecture](doc
 2. Install with `npm ci`; do not hand-edit `package-lock.json`.
 3. Keep changes within the `/sim`, `/render`, `/xr`, and `/app` dependency boundaries.
 4. Add a targeted test for every behavior change.
-5. Run `npm test`, `npm run typecheck`, `npm run lint`, and `npm run build` when those checks apply.
+5. Run `npm test`, `npm run typecheck`, `npm run lint`, `npm run format:check`, `npm run build`, and `npm run benchmark` when those checks apply.
 6. Keep simulation-tuning changes separate from dependency or XR-interaction changes.
 
 Use public, licensed, or self-created references only. Do not submit real facility-sensitive material, proprietary operating values, official branding, or content implying endorsement.

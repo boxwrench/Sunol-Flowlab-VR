@@ -1,5 +1,7 @@
 # Batch 02A Acceptance: Minimum Phenomenon Substrate
 
+> Historical baseline: this packet remains the accepted evidence for the minimum statistical phenomenon substrate. The later [modeling research amendment](MODELING_RESEARCH_AMENDMENT.md) supersedes conflicting version 1 implementation guidance and is routed through Workstream 03D; it does not retroactively erase this prototype result.
+
 Accepted: 2026-07-15
 
 ## Outcome

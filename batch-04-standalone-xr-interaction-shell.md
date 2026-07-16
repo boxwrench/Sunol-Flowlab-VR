@@ -1,9 +1,8 @@
 # Batch 04 Implementation Plan: Standalone XR Interaction Shell
 
 **Status:** Not started — predecessor gates remain open
-**Branch:** `batch-04-xr-shell`  
-**Depends on:** Batch 01B accepted; Batch 00 command contract fixed  
-**May run in parallel with:** Batch 03 under a separate worktree  
+**Depends on:** Batch 03 accepted; local Batch 01B route accepted; Batch 00 command contract fixed  
+**May run in parallel with:** Review and interaction-test preparation only  
 **Primary gate:** A user can reliably select one of 11 integer doses and press Start on the target Quest while maintaining 72 fps with useful headroom.
 
 > This batch must also follow [the hybrid jar-test design direction](docs/DESIGN_DIRECTION_JAR_TEST_HYBRID.md). The design brief governs product intent and presentation meaning; this batch remains authoritative for timing, scope, tests, evidence, and acceptance.
@@ -102,7 +101,7 @@ Do not carry both controls into the shipped scene unless accessibility testing d
 - Treat jars as presets for doses 0, 2, 4, 6, 8, and 10 only.
 - Route every jar selection through the same validated SET_DOSE command as the physical control.
 - Reflect the selected preset on the 11-detent control without bypassing or weakening the full 0-10 contract.
-- Keep the jar rack static; do not add simulation state, moving particles, turbidity, completed summaries, or experiment history.
+- Keep the jar rack static; do not add simulation state, moving particles, optical-load data, completed summaries, or experiment history.
 - Accept jar selection only if it is reliable and does not confuse users about the hero tank being the single live trial.
 
 This interaction is optional for v1. The primary 11-detent control remains authoritative and sufficient.
@@ -164,7 +163,7 @@ The empty shell should hold 72 fps with substantial headroom. A marginal pass he
 
 ## Explicit non-goals
 
-- No treatment particles or turbidity quad.
+- No treatment particles or optical-load gradient.
 - No simulation imports.
 - No phase locking based on trial state.
 - No gauge, plot, refill handle, or tear-off sheet.
@@ -173,11 +172,11 @@ The empty shell should hold 72 fps with substantial headroom. A marginal pass he
 - No detailed environment art.
 - No desktop spectator interactions.
 
-## Parallelization rules with Batch 03
+## Batch 03 interface boundary
 
 - Separate worktree and branch.
 - Batch 04 cannot modify `/sim`.
-- Batch 03 cannot modify the dose command contract without coordination.
+- The accepted Batch 03 model cannot modify the dose command contract without a coordinated contract change.
 - Merge only after both branches pass their own gates.
 - Integration begins only in Batch 05.
 

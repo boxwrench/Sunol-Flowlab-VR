@@ -6,6 +6,8 @@ Source artifact: [Sunol FlowLab VR Design Brief.pdf](Sunol%20FlowLab%20VR%20Desi
 
 Applies to product presentation, visual hierarchy, interaction meaning, instrumentation, rendering, and the future roadmap. [IMPLEMENTATION_PLAN.md](../IMPLEMENTATION_PLAN.md) and the individual batch plans remain authoritative for implementation order, blockers, scope, tests, evidence, acceptance, and completion.
 
+Historical source identifiers using “turbidity” refer to a dimensionless relative optical-load signal. [The modeling research amendment](MODELING_RESEARCH_AMENDMENT.md) governs its authoritative calculation and excludes calibrated NTU claims.
+
 ## 1. Purpose
 
 Sunol FlowLab VR retains the recognizable visual language of a traditional six-jar test without limiting the central experience to six small vessels. The approved direction pairs a classic six-jar comparison bench with one larger hero observation tank.
@@ -65,11 +67,13 @@ The complete DoseIndex contract remains every integer from 0 through 10. Odd val
 
 A completed trial may update a jar summary only when the dose exactly matches that jar's canonical preset. Suitable summaries include final relative haze, simplified settled-material appearance, a tested indicator, a small result token, or a restrained clarity gradient.
 
-Canonical summaries are static physical comparisons. They are not separate simulations and must not contain their own clock, continuously moving particles, independent turbidity calculations, per-frame process logic, or renderer-derived outcomes.
+Canonical summaries are static physical comparisons. They are not separate simulations and must not contain their own clock, continuously moving particles, independent optical-load calculations, per-frame process logic, or renderer-derived outcomes.
 
 ## 5. Complete experiment memory
 
 The mounted dose-response plot and versioned experiment log are the sole complete records of experiment history. They support all eleven integer dose values.
+
+A saved treatment-result ghost is a limited, separately managed comparison record governed by [the ghost replay design](GHOST_REPLAY_DESIGN.md). It does not replace the complete plot/log, imply that every trial was saved, or turn a canonical jar into a replay surface. Clearing experiment history and deleting saved ghosts are distinct deliberate actions unless a later tested “clear all local data” control labels both effects explicitly.
 
 An odd-dose trial updates the hero tank, gauge, complete plot, and experiment log while leaving canonical jars unchanged. An exact canonical-dose trial also updates its one matching jar summary.
 
@@ -92,7 +96,7 @@ It is a stylized observation chamber inspired by jar-test behavior, not a litera
 
 ## 8. Source-of-truth rule
 
-Validated commands feed one authoritative deterministic simulation. Authoritative turbidity-band and trial-result records then feed the hero tank, canonical jar summaries, gauge, complete plot, measurement cue, audio, and haptics.
+Validated commands feed one authoritative deterministic simulation. Authoritative optical-load-band and trial-result records then feed the hero tank, canonical jar summaries, gauge, complete plot, measurement cue, audio, haptics, and the application-owned treatment-ghost recorder.
 
 Prohibited behavior includes:
 
@@ -100,7 +104,7 @@ Prohibited behavior includes:
 - jar clarity calculated separately from a completed result;
 - hero-tank behavior that disagrees with the result;
 - phase-triggered success effects unsupported by simulation state;
-- independent instrument turbidity calculations;
+- independent instrument optical-load calculations;
 - decorative best-jar effects unsupported by trial data;
 - audio or lighting that communicates a better outcome than the simulation produced.
 
@@ -127,6 +131,8 @@ Before additional treatment behavior, the foundation must preserve these outcome
 - rendering never imports app-owned lifecycle or telemetry modules;
 - the runtime starts, pauses, resets, advances, and steps headlessly without React or WebGL;
 - no generalized engine, event bus, or global state framework is introduced.
+- treatment-ghost recording, compatibility, persistence, and playback timing stay in src/app;
+- ghost rendering consumes a read-only replay view and never advances or recomputes simulation state.
 
 Boundary, lifecycle, renderer-contract, and headless tests permanently enforce this correction. Unexpected React rerenders may be measured diagnostically, but zero renders is not the primary gate; continuously changing state must not require React ownership.
 
@@ -145,7 +151,7 @@ A suitable application-owned record is:
     interface CanonicalJarSummary {
       readonly dose: 0 | 2 | 4 | 6 | 8 | 10
       readonly trialId: string
-      readonly endpointTurbidity: number
+      readonly endpointOpticalLoad: number
       readonly displayClarity: number
     }
 
@@ -159,11 +165,11 @@ Expensive volumetric or layered transparency effects require a successful hero t
 
 ## 13. Rendering and performance
 
-Layered transparency and screen-space overdraw are expected to be more dangerous than 500 particles alone. Prefer opaque instanced particles, one turbidity-gradient surface, cheap jar walls, no realistic refraction, and no stacked full-tank effects.
+Layered transparency and screen-space overdraw are expected to be more dangerous than 500 particles alone. Prefer opaque instanced particles, one optical-load gradient surface, cheap jar walls, no realistic refraction, and no stacked full-tank effects.
 
 Any large transparent effect requires before-and-after average frame time, p95, draw-call, memory, and readability evidence on the target Quest.
 
-React may own composition, discrete transitions, XR lifecycle, completed-trial updates, low-frequency accessibility state, and development configuration. It must not own per-particle state, changing turbidity arrays, clock progression, floc motion, clearing-front animation, or continuously updated gauge motion.
+React may own composition, discrete transitions, XR lifecycle, completed-trial updates, low-frequency accessibility state, and development configuration. It must not own per-particle state, changing optical-load arrays, clock progression, floc motion, clearing-front animation, or continuously updated gauge motion.
 
 The simulation stays on the main thread until measurements prove it is a meaningful bottleneck. A Web Worker is not currently planned.
 
@@ -208,7 +214,8 @@ Record responses in docs/UX_VALIDATION.md. Reconsider the composition before ins
 | Simulation and XR integration                                         | Batch 05          |
 | Complete treatment-cycle behavior                                     | Batch 06          |
 | Static jar summaries, complete plot, gauge, nephelometer, persistence | Batch 07          |
-| Headset readability and clearing-front refinement                     | Batch 08          |
+| Treatment-ghost recording, compatibility, storage, playback runtime   | Batch 07          |
+| Headset readability, clearing-front, and ghost visual comparison      | Batch 08          |
 | Desktop spectator presentation                                        | Batch 09          |
 | Audio, lighting, environment, measurement polish                      | Batch 10          |
 | Approved export and sharing features                                  | Batch 11          |
@@ -216,17 +223,18 @@ Record responses in docs/UX_VALIDATION.md. Reconsider the composition before ins
 ## 19. Staged implementation
 
 1. Close the foundation: runtime ownership, boundaries, deterministic foundation, performance evidence, and synchronized plans.
-2. Prove the phenomenon: dose response, floc, settling, turbidity authority, hero-tank desktop proof, sweep, jar-rack blockout, and recognition validation. Jars may remain static geometry.
+2. Prove the phenomenon: dose response, floc, settling, optical-load authority, hero-tank desktop proof, sweep, jar-rack blockout, and recognition validation. Jars may remain static geometry.
 3. Prove XR interaction: detented control, Start, haptics, ergonomics, optional jar preset selection, and validated commands.
 4. Integrate the treatment cycle: selected dose, runtime, hero tank, phases, measurement, result, refill, and XR state.
-5. Add instrumentation and memory: static jar summaries, gauge, complete plot, nephelometer, persistence, refill, and physical clear-history action.
-6. Add presence and polish only after core evidence.
+5. Add instrumentation and memory: static jar summaries, gauge, complete plot, nephelometer, persistence, refill, physical clear-history action, and the bounded treatment-ghost recorder/playback runtime.
+6. Add the subordinate ghost visual comparison during headset readability work.
+7. Add presence and polish only after core evidence.
 
 ## 20. Version 1 boundary
 
-Version 1 includes one live authoritative simulation, one hero tank, one six-jar canonical preset rack, one 11-detent control, one treatment cycle at a time, static canonical summaries, a complete plot, persistent history, desktop spectator mode, and Quest VR mode.
+Version 1 includes one live authoritative simulation, one hero tank, one six-jar canonical preset rack, one 11-detent control, one treatment cycle at a time, static canonical summaries, a complete plot, persistent history, a small treatment-result ghost library, desktop spectator mode, and Quest VR mode.
 
-Version 1 does not require six concurrent simulations, a universal multi-vessel engine, calibrated units, pH or temperature chemistry, hand tracking, volumetric lighting, fluid simulation, CFD, operational recommendations, or a plant walkthrough.
+Version 1 does not require six concurrent simulations, a universal multi-vessel engine, particle-level replay, replay by recomputation, calibrated units, pH or temperature chemistry, hand tracking, volumetric lighting, fluid simulation, CFD, operational recommendations, or a plant walkthrough.
 
 ## 21. Future direction
 
@@ -238,4 +246,4 @@ The direction succeeds when an operator recognizes the jar-test connection, a no
 
 ## 23. Final decision
 
-Sunol FlowLab VR is neither a literal six-jar simulator nor an abandonment of the iconic jar-test image. A classic six-jar bench provides authenticity and canonical dose selection. One larger hero tank magnifies the selected treatment process. The mounted plot and persisted experiment log hold complete history across all eleven doses; jars provide static summaries only for six canonical presets.
+Sunol FlowLab VR is neither a literal six-jar simulator nor an abandonment of the iconic jar-test image. A classic six-jar bench provides authenticity and canonical dose selection. One larger hero tank magnifies the selected treatment process. The mounted plot and persisted experiment log hold complete history across all eleven doses; jars provide static summaries only for six canonical presets, and a small saved ghost library provides optional recorded-result comparison without duplicating the simulation.

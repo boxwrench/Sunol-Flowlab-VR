@@ -5,6 +5,7 @@
 - Do not use SCADA screens, alarm history, P&IDs, as-builts, internal SOPs, plant tags, access-control details, operating values, sensitive layouts, or restricted imagery.
 - Do not use an official logo, seal, endorsement claim, or implied affiliation without written approval.
 - External AI tools receive sanitized summaries and public references only.
+- Persisted treatment ghosts contain only application-generated fictionalized configuration, normalized optical-load samples, and local metadata. Version 1 does not upload, cloud-sync, import, or attach real plant identifiers or operational records.
 - Record source, license, creator, and generation method for every external or AI-generated asset before it ships.
 - Public copy uses "personal educational portfolio project" and "phenomenological coagulation model."
 

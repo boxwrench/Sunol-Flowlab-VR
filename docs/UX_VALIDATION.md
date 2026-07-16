@@ -1,7 +1,7 @@
 # Apparatus Recognition Validation
 
 **Status:** Project-owner operator composition accepted; external blind recognition open
-**Governing requirement:** Batch 03, work package 03B.5
+**Governing requirement:** Batch 03 presentation-retention and human-validation gate
 **Review route:** `http://127.0.0.1:5173/?mode=proof`
 
 ## Purpose

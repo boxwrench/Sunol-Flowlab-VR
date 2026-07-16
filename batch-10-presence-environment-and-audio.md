@@ -1,7 +1,6 @@
 # Batch 10 Implementation Plan: Presence, Environment, and Audio
 
 **Status:** Not started — predecessor gates remain open
-**Branch:** `batch-10-presence`  
 **Depends on:** Core apparatus, instrumentation, readability, and spectator flow accepted  
 **May run in parallel with:** Asset and audio preparation after Batch 03, but final integration occurs here  
 **Primary gate:** The scene reads as a stylized drinking-water plant, preserves instrument dominance and parallax, and maintains the Quest performance target.
@@ -120,7 +119,7 @@ Audio may clarify authoritative events but must not imply better flocculation or
 
 ### Work package 10B.3 - Ambient opening with clarity
 
-Prototype a subtle ambience change as turbidity falls, driven by the authoritative turbidity record through a display/audio transform.
+Prototype a subtle ambience change as relative optical load falls, driven by the authoritative band record through a display/audio transform.
 
 Requirements:
 
@@ -137,9 +136,9 @@ Requirements:
 - Limit real-time lights.
 - No dynamic shadows.
 - Add a brief measurement lighting cue only if inexpensive.
-- Preserve readable contrast on gauge, plot, labels, particles, and turbidity quad.
+- Preserve readable contrast on gauge, plot, labels, particles, and optical-load gradient.
 - Preserve canonical jar labels and summaries without letting six jars overpower the hero tank.
-- Drive any result-responsive light from authoritative turbidity or completed-result data.
+- Drive any result-responsive light from authoritative optical load or completed-result data.
 
 ### Work package 10C.2 - Materials and palette
 

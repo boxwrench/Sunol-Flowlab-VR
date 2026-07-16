@@ -1,7 +1,8 @@
 # Batch 03 Desktop Proof Progress
 
-**Status:** In progress; automated presentation slice complete, human gates open
-**Baseline:** `5d2ff8c`
+**Status:** In progress; automated presentation slice complete, 03D model refinement next, human gates open and parked
+**Simulation baseline:** `5d2ff8c`  
+**Latest presentation evidence:** `f1c4e13`
 **Date:** 2026-07-15
 
 ## Implemented
@@ -72,10 +73,15 @@ No renderer calculates dose efficiency, turbidity, endpoints, clearing
 diagnostics, or simulation state.
 
 The larger production bundle still emits the previously documented non-failing
-Vite chunk-size warnings from emulator environment assets. No new performance
-evidence justifies Batch 02B collision, pooling, density, or spatial-hash work.
+Vite chunk-size warnings from emulator environment assets. Performance evidence
+still does not justify spatial hashing, pooling, or merge-animation metadata.
+The approved modeling amendment separately authorizes the smallest
+mass-authoritative merge and derived-density model for educational fidelity.
 
 ## Open gates
+
+These human-review gates remain open but are intentionally parked until the
+03D process-model refinement produces replacement captures.
 
 - Record at least one blinded water-treatment operator or educator response in
   [UX_VALIDATION.md](UX_VALIDATION.md). Preferably add a non-operator response.
@@ -90,5 +96,19 @@ evidence justifies Batch 02B collision, pooling, density, or spatial-hash work.
 The final physical composition/readability check and short rolling performance
 snapshot are now accepted. This is not an endurance or thermal claim.
 
-Batch 03 is not accepted until its human-comprehension gates and remaining
-performance evidence are recorded.
+Batch 03 is not accepted until Workstream 03D and its replacement evidence pass,
+then its human-comprehension gates and remaining performance evidence are
+recorded.
+
+## Approved next model increment
+
+The [modeling research amendment](MODELING_RESEARCH_AMENDMENT.md) now governs
+the final version 1 process model. The accepted Batch 02A statistical model and
+all presentation evidence above remain comparison evidence, not the final model
+implementation.
+
+Workstream 03D will add mass-authoritative deterministic aggregation,
+fractal-derived diameter and density with default `Df = 2.0`, capped
+size-dependent settling, one projected-area relative optical-load authority, a
+growth bound, and population-health validation. Spatial hashing remains
+measurement-gated and version 1 has no free list.

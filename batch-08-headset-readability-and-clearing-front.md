@@ -1,12 +1,15 @@
 # Batch 08 Implementation Plan: Headset Readability and Clearing-Front Refinement
 
 **Status:** Not started — predecessor gates remain open
-**Branch:** `batch-08-clearing-front`  
 **Depends on:** Batch 07 accepted  
 **May run in parallel with:** Recorded review, user comprehension testing, optional charge-vision spike  
-**Primary gate:** At arm’s length in stereo, the player can see floc growth, falling floc, top-down clearing, and a final appearance consistent with the gauge while the Quest sustains the performance target.
+**Primary gate:** At arm’s length in stereo, the player can see floc growth, falling floc, top-down clearing, a final appearance consistent with the gauge, and a subordinate compatible prior-result ghost while the Quest sustains the performance target.
 
 > This batch must also follow [the hybrid jar-test design direction](docs/DESIGN_DIRECTION_JAR_TEST_HYBRID.md). The design brief governs product intent and presentation meaning; this batch remains authoritative for timing, scope, tests, evidence, and acceptance.
+
+> The clearing front and every clarity display remain transforms of the relative optical-load bands governed by [the modeling research amendment](docs/MODELING_RESEARCH_AMENDMENT.md). Visual smoothing and exaggeration cannot alter the authoritative process record.
+
+> Treatment-ghost visuals consume the app-owned read-only replay view governed by [the ghost replay design](docs/GHOST_REPLAY_DESIGN.md). They remain subordinate to the active trial and never introduce ghost particles or duplicate physics.
 
 ## Goal
 
@@ -48,7 +51,7 @@ Create a repeatable test matrix covering:
 
 Capture video or screenshots with build hash and config hash.
 
-## Work package 08.2 - Turbidity-band count and smoothing
+## Work package 08.2 - Optical-load band count and smoothing
 
 Evaluate the existing 12-16 band range:
 
@@ -63,7 +66,7 @@ Choose and document:
 - final band count;
 - vertical interpolation method;
 - temporal smoothing method and time constant;
-- whether smoothing applies only to display or also to recorded ghost history;
+- keep temporal smoothing display-only; the 10 Hz ghost recorder stores authoritative unsmoothed band samples and identifies their optical-proxy version;
 - behavior during refill/reset.
 
 Do not add layered translucent meshes.
@@ -161,6 +164,17 @@ Capture final Batch 8 metrics on the target headset through the most expensive v
 
 Record average and p95 frame time, simulation time, instance upload, draw calls, heap trend, particle count, and texture memory estimate.
 
+## Work package 08.9 - Treatment-ghost visual comparison
+
+- Consume only the app-owned read-only replay view accepted in Batch 07.
+- Test a restrained secondary water-gradient overlay, prior clearing-front marker, ghost gauge trace, previous-result plot line, and phase markers; keep only the smallest combination that improves comparison.
+- Keep the active trial visually primary through opacity, line weight, color, and spatial hierarchy.
+- Label incompatible raw-water, optical-proxy, band, normalization, or phase configurations instead of presenting an equal-condition comparison.
+- Do not show ghost particles, collision events, floc shapes, settling snowfall, or a second live tank.
+- Verify that visual interpolation agrees with the replay runtime at sample timestamps and remains bounded between them.
+- Profile the worst live-plus-ghost comparison moment on Quest and remove optional layers before increasing render complexity.
+- Test whether an operator-informed reviewer and a non-operator understand that the ghost is a previous recorded result rather than a second live simulation.
+
 ## Optional contained spike - Charge vision
 
 May begin only if core tuning is stable:
@@ -181,6 +195,7 @@ It is not required for this batch to pass.
 - No extra transparent water spectacle.
 - No particle-count escalation as the first solution.
 - No independent clearing-front animation.
+- No particle-level ghost, duplicate simulation, replay recomputation, or visually dominant previous-run overlay.
 
 ## Required tests and evidence
 
@@ -190,6 +205,9 @@ It is not required for this batch to pass.
 - comprehension-test notes;
 - transparency/draw-call audit;
 - Quest performance report;
+- live-plus-ghost Quest cost and draw/transparent-layer audit;
+- compatible, incompatible, paused, sought, endpoint, and playback-ended ghost screenshots;
+- reviewer evidence that the previous-run comparison is understood without implying a second live simulation;
 - accepted final visual and simulation config in `docs/TUNING.md`.
 
 ## Review-agent checklist
@@ -203,6 +221,7 @@ It is not required for this batch to pass.
 - Does the hero tank remain the most readable and compelling element?
 - Were user observations recorded rather than assumed?
 - Does the target headset maintain 72 fps through worst-case moments?
+- Is the ghost visibly subordinate, compatible when compared, and sourced only from the app-owned replay view?
 
 ## Acceptance criteria
 
@@ -213,12 +232,14 @@ It is not required for this batch to pass.
 - Static canonical jar summaries agree with their completed results without obscuring the complete plot.
 - The hero tank remains visually dominant and the jars read as presets, not complete memory.
 - Visuals remain legible from common standing/seated angles.
-- One turbidity authority remains intact.
+- One relative optical-load authority remains intact.
+- A compatible treatment ghost makes prior clearing and result progression comparable without ghost particles, duplicate physics, or live-state mutation.
+- Reviewers distinguish the recorded previous result from the active simulation, and incompatible comparisons are labeled rather than implied.
 - Quest sustains the required performance target with documented metrics.
 
 ## Suggested tag and commit
 
-- Commit: `refine: tune headset clearing front and floc readability`
+- Commit: `refine: tune headset clearing, floc, and ghost readability`
 - Accepted tag: `headset-readability-proven`
 
 ## Required closing acceptance packet

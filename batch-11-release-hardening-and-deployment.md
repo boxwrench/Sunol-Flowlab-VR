@@ -1,12 +1,13 @@
 # Batch 11 Implementation Plan: Release Hardening and Deployment
 
 **Status:** Not started — predecessor gates remain open
-**Branch:** `batch-11-release`  
 **Depends on:** All prior batch gates accepted  
 **May run in parallel with:** Independent release review and documentation verification only  
 **Primary gate:** A reproducible public release works on Quest, desktop, and mobile fallback, preserves the accepted dose-response behavior, contains no development or sensitive material, and can be rolled back safely.
 
 > This batch must also follow [the hybrid jar-test design direction](docs/DESIGN_DIRECTION_JAR_TEST_HYBRID.md). The design brief governs product intent and presentation meaning; this batch remains authoritative for timing, scope, tests, evidence, and acceptance.
+
+> Release validation must cover the treatment-result ghost’s recording, compatibility, storage, playback independence, cross-browser interpolation, and subordinate presentation as governed by [the ghost replay design](docs/GHOST_REPLAY_DESIGN.md).
 
 ## Goal
 
@@ -67,6 +68,7 @@ Run from a clean checkout:
 - integration tests;
 - state-machine tests;
 - persistence/migration tests;
+- treatment-ghost cadence, schema, compatibility, interpolation, storage-limit, and playback-independence tests;
 - browser smoke tests;
 - production build;
 - static-host preview test.
@@ -106,6 +108,7 @@ Test the final hosted candidate on:
 - XR permission denied path;
 - audio autoplay denied path;
 - persistent data present, absent, corrupt, and future-version cases.
+- compatible, migrated, legacy-summary, incompatible, truncated, quota-blocked, and deleted treatment-ghost cases.
 
 For each, record:
 
@@ -115,6 +118,7 @@ For each, record:
 - Enter VR behavior where supported;
 - full trial completion;
 - persistence and clear-sheet behavior;
+- treatment-ghost record, restart, replay, comparison, compatibility label, and deletion behavior;
 - console errors;
 - screenshots/video.
 
@@ -216,6 +220,9 @@ The release cannot proceed with:
 - jars presented as complete history or implemented as unapproved live simulations;
 - missing recognition-validation evidence in docs/UX_VALIDATION.md;
 - inability to clear inherited plot data;
+- ghost playback mutating or advancing the live simulation;
+- corrupt, incompatible, or quota-blocked ghost data crashing the app or silently changing a comparison;
+- treatment ghosts presented as particle replay, complete experiment memory, or a second live simulation;
 - unresolved memory growth;
 - Quest performance below the accepted target;
 - root URL failing without XR;
@@ -230,6 +237,7 @@ The release cannot proceed with:
 - Is the U-shaped curve still present and discoverable?
 - Does an unlabeled image retain the validated jar-test and comparative-experiment recognition?
 - Do users understand that the hero tank is live, jars are canonical presets, and the plot is complete memory?
+- Do users understand that a treatment ghost is a subordinate recorded prior result rather than particle replay or a second live simulation?
 - Are all public claims appropriately phenomenological?
 - Do automated and device tests match the release commit?
 - Are performance results measured on the real target device?
@@ -252,7 +260,8 @@ A new visitor can:
 10. see exact canonical-dose trials update one static matching jar while odd doses remain in the complete plot without changing a jar;
 11. refill identical raw water and repeat;
 12. clear the experiment log, plot, and canonical summaries physically;
-13. discover the U-shaped dose-response curve.
+13. record, replay, and delete a compatible prior treatment-result ghost without changing the live trial or complete plot/log;
+14. discover the U-shaped dose-response curve.
 
 Additionally:
 

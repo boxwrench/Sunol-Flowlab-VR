@@ -1,306 +1,203 @@
 # Batch 03 Implementation Plan: Desktop Phenomenon Proof
 
-**Status:** In progress — presentation slice implemented; human review gates open  
-**Branch:** `batch-03-desktop-proof`  
-**Depends on:** Batch 02 accepted; Batch 00 regression and visual contracts available  
-**May run in parallel with:** Batch 04 in an isolated worktree  
-**Primary gate:** Low, near-optimal, and high dose outcomes are numerically U-shaped and visibly distinct on desktop before any XR integration begins.
+**Status:** In progress — presentation baseline accepted; Workstream 03D active; human review gates open and parked  
+**Depends on:** Batch 02A accepted; Batch 00 regression and visual contracts available  
+**Primary gate:** The approved mass-authoritative model produces a deterministic, population-healthy U-shaped response whose low, near-optimal, and high outcomes remain visibly distinct in the retained desktop apparatus.
 
-> This batch must also follow [the hybrid jar-test design direction](docs/DESIGN_DIRECTION_JAR_TEST_HYBRID.md). The design brief governs product intent and presentation meaning; this batch remains authoritative for timing, scope, tests, evidence, and acceptance.
+This plan is governed by:
+
+- [the hybrid jar-test design direction](docs/DESIGN_DIRECTION_JAR_TEST_HYBRID.md) for product meaning and presentation;
+- [the modeling research amendment](docs/MODELING_RESEARCH_AMENDMENT.md) for final version 1 process behavior;
+- [the regression contract](docs/REGRESSION_CONTRACT.md) for numerical acceptance;
+- [the ghost replay design](docs/GHOST_REPLAY_DESIGN.md) only for the read-only samples a later app-owned recorder will consume.
+
+The original pre-research Batch 03 mechanics plan is preserved in Git history, not as parallel active guidance.
 
 ## Goal
 
-Prove the product’s central teaching claim using a deterministic desktop prototype: dose changes collision success, floc grows, larger floc settles faster, and too little or too much dose leaves worse residual turbidity.
+Replace the accepted Batch 02A statistical substrate with the smallest deterministic, mass-conserving representative-particle model that preserves the educational lesson and the proven presentation:
 
-This is the largest product-risk batch. Tuning is the work, not cleanup after the work.
-
-## Agent execution rules
-
-- Read `CLAUDE.md`, the current repository tree, `package.json`, and relevant tests before proposing edits.
-- Summarize the current architecture and any conflicts with this plan before writing code.
-- Use one implementation owner per worktree. A second agent may review, but must not edit concurrently.
-- Implement only this batch. Do not pull later-batch work forward because it appears convenient.
-- Preserve the `/sim`, `/render`, `/xr`, and `/app` ownership boundaries.
-- Keep simulation state outside React. Do not add React state updates to the hot simulation path.
-- Report uncertainty instead of inventing package APIs, especially for the pinned `@react-three/xr` version.
-- Produce evidence: changed files, commands run, test output, performance measurements where applicable, known limitations, and remaining hot-path allocations.
-- Do not mark the batch complete until every acceptance criterion has objective evidence.
-
-## Workstream 03A - Treatment mechanics
-
-### Work package 03A.1 - Dose model
-
-- Add `DoseIndex` input restricted to integers `0..10`.
-- Map detent index to normalized model dose through one explicit function.
-- Implement configured optimum and dose window.
-- Implement bell-shaped collision efficiency, starting with:
-
-```ts
-const error = (dose - optimumDose) / doseWindow
-const collisionEfficiency = Math.exp(-(error * error))
+```text
+relative dose
+    ↓
+effective sticking
+    ↓
+aggregate growth
+    ↓
+size-dependent settling
+    ↓
+relative optical-load removal
+    ↓
+underdose–optimum–overdose comparison
 ```
 
-- Route all merge probability through one deterministic PRNG sequence.
-- Expose collision efficiency for diagnostics and optional future charge vision.
-- Do not add literal electrostatic forces.
+This remains a phenomenological teaching model. It does not predict real dose, NTU, chemistry, or plant performance.
 
-Tests:
+## Current baseline
 
-- efficiency peaks at configured optimum;
-- symmetric behavior when configured symmetrically;
-- valid bounds from 0 to 1;
-- only integer detents enter trial state;
-- same seed and dose reproduce merge statistics.
+The retained presentation baseline includes:
 
-### Work package 03A.2 - Treatment phase motion presets
+- one independently runnable desktop proof;
+- one dominant hero observation tank;
+- one read-only band-driven gradient surface;
+- one table-mounted rack of six open rectangular canonical jars;
+- deterministic low, optimum, and high development presets;
+- clearing-front diagnostics from the authoritative band record;
+- one unlabeled proof route and randomized review packet;
+- accepted project-owner operator composition feedback and short Quest evidence.
 
-Add desktop-development phase controls for:
+[The Batch 03 progress packet](docs/BATCH_03_PROGRESS.md) records that evidence. It is comparison evidence for the pre-03D model, not acceptance of the final version 1 process behavior.
 
-- rapid mix: short, energetic circulation;
-- flocculation: slower, collision-promoting motion;
-- settling: reduced lateral motion plus gravity/settling;
-- ready/reset state.
+The external apparatus-recognition and blinded low/optimum/high reviews remain required but are parked until Workstream 03D produces replacement captures. Old outcome captures cannot accept changed process behavior.
 
-This is not yet the full Batch 6 state machine. It may be a simple development runner that executes phases in sequence for a trial.
+## Execution rules
 
-### Work package 03A.3 - Stokes-inspired settling
+- Preserve `/src/app`, `/src/sim`, `/src/render`, and `/src/xr` ownership boundaries.
+- Keep simulation state, stepping, optical-load calculation, and headless sweeps outside React and rendering.
+- Preserve fixed timestep, seeded randomness, reset-in-place storage, stable ordering, and the 500-particle target.
+- Make one bounded implementation change at a time and run the canonical sweep after every behavior change.
+- Tune one parameter group at a time; commit accepted configuration in source, not browser storage.
+- Keep the desktop proof runnable without a headset.
+- Preserve the hero tank as the only live process view and the six jars as static geometry in this batch.
+- Do not start Batch 04 or later simulation integration until this batch passes.
 
-Implement phenomenological settling based on the size-squared insight:
+## Workstream 03D - Approved version 1 model refinement
 
-- downward velocity scales with diameter squared and effective density difference;
-- maximum settling velocity cap;
-- mild drag;
-- effective density decreases as floc grows;
-- maximum diameter cap;
-- boundary handling at tank floor;
-- settled material no longer contributes like suspended fine mass.
+### Work package 03D.1 - Authoritative mass and derived diameter
 
-Tests:
+- Add fixed-capacity mass and diameter arrays to authoritative particle state.
+- Make mass authoritative and derive cached diameter from mass with default `Df = 2.0`.
+- Enforce finite positive mass and diameter consistency within a documented tolerance.
+- Keep simulation diameter, collision radius, and rendered radius separate.
+- Preserve deterministic seeded initialization and reset arrays in place.
+- Keep consumed slots inactive until reset; version 1 has no free list.
 
-- larger otherwise-equal particles settle faster;
-- cap prevents explosive motion;
-- effective density remains valid;
-- fine particles remain suspended long enough to preserve underdose haze;
-- no claim or unit implies calibrated plant prediction.
+Required tests:
 
-### Work package 03A.4 - Three comparison trial presets
+- deterministic initialization and reset;
+- mass/diameter invariants;
+- finite state and inactive-slot behavior;
+- no new simulation-to-UI dependency or hot-step allocation.
 
-Create development presets for:
+### Work package 03D.2 - Deterministic encounters and merges
 
-- underdose;
-- near-optimum dose;
-- overdose.
+- Precompute the eleven dose-efficiency values outside the hot loop.
+- Traverse particles and candidate pairs in stable order and prevent duplicate pair evaluation.
+- Select the surviving slot deterministically.
+- Conserve mass and use mass-weighted velocity for every successful merge.
+- Base collision distance on authoritative aggregate radii plus one normalized interaction multiplier.
+- Use the simplest allocation-free encounter traversal that meets the 500-particle budget.
+- Add spatial hashing only when profiling shows pair evaluation is a material cost and prove that it preserves results.
 
-Presets must use the same raw-water seed, temperature/default viscosity, durations, and measurement endpoint. Only dose differs.
+Required tests:
 
-## Workstream 03B - Turbidity authority and rendering
+- deterministic pair ordering and merge history or digest;
+- total mass conservation;
+- consumed-slot deactivation;
+- mass-weighted velocity;
+- identical supported inputs produce identical active state and endpoint bands.
 
-### Work package 03B.1 - Turbidity-band calculation
+### Work package 03D.3 - Fractal settling and growth bound
 
-- Divide the tank into 12-16 horizontal bands.
-- Calculate suspended concentration by band.
-- Use size weighting that emphasizes fine suspended particles and avoids counting settled large floc as equivalent haze.
-- Define a normalized internal turbidity range.
-- Record band history at a configurable low frequency suitable for later ghost replay.
-- Add a fixed sample-zone or weighted upper-column endpoint metric.
+- Derive effective excess density and capped settling from mass-derived diameter.
+- Use the default `Df = 2.0` simplified path, with settling approximately linear in diameter after constants are combined.
+- Require larger active aggregates generally to settle faster while remaining bounded.
+- Select and document a maximum mass or diameter through deterministic and visual evidence.
+- Treat the limit as merge prohibition, not fragmentation or a claimed breakage model.
+- Keep rendered porosity, irregularity, softness, and size exaggeration non-authoritative.
 
-Requirements:
+Required tests:
 
-- this band record is the only process authority;
-- no renderer, gauge, plot, or score may calculate its own turbidity;
-- visual transforms may differ from measurement transforms but consume the same record.
+- monotonic size/settling relationship before the cap;
+- growth-bound behavior;
+- no mass loss at settlement;
+- no invalid positions, velocities, masses, or diameters after at least 10,000 fixed steps.
 
-### Work package 03B.2 - Gradient turbidity quad
+### Work package 03D.4 - Relative optical-load authority
 
-- Add one shader-driven gradient quad behind the tank.
-- Upload one small band-value uniform array or tiny texture.
-- Interpolate between bands.
-- Provide configurable color and nonlinear alpha response.
-- Avoid 12-16 stacked transparent meshes.
-- Keep particles visible as events while the quad supplies cloudiness and the clearing front.
+- Replace the Batch 02A unresolved-fines blend with suspended projected simulation area, `sum(D^2)`, normalized to the trial's initial load.
+- Produce one reusable vertical band record and distinguish whole-tank, banded, and local sample-zone values.
+- Derive the clearing front, endpoint, water appearance, future instruments, plot, persistence, jars, and replay samples from that record only.
+- Migrate source and forward contract identifiers from legacy turbidity naming to relative optical load in one coordinated change.
+- Keep display transforms read-only and label the result as relative optical load, normalized haze, relative clarity, or treatment result—not NTU.
+- Expose authoritative samples for the later app-owned 10 Hz ghost recorder; do not record, serialize, or play ghosts in `/src/sim`.
 
-### Work package 03B.3 - Minimal desktop tank and camera
+Required tests:
 
-- Add only enough tank geometry to judge the phenomenon.
-- Use thin, open-topped walls and restrained transparency.
-- Provide a stable profile/quarter camera that makes the clearing front visible.
-- Keep the desktop proof independently runnable after later XR work.
+- finite normalized bands and deterministic reset;
+- aggregation-only whole-tank conservation with settling disabled at `Df = 2.0`;
+- expected pre-settling direction for at least one non-default fractal dimension;
+- local transport can change bands without changing the whole-tank authority;
+- renderer and app code contain no second process calculation.
 
-### Work package 03B.4 - Clearing-front diagnostics
+### Work package 03D.5 - Population health, dose sweep, and performance
 
-Derive diagnostic values from the band record:
+- Record active, suspended, and settled counts; mean and maximum mass; maximum diameter; largest-mass fraction; and visible suspended-floc count during settling.
+- Select the largest-mass fraction bound through deterministic and visual testing.
+- Run the canonical and nine-seed 11-dose suites from identical raw water.
+- Preserve one principal basin near Dose 5, worse low/high tails, order independence, and reset purity.
+- Compare curve shape, timing, population health, runtime, allocations, and visible behavior with the immutable Batch 02A baseline.
+- Benchmark the complete 500-particle production path before adding spatial hashing or increasing particle count.
+- Commit the accepted config and a new config hash without overwriting the Batch 02A evidence packet.
 
-- top clear fraction;
-- depth at which clarity crosses a threshold;
-- time to a configured upper-band clarity target;
-- endpoint upper-zone turbidity.
+Required evidence:
 
-Use these for testing and tuning, not as a second process model.
+- canonical and nine-seed tables;
+- side-by-side old/new curve summary;
+- population-health summary;
+- benchmark and allocation audit;
+- low/optimum/high desktop captures from identical framing;
+- desktop browser state and console inspection.
 
-### Work package 03B.5 - Hybrid apparatus blockout and recognition validation
+## Presentation retention and human validation
 
-- Block out one visually dominant hero observation tank and one recognizable six-jar rack.
-- Treat the rack as static canonical preset geometry for doses 0, 2, 4, 6, 8, and 10.
-- Preserve all eleven integer dose values through the primary control; do not imply the jars contain complete history.
-- Keep the mounted plot reserved as the complete visual memory for all doses in Batch 07.
-- Do not create six live simulations, moving jar particles, or jar-owned turbidity.
-- Capture one unlabeled screenshot once the composition reads clearly.
-- Show it to at least one water-treatment operator or educator and preferably one non-operator before instrumentation is finalized.
-- Ask what the apparatus represents and what they expect to do before explaining the project.
-- Record responses in docs/UX_VALIDATION.md.
-- Reconsider the composition if the jar-test connection, comparative-experiment purpose, hero-tank dominance, or one-live-simulation relationship is unclear.
+After the model passes scientific and numerical gates:
 
-The canonical jars may remain static unfilled geometry throughout this batch. Static write-on-completion summaries arrive in Batch 07.
+1. reconnect it to the existing read-only particle and optical-load presentation;
+2. verify the table, rectangular jars, hero-tank hierarchy, proof route, and clearing-front diagnostics remain intact;
+3. regenerate randomized low/optimum/high review captures;
+4. run the apparatus-recognition protocol with at least one external water-treatment operator or educator and preferably one non-operator;
+5. run the blinded outcome comparison with an operator-informed reviewer and a non-operator;
+6. record responses in [UX_VALIDATION.md](docs/UX_VALIDATION.md).
 
-## Workstream 03C - Tuning and permanent regression harness
-
-### Work package 03C.1 - Development-only tuning panel
-
-Expose at least:
-
-- optimum dose;
-- dose window;
-- collision-efficiency shape parameter if retained;
-- sticky radius;
-- mix intensity by phase;
-- phase duration for development trials;
-- settling multiplier;
-- maximum settling velocity;
-- maximum floc diameter;
-- density falloff with growth;
-- turbidity size weighting;
-- visual alpha/color response;
-- global time scale.
-
-Requirements:
-
-- dev flag only;
-- config can be exported/imported as JSON;
-- accepted settings are committed to a normal config file, not hidden in browser storage;
-- changing a setting cannot bypass integer dose detents.
-
-### Work package 03C.2 - Headless 11-dose sweep
-
-Build a renderer-free sweep that:
-
-1. resets identical raw water;
-2. runs all 11 doses through the same phase schedule;
-3. measures at the same endpoint;
-4. outputs endpoint turbidity and compact band-history metrics;
-5. reports minimum index, tail margins, basin depth, local reversals, execution time, and validity checks;
-6. writes a failure artifact when contract assertions fail.
-
-### Work package 03C.3 - Regression assertions
-
-Implement the contract defined in Batch 00. At minimum:
-
-- minimum near configured optimum;
-- both extremes worse by an approved margin;
-- one principal basin with limited noise;
-- deterministic repeatability within tolerance;
-- reset purity/no hysteresis;
-- all results finite and in range;
-- runtime below ceiling;
-- optimum clears upper bands earlier or more strongly than both extremes.
-
-Use a canonical seed for fast tests and a small seed corpus for extended validation.
-
-### Work package 03C.4 - Visual tuning protocol
-
-Use a repeatable comparison process:
-
-- capture low, optimum, and high runs with the same camera and duration;
-- review side by side;
-- have at least one operator-informed reviewer and one non-operator reviewer answer a short rubric;
-- record whether they can identify the best run without seeing the dose label or plot;
-- record which cues made the difference: floc size, snowfall, clearing front, or endpoint haze;
-- tune one parameter group at a time and preserve accepted configs.
-
-Do not allow two agents to tune constants independently.
-
-### Work package 03C.5 - Preserve the desktop artifact
-
-- Add a stable route or mode for the Phase 1 desktop proof.
-- Ensure it does not depend on a headset.
-- Keep the three comparison trial presets and sweep visualization accessible in development.
-- Document how to run and record it.
+If scientific behavior is correct but differences are hard to see, adjust render-size exaggeration, visual morphology, optical mapping, phase pacing, or camera composition before increasing model complexity or particle count.
 
 ## Stop conditions
 
-Stop and do not proceed to Batch 5 when any of the following is true:
+Stop before Batch 04 when any of the following is true:
 
-- the numeric curve passes but the optimum does not visibly look better;
-- underdose or overdose becomes visually better through a separate renderer-only trick not reflected in the band authority;
-- deterministic reset is broken;
-- tuning requires more particles rather than a better turbidity layer;
-- the model begins claiming calibrated NTU or real alum dose;
-- performance problems are hidden by testing only on a powerful desktop.
+- mass is not conserved or cached diameter can drift from mass;
+- deterministic reset, stable ordering, or the permanent dose sweep fails;
+- one aggregate collapses the visible population;
+- the numerical curve passes but the optimum is not visibly better;
+- a renderer-only effect creates or changes the treatment outcome;
+- performance problems are hidden by desktop-only testing;
+- terminology implies calibrated NTU, real coagulant dose, mechanistic charge reversal, or plant prediction.
 
 ## Explicit non-goals
 
-- No XR controls.
-- No final treatment state machine.
-- No physical gauge or plot board.
-- No localStorage.
-- No plant environment.
-- No temperature control, breakup, or short-circuiting.
-- No live jar simulations or canonical jar summaries; the six-jar rack is recognition blockout geometry only.
-- No particle-count increase above 500 without a documented reason.
-
-## Required tests and evidence
-
-- unit tests for dose efficiency and settling relationships;
-- deterministic trial test;
-- 11-dose sweep fast suite;
-- extended seed-corpus sweep;
-- reset/hysteresis test;
-- band-authority tests;
-- shader or rendering smoke test;
-- exported accepted config;
-- curve artifact committed or attached to the acceptance packet;
-- three comparable video or screenshot sequences;
-- unlabeled hybrid-apparatus screenshot and recognition responses in docs/UX_VALIDATION.md;
-- desktop performance metrics and remaining allocations.
-
-## Review-agent checklist
-
-- Is the U-shape caused by the simulation rather than a plot-only transformation?
-- Do all turbidity consumers derive from one band record?
-- Does large floc settle faster for the intended reason?
-- Are visual cues plausible and legible rather than theatrically misleading?
-- Is the desktop proof still independent of XR?
-- Did any future chemistry or instrument feature slip in?
-- Can the full sweep run headlessly after every simulation change?
+- No XR controls or final treatment-cycle state machine.
+- No physical gauge, plot, persistence, or canonical jar summaries.
+- No treatment-ghost recorder, library, playback clock, or replay renderer.
+- No live jar simulations or multiple live tanks.
+- No free list, fragmentation, regrowth, hindered settling, population-balance authority, CFD, or universal engine.
+- No spatial hash without a recorded bottleneck.
+- No particle-count increase above 500 without measured need and Quest evidence.
+- No cross-device lockstep, replay by recomputation, WebAssembly rewrite, or fixed-point math.
 
 ## Acceptance criteria
 
-- The U-shaped sweep passes the approved numerical contract.
-- Same seed and dose reproduce comparable results.
-- Low, optimum, and high runs begin from identical raw water.
-- An uninformed observer can identify the optimum run without reading an explanation.
-- A water-treatment operator or educator recognizes the jar-test connection from an unlabeled screenshot, and a non-operator is sought to validate comparative-experiment comprehension.
-- The hero tank remains visually dominant and viewers do not mistake the jars for six simultaneous simulations or complete history.
-- Clear water visibly progresses downward in the optimum case.
-- The desktop proof remains runnable independently.
-- One turbidity-band record drives all current outputs.
-- No unresolved model or rendering issue would make XR integration ambiguous.
+- The mass-authoritative model passes every Workstream 03D invariant and replacement gate in `docs/REGRESSION_CONTRACT.md`.
+- Low, optimum, and high trials begin from identical raw water and remain numerically and visibly distinct.
+- One relative optical-load band record drives all process outputs.
+- The accepted 500-particle path meets the documented runtime and allocation budget.
+- The desktop proof remains independently runnable and the Quest apparatus retains its accepted placement and hierarchy.
+- External recognition and blinded outcome responses are recorded after replacement captures are generated.
+- No unresolved model, presentation, terminology, or performance issue would make Batch 04 or later XR integration ambiguous.
 
-## Suggested tag and commit
+## Suggested commit and closing packet
 
-- Commit: `feat(sim): prove desktop coagulation dose response`
+- Commit: `feat(sim): implement mass-authoritative phenomenon proof`
 - Accepted tag: `desktop-phenomenon-proven`
 
-## Required closing acceptance packet
-
-The implementation agent must provide:
-
-1. What changed.
-2. What intentionally did not change.
-3. Files added, removed, and modified.
-4. Commands run and exact results.
-5. Dose-sweep comparison when simulation behavior changed.
-6. Desktop or Quest metrics when rendering or XR behavior changed.
-7. Known defects, compromises, and deferred decisions.
-8. Remaining allocations or expensive operations in per-frame paths.
-9. Documentation updated.
-10. Proposed commit message and whether the batch gate passed.
+The closing packet records changed files, commands and results, old/new sweep evidence, population metrics, desktop and Quest performance when applicable, allocations, known limitations, documentation changes, and whether every human and technical gate passed.

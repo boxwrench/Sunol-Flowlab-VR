@@ -1,8 +1,7 @@
 # Batch 01 Implementation Plan: Foundation and WebXR Preflight
 
 **Status:** In progress — Track 1A accepted; Track 1B local device gate accepted, hosted gate open
-**Branch:** `batch-01-foundation`  
-**Depends on:** Batch 00 accepted  
+**Depends on:** Batch 00 contracts substantially complete; hosted-route closure remains part of Track 1B  
 **May run in parallel with:** Track 1A and Track 1B only under isolated ownership  
 **Primary gate:** The repository can render 500 deterministic particles with permanent metrics, and the actual Quest/WebXR toolchain is proven independently.
 
@@ -83,7 +82,7 @@ The first motion may be simple bounded drift. Do not implement coagulation, sett
 - Keep materials simple and opaque in this batch.
 - Add a clear method for inactive slots to be omitted without recreating meshes.
 
-**Non-goal:** No glass tank, turbidity quad, post-processing, or physical instrumentation.
+**Non-goal:** No glass tank, optical-load gradient, post-processing, or physical instrumentation.
 
 ### Work package 01A.5 - Permanent development telemetry
 
@@ -184,7 +183,7 @@ Deploy the minimal build to the intended static host or a disposable equivalent 
 - No collision or aggregation.
 - No dose model.
 - No XR grabbing or constrained controls.
-- No glass, transparency, turbidity, plot, or plant environment.
+- No glass, transparency, optical-load presentation, plot, or plant environment.
 - No particle-count increase above 500.
 
 ## Parallelization rules

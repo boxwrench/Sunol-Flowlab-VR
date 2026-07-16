@@ -1,12 +1,13 @@
 # Batch 05 Implementation Plan: Simulation and XR Integration
 
 **Status:** Not started — predecessor gates remain open
-**Branch:** `batch-05-xr-integration`  
 **Depends on:** Batch 03 and Batch 04 both accepted  
 **May run in parallel with:** Review, parity-test preparation, trace analysis  
 **Primary gate:** The proven desktop simulation runs inside the proven XR apparatus with the same qualitative behavior, deterministic results, and acceptable Quest performance.
 
 > This batch must also follow [the hybrid jar-test design direction](docs/DESIGN_DIRECTION_JAR_TEST_HYBRID.md). The design brief governs product intent and presentation meaning; this batch remains authoritative for timing, scope, tests, evidence, and acceptance.
+
+> Integrate only the accepted Workstream 03D model governed by [the modeling research amendment](docs/MODELING_RESEARCH_AMENDMENT.md). Its dimensionless relative optical-load record is the sole process authority and is never calibrated NTU.
 
 ## Goal
 
@@ -62,9 +63,9 @@ This batch may use a temporary limited lifecycle until Batch 06 supplies the ful
 - Align simulation coordinates with tank geometry through one documented transform.
 - Avoid applying world transforms independently to each particle.
 - Place the existing `InstancedMesh` renderer in the XR scene.
-- Add the existing gradient turbidity quad.
+- Add the existing gradient optical-load surface.
 - Preserve the desktop proof route unchanged.
-- Preserve the six-jar rack as static geometry without clocks, process state, or duplicated turbidity.
+- Preserve the six-jar rack as static geometry without clocks, process state, or duplicated optical load.
 - Ensure tank dimensions and particle scale read at arm’s length.
 
 ## Work package 05.4 - Render synchronization
@@ -101,7 +102,7 @@ Simplify visual layers before considering architectural changes.
 For canonical seeds and doses:
 
 - run the same fixed simulation steps headlessly and in the integrated app;
-- compare endpoint turbidity and band summaries;
+- compare endpoint relative optical load and band summaries;
 - verify XR frame rate does not change simulation timestep or measurement endpoint;
 - confirm desktop and XR render paths consume the same state;
 - verify no headset-specific chemistry constants exist.
@@ -138,7 +139,7 @@ Stop and isolate the cause when:
 
 - the desktop sweep changes during integration;
 - XR frame timing changes the endpoint result;
-- a second turbidity calculation appears;
+- a second optical-load calculation appears;
 - performance fails because of unnecessary transparent layers;
 - an interaction bug prompts a simulation rewrite;
 - a simulation issue prompts changing the XR control API.
@@ -168,7 +169,7 @@ Stop and isolate the cause when:
 - Is there exactly one simulation implementation for desktop and XR?
 - Are world/tank transforms applied efficiently?
 - Are instance arrays being copied or allocated unnecessarily?
-- Did any new turbidity computation appear in rendering or app code?
+- Did any new optical-load computation appear in rendering or app code?
 - Is performance loss explained by measured components?
 - Were visuals simplified before proposing deeper rewrites?
 
@@ -177,7 +178,7 @@ Stop and isolate the cause when:
 - Same seed, dose, and config produce the same simulation outputs in desktop and XR paths.
 - Canonical low/optimum/high outcomes remain qualitatively correct in the headset.
 - Dose control and start input remain reliable.
-- One turbidity authority remains enforced.
+- One relative optical-load authority remains enforced.
 - Exactly one authoritative live simulation drives the hero tank; canonical jars remain non-simulated preset context.
 - Quest performance at 500 particles is acceptable with sufficient headroom for instrumentation.
 - Desktop proof remains independently runnable.

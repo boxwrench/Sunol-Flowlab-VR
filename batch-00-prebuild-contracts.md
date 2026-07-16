@@ -1,7 +1,6 @@
 # Batch 00 Implementation Plan: Pre-build Contracts
 
 **Status:** Substantially complete — local Quest route confirmed; hosted HTTPS remains open
-**Branch:** `batch-00-contracts`  
 **Depends on:** Project brief only  
 **May run in parallel with:** Visual reference gathering, public-data review, package verification  
 **Primary gate:** No serious feature implementation begins until the versioned stack, architecture boundaries, regression contract, and public-data boundary are recorded.
@@ -92,7 +91,7 @@ Requirements:
 Create or update `docs/DECISIONS.md` with a short decision record covering:
 
 ```text
-/src/sim      deterministic simulation, seeded RNG, spatial hash, turbidity, headless sweeps
+/src/sim      deterministic simulation, seeded RNG, relative optical load, headless sweeps
 /src/render   Three.js/R3F rendering that consumes simulation output
 /src/xr       XR store, controller input, physical interactions, discrete commands
 /src/app      lifecycle, mode selection, orchestration, spectator entry
@@ -106,7 +105,7 @@ Record these invariants:
 - `/app` coordinates lifecycle but does not own per-particle state.
 - No `setState` in the simulation loop.
 - No allocations in hot paths without an explicit documented reason.
-- One turbidity-band record is the authority for water appearance, clearing front, gauge, score, plot, and ghost replay.
+- One relative optical-load band record is the authority for water appearance, clearing front, gauge, score, plot, persistence, jars, and ghost replay.
 
 **Deliverable:** Architecture decision record with allowed and prohibited dependency directions.
 
@@ -127,7 +126,7 @@ type AppCommand =
 Also define:
 
 - trial result shape;
-- turbidity-band array shape and normalization range;
+- relative optical-load band shape and normalization range;
 - deterministic reset inputs;
 - expected performance metric record;
 - ownership of persistence schema versions.
@@ -146,7 +145,7 @@ Write a property-based contract for the permanent 11-dose sweep. Initial recomme
 - Both extreme doses materially worse than the minimum.
 - One principal basin; small shoulder noise allowed within a documented tolerance.
 - Same seed, dose, config, and fixed timestep reproduce the same result within stated numeric tolerance.
-- No `NaN`, negative, or out-of-range turbidity values.
+- No `NaN`, negative, or out-of-range optical-load values.
 - Sweep completes below a generous runtime ceiling.
 - Reset purity test proves no history dependence.
 
@@ -229,7 +228,7 @@ Run or verify:
 - Does any contract imply predictive chemistry or a real plant simulator?
 - Are exact XR-sensitive versions pinned?
 - Can Batch 3 and Batch 4 work against the same dose command contract without touching each other’s modules?
-- Is one turbidity source of truth explicit?
+- Is one relative optical-load source of truth explicit?
 - Are public-data restrictions clear enough for external AI use?
 - Are regression rules based on properties rather than one fragile floating-point array?
 - Has any later-batch feature slipped into the repository under the guise of setup?

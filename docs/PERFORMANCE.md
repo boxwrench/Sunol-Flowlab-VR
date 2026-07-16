@@ -160,7 +160,7 @@ The benchmark schema now covers the full accepted Dose 5 phenomenon path rather 
 
 The canonical 11-dose sweep completed in 214.22 ms during focused validation, and the nine-seed acceptance corpus completed in 1.78 seconds. Both are far below the 30-second canonical sweep ceiling on the development machine.
 
-The phenomenon step allocates no arrays, objects, closures, PRNGs, or rendering values. Its nine particle arrays and three turbidity value/scratch arrays are fixed and reused. Completed result snapshots, failure JSON, Markdown tables, and sorted benchmark samples allocate outside the hot step. No evidence justifies Batch 02B spatial hashing, pooling, collision, mass/density, or merge-animation work. Full evidence is in [the Batch 02A acceptance packet](BATCH_02A_ACCEPTANCE.md).
+The phenomenon step allocates no arrays, objects, closures, PRNGs, or rendering values. Its nine particle arrays and three turbidity value/scratch arrays are fixed and reused. Completed result snapshots, failure JSON, Markdown tables, and sorted benchmark samples allocate outside the hot step. At Batch 02A acceptance, no performance evidence justified spatial hashing, pooling, collision, mass/density, or merge-animation work. The later modeling amendment authorizes the smallest mass-authoritative merge/density refinement for model fidelity, not as a performance optimization; spatial hashing, pooling, and render metadata remain evidence-gated. Full evidence is in [the Batch 02A acceptance packet](BATCH_02A_ACCEPTANCE.md).
 
 ## 2026-07-15 - Batch 03 desktop apparatus observation
 

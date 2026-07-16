@@ -1,12 +1,15 @@
 # Batch 06 Implementation Plan: Complete Treatment-Cycle State Machine
 
 **Status:** Not started — predecessor gates remain open
-**Branch:** `batch-06-treatment-cycle`  
 **Depends on:** Batch 05 accepted  
 **May run in parallel with:** State-test authoring, instrument concepts, pacing review  
 **Primary gate:** One complete trial has a clear beginning, treatment sequence, fixed measurement, recorded result, and deterministic refill/reset.
 
 > This batch must also follow [the hybrid jar-test design direction](docs/DESIGN_DIRECTION_JAR_TEST_HYBRID.md). The design brief governs product intent and presentation meaning; this batch remains authoritative for timing, scope, tests, evidence, and acceptance.
+
+> Trial results capture the one relative optical-load authority defined by [the modeling research amendment](docs/MODELING_RESEARCH_AMENDMENT.md). The state machine must not create a second process calculation or relabel the signal as calibrated turbidity.
+
+> This batch exposes the immutable result and phase timeline required by [the ghost replay design](docs/GHOST_REPLAY_DESIGN.md), but it does not record, persist, or play ghosts.
 
 ## Goal
 
@@ -122,7 +125,7 @@ The hero observation tank remains the single live process presentation throughou
 
 Implement the event sequence:
 
-1. capture the authoritative turbidity-band record at the fixed endpoint;
+1. capture the authoritative relative optical-load band record at the fixed endpoint;
 2. flash the nephelometer emitter through the sample zone;
 3. glow the side detector based on the same authoritative concentration data;
 4. animate a provisional gauge/result output hook;
@@ -131,17 +134,21 @@ Implement the event sequence:
 
 The final gauge and plot geometry arrive in Batch 7. This batch provides the event, data, and minimal placeholders.
 
-The completed-result event must also be consumable by Batch 07 static canonical jar summaries. This batch does not update jars directly, and odd-dose results remain fully valid even though they never map to a canonical jar.
+The completed-result event must also be consumable by Batch 07 static canonical jar summaries and its app-owned treatment-ghost recorder. This batch does not update jars or create ghosts directly, and odd-dose results remain fully valid even though they never map to a canonical jar.
 
 Suggested result shape:
 
 ```ts
 interface TrialResult {
   schemaVersion: 1
+  id: string
   dose: DoseIndex
   seed: number
-  endpointTurbidity: number
+  rawWaterConfigId: string
+  opticalProxyVersion: string
+  endpointOpticalLoad: number
   bandSnapshot: readonly number[]
+  phaseTimeline: TreatmentPhaseTimeline
   completedAtSimulationTime: number
   configHash: string
 }
@@ -188,6 +195,7 @@ Do not finalize visual tuning here; capture adjustments for Batch 8.
 
 - No final gauge face or plot board.
 - No localStorage.
+- No ghost recording, persistence, playback clock, or replay rendering.
 - No tear-off sheet.
 - No desktop scripted three-dose sequence.
 - No environment art or final audio mix.
