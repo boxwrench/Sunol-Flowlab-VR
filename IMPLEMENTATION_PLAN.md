@@ -63,10 +63,12 @@ Batch 01A has an app-owned deterministic runtime, read-only rendering consumptio
 Batch 02A is accepted in [its closing packet](docs/BATCH_02A_ACCEPTANCE.md): the canonical minimum is Dose 5, both tail margins exceed the regression threshold, the extended nine-seed suite passes, and the complete 500-particle phenomenon path remains well inside the desktop benchmark ceiling. That statistical substrate remains the immutable comparison baseline. The modeling amendment supplied the product-model justification for mass-authoritative deterministic merging and derived density in Workstream 03D. The replacement now has [technical acceptance](docs/BATCH_03_03D_TECHNICAL_ACCEPTANCE.md). Version 1 still has no free list; spatial hashing and simulation merge-event metadata remain deferred because measurements do not justify them. Short render-local transition smoothing is accepted presentation behavior and owns no process state.
 
 Batch 03 now has an independently runnable desktop proof, one band-driven
-optical-load presentation on shared rear and middle slices, a dominant hero tank, six static canonical jar
-blockouts, deterministic low/optimum/high presets, clearing-front diagnostics,
-an unlabeled proof mode, and a technically accepted mass-authoritative model.
-Automated, visual, sweep, population, and benchmark evidence is recorded in
+optical-load presentation on shared rear and middle slices, a dominant hero
+tank, six static canonical jar blockouts, deterministic low/optimum/high
+presets, deterministic development Start/Stop/Reset review controls,
+clearing-front diagnostics, an unlabeled proof mode, and a technically accepted
+mass-authoritative model. Automated, visual, sweep, population, and benchmark
+evidence is recorded in
 [the Batch 03 progress packet](docs/BATCH_03_PROGRESS.md). The next active work
 is external blind recognition and blinded low/optimum/high review. The short
 replacement-model Quest visibility and rolling-performance check has passed.

@@ -6,8 +6,7 @@ Updated: 2026-07-15
 
 - Repository: <https://github.com/boxwrench/Sunol-Flowlab-VR>
 - Branch: main
-- Latest published technical increment: 7f3ab9c
-  (docs: accept Workstream 03D technical gate)
+- Published branch: main; use `git log -1 --oneline` for the current increment
 - Current milestone: Batch 03 Workstream 03D technical acceptance complete;
   replacement-model Quest check passed; external human review remains open
 - Active plan authority: [IMPLEMENTATION_PLAN.md](IMPLEMENTATION_PLAN.md) and
@@ -45,6 +44,10 @@ Use only the active indexed Markdown plan.
 - Authoritative diameter ratios are preserved in rendered floc scale. Short
   render-local position, scale, and consumed-particle exit smoothing improves
   merge readability without adding simulation merge-event state.
+- Development review controls provide Start, Stop, and Reset without moving
+  lifecycle ownership out of SimulationRuntime. Stop preserves the current
+  state; Reset restores the selected dose and canonical seed at time zero and
+  remains stopped; Start resumes the current state. Proof mode hides them.
 - One table-mounted six-jar bench with open rectangular vessels. The jars are
   static canonical presets for doses 0, 2, 4, 6, 8, and 10; they are not six
   live simulations.
@@ -77,6 +80,8 @@ Use only the active indexed Markdown plan.
   visible suspended aggregates, 1.6% largest-mass fraction, and zero mass error.
 - The bundled browser client completed the same optimum state with a readable
   clearing front and no console errors.
+- Four browser interaction tests pass, including the full Stop, deterministic
+  Reset, and Start sequence plus proof-mode control exclusion.
 - The tracked apparatus and three randomized comparison PNGs were regenerated
   after 03D and visually inspected. Capture-time browser errors were zero. The
   answer key remains ignored under test-results.
@@ -141,7 +146,9 @@ closing the remaining Batch 03 gates.
 ## Recommended next session
 
 1. Conduct the blinded apparatus and outcome reviews from the regenerated
-   packet and record exact or carefully paraphrased responses.
+   packet and record exact or carefully paraphrased responses. For a live
+   follow-up after the blind answers are recorded, the desktop review controls
+   may pause, reset, and resume the deterministic trial.
 2. If reviewers identify a comprehension problem, adjust the smallest
    presentation parameter before changing simulation complexity or particle
    count, then regenerate the packet.

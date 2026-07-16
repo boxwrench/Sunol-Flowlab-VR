@@ -8,12 +8,15 @@ describe('SimulationRuntime', () => {
     const runtime = new SimulationRuntime(4, 123, 0.01, 5)
     const initialX = Array.from(runtime.state.positionX)
 
+    expect(runtime.isRunning).toBe(false)
     expect(runtime.step(0.02)).toBe(0)
     runtime.start()
+    expect(runtime.isRunning).toBe(true)
     expect(runtime.step(0.02)).toBe(2)
     expect(Array.from(runtime.state.positionX)).not.toEqual(initialX)
 
     runtime.pause()
+    expect(runtime.isRunning).toBe(false)
     expect(runtime.step(0.02)).toBe(0)
   })
 
@@ -26,6 +29,7 @@ describe('SimulationRuntime', () => {
     runtime.stepHeadless(10)
     runtime.reset(456)
 
+    expect(runtime.isRunning).toBe(false)
     expect(runtime.state.positionX).toBe(positionX)
     expect(Array.from(runtime.state.positionX)).toEqual(initialX)
     expect(runtime.step(1)).toBe(0)

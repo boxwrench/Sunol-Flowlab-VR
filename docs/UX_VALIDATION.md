@@ -19,6 +19,11 @@ dose controls, metrics, title, plot, or labels. Ask:
 1. “What do you think this apparatus represents?”
 2. “What would you expect to do here?”
 
+Record the blind answers before exposing any live controls. A later live
+follow-up may use the development Start, Stop, and Reset controls to inspect
+growth and settling. Stop preserves the current deterministic state; Reset
+returns the selected dose and canonical seed to time zero and remains stopped.
+
 Seek at least one water-treatment operator or educator. Preferably also seek one
 person without water-treatment experience. Record their role, date, exact or
 carefully paraphrased responses, and the tested commit.

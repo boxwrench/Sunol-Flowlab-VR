@@ -11,6 +11,7 @@ test('desktop foundation loads with explicit VR entry and a render surface', asy
   await expect(page.getByRole('button', { name: 'Enter VR' })).toBeVisible()
   await expect(page.getByLabel('Development performance metrics')).toBeVisible()
   await expect(page.getByLabel('Comparison presets')).toBeVisible()
+  await expect(page.getByLabel('Simulation playback')).toBeVisible()
   await expect(page.locator('canvas')).toBeVisible()
   const xrPreflight = await page.evaluate(() =>
     JSON.parse(window.render_xr_preflight_to_text?.() ?? '{}'),
@@ -23,6 +24,36 @@ test('desktop foundation loads with explicit VR entry and a render surface', asy
     rightSelectCount: 0,
     targetSelectCount: 0,
   })
+})
+
+test('review controls start, stop, and deterministically reset the trial', async ({
+  page,
+}) => {
+  await page.goto('/')
+
+  const state = () =>
+    page.evaluate(() => JSON.parse(window.render_game_to_text?.() ?? '{}'))
+
+  await page.getByRole('button', { name: 'Stop' }).click()
+  const stopped = await state()
+  expect(stopped.running).toBe(false)
+  await page.waitForTimeout(120)
+  expect((await state()).simulationTimeSeconds).toBe(
+    stopped.simulationTimeSeconds,
+  )
+
+  await page.getByRole('button', { name: 'Reset' }).click()
+  const reset = await state()
+  expect(reset.running).toBe(false)
+  expect(reset.phase).toBe('rapidMix')
+  expect(reset.simulationTimeSeconds).toBe(0)
+  expect(reset.activeParticles).toBe(500)
+
+  await page.getByRole('button', { name: 'Start' }).click()
+  await page.waitForTimeout(120)
+  const resumed = await state()
+  expect(resumed.running).toBe(true)
+  expect(resumed.simulationTimeSeconds).toBeGreaterThan(0)
 })
 
 test('comparison presets deterministically expose the U-shaped endpoint', async ({
@@ -59,6 +90,7 @@ test('proof mode leaves an unlabeled canvas for recognition review', async ({
   await expect(page.locator('canvas')).toBeVisible()
   await expect(page.getByRole('heading')).toHaveCount(0)
   await expect(page.getByLabel('Comparison presets')).toHaveCount(0)
+  await expect(page.getByLabel('Simulation playback')).toHaveCount(0)
   await expect(page.getByLabel('Development performance metrics')).toHaveCount(
     0,
   )

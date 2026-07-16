@@ -83,10 +83,21 @@ button {
   text-align: center;
   font-size: 0.78rem;
 }
-.comparison-controls div {
+.preset-buttons,
+.simulation-controls {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 0.45rem;
+}
+.simulation-review-row {
+  display: grid;
+  grid-template-columns: minmax(6rem, 0.7fr) 2fr;
+  align-items: center;
+  gap: 0.45rem;
+}
+.simulation-review-row > span {
+  color: #dcebea;
+  text-align: left;
 }
 .comparison-controls button {
   padding: 0.48rem 0.6rem;
@@ -100,6 +111,10 @@ button {
   border-color: #8bd2ca;
   color: #ffffff;
   background: #1a625f;
+}
+.comparison-controls button:disabled {
+  opacity: 0.45;
+  cursor: default;
 }
 .metrics {
   position: absolute;

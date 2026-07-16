@@ -39,6 +39,7 @@ test('binding Batch 00 contracts are present and mutually consistent', async () 
     /type DoseIndex = 0 \| 1 \| 2 \| 3 \| 4 \| 5 \| 6 \| 7 \| 8 \| 9 \| 10/,
   )
   assert.match(contracts, /SET_DOSE/)
+  assert.match(contracts, /PAUSE_TRIAL/)
   assert.match(regression, /0x5f3759df/)
   assert.match(regression, /detents 0 and 10/)
   assert.match(visuals, /Strong top-down clearing/)

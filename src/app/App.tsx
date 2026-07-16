@@ -62,6 +62,7 @@ export function App() {
   const reviewCaptureMode = urlParameters.get('capture') === 'review'
   const [entryError, setEntryError] = useState<string | null>(null)
   const [selectedDose, setSelectedDose] = useState<DoseDetent>(5)
+  const [trialRunning, setTrialRunning] = useState(true)
   const xrPreflightRef = useRef<XrPreflightSnapshot>({
     sessionActive: false,
     leftControllerDetected: false,
@@ -111,6 +112,7 @@ export function App() {
       return JSON.stringify({
         coordinateSystem: 'meters; origin tank center-bottom; +Y upward',
         mode: 'phenomenon-trial',
+        running: runtime.isRunning,
         dose: runtime.dose,
         phase: runtime.phase,
         simulationTimeSeconds: runtime.simulationTimeSeconds,
@@ -135,6 +137,7 @@ export function App() {
       if (!Number.isFinite(milliseconds) || milliseconds < 0)
         throw new RangeError('Advance time must be finite and non-negative')
       runtime.pause()
+      setTrialRunning(false)
       runtime.stepHeadless(Math.round(milliseconds / (1000 / 60)))
     }
     window.render_xr_preflight_to_text = () =>
@@ -149,7 +152,23 @@ export function App() {
   function runComparisonPreset(dose: DoseDetent): void {
     runtime.reset(undefined, dose)
     runtime.start()
+    setTrialRunning(true)
     setSelectedDose(dose)
+  }
+
+  function startTrial(): void {
+    runtime.start()
+    setTrialRunning(true)
+  }
+
+  function stopTrial(): void {
+    runtime.pause()
+    setTrialRunning(false)
+  }
+
+  function resetTrial(): void {
+    runtime.reset(undefined, selectedDose)
+    setTrialRunning(false)
   }
 
   async function enterVr() {
@@ -185,7 +204,7 @@ export function App() {
       {import.meta.env.DEV && !presentationMode ? (
         <nav className="comparison-controls" aria-label="Comparison presets">
           <span>Same raw water · relative dose</span>
-          <div>
+          <div className={'preset-buttons'}>
             {COMPARISON_PRESETS.map(({ dose, label }) => (
               <button
                 key={dose}
@@ -197,6 +216,36 @@ export function App() {
                 {label}
               </button>
             ))}
+          </div>
+          <div className={'simulation-review-row'}>
+            <span role={'status'} aria-live={'polite'}>
+              {trialRunning ? 'Trial running' : 'Trial stopped'}
+            </span>
+            <div
+              className={'simulation-controls'}
+              role={'group'}
+              aria-label={'Simulation playback'}
+            >
+              <button
+                id={'trial-start'}
+                type={'button'}
+                disabled={trialRunning}
+                onClick={startTrial}
+              >
+                Start
+              </button>
+              <button
+                id={'trial-stop'}
+                type={'button'}
+                disabled={!trialRunning}
+                onClick={stopTrial}
+              >
+                Stop
+              </button>
+              <button id={'trial-reset'} type={'button'} onClick={resetTrial}>
+                Reset
+              </button>
+            </div>
           </div>
         </nav>
       ) : null}

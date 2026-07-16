@@ -64,6 +64,10 @@ export class SimulationRuntime {
     return this.workspace.dose
   }
 
+  get isRunning(): boolean {
+    return this.clock.snapshot().running
+  }
+
   get phase(): TreatmentPhase {
     return treatmentPhaseAtStep(
       this.workspace.stepIndex,

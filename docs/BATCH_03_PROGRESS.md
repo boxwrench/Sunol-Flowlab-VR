@@ -16,6 +16,9 @@
   receive no simulation, result, optical-load, or clock input.
 - Development comparison resets for doses 0, 5, and 10 from the same seed,
   phase schedule, camera, and raw-water state.
+- Development Start, Stop, and Reset review controls. Stop preserves current
+  state, Reset restores the selected canonical trial at time zero and remains
+  stopped, and Start resumes; proof mode hides all review controls.
 - An unlabeled proof route for apparatus-recognition review.
 - Clearing-front diagnostics derived from the same authoritative band record:
   top clear fraction, front depth, upper-zone optical load, and clarity time.
@@ -68,6 +71,8 @@ scope.
   - zero mass error.
 - The bundled browser client completed the optimum trial with the same state,
   a readable settled bed and clearing front, and no console errors.
+- Four browser interaction tests pass, including the complete Stop, Reset, and
+  Start chain and proof-mode control exclusion.
 - The randomized apparatus and low/optimum/high packet was regenerated at
   1280 x 720 and visually inspected with no capture-time browser errors.
 

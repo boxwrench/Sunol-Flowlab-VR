@@ -12,6 +12,7 @@ export type CanonicalDosePreset = 0 | 2 | 4 | 6 | 8 | 10
 export type AppCommand =
   | { type: 'SET_DOSE'; dose: DoseIndex }
   | { type: 'START_TRIAL' }
+  | { type: 'PAUSE_TRIAL' }
   | { type: 'RESET_TRIAL' }
   | { type: 'CLEAR_EXPERIMENT_LOG' }
 
