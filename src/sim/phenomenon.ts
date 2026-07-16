@@ -155,7 +155,7 @@ export function runPhenomenonTrial(
   let sizeTotal = 0
   for (let index = 0; index < workspace.particles.activeCount; index += 1) {
     settledParticles += workspace.particles.settled[index]
-    sizeTotal += workspace.particles.normalizedSize[index]
+    sizeTotal += workspace.particles.diameter[index]
   }
   return {
     dose,

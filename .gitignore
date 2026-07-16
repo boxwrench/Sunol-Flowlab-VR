@@ -3,6 +3,7 @@ dist/
 coverage/
 playwright-report/
 test-results/
+output/web-game/
 vite-dev.log
 vite-dev.error.log
 *.tsbuildinfo

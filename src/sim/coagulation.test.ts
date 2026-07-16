@@ -6,7 +6,12 @@ import {
   totalTreatmentSteps,
   treatmentPhaseAtStep,
 } from './coagulation'
-import { createParticleState, resetParticleState } from './particleState'
+import {
+  createParticleState,
+  massFromDiameter,
+  resetParticleState,
+  setParticleMass,
+} from './particleState'
 
 describe('simplified aggregation and settling', () => {
   it('uses integer boundaries for the accepted 43-second phase schedule', () => {
@@ -34,9 +39,9 @@ describe('simplified aggregation and settling', () => {
       stepCoagulation(strong, 'flocculation', 1 / 60, 1)
     }
 
-    expect(strong.normalizedSize[0]).toBeGreaterThan(weak.normalizedSize[0])
-    expect(strong.normalizedSize[0]).toBeLessThanOrEqual(1)
-    expect(weak.normalizedSize[0]).toBeGreaterThan(0)
+    expect(strong.diameter[0]).toBeGreaterThan(weak.diameter[0])
+    expect(strong.diameter[0]).toBeLessThanOrEqual(1)
+    expect(weak.diameter[0]).toBeGreaterThan(0)
   })
 
   it('settles larger floc faster and makes settlement irreversible', () => {
@@ -46,8 +51,12 @@ describe('simplified aggregation and settling', () => {
     resetParticleState(large, 4)
     small.positionY[0] = 0.5
     large.positionY[0] = 0.5
-    small.normalizedSize[0] = DEFAULT_COAGULATION_CONFIG.settlingThreshold
-    large.normalizedSize[0] = 1
+    setParticleMass(
+      small,
+      0,
+      massFromDiameter(DEFAULT_COAGULATION_CONFIG.settlingThreshold),
+    )
+    setParticleMass(large, 0, massFromDiameter(1))
 
     stepCoagulation(small, 'settling', 1, 0.4)
     stepCoagulation(large, 'settling', 1, 1)

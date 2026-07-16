@@ -6,6 +6,7 @@ import {
   resetPhenomenonWorkspace,
   stepPhenomenonWorkspace,
 } from './phenomenon'
+import { particleDiameterIsConsistent } from './particleState'
 import { endpointTurbidity } from './turbidity'
 
 export interface HeadlessBenchmarkOptions {
@@ -27,7 +28,7 @@ export interface HeadlessBenchmarkReport {
   readonly averageStepMs: number
   readonly p95StepMs: number
   readonly activeParticles: number
-  readonly stateArrayAllocations: 9
+  readonly stateArrayAllocations: 10
   readonly turbidityArrayAllocations: 3
   readonly endpointTurbidity: number
   readonly finite: boolean
@@ -82,7 +83,7 @@ export function runHeadlessBenchmark(
     averageStepMs: sampleTotal / options.steps,
     p95StepMs: sortedSamples[Math.ceil(options.steps * 0.95) - 1],
     activeParticles: workspace.particles.activeCount,
-    stateArrayAllocations: 9,
+    stateArrayAllocations: 10,
     turbidityArrayAllocations: 3,
     endpointTurbidity: endpointTurbidity(workspace.bands, config.turbidity),
     finite: workspaceIsFinite(workspace),
@@ -94,6 +95,7 @@ function workspaceIsFinite(
 ): boolean {
   const state = workspace.particles
   for (let index = 0; index < state.capacity; index += 1) {
+    const isActive = state.active[index] === 1
     if (
       !Number.isFinite(state.positionX[index]) ||
       !Number.isFinite(state.positionY[index]) ||
@@ -101,9 +103,12 @@ function workspaceIsFinite(
       !Number.isFinite(state.velocityX[index]) ||
       !Number.isFinite(state.velocityY[index]) ||
       !Number.isFinite(state.velocityZ[index]) ||
-      !Number.isFinite(state.normalizedSize[index]) ||
-      state.normalizedSize[index] < 0 ||
-      state.normalizedSize[index] > 1 ||
+      !Number.isFinite(state.mass[index]) ||
+      (isActive ? state.mass[index] <= 0 : state.mass[index] !== 0) ||
+      !Number.isFinite(state.diameter[index]) ||
+      (isActive ? state.diameter[index] <= 0 : state.diameter[index] !== 0) ||
+      state.diameter[index] > 1 ||
+      !particleDiameterIsConsistent(state, index) ||
       (state.settled[index] !== 0 && state.settled[index] !== 1)
     )
       return false

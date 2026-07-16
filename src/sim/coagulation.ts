@@ -2,6 +2,8 @@ import { stepParticleDrift } from './drift'
 import {
   DEFAULT_PARTICLE_BOUNDS,
   PARTICLE_SETTLED,
+  massFromDiameter,
+  setParticleMass,
   type ParticleBounds,
   type ParticleState,
 } from './particleState'
@@ -99,10 +101,11 @@ export function stepCoagulation(
     )
     for (let index = 0; index < state.capacity; index += 1) {
       if (state.active[index] === 0 || state.settled[index] === 1) continue
-      const size = state.normalizedSize[index]
+      const size = state.diameter[index]
       const growth =
         config.flocGrowthRatePerSecond * (target - size) * timestepSeconds
-      state.normalizedSize[index] = Math.min(target, size + Math.max(0, growth))
+      const nextDiameter = Math.min(target, size + Math.max(0, growth))
+      setParticleMass(state, index, massFromDiameter(nextDiameter))
     }
     return
   }
@@ -113,7 +116,7 @@ export function stepCoagulation(
       0,
       Math.min(
         1,
-        (state.normalizedSize[index] - config.settlingThreshold) /
+        (state.diameter[index] - config.settlingThreshold) /
           (1 - config.settlingThreshold),
       ),
     )

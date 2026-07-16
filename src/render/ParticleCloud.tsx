@@ -28,7 +28,7 @@ export function ParticleCloud({ state, recordFrame }: ParticleCloudProps) {
     let instance = 0
     for (let index = 0; index < state.capacity; index += 1) {
       if (state.active[index] === 0) continue
-      const scale = PARTICLE_SCALE * (0.75 + state.normalizedSize[index] * 2.25)
+      const scale = PARTICLE_SCALE * (0.75 + state.diameter[index] * 2.25)
       transform.makeScale(scale, scale, scale)
       transform.setPosition(
         state.positionX[index],

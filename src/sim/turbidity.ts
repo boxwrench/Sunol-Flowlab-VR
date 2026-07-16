@@ -76,7 +76,7 @@ export function resetTurbidityBands(
   for (let index = 0; index < particles.capacity; index += 1) {
     if (particles.active[index] === 0) continue
     bands.initialLoads[bandIndex(particles.positionY[index], config, bounds)] +=
-      opticalLoad(particles.normalizedSize[index])
+      opticalLoad(particles.diameter[index])
   }
   bands.values.fill(config.rawTurbidity)
   bands.sampledAtSimulationTime = 0
@@ -109,7 +109,7 @@ export function sampleTurbidityBands(
       particles.settled[index] === PARTICLE_SETTLED
     )
       continue
-    const load = opticalLoad(particles.normalizedSize[index])
+    const load = opticalLoad(particles.diameter[index])
     bands.currentLoads[bandIndex(particles.positionY[index], config, bounds)] +=
       load
     currentTotal += load
@@ -201,8 +201,8 @@ function bandIndex(
   )
 }
 
-function opticalLoad(normalizedSize: number): number {
-  const safeSize = Math.max(0.05, normalizedSize)
+function opticalLoad(diameter: number): number {
+  const safeSize = Math.max(0.05, diameter)
   return 1 / (safeSize * safeSize)
 }
 

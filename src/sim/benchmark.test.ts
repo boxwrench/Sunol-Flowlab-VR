@@ -26,7 +26,7 @@ describe('headless benchmark', () => {
       averageStepMs: 1,
       p95StepMs: 1,
       activeParticles: 500,
-      stateArrayAllocations: 9,
+      stateArrayAllocations: 10,
       turbidityArrayAllocations: 3,
       finite: true,
     })

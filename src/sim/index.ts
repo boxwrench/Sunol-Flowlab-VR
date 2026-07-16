@@ -35,12 +35,17 @@ export {
 } from './fixedStep'
 export {
   DEFAULT_PARTICLE_BOUNDS,
-  INITIAL_NORMALIZED_SIZE_MAX,
-  INITIAL_NORMALIZED_SIZE_MIN,
+  DEFAULT_AGGREGATE_GEOMETRY_CONFIG,
+  MASS_DIAMETER_RELATIVE_TOLERANCE,
   PARTICLE_SETTLED,
   PARTICLE_SUSPENDED,
   createParticleState,
+  diameterFromMass,
+  massFromDiameter,
+  particleDiameterIsConsistent,
   resetParticleState,
+  setParticleMass,
+  type AggregateGeometryConfig,
   type ParticleBounds,
   type ParticleState,
 } from './particleState'

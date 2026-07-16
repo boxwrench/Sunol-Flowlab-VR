@@ -1,6 +1,11 @@
 import { describe, expect, it } from 'vitest'
 
-import { createParticleState, resetParticleState } from './particleState'
+import {
+  createParticleState,
+  massFromDiameter,
+  resetParticleState,
+  setParticleMass,
+} from './particleState'
 import {
   clearingFrontDiagnostics,
   createTurbidityBands,
@@ -17,7 +22,8 @@ describe('authoritative turbidity bands', () => {
     resetTurbidityBands(bands, particles)
     const first = Array.from(bands.values)
 
-    particles.normalizedSize.fill(1)
+    for (let index = 0; index < particles.capacity; index += 1)
+      setParticleMass(particles, index, massFromDiameter(1))
     particles.settled.fill(1)
     sampleTurbidityBands(bands, particles, 1, 43)
     expect(endpointTurbidity(bands)).toBeLessThan(0.3)
@@ -40,7 +46,8 @@ describe('authoritative turbidity bands', () => {
     sampleTurbidityBands(bands, particles, 0.8, 1)
     const rawParticleOutcome = endpointTurbidity(bands)
 
-    particles.normalizedSize.fill(0.9)
+    for (let index = 0; index < particles.capacity; index += 1)
+      setParticleMass(particles, index, massFromDiameter(0.9))
     sampleTurbidityBands(bands, particles, 0.8, 2)
     const aggregatedOutcome = endpointTurbidity(bands)
     particles.settled.fill(1)

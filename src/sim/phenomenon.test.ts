@@ -14,14 +14,14 @@ describe('deterministic phenomenon trial', () => {
     const workspace = createPhenomenonWorkspace()
     const first = runPhenomenonTrial(5, 0x5f3759df, undefined, workspace)
     const finalPositions = Array.from(workspace.particles.positionY)
-    const finalSizes = Array.from(workspace.particles.normalizedSize)
+    const finalDiameters = Array.from(workspace.particles.diameter)
 
     runPhenomenonTrial(0, 123, undefined, workspace)
     const replay = runPhenomenonTrial(5, 0x5f3759df, undefined, workspace)
     expect(replay.endpointTurbidity).toBe(first.endpointTurbidity)
     expect(replay.bandSnapshot).toEqual(first.bandSnapshot)
     expect(Array.from(workspace.particles.positionY)).toEqual(finalPositions)
-    expect(Array.from(workspace.particles.normalizedSize)).toEqual(finalSizes)
+    expect(Array.from(workspace.particles.diameter)).toEqual(finalDiameters)
   })
 
   it('keeps long-run state finite, bounded, and settled state binary', () => {
@@ -33,11 +33,11 @@ describe('deterministic phenomenon trial', () => {
 
     for (let index = 0; index < workspace.particles.capacity; index += 1) {
       expect(Number.isFinite(workspace.particles.positionY[index])).toBe(true)
-      expect(Number.isFinite(workspace.particles.normalizedSize[index])).toBe(
-        true,
-      )
-      expect(workspace.particles.normalizedSize[index]).toBeGreaterThan(0)
-      expect(workspace.particles.normalizedSize[index]).toBeLessThanOrEqual(1)
+      expect(Number.isFinite(workspace.particles.mass[index])).toBe(true)
+      expect(workspace.particles.mass[index]).toBeGreaterThan(0)
+      expect(Number.isFinite(workspace.particles.diameter[index])).toBe(true)
+      expect(workspace.particles.diameter[index]).toBeGreaterThan(0)
+      expect(workspace.particles.diameter[index]).toBeLessThanOrEqual(1)
       expect([0, 1]).toContain(workspace.particles.settled[index])
     }
     expect(workspace.bands.sampledAtSimulationTime).toBeCloseTo(43)
