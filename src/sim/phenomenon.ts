@@ -30,6 +30,12 @@ import {
   type ParticleState,
 } from './particleState'
 import {
+  calculatePopulationDiagnostics,
+  countVisibleSuspendedAggregates,
+  totalParticleMass,
+  type PopulationDiagnostics,
+} from './populationDiagnostics'
+import {
   DEFAULT_OPTICAL_LOAD_CONFIG,
   createOpticalLoadBands,
   endpointOpticalLoad,
@@ -61,6 +67,8 @@ export interface PhenomenonWorkspace {
   seed: number
   stepIndex: number
   clarityReachedAtSimulationTime: number | null
+  initialTotalMass: number
+  minimumVisibleSuspendedAggregatesDuringSettling: number
 }
 
 export interface PhenomenonTrialResult {
@@ -69,8 +77,7 @@ export interface PhenomenonTrialResult {
   readonly endpointOpticalLoad: number
   readonly bandSnapshot: readonly number[]
   readonly clarityReachedAtSimulationTime: number | null
-  readonly settledParticles: number
-  readonly meanNormalizedSize: number
+  readonly population: PopulationDiagnostics
   readonly mergeCount: number
   readonly mergeDigest: number
   readonly completedAtSimulationTime: number
@@ -103,6 +110,8 @@ export function createPhenomenonWorkspace(
     seed: 0,
     stepIndex: 0,
     clarityReachedAtSimulationTime: null,
+    initialTotalMass: config.particleCount,
+    minimumVisibleSuspendedAggregatesDuringSettling: config.particleCount,
   }
 }
 
@@ -134,6 +143,9 @@ export function resetPhenomenonWorkspace(
     workspace.particles,
     config.opticalLoad,
   )
+  workspace.initialTotalMass = totalParticleMass(workspace.particles)
+  workspace.minimumVisibleSuspendedAggregatesDuringSettling =
+    workspace.particles.activeCount
 }
 
 export function stepPhenomenonWorkspace(
@@ -168,6 +180,11 @@ export function stepPhenomenonWorkspace(
       config.aggregation,
       config.geometry,
     )
+  if (phase === 'settling')
+    workspace.minimumVisibleSuspendedAggregatesDuringSettling = Math.min(
+      workspace.minimumVisibleSuspendedAggregatesDuringSettling,
+      countVisibleSuspendedAggregates(workspace.particles),
+    )
   workspace.stepIndex += 1
   const simulationTime = workspace.stepIndex * config.fixedTimestepSeconds
   sampleOpticalLoadBands(
@@ -196,13 +213,6 @@ export function runPhenomenonTrial(
     // Fixed-step trial intentionally runs without rendering or wall-clock input.
   }
 
-  let settledParticles = 0
-  let sizeTotal = 0
-  for (let index = 0; index < workspace.particles.capacity; index += 1) {
-    if (workspace.particles.active[index] === 0) continue
-    settledParticles += workspace.particles.settled[index]
-    sizeTotal += workspace.particles.diameter[index]
-  }
   return {
     dose,
     seed,
@@ -212,8 +222,11 @@ export function runPhenomenonTrial(
     ),
     bandSnapshot: Array.from(workspace.bands.values),
     clarityReachedAtSimulationTime: workspace.clarityReachedAtSimulationTime,
-    settledParticles,
-    meanNormalizedSize: sizeTotal / workspace.particles.activeCount,
+    population: calculatePopulationDiagnostics(
+      workspace.particles,
+      workspace.initialTotalMass,
+      workspace.minimumVisibleSuspendedAggregatesDuringSettling,
+    ),
     mergeCount: workspace.mergeDiagnostics.mergeCount,
     mergeDigest: workspace.mergeDiagnostics.mergeDigest,
     completedAtSimulationTime:

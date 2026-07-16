@@ -16,7 +16,7 @@ describe('headless benchmark', () => {
     )
 
     expect(report).toMatchObject({
-      schemaVersion: 2,
+      schemaVersion: 3,
       particleCount: 500,
       steps: 120,
       seed: 123,
@@ -29,6 +29,13 @@ describe('headless benchmark', () => {
       stateArrayAllocations: 10,
       opticalLoadArrayAllocations: 3,
       finite: true,
+      population: {
+        activeAggregateCount: 500,
+        suspendedAggregateCount: 500,
+        settledAggregateCount: 0,
+        maximumAggregateMass: 1,
+        largestAggregateMassFraction: 1 / 500,
+      },
     })
     expect(report.endpointOpticalLoad).toBeGreaterThan(0)
     expect(report.endpointOpticalLoad).toBeLessThanOrEqual(1)

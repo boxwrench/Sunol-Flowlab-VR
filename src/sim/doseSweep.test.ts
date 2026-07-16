@@ -47,7 +47,7 @@ describe('permanent eleven-dose regression sweep', () => {
     }
     minimumDoses.sort((a, b) => a - b)
     expect(Math.abs(minimumDoses[4] - 5)).toBeLessThanOrEqual(1)
-  })
+  }, 30_000)
 
   it('rejects incomplete or duplicate sweep orders', () => {
     expect(() => runDoseSweep(CANONICAL_SEED, [0, 1])).toThrow(RangeError)

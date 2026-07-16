@@ -67,6 +67,16 @@ export {
 export type { ParticleStateView } from './particleState'
 export { SeededRng } from './rng'
 export {
+  MASS_CONSERVATION_TOLERANCE,
+  MAXIMUM_LARGEST_AGGREGATE_MASS_FRACTION,
+  MINIMUM_ACTIVE_AGGREGATE_COUNT,
+  MINIMUM_VISIBLE_SUSPENDED_AGGREGATES,
+  calculatePopulationDiagnostics,
+  countVisibleSuspendedAggregates,
+  totalParticleMass,
+  type PopulationDiagnostics,
+} from './populationDiagnostics'
+export {
   DEFAULT_PHENOMENON_CONFIG,
   createPhenomenonWorkspace,
   hashPhenomenonConfig,

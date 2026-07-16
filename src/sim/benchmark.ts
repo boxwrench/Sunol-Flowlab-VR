@@ -7,6 +7,10 @@ import {
   stepPhenomenonWorkspace,
 } from './phenomenon'
 import { particleDiameterIsConsistent } from './particleState'
+import {
+  calculatePopulationDiagnostics,
+  type PopulationDiagnostics,
+} from './populationDiagnostics'
 import { endpointOpticalLoad } from './opticalLoad'
 
 export interface HeadlessBenchmarkOptions {
@@ -18,7 +22,7 @@ export interface HeadlessBenchmarkOptions {
 }
 
 export interface HeadlessBenchmarkReport {
-  readonly schemaVersion: 2
+  readonly schemaVersion: 3
   readonly particleCount: number
   readonly steps: number
   readonly seed: number
@@ -31,6 +35,7 @@ export interface HeadlessBenchmarkReport {
   readonly stateArrayAllocations: 10
   readonly opticalLoadArrayAllocations: 3
   readonly endpointOpticalLoad: number
+  readonly population: PopulationDiagnostics
   readonly finite: boolean
 }
 
@@ -66,6 +71,11 @@ export function runHeadlessBenchmark(
     samples[index] = now() - stepStart
   }
   const totalMs = now() - benchmarkStart
+  const population = calculatePopulationDiagnostics(
+    workspace.particles,
+    workspace.initialTotalMass,
+    workspace.minimumVisibleSuspendedAggregatesDuringSettling,
+  )
 
   const sortedSamples = Array.from(samples).sort((a, b) => a - b)
   let sampleTotal = 0
@@ -73,7 +83,7 @@ export function runHeadlessBenchmark(
     sampleTotal += samples[index]
 
   return {
-    schemaVersion: 2,
+    schemaVersion: 3,
     particleCount: options.particleCount,
     steps: options.steps,
     seed: options.seed,
@@ -89,6 +99,7 @@ export function runHeadlessBenchmark(
       workspace.bands,
       config.opticalLoad,
     ),
+    population,
     finite: workspaceIsFinite(workspace, config),
   }
 }

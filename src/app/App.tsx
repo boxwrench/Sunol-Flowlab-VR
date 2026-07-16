@@ -106,6 +106,7 @@ export function App() {
     if (!import.meta.env.DEV) return
     window.render_game_to_text = () => {
       const clearing = clearingFrontDiagnostics(runtime.opticalLoadBands)
+      const population = runtime.populationDiagnostics
       return JSON.stringify({
         coordinateSystem: 'meters; origin tank center-bottom; +Y upward',
         mode: 'phenomenon-trial',
@@ -113,6 +114,14 @@ export function App() {
         phase: runtime.phase,
         simulationTimeSeconds: runtime.simulationTimeSeconds,
         activeParticles: runtime.state.activeCount,
+        suspendedAggregates: population.suspendedAggregateCount,
+        settledAggregates: population.settledAggregateCount,
+        meanAggregateMass: population.meanAggregateMass,
+        maximumAggregateMass: population.maximumAggregateMass,
+        maximumAggregateDiameter: population.maximumAggregateDiameter,
+        largestAggregateMassFraction: population.largestAggregateMassFraction,
+        minimumVisibleSuspendedAggregatesDuringSettling:
+          population.minimumVisibleSuspendedAggregatesDuringSettling,
         endpointOpticalLoad: endpointOpticalLoad(runtime.opticalLoadBands),
         globalRelativeOpticalLoad: runtime.opticalLoadBands.globalRelativeLoad,
         topClearFraction: clearing.topClearFraction,

@@ -7,13 +7,19 @@ import {
   type PhenomenonConfig,
   type PhenomenonTrialResult,
 } from './phenomenon'
+import {
+  MASS_CONSERVATION_TOLERANCE,
+  MAXIMUM_LARGEST_AGGREGATE_MASS_FRACTION,
+  MINIMUM_ACTIVE_AGGREGATE_COUNT,
+  MINIMUM_VISIBLE_SUSPENDED_AGGREGATES,
+} from './populationDiagnostics'
 
 export const ALL_DOSE_DETENTS: readonly DoseDetent[] = Object.freeze([
   0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
 ])
 
 export interface DoseSweepReport {
-  readonly schemaVersion: 1
+  readonly schemaVersion: 2
   readonly seed: number
   readonly configHash: string
   readonly fixedTimestepSeconds: number
@@ -47,13 +53,15 @@ export function runDoseSweep(
 
 export function formatDoseSweepMarkdown(report: DoseSweepReport): string {
   const lines = [
-    '| Dose | Endpoint | Settled | Mean size | Clear time |',
-    '| ---: | -------: | ------: | --------: | ---------: |',
+    '| Dose | Endpoint | Active | Suspended | Settled | Mean mass | Max mass | Largest % | Min visible | Clear time |',
+    '| ---: | -------: | -----: | --------: | ------: | --------: | -------: | --------: | ----------: | ---------: |',
   ]
-  for (const result of report.results)
+  for (const result of report.results) {
+    const population = result.population
     lines.push(
-      `| ${result.dose} | ${result.endpointOpticalLoad.toFixed(6)} | ${result.settledParticles} | ${result.meanNormalizedSize.toFixed(6)} | ${result.clarityReachedAtSimulationTime?.toFixed(3) ?? 'never'} |`,
+      `| ${result.dose} | ${result.endpointOpticalLoad.toFixed(6)} | ${population.activeAggregateCount} | ${population.suspendedAggregateCount} | ${population.settledAggregateCount} | ${population.meanAggregateMass.toFixed(3)} | ${population.maximumAggregateMass.toFixed(3)} | ${(population.largestAggregateMassFraction * 100).toFixed(3)} | ${population.minimumVisibleSuspendedAggregatesDuringSettling} | ${result.clarityReachedAtSimulationTime?.toFixed(3) ?? 'never'} |`,
     )
+  }
   return lines.join('\n')
 }
 
@@ -120,10 +128,15 @@ function analyzeDoseSweep(
     failures.push('an extreme reaches the upper-column clarity threshold')
   if (results.some((result) => !trialIsFiniteAndBounded(result)))
     failures.push('one or more trial outputs are non-finite or out of bounds')
+  for (const result of results) {
+    const populationFailure = populationHealthFailure(result, config)
+    if (populationFailure !== null)
+      failures.push(`dose ${result.dose}: ${populationFailure}`)
+  }
 
   const c = config.coagulation
   return {
-    schemaVersion: 1,
+    schemaVersion: 2,
     seed,
     configHash: hashPhenomenonConfig(config),
     fixedTimestepSeconds: config.fixedTimestepSeconds,
@@ -150,14 +163,47 @@ function trialIsFiniteAndBounded(result: PhenomenonTrialResult): boolean {
     !Number.isFinite(result.endpointOpticalLoad) ||
     result.endpointOpticalLoad < 0 ||
     result.endpointOpticalLoad > 1 ||
-    !Number.isFinite(result.meanNormalizedSize) ||
-    result.meanNormalizedSize <= 0 ||
-    result.meanNormalizedSize > 1
+    !Number.isFinite(result.population.meanAggregateMass) ||
+    result.population.meanAggregateMass <= 0 ||
+    !Number.isFinite(result.population.maximumAggregateDiameter) ||
+    result.population.maximumAggregateDiameter <= 0
   )
     return false
   for (const value of result.bandSnapshot)
     if (!Number.isFinite(value) || value < 0 || value > 1) return false
   return true
+}
+
+function populationHealthFailure(
+  result: PhenomenonTrialResult,
+  config: Readonly<PhenomenonConfig>,
+): string | null {
+  const population = result.population
+  if (population.massConservationError > MASS_CONSERVATION_TOLERANCE)
+    return 'aggregate mass is not conserved'
+  if (population.activeAggregateCount < MINIMUM_ACTIVE_AGGREGATE_COUNT)
+    return 'active aggregate population collapsed below the accepted bound'
+  if (
+    population.largestAggregateMassFraction >
+    MAXIMUM_LARGEST_AGGREGATE_MASS_FRACTION + MASS_CONSERVATION_TOLERANCE
+  )
+    return 'largest aggregate exceeds the accepted total-mass fraction'
+  if (
+    population.minimumVisibleSuspendedAggregatesDuringSettling <
+    MINIMUM_VISIBLE_SUSPENDED_AGGREGATES
+  )
+    return 'visible suspended population fell below the accepted bound'
+  if (
+    population.activeAggregateCount !==
+    population.suspendedAggregateCount + population.settledAggregateCount
+  )
+    return 'active population does not equal suspended plus settled counts'
+  if (
+    population.maximumAggregateMass >
+    config.aggregation.maximumAggregateMass + MASS_CONSERVATION_TOLERANCE
+  )
+    return 'maximum aggregate mass exceeds the configured growth bound'
+  return null
 }
 
 function validateSweepOrder(order: readonly DoseDetent[]): void {

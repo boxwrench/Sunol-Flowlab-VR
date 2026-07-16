@@ -6,9 +6,11 @@ import {
   resetPhenomenonWorkspace,
   stepPhenomenonWorkspace,
   treatmentPhaseAtStep,
+  calculatePopulationDiagnostics,
   type DoseDetent,
   type PhenomenonConfig,
   type ParticleStateView,
+  type PopulationDiagnostics,
   type OpticalLoadBandsView,
   type TreatmentPhase,
 } from '../sim'
@@ -76,6 +78,14 @@ export class SimulationRuntime {
 
   get clarityReachedAtSimulationTime(): number | null {
     return this.workspace.clarityReachedAtSimulationTime
+  }
+
+  get populationDiagnostics(): PopulationDiagnostics {
+    return calculatePopulationDiagnostics(
+      this.workspace.particles,
+      this.workspace.initialTotalMass,
+      this.workspace.minimumVisibleSuspendedAggregatesDuringSettling,
+    )
   }
 
   step(elapsedSeconds: number): number {
