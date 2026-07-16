@@ -5,6 +5,10 @@ import {
 } from '@react-three/xr'
 import { useEffect, useState } from 'react'
 
+const XR_PREFLIGHT_TARGET_POSITION: readonly [number, number, number] = [
+  0, 1.25, -1,
+]
+
 export type XrPreflightEvent =
   | { readonly type: 'session'; readonly active: boolean }
   | {
@@ -66,7 +70,7 @@ export function ControllerPreflight({ recordEvent }: ControllerPreflightProps) {
 
   return (
     <mesh
-      position={[0, 1.25, -1.5]}
+      position={[...XR_PREFLIGHT_TARGET_POSITION]}
       onClick={() => {
         setTargetSelected(true)
         recordEvent({ type: 'target-select' })

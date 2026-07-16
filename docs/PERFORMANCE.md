@@ -29,6 +29,40 @@ target selection, remote inspection, baseline metrics, and clean exit. It is a
 short functional preflight, not a thermal or endurance claim. The separate
 hosted-HTTPS smoke deployment remains open.
 
+### Batch 03 placement follow-up
+
+The first physical presentation review later on 2026-07-15 found that the
+WebXR floor origin overlapped the hero tank, leaving the operator inside the
+apparatus and making the simulation difficult to view. This does not invalidate
+the accepted connectivity and input preflight above, but it leaves Batch 03
+headset ergonomics open. The candidate moves the apparatus forward and adds an
+automated minimum-clearance check; physical re-entry is required before the new
+placement is accepted. On re-entry, the operator described the revised view as
+"pretty good" and requested that the floor-mounted jar rack be placed on a
+table. The next candidate adds a static table with one tabletop draw and one
+instanced four-leg draw. On the following check, the table composition was
+reported as "pretty good," but the operator noted that jar-test vessels are
+usually rectangular. The candidate now uses open rectangular vessel and rim
+geometry with the same instance and draw counts; the final physical check is
+recorded below.
+
+### Final Batch 03 apparatus candidate
+
+The project-owner water-treatment operator accepted the final physical
+composition after confirming the revised start position, table-mounted rack,
+and open rectangular vessels. While the accepted candidate remained in an
+active immersive session, remote inspection recorded the following 300-frame
+rolling snapshot:
+
+| Average FPS | Average frame | p95 frame | Simulation | Instance sync | Particles | Draw calls | JS heap |
+| ----------: | ------------: | --------: | ---------: | ------------: | --------: | ---------: | ------: |
+|       120.0 |       8.33 ms |   8.70 ms |   0.005 ms |      0.027 ms |       500 |         22 | 35.6 MB |
+
+The Dose 5 trial was complete at 43 simulated seconds with normalized endpoint
+turbidity `0.200000`, and the immersive session was active at capture. This
+accepts the short Batch 03 physical composition, readability, and rolling
+performance check. It is not a thermal or endurance claim.
+
 ## 2026-07-14 - Chrome Quest 3 emulator preflight
 
 - Mode: development, Chrome localhost, IWER Meta Quest 3 profile

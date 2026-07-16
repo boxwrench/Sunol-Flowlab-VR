@@ -1,4 +1,5 @@
 import type { ParticleStateView, TurbidityBandsView } from '../sim'
+import { HERO_TANK_LOCAL_POSITION } from './layout'
 import { ParticleCloud, type ParticleFrameRecorder } from './ParticleCloud'
 import { TurbidityGradient } from './TurbidityGradient'
 
@@ -14,7 +15,7 @@ export function HeroObservationTank({
   recordParticleFrame,
 }: HeroObservationTankProps) {
   return (
-    <group position={[0.45, 0.02, 0]}>
+    <group position={[...HERO_TANK_LOCAL_POSITION]}>
       <TurbidityGradient bands={turbidityBands} />
       <ParticleCloud state={particleState} recordFrame={recordParticleFrame} />
 

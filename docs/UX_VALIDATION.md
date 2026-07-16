@@ -1,6 +1,6 @@
 # Apparatus Recognition Validation
 
-**Status:** Awaiting external recognition review
+**Status:** Project-owner operator composition accepted; external blind recognition open
 **Governing requirement:** Batch 03, work package 03B.5
 **Review route:** `http://127.0.0.1:5173/?mode=proof`
 
@@ -36,4 +36,34 @@ before accepting Batch 03.
 
 ## Results
 
-No external responses have been recorded. This is an open acceptance gate.
+The randomized [Batch 03 review packet](BATCH_03_REVIEW_PACKET.md) was generated
+on 2026-07-15. It contains one unlabeled apparatus image and three shuffled,
+completed low/optimum/high outcomes. The answer key is retained only in an
+ignored local test artifact until responses are recorded.
+
+No participant responses have been recorded yet. The project owner's
+operator-informed outcome review may be recorded, but it does not replace the
+external blind apparatus-recognition response because the owner already knows
+the intended design.
+
+During the first physical Quest review on 2026-07-15, the project owner and
+water-treatment operator reported that the initial WebXR viewpoint began inside
+the hero tank, making the simulation difficult to view. Review was paused. The
+candidate now places the apparatus beyond the WebXR floor origin with at least
+1.25 meters of clearance to the nearest tank face while preserving the desktop
+camera-to-apparatus offset.
+
+On re-entry, the owner described the revised initial view as "pretty good," so
+the inside-tank defect is corrected. The same operator review identified that
+the jar-test rack should sit on a table rather than on the floor. The candidate
+now places the six-jar rack on a waist-height static table.
+
+On the next physical check, the owner again described the composition as
+"pretty good" and noted that jar-test vessels are usually rectangular. The
+table correction is therefore retained, and the candidate now uses six
+distinct open rectangular vessels and rectangular rims without adding draw
+calls. On the final physical check, the owner confirmed the
+rectangular-vessel candidate with "yes good." The project-owner operator
+composition review is accepted for start placement, table mounting, vessel
+shape, and hero-tank priority. This informed review does not replace the open
+external blind-recognition requirement.

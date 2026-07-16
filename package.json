@@ -18,6 +18,7 @@
     "test": "node --test --test-isolation=none tests/*.test.mjs && vitest run",
     "test:unit": "vitest run",
     "test:browser": "playwright test",
+    "capture:review": "node scripts/capture-batch-03-review.mjs",
     "benchmark": "vitest run src/sim/benchmark.cli.test.ts --reporter=dot",
     "lint": "eslint .",
     "format:check": "prettier --check ."

@@ -36,13 +36,21 @@ test('turbidity renderer uses one preallocated band-driven gradient surface', as
   assert.doesNotMatch(source, /endpointTurbidity|sampleTurbidityBands|Dose/)
 })
 
-test('jar-test bench is a six-preset static geometry consumer', async () => {
+test('jar-test bench is a table-mounted six-preset static geometry consumer', async () => {
   const source = await readFile(
     new URL('../src/render/JarTestBench.tsx', import.meta.url),
     'utf8',
   )
 
   assert.match(source, /\[0, 2, 4, 6, 8, 10\] as const/)
-  assert.equal((source.match(/<instancedMesh\b/g) ?? []).length, 3)
+  assert.equal((source.match(/<instancedMesh\b/g) ?? []).length, 4)
+  for (const refName of ['jarsRef', 'rimsRef', 'paddlesRef']) {
+    assert.match(source, new RegExp(`ref=\\{${refName}\\}`))
+  }
+  assert.match(source, /ref=\{tableLegsRef\}/)
+  assert.match(source, /JAR_TEST_TABLETOP_HEIGHT_METERS/)
+  assert.match(source, /JAR_VESSEL_DIMENSIONS/)
+  assert.match(source, /JAR_RIM_DIMENSIONS/)
+  assert.doesNotMatch(source, /cylinderGeometry|torusGeometry/)
   assert.doesNotMatch(source, /useFrame|Particle|Turbidity|SimulationRuntime/)
 })

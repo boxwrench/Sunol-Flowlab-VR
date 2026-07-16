@@ -6,8 +6,8 @@ Updated: 2026-07-15
 
 - Repository: <https://github.com/boxwrench/Sunol-Flowlab-VR>
 - Branch: `main`
-- Published baseline before this increment: `98ac4a2` (`docs: record desktop apparatus performance`)
-- Current increment: Batch 01B local physical Quest preflight closure and permanent development input telemetry
+- Published baseline before this increment: `c55b7c5` (`docs: disclose hackathon AI workflow`)
+- Current increment: Batch 03 operator-review packet and physical XR start-placement correction
 - Active plan authority: [IMPLEMENTATION_PLAN.md](IMPLEMENTATION_PLAN.md) and its ordered `batch-00` through `batch-11` Markdown files
 - The superseded Godot plan is isolated under `docs/archive/` for provenance. Its stale duplicate Batch 03 snapshot was removed; use only the active indexed Batch 03 plan.
 
@@ -37,8 +37,14 @@ Updated: 2026-07-15
 - Physical immersive entry, both handed controllers, select input, development
   target selection, Chrome remote inspection, baseline metrics, and clean
   session exit
+- Apparatus placement beyond the WebXR floor origin, with an automated 1.25 m
+  minimum-clearance regression
+- Table-mounted static jar-test rack based on project-owner operator feedback,
+  followed by open rectangular jar and rim geometry based on the second review
+- Project-owner operator acceptance of the final physical Quest composition,
+  plus a 120 FPS, 8.70 ms p95, 22-draw-call live rolling snapshot
 
-The current local validation includes 16 passing repository contract tests, 64 passing Vitest tests across 14 files, canonical and nine-seed dose sweeps, reverse-order equality, type checking, lint, formatting, production build, a production-path benchmark, three passing desktop browser tests, deterministic low/optimum/high endpoint captures, an inspected unlabeled apparatus capture, and a 60 FPS 12-second real-time desktop apparatus observation with zero console errors. The physical Quest preflight recorded a stable 120 FPS rolling snapshot, 8.33 ms average and 9.00 ms p95 frame time, both controllers and select events, and clean session exit. Full physical evidence is in [docs/PERFORMANCE.md](docs/PERFORMANCE.md#2026-07-15---physical-quest-3-local-preflight); Batch 02A evidence is in [docs/BATCH_02A_ACCEPTANCE.md](docs/BATCH_02A_ACCEPTANCE.md); current Batch 03 evidence and open gates are in [docs/BATCH_03_PROGRESS.md](docs/BATCH_03_PROGRESS.md). The production build retains the expected non-failing large-chunk warnings from emulator environment assets.
+The current local validation includes 16 passing repository contract tests, 67 passing Vitest tests across 15 files, canonical and nine-seed dose sweeps, reverse-order equality, type checking, lint, formatting, production build, a production-path benchmark, three passing desktop browser tests, deterministic low/optimum/high endpoint captures, an inspected unlabeled apparatus capture, and a 60 FPS 12-second real-time desktop apparatus observation with zero console errors. The physical Quest preflight recorded a stable 120 FPS rolling snapshot, 8.33 ms average and 9.00 ms p95 frame time, both controllers and select events, and clean session exit. Full physical evidence is in [docs/PERFORMANCE.md](docs/PERFORMANCE.md#2026-07-15---physical-quest-3-local-preflight); Batch 02A evidence is in [docs/BATCH_02A_ACCEPTANCE.md](docs/BATCH_02A_ACCEPTANCE.md); current Batch 03 evidence and open gates are in [docs/BATCH_03_PROGRESS.md](docs/BATCH_03_PROGRESS.md). The production build retains the expected non-failing large-chunk warnings from emulator environment assets.
 
 ## Open gates and constraints
 
@@ -46,6 +52,12 @@ The current local validation includes 16 passing repository contract tests, 64 p
   `2G0YC5ZG0M052K` was authorized in ADB state `device`; immersive entry,
   controller input, remote inspection, metrics, and exit passed. This does not
   accept later ergonomics, readability, thermal, endurance, or release gates.
+- The first Batch 03 headset review began inside the hero tank. The revised
+  placement was reported as "pretty good." The owner then requested a
+  table-mounted jar-test rack, and reported that correction as "pretty good."
+  The latest operator correction replaces the cylindrical blockout with open
+  rectangular jars; the owner accepted that final physical candidate. External
+  blind recognition and blinded outcome review remain open.
 - The accepted post-fix desktop observation kept Chrome heap within 34.9-35.5 MB for 310 uninterrupted seconds with 500 particles, three draw calls, and no console errors. The final exported report is recorded in `docs/PERFORMANCE.md`.
 - A hosted HTTPS deployment is not authorized yet. Localhost and the documented ADB reverse route are the approved development paths.
 - Public-data and fictionalization restrictions in [docs/DATA_BOUNDARY.md](docs/DATA_BOUNDARY.md) are binding.

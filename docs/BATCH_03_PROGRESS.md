@@ -13,6 +13,11 @@
   authoritative floc-size scaling and settlement.
 - One static six-jar rack for canonical doses 0, 2, 4, 6, 8, and 10. The rack
   receives no simulation, turbidity, result, or clock input.
+- One waist-height static lab table supporting the jar rack, added from the
+  project-owner operator review. Its four legs share one instanced draw.
+- Six open rectangular jar vessels with rectangular rims, replacing the first
+  cylindrical blockout from the project-owner operator review. The vessel,
+  rim, and paddle instance counts remain unchanged.
 - Development comparison resets for relative doses 0, 5, and 10 using the same
   canonical seed and 43-second schedule.
 - An unlabeled `?mode=proof` route that hides headings, metrics, controls, and
@@ -25,8 +30,8 @@
 
 ## Objective evidence
 
-- Repository contracts: 15 passing.
-- Vitest: 64 passing tests across 14 files.
+- Repository contracts: 16 passing.
+- Vitest: 67 passing tests across 15 files.
 - Playwright: 3 passing desktop tests, including the three-preset U-shape and
   unlabeled proof mode.
 - Type checking, lint, formatting, production build, and diff checks pass.
@@ -50,12 +55,19 @@
   FPS, 16.67 ms average frame time, 18.00 ms p95, 0.023 ms average simulation
   time, 0.006 ms average instance synchronization, 500 particles, 20 draw
   calls, 23.4 MB JavaScript heap, and zero console errors.
+- The final physical Quest composition was accepted by the project-owner water
+  treatment operator after three bounded corrections: clear the WebXR origin,
+  place the rack on a table, and use open rectangular jars. A live immersive
+  rolling snapshot recorded 120.0 FPS, 8.33 ms average, 8.70 ms p95, 0.005 ms
+  simulation, 0.027 ms instance synchronization, 500 particles, 22 draw calls,
+  and 35.6 MB heap with the Dose 5 run complete.
 
 ## Architecture and cost notes
 
 Rendering remains a read-only consumer. The gradient allocates its texture,
 pixel buffer, and shader material once, then updates 12 bytes per frame. The jar
 rack uses three static instanced meshes for vessel walls, rims, and paddles.
+The table adds one top mesh and one instanced four-leg mesh.
 No renderer calculates dose efficiency, turbidity, endpoints, clearing
 diagnostics, or simulation state.
 
@@ -72,8 +84,11 @@ evidence justifies Batch 02B collision, pooling, density, or spatial-hash work.
   without labels or a plot.
 - The local physical Quest preflight is accepted separately in
   [PERFORMANCE.md](PERFORMANCE.md#2026-07-15---physical-quest-3-local-preflight).
-  Batch 03 still requires its own later headset readability and performance
-  evidence after presentation and interaction are integrated.
+  The final presentation-specific headset evidence is recorded in the same
+  document under the final Batch 03 apparatus candidate.
+
+The final physical composition/readability check and short rolling performance
+snapshot are now accepted. This is not an endurance or thermal claim.
 
 Batch 03 is not accepted until its human-comprehension gates and remaining
 performance evidence are recorded.
