@@ -46,30 +46,30 @@ The work remains staged: Workstream 03D exposes the authoritative samples; Batch
 
 ## Current status
 
-| Batch | Status                 | Gate                                                 |
-| ----- | ---------------------- | ---------------------------------------------------- |
-| 00    | Substantially complete | Hosted HTTPS route remains open                      |
-| 01A   | Accepted               | Uninterrupted post-fix rendered observation recorded |
-| 01B   | Partially accepted     | Local Quest route passed; hosted smoke remains open  |
-| 02A   | Accepted               | Deterministic 11-dose phenomenon proof recorded      |
-| 02B   | Deferred               | Spatial hash and render metadata still need evidence |
-| 03    | Technical gate passed  | External human review and replacement Quest check    |
-| 04–11 | Not started            | Predecessor gates                                    |
+| Batch | Status                 | Gate                                                   |
+| ----- | ---------------------- | ------------------------------------------------------ |
+| 00    | Substantially complete | Hosted HTTPS route remains open                        |
+| 01A   | Accepted               | Uninterrupted post-fix rendered observation recorded   |
+| 01B   | Partially accepted     | Local Quest route passed; hosted smoke remains open    |
+| 02A   | Accepted               | Deterministic 11-dose phenomenon proof recorded        |
+| 02B   | Deferred               | Spatial hash and simulation merge events need evidence |
+| 03    | Technical gate passed  | External blind recognition and outcome review          |
+| 04–11 | Not started            | Predecessor gates                                      |
 
 An [earlier Godot implementation plan](docs/archive/Sunol%20FlowLab%20Implementation%20Plan%20%28superseded%20Godot%29.pdf) is retained only as a superseded source artifact for provenance and is non-binding for this greenfield WebXR repository. The stale duplicate Batch 03 snapshot and superseded pre-research mechanics were removed from the active tree; Git history preserves them. Only [the indexed Batch 03 plan](batch-03-desktop-phenomenon-proof.md) is authoritative.
 
 Batch 01A has an app-owned deterministic runtime, read-only rendering consumption, permanent telemetry, a measured 500-particle foundation, and an accepted uninterrupted 310-second post-fix Chrome observation. The local physical portion of Batch 01B passed on Quest 3 through ADB reverse: immersive entry, both controllers, select input, target selection, remote inspection, baseline metrics, and clean session exit were observed. Batch 01B remains open only for its separately authorized hosted-HTTPS smoke deployment.
 
-Batch 02A is accepted in [its closing packet](docs/BATCH_02A_ACCEPTANCE.md): the canonical minimum is Dose 5, both tail margins exceed the regression threshold, the extended nine-seed suite passes, and the complete 500-particle phenomenon path remains well inside the desktop benchmark ceiling. That statistical substrate remains the immutable comparison baseline. The modeling amendment supplied the product-model justification for mass-authoritative deterministic merging and derived density in Workstream 03D. The replacement now has [technical acceptance](docs/BATCH_03_03D_TECHNICAL_ACCEPTANCE.md). Version 1 still has no free list; spatial hashing and merge-animation metadata remain deferred because measurements do not justify them.
+Batch 02A is accepted in [its closing packet](docs/BATCH_02A_ACCEPTANCE.md): the canonical minimum is Dose 5, both tail margins exceed the regression threshold, the extended nine-seed suite passes, and the complete 500-particle phenomenon path remains well inside the desktop benchmark ceiling. That statistical substrate remains the immutable comparison baseline. The modeling amendment supplied the product-model justification for mass-authoritative deterministic merging and derived density in Workstream 03D. The replacement now has [technical acceptance](docs/BATCH_03_03D_TECHNICAL_ACCEPTANCE.md). Version 1 still has no free list; spatial hashing and simulation merge-event metadata remain deferred because measurements do not justify them. Short render-local transition smoothing is accepted presentation behavior and owns no process state.
 
 Batch 03 now has an independently runnable desktop proof, one band-driven
-optical-load gradient surface, a dominant hero tank, six static canonical jar
+optical-load presentation on shared rear and middle slices, a dominant hero tank, six static canonical jar
 blockouts, deterministic low/optimum/high presets, clearing-front diagnostics,
 an unlabeled proof mode, and a technically accepted mass-authoritative model.
 Automated, visual, sweep, population, and benchmark evidence is recorded in
 [the Batch 03 progress packet](docs/BATCH_03_PROGRESS.md). The next active work
-is external blind recognition, blinded low/optimum/high review, and a short
-replacement-model Quest confirmation. Batch 04 remains blocked until those
-Batch 03 gates are decided.
+is external blind recognition and blinded low/optimum/high review. The short
+replacement-model Quest visibility and rolling-performance check has passed.
+Batch 04 remains blocked until the external Batch 03 gates are decided.
 
 The hybrid direction maps runtime ownership to Batch 01A closure; hero-tank and jar-rack blockout plus recognition validation to Batch 03; interaction to Batch 04; integration to Batches 05-06; static jar summaries, complete memory, and treatment-ghost recording/playback runtime to Batch 07; live-versus-ghost readability to Batch 08; spectator presentation to Batch 09; presence to Batch 10; and release evidence to Batch 11.

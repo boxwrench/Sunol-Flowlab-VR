@@ -1,6 +1,6 @@
 # Apparatus Recognition Validation
 
-**Status:** Project-owner operator composition accepted; replacement captures ready; external blind reviews open
+**Status:** Project-owner operator composition and replacement-model Quest review accepted; external blind reviews open
 **Governing requirement:** Batch 03 presentation-retention and human-validation gate
 **Review route:** `http://127.0.0.1:5173/?mode=proof`
 
@@ -74,3 +74,32 @@ Workstream 03D replacement captures have now passed browser-error and visual
 inspection. The parked reviews may resume. No external participant response has
 yet been recorded, so neither apparatus recognition nor outcome comprehension
 is accepted.
+
+### Replacement-model Quest review
+
+The project-owner water-treatment operator reviewed the completed Workstream
+03D Dose 5 behavior in an active physical Quest session on 2026-07-15. The
+first pass was not accepted: settling and clearing were visible, but aggregate
+growth was difficult to notice, the optical-load presentation read mainly as a
+rear brown plane, and merge transitions could appear as a flicker.
+
+The smallest presentation-only repair retained the authoritative simulation:
+
+- rendered radius now preserves the simulation diameter ratio, making the
+  primary-to-maximum aggregate growth range approximately 1:2.83;
+- render-local position and scale following plus a short consumed-particle
+  exit softened visually abrupt deterministic merges without adding simulation
+  merge-event metadata;
+- a lighter middle optical slice now reads from the same preallocated 12-band
+  texture as the rear slice, adding depth without creating a second process
+  authority.
+
+On the physical rerun, the operator reported, “much better . very good for this
+stage i think. its a pass.” This accepts the short replacement-model Quest
+visibility check. The operator also suggested a possible light-brown-to-
+slightly-darker mass cue. That remains optional presentation polish: aggregate
+size is the primary mass cue, and any color mapping should stay subtle and must
+not imply dose, quality, calibrated turbidity, or a second treatment result.
+
+This informed owner review does not replace the external blind apparatus-
+recognition and outcome-comparison gates above.

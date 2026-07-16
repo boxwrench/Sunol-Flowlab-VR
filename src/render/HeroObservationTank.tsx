@@ -4,12 +4,14 @@ import { ParticleCloud, type ParticleFrameRecorder } from './ParticleCloud'
 import { OpticalLoadGradient } from './OpticalLoadGradient'
 
 interface HeroObservationTankProps {
+  readonly animateParticleTransitions?: boolean
   readonly particleState: ParticleStateView
   readonly opticalLoadBands: OpticalLoadBandsView
   readonly recordParticleFrame: ParticleFrameRecorder
 }
 
 export function HeroObservationTank({
+  animateParticleTransitions = true,
   particleState,
   opticalLoadBands,
   recordParticleFrame,
@@ -17,7 +19,11 @@ export function HeroObservationTank({
   return (
     <group position={[...HERO_TANK_LOCAL_POSITION]}>
       <OpticalLoadGradient bands={opticalLoadBands} />
-      <ParticleCloud state={particleState} recordFrame={recordParticleFrame} />
+      <ParticleCloud
+        animateTransitions={animateParticleTransitions}
+        state={particleState}
+        recordFrame={recordParticleFrame}
+      />
 
       <mesh position={[0, -0.025, 0]}>
         <boxGeometry args={[1.55, 0.05, 0.85]} />

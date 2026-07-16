@@ -13,6 +13,14 @@ const privateKeyPath = fileURLToPath(
   new URL('../test-results/batch-03-review-key.local', import.meta.url),
 )
 const letters = ['A', 'B', 'C']
+const captureAttempts = 4
+
+function captureUrl(mode) {
+  const url = new URL(baseUrl)
+  url.searchParams.set('capture', 'review')
+  if (mode !== undefined) url.searchParams.set('mode', mode)
+  return url.href
+}
 
 function shuffledDoses() {
   const doses = [0, 5, 10]
@@ -78,7 +86,7 @@ async function captureCompletePresentation(
   let bestScore = -1
   let scenarioState
 
-  for (let attempt = 0; attempt < 4; attempt += 1) {
+  for (let attempt = 0; attempt < captureAttempts; attempt += 1) {
     const page = await browser.newPage({
       viewport: { width: 1280, height: 720 },
     })
@@ -87,7 +95,16 @@ async function captureCompletePresentation(
       const nextState = await setupPage(page)
       if (scenarioState === undefined) scenarioState = nextState
       await waitForRender(page)
-      const screenshot = await page.screenshot()
+      const screenshot = Buffer.from(
+        await page
+          .locator('canvas')
+          .evaluate((canvas) =>
+            canvas
+              .toDataURL('image/png')
+              .slice('data:image/png;base64,'.length),
+          ),
+        'base64',
+      )
       const score = await presentationCompletenessScore(page, screenshot)
       if (score <= bestScore) continue
       bestScreenshot = screenshot
@@ -115,10 +132,20 @@ try {
     browser,
     browserErrors,
     async (page) => {
-      await page.goto(`${baseUrl}/?mode=proof`, {
+      await page.goto(captureUrl(), {
         waitUntil: 'domcontentloaded',
       })
       await page.locator('canvas').waitFor({ state: 'visible' })
+      await page.addStyleTag({
+        content: `
+          .app-heading,
+          .comparison-controls,
+          [aria-label='Development performance metrics'] {
+            display: none !important;
+          }
+        `,
+      })
+      await page.waitForTimeout(800)
     },
     path.join(outputDirectory, 'apparatus-unlabeled.png'),
   )
@@ -137,7 +164,7 @@ try {
       browser,
       browserErrors,
       async (page) => {
-        await page.goto(baseUrl, { waitUntil: 'domcontentloaded' })
+        await page.goto(captureUrl(), { waitUntil: 'domcontentloaded' })
         await page.locator(`#preset-${dose}`).click()
         await page.evaluate(() => window.advanceTime?.(43_000))
         await waitForRender(page)

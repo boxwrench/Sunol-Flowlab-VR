@@ -38,6 +38,12 @@ This accepts the local physical-device subset only. It does not satisfy the
 hosted-HTTPS smoke deployment or later headset ergonomics, readability,
 thermal, endurance, and release gates.
 
+The later Workstream 03D replacement-model visibility and short rolling-
+performance rerun also passed on this route. That evidence closes the Batch 03
+device-visibility check while leaving thermal, endurance, later interaction
+ergonomics, hosted deployment, and release work open. Exact results are in
+[PERFORMANCE.md](PERFORMANCE.md#2026-07-15---workstream-03d-physical-quest-visibility-rerun).
+
 ## Desktop targets
 
 - Primary: current stable Chrome on Windows

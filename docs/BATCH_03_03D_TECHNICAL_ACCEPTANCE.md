@@ -13,8 +13,9 @@ architecture, population-health, performance, browser, and evidence-generation
 gates required before external review.
 
 This is technical acceptance of the process-model workstream, not final Batch
-03 acceptance. The blinded apparatus-recognition, blinded outcome-comparison,
-and replacement-model Quest review gates remain open.
+03 acceptance. The blinded apparatus-recognition and blinded outcome-
+comparison gates remain open. The replacement-model Quest visibility gate
+passed after this technical packet was first issued.
 
 ## Implemented model
 
@@ -39,8 +40,8 @@ and replacement-model Quest review gates remain open.
   counts; mean and maximum mass; maximum diameter; largest-mass fraction; and
   the minimum visible suspended population during settling.
 
-No spatial hash, free list, merge tween metadata, ghost runtime, Batch 04
-feature, or hosted deployment was added.
+No spatial hash, free list, simulation merge-event metadata, ghost runtime,
+Batch 04 feature, or hosted deployment was added.
 
 ## Accepted configuration and bounds
 
@@ -145,7 +146,7 @@ The final local gate passed:
     npm run build
 
 - 16 repository-contract tests passed.
-- 81 Vitest tests across 18 files passed.
+- 83 Vitest tests across 19 files passed.
 - The canonical and nine-seed suites, reverse-order equality, reset purity,
   10,000-step finite-state path, mass/diameter invariants, optical-load tests,
   and population bounds passed.
@@ -164,13 +165,13 @@ or page errors. Low and high are intentionally byte-identical because the
 accepted Gaussian dose abstraction is symmetric:
 
 - apparatus-unlabeled.png:
-  2F0BAF36E09677DAF51205D387EBCD56B637B61DC3EDBC93F66630A48FF24A01
+  E2F1AD790C89A1FD7E01F04FC789044B5757EE5249B2A4E43A289DC15160403F
 - comparison-a.png:
-  03A3684B12E23CDB190EF5942DFF7E3CB19DA85F7637A4E2CD29C012CAAB912B
+  5425F0F0127653EDFD21B4EB3611A0ECA4150B53A3A727969138A37801D09C16
 - comparison-b.png:
-  F8219CC26CA3CAA37B2A803495208005305AFD6425E0F5EAE0608BFD3DB5D646
+  5425F0F0127653EDFD21B4EB3611A0ECA4150B53A3A727969138A37801D09C16
 - comparison-c.png:
-  03A3684B12E23CDB190EF5942DFF7E3CB19DA85F7637A4E2CD29C012CAAB912B
+  18AA62397B711D8E3F7E77D3E1C949ED07FCA4356170178346D0BF1DD2E3935D
 
 The shuffled answer key remains an ignored local artifact and is not published
 in this packet.
@@ -187,6 +188,31 @@ The model remains a fictionalized, phenomenological educational abstraction.
 No SCADA, plant controls, intranet, operational data, calibrated units, dose
 recommendation, or operating instruction was added.
 
+## Post-acceptance presentation repair and device evidence
+
+The first physical Quest review of the technically accepted model exposed a
+presentation defect, not a simulation defect: growth was difficult to notice,
+the optical load appeared concentrated on the rear plane, and merge
+disappearance could flicker. The repaired renderer preserves the authoritative
+diameter ratio, follows survivor position and scale over short render-local
+intervals, fades consumed particles over 0.24 seconds, and draws a lighter
+middle optical slice from the same preallocated 12-band texture as the rear
+slice. It adds no simulation merge-event metadata or second optical authority.
+
+The capture route now enables `preserveDrawingBuffer` only for review captures,
+reads PNG data directly from the canvas, disables presentation transitions for
+deterministic completed-state comparisons, and leaves normal desktop and XR
+behavior unchanged. The regenerated low and high images are byte-identical as
+expected from the symmetric accepted abstraction.
+
+On the repaired physical Quest rerun, 43 simulated seconds matched 43.006
+seconds of wall time. The completed state retained 105 active, 65 suspended,
+and 40 settled aggregates. A 300-frame immersive snapshot reported 120.0 FPS,
+8.33 ms average, 8.90 ms p95, 0.017 ms simulation, 0.087 ms instance sync, 74
+fully loaded stereo draw calls, 37.8 MB heap, both controllers tracked, and no
+console or page errors. The project-owner water-treatment operator accepted
+the result as “much better” and “a pass.”
+
 ## Open external gates
 
 The replacement captures are ready for the protocol in
@@ -197,12 +223,10 @@ until:
    apparatus-recognition review, with a non-operator preferred as an additional
    participant;
 2. an operator-informed reviewer and a non-operator complete the blinded
-   low/optimum/high outcome comparison; and
-3. the replacement behavior receives a short physical Quest visibility and
-   rolling-performance confirmation.
+   low/optimum/high outcome comparison.
 
-The earlier physical Quest composition acceptance still supports start
-placement, table height, rectangular jars, controllers, and hierarchy. The
-headset was not connected at final 03D evidence collection, so no new device
-measurement is claimed. Hosted deployment, endurance, thermals, later headset
-ergonomics, Batch 04, and ghost runtime work remain out of scope.
+The earlier physical Quest composition acceptance supports start placement,
+table height, rectangular jars, controllers, and hierarchy; the final-model
+rerun now also accepts short replacement behavior visibility and rolling
+performance. Hosted deployment, endurance, thermals, later headset ergonomics,
+Batch 04, and ghost runtime work remain out of scope.

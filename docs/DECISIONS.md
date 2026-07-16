@@ -32,7 +32,7 @@ src/app/SimulationRuntime.ts owns particle state, the fixed-step clock, canonica
 
 ## ADR-005: Phenomenon-first simulation growth
 
-Batch 02A added only the particle state, deterministic dose efficiency, simplified aggregation/settling, turbidity bands, and sweep infrastructure needed to prove the underdose–optimum–overdose lesson. That accepted prototype remains historical evidence. The approved version 1 refinement in ADR-008 now supplies a specific educational need for mass-authoritative aggregation, fractal-derived diameter and density, and deterministic merging. Spatial hashing and merge-animation metadata still require measured performance or presentation evidence.
+Batch 02A added only the particle state, deterministic dose efficiency, simplified aggregation/settling, turbidity bands, and sweep infrastructure needed to prove the underdose–optimum–overdose lesson. That accepted prototype remains historical evidence. The approved version 1 refinement in ADR-008 now supplies a specific educational need for mass-authoritative aggregation, fractal-derived diameter and density, and deterministic merging. Spatial hashing and simulation merge-event metadata still require measured performance or presentation evidence; the accepted render-local smoothing owns no process metadata.
 
 ## ADR-006: Hybrid jar-test presentation and memory
 
@@ -52,7 +52,7 @@ This ADR records what Batch 02A proved; it no longer governs the final version 1
 
 Suspended projected simulation area, `sum(D^2)`, produces one vertically binned relative optical-load record. That record drives every process consumer. The accepted Batch 02A unresolved-fines blend is removed in the replacement model rather than carried forward as a second authority. A growth bound protects population health without claiming a breakage model.
 
-Version 1 has no free list because a trial creates no replacement particles. Spatial hashing remains evidence gated at the 500-particle target. Rendered floc size and morphology may improve readability but cannot alter mass, simulation diameter, collision radius, settling, optical load, or trial results. The model remains phenomenological and must not be labeled as calibrated dose, NTU, mechanistic charge reversal, or facility prediction.
+Version 1 has no free list because a trial creates no replacement particles. Spatial hashing remains evidence gated at the 500-particle target. Rendered floc size and morphology may improve readability but cannot alter mass, simulation diameter, collision radius, settling, optical load, or trial results. The accepted Quest repair permits short render-local position, scale, and consumed-particle exit smoothing; it does not add simulation merge-event metadata or a second process authority. The model remains phenomenological and must not be labeled as calibrated dose, NTU, mechanistic charge reversal, or facility prediction.
 
 ## ADR-009: Recorded treatment-result ghosts
 

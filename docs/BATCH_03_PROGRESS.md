@@ -1,6 +1,6 @@
 # Batch 03 Desktop Proof Progress
 
-**Status:** Workstream 03D technically accepted; external human and replacement-model Quest gates open
+**Status:** Workstream 03D technically accepted; replacement-model Quest gate passed; external human gates open
 **Accepted model configuration:** fnv1a32-e8bf13e7
 **Technical acceptance:** [BATCH_03_03D_TECHNICAL_ACCEPTANCE.md](BATCH_03_03D_TECHNICAL_ACCEPTANCE.md)
 **Date:** 2026-07-15
@@ -8,8 +8,8 @@
 ## Presentation retained
 
 - One open, visually dominant hero observation tank.
-- One shader-driven gradient surface consuming the authoritative 12-band
-  relative optical-load view.
+- One band-driven optical-load presentation using rear and lighter middle
+  slices from the same authoritative 12-band texture and view.
 - One read-only instanced particle draw showing mass-derived aggregate scale and
   authoritative settlement.
 - One table-mounted static six-jar rack for canonical doses 0, 2, 4, 6, 8, and 10. The six open rectangular vessels remain static comparison geometry and
@@ -35,13 +35,15 @@
   captures.
 
 No spatial hash was added because the measured production path remains far
-inside budget. Version 1 has no free list. Merge animation metadata, ghost
-runtime, Batch 04 features, and hosted deployment remain out of scope.
+inside budget. Version 1 has no free list. The accepted repair uses only
+render-local position, scale, and exit smoothing; simulation merge-event
+metadata, ghost runtime, Batch 04 features, and hosted deployment remain out of
+scope.
 
 ## Objective evidence
 
 - Repository contracts: 16 passing.
-- Vitest: 81 passing tests across 18 files.
+- Vitest: 83 passing tests across 19 files.
 - Canonical and nine-seed 11-dose suites pass, including dose-order
   independence, reset purity, mass conservation, population bounds, optical
   authority, diameter consistency, and a 10,000-step finite-state path.
@@ -70,10 +72,15 @@ runtime, Batch 04 features, and hosted deployment remain out of scope.
   1280 x 720 and visually inspected with no capture-time browser errors.
 
 The earlier physical Quest composition check remains accepted for start
-placement, table mounting, rectangular vessels, hero-tank hierarchy,
-controllers, and the recorded short rolling snapshot. It predates the final
-03D process model and is not reused as a replacement-model behavior or
-performance claim.
+placement, table mounting, rectangular vessels, hero-tank hierarchy, and
+controllers. A separate final-model physical rerun accepted visible growth,
+settling, optical-load depth, merge presentation, and rolling performance. At
+43 simulated seconds, 43.006 seconds of wall time had elapsed; the completed
+Dose 5 state held 105 active, 65 suspended, and 40 settled aggregates. The
+300-frame snapshot reported 120.0 FPS, 8.33 ms average, 8.90 ms p95, 0.017 ms
+simulation, 0.087 ms instance synchronization, 74 fully loaded stereo draw
+calls, 37.8 MB JavaScript heap, both controllers tracked, and no console or
+page errors.
 
 ## Historical comparison
 
@@ -105,10 +112,9 @@ acceptance still requires:
 - a blinded external water-treatment operator or educator apparatus-recognition
   response, preferably with an additional non-operator response;
 - a blinded low/optimum/high outcome review by an operator-informed reviewer
-  and a non-operator;
-- a short physical Quest check of the replacement behavior and rolling
-  performance.
+  and a non-operator.
 
-Record the responses in [UX_VALIDATION.md](UX_VALIDATION.md) and the device
-measurement in [PERFORMANCE.md](PERFORMANCE.md). The headset was not connected
-at final 03D evidence collection, so those gates remain explicit and open.
+Record the responses in [UX_VALIDATION.md](UX_VALIDATION.md). The physical
+replacement-model measurement is recorded in
+[PERFORMANCE.md](PERFORMANCE.md); it is a short visibility and rolling-
+performance check, not thermal or endurance evidence.

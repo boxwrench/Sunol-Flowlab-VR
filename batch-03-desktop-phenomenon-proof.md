@@ -1,6 +1,6 @@
 # Batch 03 Implementation Plan: Desktop Phenomenon Proof
 
-**Status:** Workstream 03D technically accepted; external human and replacement-model Quest gates open
+**Status:** Workstream 03D technically accepted; replacement-model Quest gate passed; external human gates open
 **Depends on:** Batch 02A accepted; Batch 00 regression and visual contracts available  
 **Primary gate:** The approved mass-authoritative model produces a deterministic, population-healthy U-shaped response whose low, near-optimal, and high outcomes remain visibly distinct in the retained desktop apparatus.
 
@@ -203,4 +203,4 @@ The [Workstream 03D technical acceptance packet](docs/BATCH_03_03D_TECHNICAL_ACC
 records changed behavior, commands and results, old/new sweep evidence,
 population metrics, desktop performance, allocations, limitations, captures,
 and the open external gates. Do not create the final Batch 03 accepted tag until
-the human and replacement-model Quest gates are recorded.
+the external human gates are recorded.

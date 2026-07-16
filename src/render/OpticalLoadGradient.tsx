@@ -22,6 +22,7 @@ const vertexShader = /* glsl */ `
 
 const fragmentShader = /* glsl */ `
   uniform sampler2D bandTexture;
+  uniform float opacityScale;
   varying vec2 vUv;
 
   void main() {
@@ -30,10 +31,23 @@ const fragmentShader = /* glsl */ `
     vec3 clearWater = vec3(0.055, 0.31, 0.32);
     vec3 cloudyWater = vec3(0.42, 0.49, 0.34);
     vec3 color = mix(clearWater, cloudyWater, response);
-    float alpha = mix(0.22, 0.78, response);
+    float alpha = mix(0.22, 0.78, response) * opacityScale;
     gl_FragColor = vec4(color, alpha);
   }
 `
+
+function createGradientMaterial(texture: DataTexture, opacityScale: number) {
+  return new ShaderMaterial({
+    fragmentShader,
+    transparent: true,
+    depthWrite: false,
+    uniforms: {
+      bandTexture: { value: texture },
+      opacityScale: { value: opacityScale },
+    },
+    vertexShader,
+  })
+}
 
 interface OpticalLoadGradientProps {
   readonly bands: OpticalLoadBandsView
@@ -60,24 +74,22 @@ export function OpticalLoadGradient({ bands }: OpticalLoadGradientProps) {
     nextTexture.needsUpdate = true
     return nextTexture
   }, [bandPixels, bands.values.length])
-  const material = useMemo(
-    () =>
-      new ShaderMaterial({
-        fragmentShader,
-        transparent: true,
-        depthWrite: false,
-        uniforms: { bandTexture: { value: texture } },
-        vertexShader,
-      }),
+  const backMaterial = useMemo(
+    () => createGradientMaterial(texture, 1),
+    [texture],
+  )
+  const middleMaterial = useMemo(
+    () => createGradientMaterial(texture, 0.42),
     [texture],
   )
 
   useEffect(
     () => () => {
-      material.dispose()
+      backMaterial.dispose()
+      middleMaterial.dispose()
       texture.dispose()
     },
-    [material, texture],
+    [backMaterial, middleMaterial, texture],
   )
 
   useFrame(() => {
@@ -87,8 +99,13 @@ export function OpticalLoadGradient({ bands }: OpticalLoadGradientProps) {
   })
 
   return (
-    <mesh position={[0, 0.6, -0.39]} material={material}>
-      <planeGeometry args={[1.45, 1.2]} />
-    </mesh>
+    <group>
+      <mesh position={[0, 0.6, -0.39]} material={backMaterial}>
+        <planeGeometry args={[1.45, 1.2]} />
+      </mesh>
+      <mesh position={[0, 0.6, 0]} material={middleMaterial}>
+        <planeGeometry args={[1.45, 1.2]} />
+      </mesh>
+    </group>
   )
 }

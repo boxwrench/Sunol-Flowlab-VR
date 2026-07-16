@@ -18,17 +18,18 @@ test('particle renderer is a read-only state consumer with one instanced mesh', 
   assert.match(source, /instanceMatrix\.needsUpdate = true/)
 })
 
-test('optical-load renderer uses one preallocated band-driven gradient surface', async () => {
+test('optical-load renderer uses two preallocated surfaces from one band authority', async () => {
   const source = await readFile(
     new URL('../src/render/OpticalLoadGradient.tsx', import.meta.url),
     'utf8',
   )
   const frameCallback = source.slice(source.indexOf('useFrame('))
 
-  assert.equal((source.match(/<mesh\b/g) ?? []).length, 1)
+  assert.equal((source.match(/<mesh\b/g) ?? []).length, 2)
   assert.match(source, /bands: OpticalLoadBandsView/)
   assert.match(source, /new Uint8Array\(bands\.values\.length\)/)
   assert.match(source, /new DataTexture/)
+  assert.match(source, /createGradientMaterial\(texture, 0\.42\)/)
   assert.doesNotMatch(
     frameCallback,
     /new (?:DataTexture|ShaderMaterial|Uint8Array)/,

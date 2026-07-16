@@ -165,7 +165,7 @@ Expensive volumetric or layered transparency effects require a successful hero t
 
 ## 13. Rendering and performance
 
-Layered transparency and screen-space overdraw are expected to be more dangerous than 500 particles alone. Prefer opaque instanced particles, one optical-load gradient surface, cheap jar walls, no realistic refraction, and no stacked full-tank effects.
+Layered transparency and screen-space overdraw are expected to be more dangerous than 500 particles alone. Prefer opaque instanced particles, one optical-load authority presented through sparse rear and middle slices from the same texture, cheap jar walls, no realistic refraction, and no stacked independent full-tank effects.
 
 Any large transparent effect requires before-and-after average frame time, p95, draw-call, memory, and readability evidence on the target Quest.
 

@@ -6,10 +6,10 @@ Updated: 2026-07-15
 
 - Repository: <https://github.com/boxwrench/Sunol-Flowlab-VR>
 - Branch: main
-- Latest published model increment: 0925913
-  (feat(sim): enforce population health acceptance)
+- Latest published technical increment: 7f3ab9c
+  (docs: accept Workstream 03D technical gate)
 - Current milestone: Batch 03 Workstream 03D technical acceptance complete;
-  external human review and a short replacement-model Quest check remain open
+  replacement-model Quest check passed; external human review remains open
 - Active plan authority: [IMPLEMENTATION_PLAN.md](IMPLEMENTATION_PLAN.md) and
   its ordered batch-00 through batch-11 Markdown files
 - Technical closing evidence:
@@ -40,7 +40,11 @@ Use only the active indexed Markdown plan.
 - Accepted configuration fnv1a32-e8bf13e7 with a principal Dose 5 minimum and
   passing canonical and nine-seed eleven-dose sweeps.
 - One live hero observation tank, one read-only instanced particle draw, a
-  band-driven clearing gradient, and clearing-front diagnostics.
+  band-driven clearing presentation using rear and lighter middle slices from
+  the same authority, and clearing-front diagnostics.
+- Authoritative diameter ratios are preserved in rendered floc scale. Short
+  render-local position, scale, and consumed-particle exit smoothing improves
+  merge readability without adding simulation merge-event state.
 - One table-mounted six-jar bench with open rectangular vessels. The jars are
   static canonical presets for doses 0, 2, 4, 6, 8, and 10; they are not six
   live simulations.
@@ -58,7 +62,7 @@ Use only the active indexed Markdown plan.
 ## Current evidence
 
 - 16 repository-contract tests pass.
-- 81 Vitest tests across 18 files pass.
+- 83 Vitest tests across 19 files pass.
 - Canonical, reverse-order, reset-purity, and nine-seed sweeps pass.
 - Mass/diameter invariants, deterministic merge history, fractal settling,
   optical-load authority, local transport, population bounds, and the
@@ -76,6 +80,11 @@ Use only the active indexed Markdown plan.
 - The tracked apparatus and three randomized comparison PNGs were regenerated
   after 03D and visually inspected. Capture-time browser errors were zero. The
   answer key remains ignored under test-results.
+- The replacement-model physical Quest rerun passed operator review. At 43
+  simulated seconds, 43.006 wall seconds had elapsed; the final 300-frame
+  snapshot reported 120.0 FPS, 8.33 ms average, 8.90 ms p95, 74 fully loaded
+  stereo draw calls, 37.8 MB heap, both controllers tracked, and no browser or
+  page errors.
 
 The production build retains the expected non-failing large-chunk warnings from
 the emulator environment assets.
@@ -89,21 +98,16 @@ following must still be recorded:
    recognition response, preferably plus a non-operator response.
 2. A blinded low/optimum/high outcome review by an operator-informed reviewer
    and a non-operator.
-3. A short physical Quest visibility and rolling-performance check using the
-   final 03D model.
 
 Use [docs/BATCH_03_REVIEW_PACKET.md](docs/BATCH_03_REVIEW_PACKET.md) for the
 review and record responses in
 [docs/UX_VALIDATION.md](docs/UX_VALIDATION.md). Do not show reviewers the local
 answer key or the technical packet before they answer.
 
-The local physical Quest route is accepted for connectivity and interaction.
-The earlier composition and controller evidence is still valid, but it predates
-the final process model and cannot accept replacement-model visibility or
-performance. The headset was not visible to ADB at final evidence collection.
-When it is reconnected, follow
-[docs/DEVICE_TESTING.md](docs/DEVICE_TESTING.md) and record the new measurement
-in [docs/PERFORMANCE.md](docs/PERFORMANCE.md).
+The local physical Quest route is accepted for connectivity, interaction,
+composition, final-model visibility, and short rolling performance. The
+measurement is recorded in [docs/PERFORMANCE.md](docs/PERFORMANCE.md). It is
+not thermal, endurance, later interaction ergonomics, or release evidence.
 
 A hosted HTTPS deployment is not authorized. Localhost and the documented ADB
 reverse route remain the approved development paths. Thermal, endurance, later
@@ -129,22 +133,20 @@ reset, or advance simulation state and cannot import the app layer. Do not move
 hot simulation state into React state.
 
 Keep spatial hashing deferred unless a recorded bottleneck justifies it.
-Version 1 has no free list. Do not add merge tween metadata without a rendering
-need. Do not start ghost runtime, Batch 04 features, or hosted deployment while
+Version 1 has no free list. The observed flicker justifies the current bounded
+render-local smoothing, but simulation merge-event metadata remains deferred.
+Do not start ghost runtime, Batch 04 features, or hosted deployment while
 closing the remaining Batch 03 gates.
 
 ## Recommended next session
 
 1. Conduct the blinded apparatus and outcome reviews from the regenerated
    packet and record exact or carefully paraphrased responses.
-2. Reconnect the Quest, verify ADB authorization, use the local reverse route,
-   complete a Dose 5 trial, inspect floc visibility and clearing-front
-   readability, and record a short rolling performance snapshot.
-3. If reviewers identify a comprehension problem, adjust the smallest
+2. If reviewers identify a comprehension problem, adjust the smallest
    presentation parameter before changing simulation complexity or particle
    count, then regenerate the packet.
-4. Accept Batch 03 only when the external and replacement-model Quest gates
-   pass. Then choose the bounded Batch 04 interaction increment.
+3. Accept Batch 03 only when the external gates pass. Then choose the bounded
+   Batch 04 interaction increment.
 
 ## Commands
 

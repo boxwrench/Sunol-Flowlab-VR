@@ -160,7 +160,7 @@ The benchmark schema now covers the full accepted Dose 5 phenomenon path rather 
 
 The canonical 11-dose sweep completed in 214.22 ms during focused validation, and the nine-seed acceptance corpus completed in 1.78 seconds. Both are far below the 30-second canonical sweep ceiling on the development machine.
 
-The phenomenon step allocates no arrays, objects, closures, PRNGs, or rendering values. Its nine particle arrays and three turbidity value/scratch arrays are fixed and reused. Completed result snapshots, failure JSON, Markdown tables, and sorted benchmark samples allocate outside the hot step. At Batch 02A acceptance, no performance evidence justified spatial hashing, pooling, collision, mass/density, or merge-animation work. The later modeling amendment authorizes the smallest mass-authoritative merge/density refinement for model fidelity, not as a performance optimization; spatial hashing, pooling, and render metadata remain evidence-gated. Full evidence is in [the Batch 02A acceptance packet](BATCH_02A_ACCEPTANCE.md).
+The phenomenon step allocates no arrays, objects, closures, PRNGs, or rendering values. Its nine particle arrays and three turbidity value/scratch arrays are fixed and reused. Completed result snapshots, failure JSON, Markdown tables, and sorted benchmark samples allocate outside the hot step. At Batch 02A acceptance, no performance evidence justified spatial hashing, pooling, collision, mass/density, or merge-animation work. The later modeling amendment authorizes the smallest mass-authoritative merge/density refinement for model fidelity, not as a performance optimization. Spatial hashing, pooling, and simulation merge-event metadata remain evidence-gated; the later Quest review separately justified bounded render-local smoothing. Full evidence is in [the Batch 02A acceptance packet](BATCH_02A_ACCEPTANCE.md).
 
 ## 2026-07-15 - Batch 03 desktop apparatus observation
 
@@ -205,8 +205,39 @@ O(n^2) pair schedule does not justify spatial hashing.
 
 The earlier physical Quest apparatus observation predates the final 03D model.
 It remains valid for placement, table and jar geometry, controllers, and
-composition, but it is not reused as a replacement-model performance claim.
-The headset was not connected at final 03D evidence collection. A short
-replacement-model Quest visibility and rolling-performance check remains open.
-Full model evidence is in
+composition. The separate final-model rerun below supplies the replacement-
+model visibility and rolling-performance evidence. Full model evidence is in
 [the Workstream 03D technical acceptance packet](BATCH_03_03D_TECHNICAL_ACCEPTANCE.md).
+
+## 2026-07-15 - Workstream 03D physical Quest visibility rerun
+
+- Device: Meta Quest 3, serial `2G0YC5ZG0M052K`
+- OS: Android 14, fingerprint `oculus/eureka/eureka:14/UP1A.231005.007.A1/52270740038100520:user/abl_signing_keys:release,amss_signing_keys:release,release-keys`
+- Browser: Quest Browser `149.0.0.24.3.1013217646` (`versionCode` `570100488`)
+- Route: USB ADB reverse `tcp:5173` to `tcp:5173`; Quest Browser at `http://127.0.0.1:5173/`
+- Model configuration: `fnv1a32-e8bf13e7`
+- Input: immersive session active; left and right controllers tracked
+
+The first final-model visual pass was rejected because aggregate growth was
+hard to notice, the brown optical load read mainly at the back of the tank,
+and deterministic merge disappearance could look like a flicker. A bounded
+presentation repair preserved the simulation and added authoritative-
+diameter display scaling, render-local transition smoothing, and a lighter
+middle optical slice driven by the same 12-band texture as the rear slice.
+
+The repaired Dose 5 rerun reached 43 simulated seconds after 43.006 seconds of
+wall time, confirming real-time pacing. The final authoritative state was 105
+active aggregates, 65 suspended, and 40 settled; mean mass `4.761905`, maximum
+mass `8`, maximum diameter `0.282843`, largest-mass fraction `1.6%`, and
+endpoint relative optical load `0.501182`.
+
+| Average FPS | Average frame | p95 frame | Simulation | Instance sync | Particles | Draw calls | JS heap |
+| ----------: | ------------: | --------: | ---------: | ------------: | --------: | ---------: | ------: |
+|       120.0 |       8.33 ms |   8.90 ms |   0.017 ms |      0.087 ms |       105 |         74 | 37.8 MB |
+
+The 74 draw calls include the fully loaded immersive stereo scene and tracked
+controllers. Remote inspection recorded no console or page errors. The
+project-owner water-treatment operator accepted the rerun as “much better” and
+“a pass.” This closes the replacement-model Quest visibility and short rolling-
+performance gate. It does not claim thermal, endurance, later interaction
+ergonomics, or release acceptance.

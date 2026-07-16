@@ -14,22 +14,27 @@ import {
 import type { ParticleFrameRecorder } from './ParticleCloud'
 
 interface FoundationSceneProps {
+  readonly animateParticleTransitions?: boolean
   readonly children?: ReactNode
   readonly particleState: ParticleStateView
   readonly opticalLoadBands: OpticalLoadBandsView
+  readonly preserveDrawingBuffer?: boolean
   readonly recordParticleFrame: ParticleFrameRecorder
 }
 
 export function FoundationScene({
+  animateParticleTransitions = true,
   children,
   particleState,
   opticalLoadBands,
+  preserveDrawingBuffer = false,
   recordParticleFrame,
 }: FoundationSceneProps) {
   return (
     <Canvas
       camera={{ position: [...DESKTOP_CAMERA_POSITION], fov: 42 }}
       dpr={[1, 1.5]}
+      gl={{ preserveDrawingBuffer }}
       onCreated={({ camera }) => camera.lookAt(...DESKTOP_CAMERA_TARGET)}
     >
       <XR store={xrStore}>
@@ -39,6 +44,7 @@ export function FoundationScene({
         <directionalLight position={[2, 4, 3]} intensity={2.2} />
         <group position={[...APPARATUS_WORLD_POSITION]}>
           <HeroObservationTank
+            animateParticleTransitions={animateParticleTransitions}
             particleState={particleState}
             opticalLoadBands={opticalLoadBands}
             recordParticleFrame={recordParticleFrame}

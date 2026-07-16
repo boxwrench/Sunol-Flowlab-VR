@@ -57,8 +57,9 @@ function recordParticleFrame(
 }
 
 export function App() {
-  const presentationMode =
-    new URLSearchParams(window.location.search).get('mode') === 'proof'
+  const urlParameters = new URLSearchParams(window.location.search)
+  const presentationMode = urlParameters.get('mode') === 'proof'
+  const reviewCaptureMode = urlParameters.get('capture') === 'review'
   const [entryError, setEntryError] = useState<string | null>(null)
   const [selectedDose, setSelectedDose] = useState<DoseDetent>(5)
   const xrPreflightRef = useRef<XrPreflightSnapshot>({
@@ -201,8 +202,10 @@ export function App() {
       ) : null}
       {import.meta.env.DEV && !presentationMode ? <MetricsOverlay /> : null}
       <FoundationScene
+        animateParticleTransitions={!reviewCaptureMode}
         particleState={runtime.state}
         opticalLoadBands={runtime.opticalLoadBands}
+        preserveDrawingBuffer={reviewCaptureMode}
         recordParticleFrame={recordParticleFrame}
       >
         <SimulationDriver runtime={runtime} />
