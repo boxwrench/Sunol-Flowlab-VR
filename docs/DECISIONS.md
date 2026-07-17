@@ -36,7 +36,7 @@ Batch 02A added only the particle state, deterministic dose efficiency, simplifi
 
 ## ADR-006: Hybrid jar-test presentation and memory
 
-The approved experience uses one live authoritative hero tank and six static canonical jar summaries at doses 0, 2, 4, 6, 8, and 10. A jar is updated once from an immutable completed result and owns no simulation state, clock, particle state, or per-frame process logic. The plot and trial log are the sole complete memory for every dose from 0 through 10; odd-dose trials therefore remain fully recorded without creating a jar. Visual acceptance also requires an unlabeled-screenshot recognition check recorded in `docs/UX_VALIDATION.md`.
+The approved experience uses one live authoritative hero tank and six static canonical jar summaries at doses 0, 2, 4, 6, 8, and 10. Before its canonical result exists, each jar may show the same frozen raw-water fill using the hero tank's visual palette so that the apparatus does not look empty. That fill is a static recognition cue, not a result and not a live mirror. A jar is later updated once from an immutable completed result and owns no simulation state, clock, particle state, live optical-load view, or per-frame process logic. Reusing hero-tank geometry or material recipes is allowed; six live render mirrors or runtimes are not. The plot and trial log are the sole complete memory for every dose from 0 through 10; odd-dose trials therefore remain fully recorded without creating a jar. Visual acceptance also requires an unlabeled-screenshot recognition check recorded in `docs/UX_VALIDATION.md`.
 
 ## ADR-007: Accepted Batch 02A statistical baseline
 

@@ -10,6 +10,8 @@ export const CANONICAL_JAR_DOSES = [0, 2, 4, 6, 8, 10] as const
 
 const JAR_VESSEL_DIMENSIONS = [0.18, 0.36, 0.16] as const
 const JAR_RIM_DIMENSIONS = [0.19, 0.014, 0.17] as const
+const RAW_WATER_FILL_DIMENSIONS = [0.158, 0.26, 0.138] as const
+const RAW_WATER_FILL_COLOR = '#6b7d57'
 const JAR_WALL_EXTRUSION = {
   depth: JAR_VESSEL_DIMENSIONS[1],
   bevelEnabled: false,
@@ -51,6 +53,7 @@ function createRectangularRing(width: number, depth: number, border: number) {
 }
 
 export function JarTestBench() {
+  const fillsRef = useRef<InstancedMesh>(null)
   const jarsRef = useRef<InstancedMesh>(null)
   const paddlesRef = useRef<InstancedMesh>(null)
   const rimsRef = useRef<InstancedMesh>(null)
@@ -76,11 +79,13 @@ export function JarTestBench() {
   )
 
   useLayoutEffect(() => {
+    const fills = fillsRef.current
     const jars = jarsRef.current
     const paddles = paddlesRef.current
     const rims = rimsRef.current
     const tableLegs = tableLegsRef.current
     if (
+      fills === null ||
       jars === null ||
       paddles === null ||
       rims === null ||
@@ -90,6 +95,8 @@ export function JarTestBench() {
 
     for (let index = 0; index < CANONICAL_JAR_DOSES.length; index += 1) {
       const x = (index - 2.5) * 0.25
+      transform.makeTranslation(x, 0.17, 0)
+      fills.setMatrixAt(index, transform)
       transform.makeRotationX(-Math.PI / 2)
       transform.setPosition(x, 0.04, 0)
       jars.setMatrixAt(index, transform)
@@ -99,6 +106,7 @@ export function JarTestBench() {
       transform.setPosition(x, 0.4, 0)
       rims.setMatrixAt(index, transform)
     }
+    fills.instanceMatrix.needsUpdate = true
     jars.instanceMatrix.needsUpdate = true
     paddles.instanceMatrix.needsUpdate = true
     rims.instanceMatrix.needsUpdate = true
@@ -126,6 +134,18 @@ export function JarTestBench() {
       </instancedMesh>
 
       <group position={[0, JAR_TEST_RACK_BASE_HEIGHT_METERS, 0]} scale={1.08}>
+        <instancedMesh
+          ref={fillsRef}
+          args={[undefined, undefined, CANONICAL_JAR_DOSES.length]}
+        >
+          <boxGeometry args={[...RAW_WATER_FILL_DIMENSIONS]} />
+          <meshStandardMaterial
+            color={RAW_WATER_FILL_COLOR}
+            roughness={0.72}
+            transparent
+            opacity={0.92}
+          />
+        </instancedMesh>
         <instancedMesh
           ref={jarsRef}
           args={[undefined, undefined, CANONICAL_JAR_DOSES.length]}

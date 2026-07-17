@@ -14,6 +14,7 @@ const privateKeyPath = fileURLToPath(
 )
 const letters = ['A', 'B', 'C']
 const captureAttempts = 4
+const apparatusOnly = process.argv.includes('--apparatus-only')
 
 function captureUrl(mode) {
   const url = new URL(baseUrl)
@@ -150,12 +151,14 @@ try {
     path.join(outputDirectory, 'apparatus-unlabeled.png'),
   )
 
-  const key = {
-    capturedAt: new Date().toISOString(),
-    sourceUrl: baseUrl,
-    comparisons: {},
-  }
-  const doses = shuffledDoses()
+  const key = apparatusOnly
+    ? undefined
+    : {
+        capturedAt: new Date().toISOString(),
+        sourceUrl: baseUrl,
+        comparisons: {},
+      }
+  const doses = apparatusOnly ? [] : shuffledDoses()
 
   for (let index = 0; index < doses.length; index += 1) {
     const dose = doses[index]
@@ -208,10 +211,14 @@ try {
     )
   }
 
-  await writeFile(privateKeyPath, `${JSON.stringify(key, null, 2)}\n`)
-  console.log(
-    'Batch 03 review captures created; the ignored local answer key is in test-results.',
-  )
+  if (key === undefined) {
+    console.log('Batch 03 unlabeled apparatus capture created.')
+  } else {
+    await writeFile(privateKeyPath, `${JSON.stringify(key, null, 2)}\n`)
+    console.log(
+      'Batch 03 review captures created; the ignored local answer key is in test-results.',
+    )
+  }
 } finally {
   await browser.close()
 }

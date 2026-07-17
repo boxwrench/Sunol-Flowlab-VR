@@ -19,6 +19,7 @@
     "test:unit": "vitest run",
     "test:browser": "playwright test",
     "capture:review": "node scripts/capture-batch-03-review.mjs",
+    "capture:apparatus": "node scripts/capture-batch-03-review.mjs --apparatus-only",
     "benchmark": "vitest run src/sim/benchmark.cli.test.ts --reporter=dot",
     "acceptance:03d": "vitest run src/sim/acceptance.cli.test.ts --reporter=dot",
     "lint": "eslint .",

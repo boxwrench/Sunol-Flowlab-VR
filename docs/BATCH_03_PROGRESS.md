@@ -1,6 +1,6 @@
 # Batch 03 Desktop Proof Progress
 
-**Status:** Workstream 03D technically accepted; replacement-model Quest gate passed; external human gates open
+**Status:** 03R.1 implementation candidate ready; fresh jar recognition required
 **Accepted model configuration:** fnv1a32-e8bf13e7
 **Technical acceptance:** [BATCH_03_03D_TECHNICAL_ACCEPTANCE.md](BATCH_03_03D_TECHNICAL_ACCEPTANCE.md)
 **Date:** 2026-07-15
@@ -12,8 +12,9 @@
   slices from the same authoritative 12-band texture and view.
 - One read-only instanced particle draw showing mass-derived aggregate scale and
   authoritative settlement.
-- One table-mounted static six-jar rack for canonical doses 0, 2, 4, 6, 8, and 10. The six open rectangular vessels remain static comparison geometry and
-  receive no simulation, result, optical-load, or clock input.
+- One table-mounted static six-jar rack for canonical doses 0, 2, 4, 6, 8, and 10. Each open rectangular vessel now contains the same frozen raw-water fill
+  from one six-instance draw. The bench receives no simulation, result,
+  optical-load, fixed-step, or per-frame process input.
 - Development comparison resets for doses 0, 5, and 10 from the same seed,
   phase schedule, camera, and raw-water state.
 - Development Start, Stop, and Reset review controls. Stop preserves current
@@ -76,6 +77,24 @@ scope.
 - The randomized apparatus and low/optimum/high packet was regenerated at
   1280 x 720 and visually inspected with no capture-time browser errors.
 
+### Work Package 03R.1 candidate
+
+- One shared box geometry and material produces six identical frozen fills.
+- The fill uses the hero tank's cloudy-water palette, leaves a visible
+  headspace, and adds no dose differences, settling cue, result claim, clock,
+  simulation import, or useFrame path.
+- The focused render contract proves six instances and excludes particle,
+  optical-load, runtime, fixed-step, completed-result, and jar-summary
+  dependencies.
+- All four browser interaction tests pass. The loaded desktop scene reports 24
+  draw calls and the browser regression records zero console and page errors.
+- The regenerated 1280 x 720 apparatus image was visually inspected. Its SHA-256
+  is 995131BF5AD84B79291351501925FFADFA0A999D4701C8521C54020B0426194B.
+- The accepted A/B/C images remain byte-unchanged at
+  5425F0F0127653EDFD21B4EB3611A0ECA4150B53A3A727969138A37801D09C16,
+  5425F0F0127653EDFD21B4EB3611A0ECA4150B53A3A727969138A37801D09C16,
+  and 18AA62397B711D8E3F7E77D3E1C949ED07FCA4356170178346D0BF1DD2E3935D.
+
 The earlier physical Quest composition check remains accepted for start
 placement, table mounting, rectangular vessels, hero-tank hierarchy, and
 controllers. A separate final-model physical rerun accepted visible growth,
@@ -112,14 +131,19 @@ connection to plant controls or operational data.
 
 Replacement evidence is ready in
 [BATCH_03_REVIEW_PACKET.md](BATCH_03_REVIEW_PACKET.md). Final Batch 03
-acceptance still requires:
+acceptance still requires a fresh blinded apparatus-recognition response from
+an external water-treatment operator or educator, preferably with an
+additional non-operator. The 03R.1 implementation and replacement apparatus
+image are ready for that Part 1 rerun.
 
-- a blinded external water-treatment operator or educator apparatus-recognition
-  response, preferably with an additional non-operator response;
-- a blinded low/optimum/high outcome review by an operator-informed reviewer
-  and a non-operator.
-
-Record the responses in [UX_VALIDATION.md](UX_VALIDATION.md). The physical
-replacement-model measurement is recorded in
-[PERFORMANCE.md](PERFORMANCE.md); it is a short visibility and rolling-
-performance check, not thermal or endurance evidence.
+The first external review correctly identified C as best and A/B as less
+effective for both the operator and non-operator, so the outcome-comparison
+gate is accepted. Both identified the large tank as primary, but the operator
+called the small vessels “Empty jars” and the non-operator read them as possible
+“chemicals?” The exact responses and assessment are recorded in
+[UX_VALIDATION.md](UX_VALIDATION.md). The physical replacement-model
+measurement remains recorded in [PERFORMANCE.md](PERFORMANCE.md); it is a short
+visibility and rolling-performance check, not thermal or endurance evidence.
+No headset was attached during 03R.1, so the optional short physical
+composition/cost confirmation for the added transparent fill remains available
+when the device is next connected.

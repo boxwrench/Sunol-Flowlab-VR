@@ -1,6 +1,6 @@
 # Batch 03 Implementation Plan: Desktop Phenomenon Proof
 
-**Status:** Workstream 03D technically accepted; replacement-model Quest gate passed; external human gates open
+**Status:** Technical, Quest, and blinded outcome gates passed; jar-recognition repair required
 **Depends on:** Batch 02A accepted; Batch 00 regression and visual contracts available  
 **Primary gate:** The approved mass-authoritative model produces a deterministic, population-healthy U-shaped response whose low, near-optimal, and high outcomes remain visibly distinct in the retained desktop apparatus.
 
@@ -194,7 +194,7 @@ Stop before Batch 04 when any of the following is true:
 - One relative optical-load band record drives all process outputs.
 - The accepted 500-particle path meets the documented runtime and allocation budget.
 - The desktop proof remains independently runnable and the Quest apparatus retains its accepted placement and hierarchy.
-- External recognition and blinded outcome responses are recorded after replacement captures are generated.
+- The passed blinded outcome response remains recorded, and the repaired static jar presentation passes fresh external recognition.
 - No unresolved model, presentation, terminology, or performance issue would make Batch 04 or later XR integration ambiguous.
 
 ## Closing packet
@@ -202,5 +202,5 @@ Stop before Batch 04 when any of the following is true:
 The [Workstream 03D technical acceptance packet](docs/BATCH_03_03D_TECHNICAL_ACCEPTANCE.md)
 records changed behavior, commands and results, old/new sweep evidence,
 population metrics, desktop performance, allocations, limitations, captures,
-and the open external gates. Do not create the final Batch 03 accepted tag until
-the external human gates are recorded.
+and the remaining external gate. Do not create the final Batch 03 accepted tag
+until the repaired jar presentation passes blinded apparatus recognition.

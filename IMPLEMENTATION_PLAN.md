@@ -53,7 +53,7 @@ The work remains staged: Workstream 03D exposes the authoritative samples; Batch
 | 01B   | Partially accepted     | Local Quest route passed; hosted smoke remains open    |
 | 02A   | Accepted               | Deterministic 11-dose phenomenon proof recorded        |
 | 02B   | Deferred               | Spatial hash and simulation merge events need evidence |
-| 03    | Technical gate passed  | External blind recognition and outcome review          |
+| 03    | 03R.1 candidate ready  | Fresh blind recognition on repaired static jars        |
 | 04–11 | Not started            | Predecessor gates                                      |
 
 An [earlier Godot implementation plan](docs/archive/Sunol%20FlowLab%20Implementation%20Plan%20%28superseded%20Godot%29.pdf) is retained only as a superseded source artifact for provenance and is non-binding for this greenfield WebXR repository. The stale duplicate Batch 03 snapshot and superseded pre-research mechanics were removed from the active tree; Git history preserves them. Only [the indexed Batch 03 plan](batch-03-desktop-phenomenon-proof.md) is authoritative.
@@ -69,9 +69,16 @@ presets, deterministic development Start/Stop/Reset review controls,
 clearing-front diagnostics, an unlabeled proof mode, and a technically accepted
 mass-authoritative model. Automated, visual, sweep, population, and benchmark
 evidence is recorded in
-[the Batch 03 progress packet](docs/BATCH_03_PROGRESS.md). The next active work
-is external blind recognition and blinded low/optimum/high review. The short
-replacement-model Quest visibility and rolling-performance check has passed.
-Batch 04 remains blocked until the external Batch 03 gates are decided.
+[the Batch 03 progress packet](docs/BATCH_03_PROGRESS.md). The blinded
+low/optimum/high outcome comparison and short replacement-model Quest check
+have passed. The next active work is the smallest static jar-content repair and
+a fresh blinded apparatus-recognition rerun. Batch 04 remains blocked until
+that final Batch 03 gate is decided.
+
+The implemented 03R.1 candidate reuses the hero tank's visual palette as one
+six-instance frozen raw-water fill across all six jars. It does not mirror live
+state. Later exact canonical completions may replace one jar at a time with an
+immutable completed-result summary; the complete plot and log remain
+authoritative memory. Fresh blinded apparatus recognition remains the open gate.
 
 The hybrid direction maps runtime ownership to Batch 01A closure; hero-tank and jar-rack blockout plus recognition validation to Batch 03; interaction to Batch 04; integration to Batches 05-06; static jar summaries, complete memory, and treatment-ghost recording/playback runtime to Batch 07; live-versus-ghost readability to Batch 08; spectator presentation to Batch 09; presence to Batch 10; and release evidence to Batch 11.

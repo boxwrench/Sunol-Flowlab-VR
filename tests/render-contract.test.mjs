@@ -37,21 +37,31 @@ test('optical-load renderer uses two preallocated surfaces from one band authori
   assert.doesNotMatch(source, /endpointOpticalLoad|sampleOpticalLoadBands|Dose/)
 })
 
-test('jar-test bench is a table-mounted six-preset static geometry consumer', async () => {
+test('jar-test bench has six identical frozen raw-water fills with no process dependency', async () => {
   const source = await readFile(
     new URL('../src/render/JarTestBench.tsx', import.meta.url),
     'utf8',
   )
 
   assert.match(source, /\[0, 2, 4, 6, 8, 10\] as const/)
-  assert.equal((source.match(/<instancedMesh\b/g) ?? []).length, 4)
-  for (const refName of ['jarsRef', 'rimsRef', 'paddlesRef']) {
+  assert.equal((source.match(/<instancedMesh\b/g) ?? []).length, 5)
+  for (const refName of ['fillsRef', 'jarsRef', 'rimsRef', 'paddlesRef']) {
     assert.match(source, new RegExp(`ref=\\{${refName}\\}`))
   }
+  assert.match(
+    source,
+    /ref=\{fillsRef\}[\s\S]*?CANONICAL_JAR_DOSES\.length[\s\S]*?RAW_WATER_FILL_DIMENSIONS/,
+  )
+  assert.match(source, /const RAW_WATER_FILL_COLOR = '#6b7d57'/)
+  assert.match(source, /fills\.setMatrixAt\(index, transform\)/)
+  assert.match(source, /fills\.instanceMatrix\.needsUpdate = true/)
   assert.match(source, /ref=\{tableLegsRef\}/)
   assert.match(source, /JAR_TEST_TABLETOP_HEIGHT_METERS/)
   assert.match(source, /JAR_VESSEL_DIMENSIONS/)
   assert.match(source, /JAR_RIM_DIMENSIONS/)
   assert.doesNotMatch(source, /cylinderGeometry|torusGeometry/)
-  assert.doesNotMatch(source, /useFrame|Particle|OpticalLoad|SimulationRuntime/)
+  assert.doesNotMatch(
+    source,
+    /useFrame|Particle|OpticalLoad|SimulationRuntime|FixedStep|TrialResult|CanonicalJarSummary/,
+  )
 })

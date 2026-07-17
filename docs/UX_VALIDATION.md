@@ -1,6 +1,6 @@
 # Apparatus Recognition Validation
 
-**Status:** Project-owner operator composition and replacement-model Quest review accepted; external blind reviews open
+**Status:** External outcome comparison passed; repaired 03R.1 apparatus candidate awaits recognition rerun
 **Governing requirement:** Batch 03 presentation-retention and human-validation gate
 **Review route:** `http://127.0.0.1:5173/?mode=proof`
 
@@ -48,10 +48,9 @@ low/optimum/high outcomes from configuration fnv1a32-e8bf13e7. The answer key
 is retained only in an ignored local test artifact until responses are
 recorded.
 
-No participant responses have been recorded yet. The project owner's
-operator-informed outcome review may be recorded, but it does not replace the
-external blind apparatus-recognition response because the owner already knows
-the intended design.
+External participant responses are recorded below. The project owner's earlier
+operator-informed review remains useful but does not replace these blinded
+responses because the owner already knows the intended design.
 
 During the first physical Quest review on 2026-07-15, the project owner and
 water-treatment operator reported that the initial WebXR viewpoint began inside
@@ -75,10 +74,8 @@ composition review is accepted for start placement, table mounting, vessel
 shape, and hero-tank priority. This informed review does not replace the open
 external blind-recognition requirement.
 
-Workstream 03D replacement captures have now passed browser-error and visual
-inspection. The parked reviews may resume. No external participant response has
-yet been recorded, so neither apparatus recognition nor outcome comprehension
-is accepted.
+Workstream 03D replacement captures passed browser-error and visual inspection
+before the external reviews below.
 
 ### Replacement-model Quest review
 
@@ -106,5 +103,61 @@ slightly-darker mass cue. That remains optional presentation polish: aggregate
 size is the primary mass cue, and any color mapping should stay subtle and must
 not imply dose, quality, calibrated turbidity, or a second treatment result.
 
-This informed owner review does not replace the external blind apparatus-
-recognition and outcome-comparison gates above.
+This informed owner review did not replace the external blind gates; the later
+external results below govern their acceptance.
+
+### External blinded review results
+
+Two external participants reviewed the packet on 2026-07-15 at commit
+`2f72e89`, before receiving the answer key or implementation explanation.
+
+#### Reviewer 1 — water-treatment operator
+
+| Question                                                           | Verbatim response    |
+| ------------------------------------------------------------------ | -------------------- |
+| What does the apparatus represent?                                 | “floc”               |
+| What would you expect to do here?                                  | “sedimentation”      |
+| Primary active experiment?                                         | “Big tank”           |
+| Meaning of the six small vessels?                                  | “Empty jars”         |
+| Best finished-water clarity?                                       | “c”                  |
+| Two less-effective outcomes?                                       | “a,b”                |
+| Does the best outcome read without labels or a plot?               | “yes”                |
+| Plausible qualitative jar-test lesson?                             | “yeah”               |
+| Does it imply calibrated prediction, guidance, or excess fidelity? | “i dont know. no”    |
+| Most important visual change?                                      | “The jars are empty” |
+
+#### Reviewer 2 — non-operator participant
+
+| Question                                                           | Verbatim response |
+| ------------------------------------------------------------------ | ----------------- |
+| What does the apparatus represent?                                 | “Dirty water”     |
+| What would you expect to do here?                                  | “Clean water”     |
+| Primary active experiment?                                         | “The big box”     |
+| Meaning of the six small vessels?                                  | “chemicals?”      |
+| Best finished-water clarity?                                       | “c”               |
+| Two less-effective outcomes?                                       | “a,b”             |
+| Does the best outcome read without labels or a plot?               | “yes”             |
+| Plausible qualitative jar-test lesson?                             | “yes”             |
+| Does it imply calibrated prediction, guidance, or excess fidelity? | “no”              |
+| Most important visual change?                                      | “Nice bacground”  |
+
+#### Gate assessment
+
+The blinded outcome-comparison gate passes. Both participants independently
+selected C as the clearest outcome, selected A and B as less effective, found
+the best result legible without labels, accepted the qualitative treatment
+lesson, and did not identify a safety-framing overclaim.
+
+The apparatus-recognition gate does not yet pass. Both participants identified
+the large tank as primary and understood water treatment, but the operator did
+not explicitly identify a jar-test comparison and described the six vessels as
+“Empty jars.” The non-operator described them as possible “chemicals?” rather
+than a comparative experiment. This is a specific presentation failure, not a
+simulation or outcome failure.
+
+The 03R.1 candidate now gives all six jars the same frozen raw-water fill while
+preserving their non-live status, secondary hierarchy, and zero process
+ownership. Only the affected apparatus evidence was regenerated; the accepted
+A/B/C files remain byte-unchanged. Repeat Part 1 with fresh blinded
+participants where practical. The passed outcome gate does not need to be
+repeated unless those images change.

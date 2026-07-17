@@ -53,8 +53,11 @@ test('binding Batch 00 contracts are present and mutually consistent', async () 
   assert.match(ghostReplay, /Ghost playback does not rerun/)
   assert.match(contracts, /interface TreatmentGhostV1/)
   assert.match(batch03, /Workstream 03D/)
-  assert.match(batch03, /Workstream 03D technically accepted/)
-  assert.match(batch03, /replacement-model Quest gate passed/)
+  assert.match(batch03, /Technical, Quest, and blinded outcome gates passed/)
+  assert.match(
+    batch03,
+    /blinded outcome gates passed; jar-recognition repair required/,
+  )
   assert.match(batch07, /Workstream 07D - Treatment-result ghost/)
   assert.match(batch08, /Work package 08.9 - Treatment-ghost visual comparison/)
 })

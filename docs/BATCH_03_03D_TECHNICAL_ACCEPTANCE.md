@@ -1,6 +1,6 @@
 # Batch 03 Workstream 03D Technical Acceptance
 
-**Status:** Technical acceptance passed; external human-review gates remain open
+**Status:** Technical, Quest, and blinded outcome gates passed; apparatus-recognition repair remains open
 **Accepted configuration:** fnv1a32-e8bf13e7
 **Canonical seed:** 0x5f3759df
 **Date:** 2026-07-15
@@ -213,17 +213,18 @@ fully loaded stereo draw calls, 37.8 MB heap, both controllers tracked, and no
 console or page errors. The project-owner water-treatment operator accepted
 the result as “much better” and “a pass.”
 
-## Open external gates
+## Remaining external gate
 
-The replacement captures are ready for the protocol in
-[BATCH_03_REVIEW_PACKET.md](BATCH_03_REVIEW_PACKET.md). Batch 03 remains open
-until:
+The first external review is recorded in [UX_VALIDATION.md](UX_VALIDATION.md).
+Both the operator and non-operator correctly selected C as best and A/B as less
+effective, so the blinded outcome-comparison gate passes.
 
-1. an external water-treatment operator or educator completes the blinded
-   apparatus-recognition review, with a non-operator preferred as an additional
-   participant;
-2. an operator-informed reviewer and a non-operator complete the blinded
-   low/optimum/high outcome comparison.
+The apparatus-recognition gate remains open. The operator described the six
+vessels as “Empty jars,” and the non-operator read them as possible
+“chemicals?” The next candidate must add a static, non-live jar-content cue,
+regenerate the affected apparatus evidence, and pass a fresh blinded Part 1
+review. The accepted outcome images do not need regeneration unless the hero-
+tank outcome presentation changes.
 
 The earlier physical Quest composition acceptance supports start placement,
 table height, rectangular jars, controllers, and hierarchy; the final-model

@@ -3,6 +3,12 @@ import { expect, test } from '@playwright/test'
 test('desktop foundation loads with explicit VR entry and a render surface', async ({
   page,
 }) => {
+  const browserErrors: string[] = []
+  page.on('console', (message) => {
+    if (message.type() === 'error') browserErrors.push(message.text())
+  })
+  page.on('pageerror', (error) => browserErrors.push(error.message))
+
   await page.goto('/')
 
   await expect(
@@ -13,6 +19,11 @@ test('desktop foundation loads with explicit VR entry and a render surface', asy
   await expect(page.getByLabel('Comparison presets')).toBeVisible()
   await expect(page.getByLabel('Simulation playback')).toBeVisible()
   await expect(page.locator('canvas')).toBeVisible()
+  await expect(
+    page
+      .getByLabel('Development performance metrics')
+      .getByText('24 draw calls'),
+  ).toBeVisible()
   const xrPreflight = await page.evaluate(() =>
     JSON.parse(window.render_xr_preflight_to_text?.() ?? '{}'),
   )
@@ -24,6 +35,7 @@ test('desktop foundation loads with explicit VR entry and a render surface', asy
     rightSelectCount: 0,
     targetSelectCount: 0,
   })
+  expect(browserErrors).toEqual([])
 })
 
 test('review controls start, stop, and deterministically reset the trial', async ({

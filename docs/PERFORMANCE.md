@@ -241,3 +241,23 @@ project-owner water-treatment operator accepted the rerun as “much better” a
 “a pass.” This closes the replacement-model Quest visibility and short rolling-
 performance gate. It does not claim thermal, endurance, later interaction
 ergonomics, or release acceptance.
+
+## 2026-07-15 - Work Package 03R.1 desktop presentation check
+
+The frozen raw-water repair adds exactly one static instanced draw for all six
+jar fills. The current 1280 x 720 headless Chromium scene reported 24 draw
+calls with 500 active particles. All four browser scenarios passed, including
+the explicit 24-draw-call check, zero captured console/page errors, the full
+Stop/Reset/Start chain, the deterministic U-shaped comparison, and proof-mode
+control exclusion.
+
+The bundled browser client captured the repaired proof scene and current text
+state without an error. The regenerated unlabeled apparatus image was visually
+inspected: each vessel has a consistent cloudy raw-water volume and visible
+headspace, while the hero tank remains primary. The accepted A/B/C outcome
+files were not regenerated and retain their prior SHA-256 values.
+
+This is desktop presentation evidence, not new physical-headset evidence.
+The adb devices -l check reported no attached device, so a short Quest
+composition/cost confirmation for the added transparent fill was not available
+in this session.

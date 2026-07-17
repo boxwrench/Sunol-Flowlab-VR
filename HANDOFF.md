@@ -6,9 +6,16 @@ Updated: 2026-07-15
 
 - Repository: <https://github.com/boxwrench/Sunol-Flowlab-VR>
 - Branch: main
-- Published branch: main; use `git log -1 --oneline` for the current increment
+- Published HEAD: `2f72e89` (`feat(app): add deterministic review controls`)
+- Working tree: the bounded 03R.1 render, browser/contract tests, apparatus-only
+  capture path, replacement apparatus image, and evidence updates are
+  uncommitted alongside the earlier external-review findings
+- Separate untracked file: `AGENTS.md` appeared outside this work, defines
+  repository-local authority, and must be preserved unless its owner directs
+  otherwise
 - Current milestone: Batch 03 Workstream 03D technical acceptance complete;
-  replacement-model Quest check passed; external human review remains open
+  Quest and blinded outcome checks passed; the 03R.1 repair candidate is ready
+  for fresh jar-recognition review
 - Active plan authority: [IMPLEMENTATION_PLAN.md](IMPLEMENTATION_PLAN.md) and
   its ordered batch-00 through batch-11 Markdown files
 - Technical closing evidence:
@@ -49,8 +56,9 @@ Use only the active indexed Markdown plan.
   state; Reset restores the selected dose and canonical seed at time zero and
   remains stopped; Start resumes the current state. Proof mode hides them.
 - One table-mounted six-jar bench with open rectangular vessels. The jars are
-  static canonical presets for doses 0, 2, 4, 6, 8, and 10; they are not six
-  live simulations.
+  static canonical presets for doses 0, 2, 4, 6, 8, and 10; one instanced draw
+  gives all six the same frozen raw-water fill, and they are not six live
+  simulations.
 - The future complete plot and experiment log remain the canonical memory for
   all eleven dose values. Static jars are summaries only.
 - Unlabeled proof mode and regenerated randomized low/optimum/high review
@@ -90,19 +98,61 @@ Use only the active indexed Markdown plan.
   snapshot reported 120.0 FPS, 8.33 ms average, 8.90 ms p95, 74 fully loaded
   stereo draw calls, 37.8 MB heap, both controllers tracked, and no browser or
   page errors.
+- The external operator and non-operator both selected C as the clearest result
+  and A/B as less effective, found the qualitative outcome legible, and rejected
+  predictive overclaim. The blinded outcome-comparison gate passes.
+- Apparatus recognition did not pass: the operator called the six vessels
+  “Empty jars,” and the non-operator read them as possible “chemicals?” Both
+  still identified the large tank as primary and understood water treatment.
 
 The production build retains the expected non-failing large-chunk warnings from
 the emulator environment assets.
 
+## Work Package 03R.1 candidate and remaining validation
+
+The six jars may reuse the hero tank's water, haze, and clearing visual language,
+but they must not be live clones of its runtime. The accepted lifecycle is:
+
+1. Before a canonical trial has completed, every jar contains the same frozen
+   raw-water fill. This is a static apparatus cue so the vessels do not look
+   empty; it is not a treatment result.
+2. In the later intended write-on-completion behavior, finishing an exact
+   canonical dose 0, 2, 4, 6, 8, or 10 replaces only that jar's fill once with
+   a frozen summary derived from the immutable completed `TrialResultV1` and
+   `CanonicalJarSummary`.
+3. A jar never consumes the current hero-tank particle view, live optical-load
+   bands, fixed-step clock, or per-frame updates. Six live mirrors or six
+   simulations are forbidden.
+4. The mounted plot and experiment log remain the sole complete memory for all
+   eleven doses; the six jars remain partial canonical summaries.
+
+03R.1 implements only the initial frozen raw-water fill as one six-instance
+draw using shared geometry and material inside the existing open rectangular
+vessels. It reuses the hero tank's cloudy-water palette and adds no dose-
+specific differences, settled-result claims, `useFrame`, simulation imports,
+or process calculation. The existing table, paddles, rims, vessel geometry,
+and hero-tank hierarchy are retained.
+
+Recorded implementation evidence for 03R.1:
+
+- a render contract proving six static fills and no runtime/process dependency;
+- updated draw-call and browser-error evidence;
+- one regenerated unlabeled apparatus image, while the accepted A/B/C outcome
+  images remain byte-unchanged;
+- visual inspection in desktop framing; no Quest was attached for the optional
+  short composition/cost confirmation of the added transparent fill;
+- a fresh blinded Part 1 review in which the operator recognizes a jar-test
+  comparison, the non-operator preferably recognizes a comparative experiment,
+  the hero tank remains primary, and the jars do not imply six live processes.
+
 ## Open gates and constraints
 
-Batch 03 is not accepted yet. The replacement images are ready, but the
-following must still be recorded:
-
-1. A blinded external water-treatment operator or educator apparatus-
-   recognition response, preferably plus a non-operator response.
-2. A blinded low/optimum/high outcome review by an operator-informed reviewer
-   and a non-operator.
+Batch 03 is not accepted yet. The bounded repair and affected apparatus
+evidence are complete. Repeat Part 1 with a fresh external water-treatment
+operator or educator, preferably plus a fresh non-operator. The passed A/B/C
+outcome review does not need repetition unless those byte-unchanged images
+change. A short Quest composition/cost check remains available when a headset
+is next attached.
 
 Use [docs/BATCH_03_REVIEW_PACKET.md](docs/BATCH_03_REVIEW_PACKET.md) for the
 review and record responses in
@@ -145,15 +195,13 @@ closing the remaining Batch 03 gates.
 
 ## Recommended next session
 
-1. Conduct the blinded apparatus and outcome reviews from the regenerated
-   packet and record exact or carefully paraphrased responses. For a live
-   follow-up after the blind answers are recorded, the desktop review controls
-   may pause, reset, and resume the deterministic trial.
-2. If reviewers identify a comprehension problem, adjust the smallest
-   presentation parameter before changing simulation complexity or particle
-   count, then regenerate the packet.
-3. Accept Batch 03 only when the external gates pass. Then choose the bounded
-   Batch 04 interaction increment.
+1. Run a fresh blind Part 1 recognition review using the repaired apparatus
+   image. Keep the accepted A/B/C images unchanged unless the hero-tank outcome
+   presentation changes.
+2. If a Quest is connected, perform the short 03R.1 composition/cost
+   confirmation for the added transparent fill.
+3. Accept Batch 03 only when the jar-test recognition gate passes. Then choose
+   the bounded Batch 04 interaction increment.
 
 ## Commands
 
