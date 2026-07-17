@@ -95,3 +95,43 @@ test('proof mode leaves an unlabeled canvas for recognition review', async ({
     0,
   )
 })
+
+test('standalone XR shell emits commands without composing simulation state', async ({
+  page,
+}) => {
+  await page.goto('/?mode=xr-shell&calibration=off')
+
+  await expect(
+    page.getByRole('heading', { name: 'Sunol FlowLab VR' }),
+  ).toBeVisible()
+  await expect(page.getByRole('button', { name: 'Enter VR' })).toBeVisible()
+  await expect(page.locator('canvas')).toBeVisible()
+
+  const state = () =>
+    page.evaluate(() => JSON.parse(window.render_xr_shell_to_text?.() ?? '{}'))
+
+  expect(await state()).toMatchObject({
+    mode: 'xr-interaction-shell',
+    commandCount: 0,
+    dose: 5,
+    sessionActive: false,
+    startCommandCount: 0,
+  })
+  expect(await state()).not.toHaveProperty('activeParticles')
+  expect(await state()).not.toHaveProperty('opticalLoad')
+
+  await page.locator('canvas').click({ position: { x: 542, y: 256 } })
+
+  await expect.poll(async () => (await state()).commandCount).toBe(1)
+  expect(await state()).toMatchObject({
+    lastCommand: { type: 'START_TRIAL' },
+    startButtonPhase: 'released',
+    startCommandCount: 1,
+  })
+
+  await page.mouse.move(424, 254)
+  await page.mouse.down()
+  await page.mouse.up()
+  await expect.poll(async () => (await state()).leverPhase).toBe('snapped')
+  expect((await state()).commandCount).toBe(1)
+})

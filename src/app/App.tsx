@@ -15,6 +15,7 @@ import { MetricsOverlay } from './MetricsOverlay'
 import { developmentPerformance } from './performance'
 import { SimulationDriver } from './SimulationDriver'
 import { SimulationRuntime } from './SimulationRuntime'
+import { XrShellApp } from './XrShellApp'
 
 declare global {
   interface Window {
@@ -57,6 +58,11 @@ function recordParticleFrame(
 }
 
 export function App() {
+  const mode = new URLSearchParams(window.location.search).get('mode')
+  return mode === 'xr-shell' ? <XrShellApp /> : <PhenomenonApp />
+}
+
+function PhenomenonApp() {
   const urlParameters = new URLSearchParams(window.location.search)
   const presentationMode = urlParameters.get('mode') === 'proof'
   const reviewCaptureMode = urlParameters.get('capture') === 'review'

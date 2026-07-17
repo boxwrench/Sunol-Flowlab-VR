@@ -54,7 +54,8 @@ The work remains staged: Workstream 03D exposes the authoritative samples; Batch
 | 02A   | Accepted               | Deterministic 11-dose phenomenon proof recorded        |
 | 02B   | Deferred               | Spatial hash and simulation merge events need evidence |
 | 03    | Technical gate passed  | External blind recognition and outcome review          |
-| 04–11 | Not started            | Predecessor gates                                      |
+| 04    | Accepted               | Quest interaction accepted with documented waivers     |
+| 05–11 | Not started            | Predecessor gates                                      |
 
 An [earlier Godot implementation plan](docs/archive/Sunol%20FlowLab%20Implementation%20Plan%20%28superseded%20Godot%29.pdf) is retained only as a superseded source artifact for provenance and is non-binding for this greenfield WebXR repository. The stale duplicate Batch 03 snapshot and superseded pre-research mechanics were removed from the active tree; Git history preserves them. Only [the indexed Batch 03 plan](batch-03-desktop-phenomenon-proof.md) is authoritative.
 
@@ -72,6 +73,21 @@ evidence is recorded in
 [the Batch 03 progress packet](docs/BATCH_03_PROGRESS.md). The next active work
 is external blind recognition and blinded low/optimum/high review. The short
 replacement-model Quest visibility and rolling-performance check has passed.
-Batch 04 remains blocked until the external Batch 03 gates are decided.
+Batch 04 was implemented independently under the owner-authorized scheduling
+exception and is accepted in
+[its closing packet](docs/BATCH_04_ACCEPTANCE.md). The seated project-owner
+operator accepted the final smaller numbered dial, near-side direct grab,
+neutral reach, integer detents, deliberate Start behavior, and 120 FPS-class
+Quest performance after rejecting two earlier ergonomics candidates. The owner
+explicitly waived a standing repeat and separately scored 50-request protocol;
+the waivers are recorded rather than represented as observed evidence.
+Batch 03 recognition remains parked and is not treated as accepted, so Batch 05
+still requires either Batch 03 acceptance or another explicit scheduling
+decision.
 
 The hybrid direction maps runtime ownership to Batch 01A closure; hero-tank and jar-rack blockout plus recognition validation to Batch 03; interaction to Batch 04; integration to Batches 05-06; static jar summaries, complete memory, and treatment-ghost recording/playback runtime to Batch 07; live-versus-ghost readability to Batch 08; spectator presentation to Batch 09; presence to Batch 10; and release evidence to Batch 11.
+
+On 2026-07-16 the project owner explicitly parked the remaining Batch 03
+blinded jar-recognition rerun and authorized Batch 04 to begin in its required
+isolated branch/worktree. The recognition gate remains deferred rather than
+accepted.
