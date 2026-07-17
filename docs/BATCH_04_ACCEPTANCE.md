@@ -26,7 +26,10 @@ Status: Accepted by the project owner with an explicit standing-repeat waiver.
   added to the shell.
 - No floating-point dose command, hand tracking, locomotion, haptic dependency,
   rotary fallback, or canonical-jar selection was added.
-- The remaining Batch 03 blinded review is still deferred, not accepted.
+- At Batch 04 acceptance time, the remaining Batch 03 blinded review was
+  deferred and not accepted. The project owner subsequently waived the fresh
+  repaired-apparatus rerun and accepted Batch 03 in
+  [BATCH_03_ACCEPTANCE.md](BATCH_03_ACCEPTANCE.md).
 
 ## 3. Files
 

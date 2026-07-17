@@ -1,6 +1,6 @@
 # Batch 03 Recognition and Outcome Review
 
-**Candidate status:** 03R.1 apparatus candidate ready for fresh Part 1 recognition review; outcome review passed
+**Candidate status:** Retained evidence; outcome review passed and fresh repaired-apparatus review waived
 **Model configuration:** fnv1a32-e8bf13e7
 **Capture date:** 2026-07-15
 **Instructions:** Review the images before opening source files or implementation
@@ -8,8 +8,10 @@ notes. Do not inspect the local answer key in `test-results`.
 
 The outcome review below is accepted and retained as evidence. The current
 apparatus image is the repaired 03R.1 candidate with six identical frozen
-raw-water fills. Repeat Part 1 only with fresh blinded participants where
-practical; do not repeat Part 2 unless the accepted A/B/C files change.
+raw-water fills. On 2026-07-16 the project owner waived the fresh Part 1 rerun
+and accepted Batch 03 without claiming a repaired-apparatus recognition pass.
+This packet remains available for optional later risk reduction. Do not repeat
+Part 2 unless the accepted A/B/C files change.
 
 ## Part 1 - Unlabeled apparatus recognition
 

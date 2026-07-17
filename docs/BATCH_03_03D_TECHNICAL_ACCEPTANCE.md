@@ -1,6 +1,6 @@
 # Batch 03 Workstream 03D Technical Acceptance
 
-**Status:** Technical, Quest, and blinded outcome gates passed; apparatus-recognition repair remains open
+**Status:** Technical, Quest, and blinded outcome gates passed; Batch 03 accepted with fresh-recognition rerun waived
 **Accepted configuration:** fnv1a32-e8bf13e7
 **Canonical seed:** 0x5f3759df
 **Date:** 2026-07-15
@@ -213,21 +213,24 @@ fully loaded stereo draw calls, 37.8 MB heap, both controllers tracked, and no
 console or page errors. The project-owner water-treatment operator accepted
 the result as “much better” and “a pass.”
 
-## Remaining external gate
+## External review and acceptance exception
 
 The first external review is recorded in [UX_VALIDATION.md](UX_VALIDATION.md).
 Both the operator and non-operator correctly selected C as best and A/B as less
 effective, so the blinded outcome-comparison gate passes.
 
-The apparatus-recognition gate remains open. The operator described the six
+The first apparatus-recognition review did not pass. The operator described the six
 vessels as “Empty jars,” and the non-operator read them as possible
-“chemicals?” The next candidate must add a static, non-live jar-content cue,
-regenerate the affected apparatus evidence, and pass a fresh blinded Part 1
-review. The accepted outcome images do not need regeneration unless the hero-
-tank outcome presentation changes.
+“chemicals?” Work Package 03R.1 subsequently added a static, non-live jar-content
+cue and regenerated the affected apparatus evidence. The accepted outcome images
+did not require regeneration.
+
+On 2026-07-16 the project owner explicitly waived the fresh blinded Part 1
+rerun and accepted Batch 03. The skipped rerun is documented as an acceptance
+exception, not a passed review, in [BATCH_03_ACCEPTANCE.md](BATCH_03_ACCEPTANCE.md).
 
 The earlier physical Quest composition acceptance supports start placement,
 table height, rectangular jars, controllers, and hierarchy; the final-model
 rerun now also accepts short replacement behavior visibility and rolling
 performance. Hosted deployment, endurance, thermals, later headset ergonomics,
-Batch 04, and ghost runtime work remain out of scope.
+and ghost runtime work remain out of scope.

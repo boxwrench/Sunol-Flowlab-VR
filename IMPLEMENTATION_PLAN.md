@@ -53,7 +53,7 @@ The work remains staged: Workstream 03D exposes the authoritative samples; Batch
 | 01B   | Partially accepted     | Local Quest route passed; hosted smoke remains open    |
 | 02A   | Accepted               | Deterministic 11-dose phenomenon proof recorded        |
 | 02B   | Deferred               | Spatial hash and simulation merge events need evidence |
-| 03    | 03R.1 candidate ready  | Fresh blind recognition on repaired static jars        |
+| 03    | Accepted               | Fresh recognition rerun waived by project owner        |
 | 04    | Accepted               | Quest interaction accepted with documented waivers     |
 | 05–11 | Not started            | Predecessor gates                                      |
 
@@ -73,14 +73,16 @@ evidence is recorded in
 [the Batch 03 progress packet](docs/BATCH_03_PROGRESS.md). The blinded
 low/optimum/high outcome comparison and short replacement-model Quest check
 have passed. The bounded 03R.1 static jar-content repair is implemented and its
-replacement apparatus evidence is ready. Fresh blinded apparatus recognition
-remains the final Batch 03 gate.
+replacement apparatus evidence is ready. The project owner explicitly waived
+the fresh blinded apparatus-recognition rerun and accepted Batch 03 in
+[its closing packet](docs/BATCH_03_ACCEPTANCE.md).
 
 The implemented 03R.1 candidate reuses the hero tank's visual palette as one
 six-instance frozen raw-water fill across all six jars. It does not mirror live
 state. Later exact canonical completions may replace one jar at a time with an
 immutable completed-result summary; the complete plot and log remain
-authoritative memory. Fresh blinded apparatus recognition remains the open gate.
+authoritative memory. The waived rerun is recorded as an acceptance exception,
+not as observed recognition evidence.
 
 Batch 04 was implemented independently under the owner-authorized scheduling
 exception and is accepted in
@@ -90,11 +92,12 @@ neutral reach, integer detents, deliberate Start behavior, and 120 FPS-class
 Quest performance after rejecting two earlier ergonomics candidates. The owner
 explicitly waived a standing repeat and separately scored 50-request protocol;
 the waivers are recorded rather than represented as observed evidence.
-Batch 03 recognition has resumed but is not yet accepted, so Batch 05 still
-requires either Batch 03 acceptance or another explicit scheduling decision.
+Batch 03 and Batch 04 are accepted, so the predecessor requirement for Batch 05
+is satisfied. Batch 05 has not started.
 
 The hybrid direction maps runtime ownership to Batch 01A closure; hero-tank and jar-rack blockout plus recognition validation to Batch 03; interaction to Batch 04; integration to Batches 05-06; static jar summaries, complete memory, and treatment-ghost recording/playback runtime to Batch 07; live-versus-ghost readability to Batch 08; spectator presentation to Batch 09; presence to Batch 10; and release evidence to Batch 11.
 
-On 2026-07-16 the project owner resumed the previously parked Batch 03 work.
-The preserved 03R.1 repair is now reconciled with accepted Batch 04, but the
-fresh blinded jar-recognition rerun remains required rather than accepted.
+On 2026-07-16 the project owner resumed the previously parked Batch 03 work,
+preserved the 03R.1 repair, reconciled it with accepted Batch 04, and explicitly
+waived the fresh blinded jar-recognition rerun. The waiver closes Batch 03
+without representing the skipped rerun as passed evidence.

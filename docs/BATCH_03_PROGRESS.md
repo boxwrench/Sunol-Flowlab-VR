@@ -1,6 +1,6 @@
 # Batch 03 Desktop Proof Progress
 
-**Status:** 03R.1 implementation candidate ready; fresh jar recognition required
+**Status:** Accepted by project owner with fresh jar-recognition rerun waived
 **Accepted model configuration:** fnv1a32-e8bf13e7
 **Technical acceptance:** [BATCH_03_03D_TECHNICAL_ACCEPTANCE.md](BATCH_03_03D_TECHNICAL_ACCEPTANCE.md)
 **Date:** 2026-07-15
@@ -127,14 +127,14 @@ The model remains phenomenological and fictionalized. It is not calibrated
 NTU, dose prediction, operating guidance, mechanistic chemistry, CFD, or a
 connection to plant controls or operational data.
 
-## Open gates
+## Acceptance closure
 
-Replacement evidence is ready in
-[BATCH_03_REVIEW_PACKET.md](BATCH_03_REVIEW_PACKET.md). Final Batch 03
-acceptance still requires a fresh blinded apparatus-recognition response from
-an external water-treatment operator or educator, preferably with an
-additional non-operator. The 03R.1 implementation and replacement apparatus
-image are ready for that Part 1 rerun.
+Replacement evidence is retained in
+[BATCH_03_REVIEW_PACKET.md](BATCH_03_REVIEW_PACKET.md). The project owner
+explicitly waived a fresh blinded apparatus-recognition response after the
+03R.1 implementation and replacement apparatus image were completed. Batch 03
+is accepted with that skipped rerun documented as an exception rather than a
+passed review.
 
 The first external review correctly identified C as best and A/B as less
 effective for both the operator and non-operator, so the outcome-comparison
@@ -146,4 +146,6 @@ measurement remains recorded in [PERFORMANCE.md](PERFORMANCE.md); it is a short
 visibility and rolling-performance check, not thermal or endurance evidence.
 No headset was attached during 03R.1, so the optional short physical
 composition/cost confirmation for the added transparent fill remains available
-when the device is next connected.
+when the device is next connected. Neither that optional check nor a later
+fresh recognition review is a remaining Batch 03 gate. See
+[BATCH_03_ACCEPTANCE.md](BATCH_03_ACCEPTANCE.md).

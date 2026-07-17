@@ -12,19 +12,19 @@ Updated: 2026-07-16
 - Separate untracked file: `AGENTS.md` appeared outside this work, defines
   repository-local authority, and must be preserved unless its owner directs
   otherwise
-- Current milestone: Batch 04 accepted; Batch 03 Workstream 03D technical,
-  Quest, and blinded outcome checks passed; the integrated 03R.1 repair awaits
-  fresh jar-recognition review
+- Current milestone: Batches 03 and 04 accepted; Batch 03's fresh blinded
+  recognition rerun and Batch 04's standing/50-request protocols are documented
+  owner waivers rather than observed passes
 - Active plan authority: [IMPLEMENTATION_PLAN.md](IMPLEMENTATION_PLAN.md) and
   its ordered batch-00 through batch-11 Markdown files
 - Batch 03 technical evidence:
   [docs/BATCH_03_03D_TECHNICAL_ACCEPTANCE.md](docs/BATCH_03_03D_TECHNICAL_ACCEPTANCE.md);
-  fresh blinded apparatus recognition remains required, not accepted
+  closing decision: [docs/BATCH_03_ACCEPTANCE.md](docs/BATCH_03_ACCEPTANCE.md)
 - Batch 04 closing evidence:
   [docs/BATCH_04_ACCEPTANCE.md](docs/BATCH_04_ACCEPTANCE.md)
 
-Resume on main. Do not begin Batch 05 before Batch 03 recognition passes or the
-owner makes another explicit scheduling decision.
+Resume on main. Batches 03 and 04 are complete; Batch 05 is the next unstarted
+bounded workstream.
 
 The superseded Godot plan remains isolated under docs/archive for provenance.
 Use only the active indexed Markdown plan.
@@ -187,17 +187,16 @@ Recorded implementation evidence for 03R.1:
 
 ## Open gates and constraints
 
-Batch 03 is not accepted yet. The bounded repair and affected apparatus
-evidence are complete. Repeat Part 1 with a fresh external water-treatment
-operator or educator, preferably plus a fresh non-operator. The passed A/B/C
-outcome review does not need repetition unless those byte-unchanged images
-change. A short Quest composition/cost check remains available when a headset
-is next attached.
+Batch 03 is accepted. The owner explicitly waived the fresh blinded Part 1
+recognition rerun after reviewing the completed 03R.1 repair record. The skipped
+rerun is not represented as a passed external review. The initial failed
+recognition responses, repair evidence, residual risk, and acceptance exception
+are retained in [docs/BATCH_03_ACCEPTANCE.md](docs/BATCH_03_ACCEPTANCE.md) and
+[docs/UX_VALIDATION.md](docs/UX_VALIDATION.md).
 
-Use
-[docs/BATCH_03_REVIEW_PACKET.md](docs/BATCH_03_REVIEW_PACKET.md) and record
-responses in [docs/UX_VALIDATION.md](docs/UX_VALIDATION.md). Do not treat the
-owner-authorized Batch 04 scheduling exception as Batch 03 acceptance.
+A later fresh recognition review and a short Quest composition/cost check for
+the added transparent fill remain optional risk-reduction work, not Batch 03
+gates.
 
 The local physical Quest route is accepted for connectivity, interaction,
 composition, final-model visibility, and short rolling performance. The
@@ -245,20 +244,17 @@ hot simulation state into React state.
 Keep spatial hashing deferred unless a recorded bottleneck justifies it.
 Version 1 has no free list. The observed flicker justifies the current bounded
 render-local smoothing, but simulation merge-event metadata remains deferred.
-Do not import simulation state into the Batch 04 shell, start Batch 05
-integration before its predecessor decision, add ghost runtime, or authorize
-hosted deployment from this branch.
+Do not import simulation state into the Batch 04 shell, add ghost runtime ahead
+of its planned batch, or authorize hosted deployment from this branch. Start
+Batch 05 only as a separately bounded work increment.
 
 ## Recommended next session
 
-1. Run a fresh blind Part 1 recognition review using the repaired apparatus
-   image. Keep the accepted A/B/C images unchanged unless the hero-tank outcome
-   presentation changes.
-2. If a Quest is connected, perform the short 03R.1 composition/cost
-   confirmation for the added transparent fill.
-3. Accept Batch 03 only when the jar-test recognition gate passes. Do not begin
-   Batch 05 until then without another explicit owner scheduling decision.
-4. If later testing repeats the waived Batch 04 standing protocol and reveals
+1. Select and authorize the bounded Batch 05 simulation/XR integration
+   increment; do not pull Batch 06 lifecycle scope forward.
+2. Optionally perform a fresh jar-recognition review or short Quest 03R.1
+   composition/cost check if later risk reduction is useful.
+3. If later testing repeats the waived Batch 04 standing protocol and reveals
    a defect,
    repair the smallest demonstrated interaction/layout issue and update the
    acceptance packet.

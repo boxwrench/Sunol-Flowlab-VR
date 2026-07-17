@@ -1,6 +1,6 @@
 # Apparatus Recognition Validation
 
-**Status:** External outcome comparison passed; repaired 03R.1 apparatus candidate awaits recognition rerun
+**Status:** Batch 03 accepted with repaired-apparatus recognition rerun waived
 **Governing requirement:** Batch 03 presentation-retention and human-validation gate
 **Review route:** `http://127.0.0.1:5173/?mode=proof`
 
@@ -161,3 +161,14 @@ ownership. Only the affected apparatus evidence was regenerated; the accepted
 A/B/C files remain byte-unchanged. Repeat Part 1 with fresh blinded
 participants where practical. The passed outcome gate does not need to be
 repeated unless those images change.
+
+#### Owner acceptance exception
+
+On 2026-07-16 the project owner directed the project to skip the fresh blinded
+Part 1 rerun and accepted Batch 03. The repaired apparatus therefore has no
+independent post-repair recognition result. This is a documented waiver of the
+remaining validation gate, not evidence that the repaired jars passed it.
+
+The initial failed responses, the bounded 03R.1 repair, and the residual
+recognition risk remain part of the permanent record. A later fresh review may
+still be run as optional risk reduction if jar-rack confusion reappears.
