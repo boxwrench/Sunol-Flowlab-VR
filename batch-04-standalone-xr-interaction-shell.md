@@ -1,9 +1,28 @@
 # Batch 04 Implementation Plan: Standalone XR Interaction Shell
 
-**Status:** Not started — predecessor gates remain open
+**Status:** Accepted by project owner with documented physical-test waivers
 **Depends on:** Batch 03 accepted; local Batch 01B route accepted; Batch 00 command contract fixed  
 **May run in parallel with:** Review and interaction-test preparation only  
 **Primary gate:** A user can reliably select one of 11 integer doses and press Start on the target Quest while maintaining 72 fps with useful headroom.
+
+**Scheduling exception (2026-07-16):** The project owner explicitly parked the
+remaining Batch 03 blinded jar-recognition rerun and authorized Batch 04 to
+start. This permits isolated Batch 04 work but does not convert the parked gate
+into Batch 03 acceptance.
+
+**Pause checkpoint (2026-07-16):** The isolated software candidate and its
+desktop/IWER checks are complete. The project owner paused work before the
+operator-worn Quest protocol. Batch 04 remains unaccepted until the required
+seated/standing, left/right, reliability, and rolling-performance evidence is
+recorded.
+
+**Acceptance checkpoint (2026-07-16):** Physical testing resumed. Two control
+layouts were rejected before the seated project-owner operator accepted the
+final smaller numbered dial, near-side direct grab, neutral reach, integer
+detents, Start latch, and 120 FPS-class performance. The owner explicitly
+waived a standing repeat and the separately scored 50-request protocol. Exact
+evidence and exceptions are recorded in
+[the Batch 04 acceptance packet](docs/BATCH_04_ACCEPTANCE.md).
 
 > This batch must also follow [the hybrid jar-test design direction](docs/DESIGN_DIRECTION_JAR_TEST_HYBRID.md). The design brief governs product intent and presentation meaning; this batch remains authoritative for timing, scope, tests, evidence, and acceptance.
 
