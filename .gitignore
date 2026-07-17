@@ -8,3 +8,4 @@ vite-dev.log
 vite-dev.error.log
 *.tsbuildinfo
 *.local
+/AGENTS.md
