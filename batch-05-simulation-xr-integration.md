@@ -1,6 +1,6 @@
 # Batch 05 Implementation Plan: Simulation and XR Integration
 
-**Status:** Not started — predecessor gates remain open
+**Status:** Parked review-ready — software passes; physical Quest gate open
 **Depends on:** Batch 03 and Batch 04 both accepted  
 **May run in parallel with:** Review, parity-test preparation, trace analysis  
 **Primary gate:** The proven desktop simulation runs inside the proven XR apparatus with the same qualitative behavior, deterministic results, and acceptable Quest performance.

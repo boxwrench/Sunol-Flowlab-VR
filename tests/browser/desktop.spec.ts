@@ -108,7 +108,7 @@ test('proof mode leaves an unlabeled canvas for recognition review', async ({
   )
 })
 
-test('standalone XR shell emits commands without composing simulation state', async ({
+test('XR integration routes commands into the shared authoritative simulation', async ({
   page,
 }) => {
   await page.goto('/?mode=xr-shell&calibration=off')
@@ -123,27 +123,69 @@ test('standalone XR shell emits commands without composing simulation state', as
     page.evaluate(() => JSON.parse(window.render_xr_shell_to_text?.() ?? '{}'))
 
   expect(await state()).toMatchObject({
-    mode: 'xr-interaction-shell',
+    mode: 'simulation-xr-integration',
+    activeParticles: 500,
     commandCount: 0,
     dose: 5,
+    lifecycle: 'ready',
+    running: false,
     sessionActive: false,
+    simulationConfigHash: 'fnv1a32-e8bf13e7',
+    simulationDose: 5,
     startCommandCount: 0,
   })
-  expect(await state()).not.toHaveProperty('activeParticles')
-  expect(await state()).not.toHaveProperty('opticalLoad')
+
+  const setDose = await page.evaluate(() =>
+    window.dispatch_xr_shell_command?.({ type: 'SET_DOSE', dose: 0 }),
+  )
+  expect(setDose).toMatchObject({ accepted: true, dose: 0 })
+  expect(await state()).toMatchObject({
+    dose: 0,
+    simulationDose: 5,
+    lifecycle: 'ready',
+  })
 
   await page.locator('canvas').click({ position: { x: 542, y: 256 } })
 
-  await expect.poll(async () => (await state()).commandCount).toBe(1)
+  await expect.poll(async () => (await state()).commandCount).toBe(2)
   expect(await state()).toMatchObject({
     lastCommand: { type: 'START_TRIAL' },
+    lifecycle: 'running',
+    running: true,
+    simulationDose: 0,
     startButtonPhase: 'released',
     startCommandCount: 1,
   })
+
+  await page.evaluate(() => window.advanceTime?.(43_000))
+  const completed = await state()
+  expect(completed.simulationTimeSeconds).toBe(43)
+  expect(completed.endpointOpticalLoad).toBeCloseTo(0.7375886586965295, 12)
+  expect(completed.mergeCount).toBeGreaterThan(0)
+  expect(completed.mergesPerSecond).toBeGreaterThan(0)
+  const readPerformanceReport = () =>
+    page.evaluate(() =>
+      JSON.parse(window.render_performance_to_text?.() ?? '{}'),
+    )
+  await expect
+    .poll(async () => (await readPerformanceReport()).metrics?.activeParticles)
+    .toBe(completed.activeParticles)
+  const performanceReport = await readPerformanceReport()
+  expect(performanceReport.metrics.activeParticles).toBe(
+    completed.activeParticles,
+  )
+  expect(performanceReport.metrics.sampleCount).toBeGreaterThan(0)
+  expect(performanceReport.metrics.drawCalls).toBeGreaterThan(20)
+  expect(
+    performanceReport.metrics.averageSimulationStepMs,
+  ).toBeGreaterThanOrEqual(0)
+  expect(
+    performanceReport.metrics.averageInstanceSyncMs,
+  ).toBeGreaterThanOrEqual(0)
 
   await page.mouse.move(424, 254)
   await page.mouse.down()
   await page.mouse.up()
   await expect.poll(async () => (await state()).leverPhase).toBe('snapped')
-  expect((await state()).commandCount).toBe(1)
+  expect((await state()).commandCount).toBe(2)
 })

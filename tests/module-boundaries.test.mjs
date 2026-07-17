@@ -56,3 +56,25 @@ test('the app runtime owns deterministic state and clock lifecycle', async () =>
   assert.match(source, /resetPhenomenonWorkspace/)
   assert.match(source, /stepPhenomenonWorkspace/)
 })
+
+test('Batch 05 composes one app-owned runtime into the shared hero tank renderer', async () => {
+  const [app, scene, apparatus] = await Promise.all([
+    readFile(new URL('../src/app/XrShellApp.tsx', import.meta.url), 'utf8'),
+    readFile(
+      new URL('../src/render/XrShellScene.tsx', import.meta.url),
+      'utf8',
+    ),
+    readFile(
+      new URL('../src/render/XrShellApparatus.tsx', import.meta.url),
+      'utf8',
+    ),
+  ])
+
+  assert.equal((app.match(/new SimulationRuntime\(/g) ?? []).length, 1)
+  assert.match(app, /new Batch05CommandAdapter\(runtime/)
+  assert.match(scene, /<HeroObservationTank/)
+  assert.match(scene, /particleState=\{particleState\}/)
+  assert.match(scene, /opticalLoadBands=\{opticalLoadBands\}/)
+  assert.doesNotMatch(apparatus, /EmptyHeroTank/)
+  assert.equal((apparatus.match(/<JarTestBench\b/g) ?? []).length, 1)
+})

@@ -10,6 +10,8 @@
 - [Batch 03 progress evidence](BATCH_03_PROGRESS.md)
 - [Batch 03 Workstream 03D technical acceptance](BATCH_03_03D_TECHNICAL_ACCEPTANCE.md)
 - [Batch 03 final acceptance and recognition waiver](BATCH_03_ACCEPTANCE.md)
+- [Batch 04 final interaction acceptance](BATCH_04_ACCEPTANCE.md)
+- [Batch 05 integration acceptance packet](BATCH_05_ACCEPTANCE.md)
 - [Apparatus recognition validation](UX_VALIDATION.md)
 - [Visual behavior target](VISUAL_BEHAVIOR.md)
 - [Hybrid jar-test design direction](DESIGN_DIRECTION_JAR_TEST_HYBRID.md)

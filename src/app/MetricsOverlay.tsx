@@ -6,17 +6,35 @@ import {
   readBrowserHeapBytes,
 } from './performance'
 
+declare global {
+  interface Window {
+    render_performance_to_text?: () => string
+  }
+}
+
 export function MetricsOverlay() {
   const [metrics, setMetrics] = useState(() =>
     developmentPerformance.snapshot(readBrowserHeapBytes()),
   )
 
   useEffect(() => {
+    window.render_performance_to_text = () =>
+      JSON.stringify(
+        createPerformanceReport(
+          developmentPerformance,
+          navigator.userAgent,
+          import.meta.env.MODE,
+          readBrowserHeapBytes(),
+        ),
+      )
     const timer = window.setInterval(
       () => setMetrics(developmentPerformance.snapshot(readBrowserHeapBytes())),
       1000,
     )
-    return () => window.clearInterval(timer)
+    return () => {
+      window.clearInterval(timer)
+      delete window.render_performance_to_text
+    }
   }, [])
 
   function exportReport() {

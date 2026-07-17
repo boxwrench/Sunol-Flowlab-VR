@@ -299,3 +299,27 @@ Remote state recorded 84 validated commands and seven START_TRIAL commands from
 seven separately deliberate presses, with no held-repeat. The owner explicitly
 waived a standing repeat and the separately scored 50-request protocol; those
 items are documented as acceptance exceptions rather than observed evidence.
+
+## 2026-07-16 - Batch 05 pre-immersive integration checkpoint
+
+The accepted simulation and XR shell are now composed through one app-owned
+runtime and the shared hero-tank renderer. The integration adds no simulation
+constant, alternate optical calculation, per-frame React state, full-array
+copy, or per-particle Three.js object. Exact low/optimum/high bands,
+populations, merge counts, and config hashes match the headless authority; 60
+Hz and 120 Hz presentation cadences produce identical endpoints.
+
+The attached authorized Quest 3 loaded the exact seated development candidate
+through `adb reverse tcp:5173 tcp:5173` at
+`http://127.0.0.1:5173/?mode=xr-shell&posture=seated&calibration=off`. Before
+immersive entry, a stable 300-frame browser-panel window reported:
+
+| Average FPS | Average frame | p95 frame | Simulation | Instance sync | Particles | Draw calls | JS heap |
+| ----------: | ------------: | --------: | ---------: | ------------: | --------: | ---------: | ------: |
+|        30.0 |      33.34 ms |  33.90 ms |   0.006 ms |      0.300 ms |       500 |         43 | 24.5 MB |
+
+This is a flat Quest Browser panel checkpoint only. It does not prove stereo,
+immersive frame rate, controller-inclusive cost, transparency ordering, or
+operator acceptance. Those measurements remain the final Batch 05 gate and
+will be compared with the accepted Batch 04 shell baseline of 119.7 FPS,
+8.90 ms p95, 86 controller-inclusive draw calls, and 57.5 MB heap.

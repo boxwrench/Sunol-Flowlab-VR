@@ -7,14 +7,14 @@ Updated: 2026-07-16
 - Repository: <https://github.com/boxwrench/Sunol-Flowlab-VR>
 - Branch: main
 - Published branch: main; use `git log -1 --oneline` for the current increment
-- Working tree: Batch 03 03R.1 and accepted Batch 04 are reconciled; only the
-  separately supplied `AGENTS.md` authority file remains untracked
+- Working tree: uncommitted Batch 05 integration candidate plus the separately
+  supplied untracked `AGENTS.md` authority file
 - Separate untracked file: `AGENTS.md` appeared outside this work, defines
   repository-local authority, and must be preserved unless its owner directs
   otherwise
-- Current milestone: Batches 03 and 04 accepted; Batch 03's fresh blinded
-  recognition rerun and Batch 04's standing/50-request protocols are documented
-  owner waivers rather than observed passes
+- Current milestone: Batch 05 software integration and deterministic parity
+  pass; physical immersive Quest presentation and performance acceptance is
+  open
 - Active plan authority: [IMPLEMENTATION_PLAN.md](IMPLEMENTATION_PLAN.md) and
   its ordered batch-00 through batch-11 Markdown files
 - Batch 03 technical evidence:
@@ -22,9 +22,11 @@ Updated: 2026-07-16
   closing decision: [docs/BATCH_03_ACCEPTANCE.md](docs/BATCH_03_ACCEPTANCE.md)
 - Batch 04 closing evidence:
   [docs/BATCH_04_ACCEPTANCE.md](docs/BATCH_04_ACCEPTANCE.md)
+- Batch 05 review-ready evidence:
+  [docs/BATCH_05_ACCEPTANCE.md](docs/BATCH_05_ACCEPTANCE.md)
 
-Resume on main. Batches 03 and 04 are complete; Batch 05 is the next unstarted
-bounded workstream.
+Resume on main. Batches 03 and 04 are complete. Batch 05 implementation is
+review-ready and waiting on its seated physical Quest gate.
 
 The superseded Godot plan remains isolated under docs/archive for provenance.
 Use only the active indexed Markdown plan.
@@ -72,10 +74,12 @@ Use only the active indexed Markdown plan.
   entry, both controllers, select input, remote inspection, and clean exit.
 - Project-owner operator acceptance of start placement, table height,
   rectangular jar shape, and hero-tank hierarchy on Quest.
-- A separate Batch 04 XR-only mode composes a deliberately empty apparatus
-  shell with standing and seated transforms, a floor/reference frame, empty
-  hero tank, static six-jar rack, calibration marker, dose lever, and Start
-  button. It imports no simulation runtime or treatment state.
+- The Batch 05 XR route composes exactly one app-owned `SimulationRuntime` into
+  the shared live hero-tank renderer while retaining the Batch 04 controls,
+  posture transforms, floor/reference frame, and static six-jar rack.
+- A pure app-owned adapter accepts ready-state integer dose changes, starts a
+  deterministic trial, rejects invalid/non-ready commands with a log record,
+  pauses on XR/visibility interruption, and resumes without hidden catch-up.
 - The physically accepted dose interaction uses a smaller operator-facing arc,
   a near-side direct-grab target, and locally generated instanced labels 0
   through 10. It maps constrained movement to all eleven validated integer
@@ -85,17 +89,20 @@ Use only the active indexed Markdown plan.
   SET_DOSE only on a changed detent and snaps to an integer on release.
 - The Start control has idle, hovered, pressed, released, and locked states and
   emits exactly one START_TRIAL command per press, with held presses suppressed.
-- The XR shell records controller/session presence, handedness, interaction
-  phases, command counts, last command, and rolling render telemetry for remote
-  inspection without introducing simulation ownership.
+- The XR integration records controller/session presence, handedness,
+  interaction phases, accepted/rejected command counts, authoritative runtime
+  diagnostics, merge rate, optical load, and rolling render telemetry for
+  remote inspection without introducing simulation ownership in `/src/xr`.
 - Approved treatment-result ghost design remains staged for Batches 07-08.
   There is no ghost runtime, particle replay, or replay recomputation.
 
 ## Current evidence
 
-- 19 repository-contract tests pass, including XR ownership, detent, pointer-
+- 20 repository-contract tests pass, including XR ownership, integration
+  composition, detent, pointer-
   capture, and Start-latch source contracts.
-- 92 Vitest tests across 21 files pass, including all eleven detents,
+- 100 Vitest tests across 23 files pass, including exact low/optimum/high app-
+  runtime parity, 60/120 Hz parity, bounded interruption recovery, all eleven detents,
   mechanical travel clamping, duplicate suppression, direct snapping, locking,
   release behavior, and one-emission-per-press Start behavior.
 - Canonical, reverse-order, reset-purity, and nine-seed sweeps pass.
@@ -112,10 +119,14 @@ Use only the active indexed Markdown plan.
   visible suspended aggregates, 1.6% largest-mass fraction, and zero mass error.
 - The bundled browser client completed the same optimum state with a readable
   clearing front and no console errors.
-- Five Playwright browser tests pass. The new XR-shell test proves that the
-  standalone mode exposes no particle or optical-load state, emits exactly one
-  START_TRIAL from the rendered button, and reaches the lever snapped state
-  without an extra command. The four existing desktop/review tests still pass.
+- Five Playwright browser tests pass. The XR integration scenario proves that
+  `SET_DOSE` changes only ready state, the rendered Start control resets/starts
+  the selected deterministic trial, Dose 0 reaches the exact endpoint, runtime
+  and performance diagnostics synchronize, and non-ready dose input is
+  rejected. The four existing desktop/review scenarios still pass.
+- The pre/post eleven-dose sweep has identical endpoints at every detent and
+  the complete nine-seed corpus still passes under config
+  `fnv1a32-e8bf13e7`.
 - The bundled browser client separately clicked the rendered Start control and
   recorded one START_TRIAL, then grabbed the spherical lever handle and
   recorded a snapped release with no console/page error.
@@ -215,8 +226,10 @@ The owner explicitly waived a standing repeat and the separately scored
 observed evidence. The accepted deck transform is shared by both posture
 presets; later headset/release testing may repeat standing use if practical.
 
-At final handoff, the Batch 04 Vite server is stopped and ADB reverse/debug
-forwards are removed. No background process or device tunnel should be assumed.
+At this handoff, the Batch 05 Vite server is stopped, the Quest is disconnected,
+and the ADB reverse/debug forwards are removed. The previous seated flat-browser
+page never entered immersive VR and must not be treated as a surviving session.
+Restore the local route with the commands below.
 
 A hosted HTTPS deployment is not authorized. Localhost and the documented ADB
 reverse route remain the approved development paths. Thermal/endurance, later
@@ -244,20 +257,21 @@ hot simulation state into React state.
 Keep spatial hashing deferred unless a recorded bottleneck justifies it.
 Version 1 has no free list. The observed flicker justifies the current bounded
 render-local smoothing, but simulation merge-event metadata remains deferred.
-Do not import simulation state into the Batch 04 shell, add ghost runtime ahead
-of its planned batch, or authorize hosted deployment from this branch. Start
-Batch 05 only as a separately bounded work increment.
+Do not add a second simulation, copy hot arrays into React state, give the jars
+live state, add ghost runtime ahead of its planned batch, pull Batch 06 lifecycle
+forward, or authorize hosted deployment from this increment.
 
 ## Recommended next session
 
-1. Select and authorize the bounded Batch 05 simulation/XR integration
-   increment; do not pull Batch 06 lifecycle scope forward.
-2. Optionally perform a fresh jar-recognition review or short Quest 03R.1
-   composition/cost check if later risk reduction is useful.
-3. If later testing repeats the waived Batch 04 standing protocol and reveals
-   a defect,
-   repair the smallest demonstrated interaction/layout issue and update the
-   acceptance packet.
+1. Reattach and authorize the Quest 3, start the Vite server, restore the ADB
+   reverse/debug forwards, open the exact seated Batch 05 route, press Enter VR,
+   and report when the apparatus is visible.
+2. Run the bounded physical protocol: both controllers, dose and Start routing,
+   full optimum trial, low/high result checks, common-angle stereo/transparency
+   review, interruption/resume, rolling metrics, heap/GC, and error inspection.
+3. Record objective evidence in the Batch 05 packet and performance log. Accept
+   only if every physical criterion passes; otherwise isolate the smallest
+   integration defect without changing the accepted simulation/control APIs.
 
 ## Commands
 
@@ -270,10 +284,12 @@ Batch 05 only as a separately bounded work increment.
     npm run format:check
     npm run build
     npm run test:browser
-    npm run dev -- --host 127.0.0.1 --port 5174
+    npm run dev -- --port 5173
     adb devices
-    adb reverse tcp:5174 tcp:5174
+    adb reverse tcp:5173 tcp:5173
+    adb forward tcp:9222 localabstract:chrome_devtools_remote
 
-Open http://127.0.0.1:5174/?mode=xr-shell in Quest Browser after restoring the
-reverse tunnel. Use posture=seated for the seated layout. For the broader
-physical-device route, follow [docs/DEVICE_TESTING.md](docs/DEVICE_TESTING.md).
+Open
+http://127.0.0.1:5173/?mode=xr-shell&posture=seated&calibration=off in Quest
+Browser after restoring the reverse tunnel. For the broader physical-device
+route, follow [docs/DEVICE_TESTING.md](docs/DEVICE_TESTING.md).

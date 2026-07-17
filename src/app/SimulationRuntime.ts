@@ -3,6 +3,7 @@ import {
   DEFAULT_PARTICLE_CAPACITY,
   FixedStepClock,
   createPhenomenonWorkspace,
+  hashPhenomenonConfig,
   resetPhenomenonWorkspace,
   stepPhenomenonWorkspace,
   treatmentPhaseAtStep,
@@ -82,6 +83,19 @@ export class SimulationRuntime {
 
   get clarityReachedAtSimulationTime(): number | null {
     return this.workspace.clarityReachedAtSimulationTime
+  }
+
+  get configHash(): string {
+    return hashPhenomenonConfig(this.config)
+  }
+
+  get mergeCount(): number {
+    return this.workspace.mergeDiagnostics.mergeCount
+  }
+
+  get mergeRatePerSecond(): number {
+    const elapsed = this.simulationTimeSeconds
+    return elapsed === 0 ? 0 : this.mergeCount / elapsed
   }
 
   get populationDiagnostics(): PopulationDiagnostics {

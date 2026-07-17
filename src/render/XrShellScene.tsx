@@ -1,29 +1,36 @@
-import { Canvas, useFrame } from '@react-three/fiber'
+import { Canvas } from '@react-three/fiber'
 import { XR } from '@react-three/xr'
 import type { ReactNode } from 'react'
 
+import type { OpticalLoadBandsView, ParticleStateView } from '../sim'
 import { XR_SHELL_POSTURE_LAYOUTS, type XrShellPosture } from '../xr/layout'
 import { xrStore } from '../xr/store'
+import { HeroObservationTank } from './HeroObservationTank'
 import { XrShellApparatus } from './XrShellApparatus'
 import {
   APPARATUS_WORLD_POSITION,
   DESKTOP_CAMERA_POSITION,
   DESKTOP_CAMERA_TARGET,
 } from './layout'
-
-export type XrShellFrameRecorder = (frameMs: number, drawCalls: number) => void
+import type { ParticleFrameRecorder } from './ParticleCloud'
 
 interface XrShellSceneProps {
   readonly children?: ReactNode
+  readonly opticalLoadBands: OpticalLoadBandsView
+  readonly particleState: ParticleStateView
   readonly posture: XrShellPosture
-  readonly recordFrame: XrShellFrameRecorder
+  readonly recordParticleFrame: ParticleFrameRecorder
+  readonly sceneChildren?: ReactNode
   readonly showCalibrationMarker?: boolean
 }
 
 export function XrShellScene({
   children,
+  opticalLoadBands,
+  particleState,
   posture,
-  recordFrame,
+  recordParticleFrame,
+  sceneChildren,
   showCalibrationMarker = false,
 }: XrShellSceneProps) {
   const layout = XR_SHELL_POSTURE_LAYOUTS[posture]
@@ -37,11 +44,18 @@ export function XrShellScene({
         <color attach={'background'} args={['#081719']} />
         <ambientLight intensity={1.35} />
         <directionalLight position={[2, 4, 3]} intensity={2.2} />
-        <FrameMetricsProbe recordFrame={recordFrame} />
+        {sceneChildren}
         <group position={[...APPARATUS_WORLD_POSITION]}>
           <XrShellApparatus
             calibrationEyeHeightMeters={layout.calibrationEyeHeightMeters}
             controlReachMeters={layout.neutralReachMeters}
+            heroTank={
+              <HeroObservationTank
+                particleState={particleState}
+                opticalLoadBands={opticalLoadBands}
+                recordParticleFrame={recordParticleFrame}
+              />
+            }
             showCalibrationMarker={showCalibrationMarker}
           >
             <group
@@ -56,15 +70,4 @@ export function XrShellScene({
       </XR>
     </Canvas>
   )
-}
-
-function FrameMetricsProbe({
-  recordFrame,
-}: {
-  readonly recordFrame: XrShellFrameRecorder
-}) {
-  useFrame((state, delta) => {
-    recordFrame(delta * 1000, state.gl.info.render.calls)
-  })
-  return null
 }

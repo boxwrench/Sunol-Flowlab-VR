@@ -55,7 +55,8 @@ The work remains staged: Workstream 03D exposes the authoritative samples; Batch
 | 02B   | Deferred               | Spatial hash and simulation merge events need evidence |
 | 03    | Accepted               | Fresh recognition rerun waived by project owner        |
 | 04    | Accepted               | Quest interaction accepted with documented waivers     |
-| 05–11 | Not started            | Predecessor gates                                      |
+| 05    | In progress            | Physical Quest integration acceptance                  |
+| 06–11 | Not started            | Predecessor gates                                      |
 
 An [earlier Godot implementation plan](docs/archive/Sunol%20FlowLab%20Implementation%20Plan%20%28superseded%20Godot%29.pdf) is retained only as a superseded source artifact for provenance and is non-binding for this greenfield WebXR repository. The stale duplicate Batch 03 snapshot and superseded pre-research mechanics were removed from the active tree; Git history preserves them. Only [the indexed Batch 03 plan](batch-03-desktop-phenomenon-proof.md) is authoritative.
 
@@ -93,7 +94,8 @@ Quest performance after rejecting two earlier ergonomics candidates. The owner
 explicitly waived a standing repeat and separately scored 50-request protocol;
 the waivers are recorded rather than represented as observed evidence.
 Batch 03 and Batch 04 are accepted, so the predecessor requirement for Batch 05
-is satisfied. Batch 05 has not started.
+is satisfied. Batch 05 software integration and deterministic parity pass; its
+physical immersive Quest presentation and performance gate remains open.
 
 The hybrid direction maps runtime ownership to Batch 01A closure; hero-tank and jar-rack blockout plus recognition validation to Batch 03; interaction to Batch 04; integration to Batches 05-06; static jar summaries, complete memory, and treatment-ghost recording/playback runtime to Batch 07; live-versus-ghost readability to Batch 08; spectator presentation to Batch 09; presence to Batch 10; and release evidence to Batch 11.
 
