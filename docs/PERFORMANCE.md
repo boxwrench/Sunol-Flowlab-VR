@@ -261,3 +261,41 @@ This is desktop presentation evidence, not new physical-headset evidence.
 The adb devices -l check reported no attached device, so a short Quest
 composition/cost confirmation for the added transparent fill was not available
 in this session.
+
+## 2026-07-16 - Batch 04 physical Quest interaction acceptance
+
+- Device: Meta Quest 3, serial 2G0YC5ZG0M052K
+- OS: Android 14
+- Browser: Quest Browser 149.0.0.24.3.1013217646
+- Route: USB ADB reverse tcp:5174 to tcp:5174; Quest Browser at
+  http://127.0.0.1:5174/?mode=xr-shell
+- Candidate: isolated batch-04-xr-shell worktree based on 2f72e89
+- Runtime: immersive-vr active; secure context true; navigator.xr present
+- Input: left and right controllers tracked simultaneously
+
+The first physical candidate was rejected because the controls were high and
+far, the dial was hard to read, and the knob required ray pointing. A lower and
+closer revision improved height but remained oversized and beyond neutral
+reach. The accepted revision uses a smaller numbered dial, an operator-facing
+working arc, a larger invisible direct-grab target, a smaller Start face, and
+the physically accepted shared deck transform. Full iteration evidence is in
+[XR_INTERACTION.md](XR_INTERACTION.md).
+
+The final fully tracked immersive snapshot reported:
+
+| Average FPS | Average frame | p95 frame | Draw calls | JS heap |
+| ----------: | ------------: | --------: | ---------: | ------: |
+|       119.7 |       8.36 ms |   8.90 ms |         86 | 57.5 MB |
+
+The 86 calls include both tracked controller models. After controller
+inactivity, the rolling window stabilized at 120.0 FPS, 8.33 ms average,
+8.60 ms p95, 6 shell-only draw calls, and 64.8 MB heap. An eight-second remote
+monitoring window recorded no active application alert, runtime exception,
+console error, or browser log error.
+
+The seated project-owner operator accepted final control size, reach, numeric
+readability, direct interaction, integer detent behavior, and Start behavior.
+Remote state recorded 84 validated commands and seven START_TRIAL commands from
+seven separately deliberate presses, with no held-repeat. The owner explicitly
+waived a standing repeat and the separately scored 50-request protocol; those
+items are documented as acceptance exceptions rather than observed evidence.
