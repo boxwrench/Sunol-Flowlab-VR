@@ -133,6 +133,19 @@ particle size, ionic strength, van der Waals attraction, hydrodynamics, and
 surface chemistry. The implementation and public language must preserve that
 distinction.
 
+Treat `alpha = 1 / W` as a candidate reference relationship, where `W` is the
+Fuchs stability ratio, not as an approved production equation. Any reduced
+DLVO-shaped candidate must state its normalization and limiting behavior. In
+particular, it must reach its documented maximum intentionally rather than
+accidentally capping attachment below one through an unexamined prefactor.
+
+Do not infer a shifted or asymmetric microscopic attachment function directly
+from an observed treatment-performance window. A useful zeta range measured
+after coagulation can also reflect charge distributions, adsorption, NOM,
+precipitate sweep, settling, and downstream separation. Those observations may
+validate the integrated response, but they do not by themselves establish the
+shape or center of the charge-only attachment term.
+
 ### 5. Sweep-floc attachment
 
 Sweep floc requires a separate precipitate/enmeshment contribution. It cannot be
@@ -240,13 +253,24 @@ cannot be confused with one bell-shaped lookup.
 
 ### R3 — Attachment model
 
-- Evaluate multiple defensible charge-attachment forms.
+- Evaluate multiple defensible charge-attachment forms, including a normalized
+  DLVO/Fuchs-shaped surrogate and an offline analytic or tabulated reference.
 - Evaluate separate sweep-enmeshment forms.
 - Test boundedness, monotonic subrelationships, deterministic ordering, and
   sensitivity to charge demand, pH, alkalinity, and ionic-strength proxy.
+- Test each charge candidate's maximum, limits, units, parameter meaning, and
+  sensitivity to particle size, ionic strength, surface-potential proxy, and
+  attractive-force assumptions.
+- Keep any asymmetric charge candidate evidence-gated. Do not hard-code a
+  universal zeta center, a universal `+/-25–30 mV` active band, or a claim that
+  one side of the treatment window is always the safer miss.
+- Treat a saturating authored dose-to-zeta curve only as a research baseline;
+  it cannot satisfy the emergent-response gate by moving the hidden optimum one
+  link upstream.
 
-Gate: the selected formulation explains why its optimum moves and identifies
-which parts remain phenomenological.
+Gate: the selected formulation explains why its optimum moves, distinguishes a
+microscopic charge-attachment claim from an integrated treatment-performance
+window, and identifies which parts remain phenomenological.
 
 ### R4 — Emergent response validation
 
@@ -343,6 +367,12 @@ Before any production code begins, provide:
   efficiency factor in Brownian coagulation including hydrodynamics and
   interparticle forces,” Water Science and Technology 36(4), 69–75.
   https://doi.org/10.1016/S0273-1223(97)00420-4
+- Ohshima, H. (2014), “Approximate analytic expression for the stability ratio
+  of colloidal dispersions,” Colloid and Polymer Science 292(9), 2269–2274.
+  https://doi.org/10.1007/s00396-014-3257-1
+- Sharp, E. L., Parsons, S. A., and Jefferson, B. (2006), “Coagulation of NOM:
+  linking character to treatment,” Water Science and Technology 53(7), 67–76.
+  https://doi.org/10.2166/wst.2006.209
 - Chakraborti, R. K., Atkinson, J. F., and Van Benschoten, J. E. (2000),
   “Characterization of alum floc by image analysis,” Environmental Science &
   Technology 34(18), 3969–3976.
