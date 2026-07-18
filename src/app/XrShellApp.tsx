@@ -32,6 +32,7 @@ declare global {
   interface Window {
     dispatch_xr_shell_command?: (command: unknown) => Batch05CommandRecord
     render_xr_shell_to_text?: () => string
+    reset_xr_trial_to_ready?: () => void
   }
 }
 
@@ -223,6 +224,14 @@ export function XrShellApp() {
     window.render_game_to_text = renderState
     window.render_xr_shell_to_text = renderState
     window.dispatch_xr_shell_command = dispatchCommand
+    window.reset_xr_trial_to_ready = () => {
+      adapter.resetToReady()
+      const snapshot = snapshotRef.current
+      snapshot.lifecycle = adapter.lifecycle
+      snapshot.dose = adapter.selectedDose
+      setSelectedDose(adapter.selectedDose)
+      setStatusRevision((revision) => revision + 1)
+    }
     window.advanceTime = (milliseconds) => {
       if (!Number.isFinite(milliseconds) || milliseconds < 0) {
         throw new RangeError('Advance time must be finite and non-negative')
@@ -233,6 +242,7 @@ export function XrShellApp() {
       delete window.dispatch_xr_shell_command
       delete window.render_game_to_text
       delete window.render_xr_shell_to_text
+      delete window.reset_xr_trial_to_ready
       delete window.advanceTime
     }
   }, [adapter, dispatchCommand, runtime])

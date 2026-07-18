@@ -188,4 +188,19 @@ test('XR integration routes commands into the shared authoritative simulation', 
   await page.mouse.up()
   await expect.poll(async () => (await state()).leverPhase).toBe('snapped')
   expect((await state()).commandCount).toBe(2)
+
+  await page.evaluate(() => window.reset_xr_trial_to_ready?.())
+  expect(await state()).toMatchObject({
+    activeParticles: 500,
+    dose: 0,
+    lifecycle: 'ready',
+    running: false,
+    simulationDose: 0,
+    simulationTimeSeconds: 0,
+  })
+  expect(
+    await page.evaluate(() =>
+      window.dispatch_xr_shell_command?.({ type: 'SET_DOSE', dose: 10 }),
+    ),
+  ).toMatchObject({ accepted: true, dose: 10 })
 })

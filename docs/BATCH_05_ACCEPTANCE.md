@@ -1,9 +1,10 @@
 # Batch 05 Acceptance Packet
 
-Date: 2026-07-16
+Date: 2026-07-17
 
-Status: Parked at a review-ready checkpoint. Implementation and software
-evidence are complete; physical Quest 3 acceptance remains open.
+Status: **Accepted.** Software, deterministic parity, seated physical Quest 3
+presentation, interaction routing, lifecycle reentry, and short rolling
+performance evidence pass.
 
 ## 1. What changed
 
@@ -20,6 +21,10 @@ evidence are complete; physical Quest 3 acceptance remains open.
   phase, population, merge count/rate, optical load, and rolling performance.
 - Paused the runtime on XR session loss, document hiding, and unmount; retained
   capped catch-up and deterministic reset without replacing typed-array storage.
+- Added a development-only, Batch-specific Quest acceptance monitor for status,
+  ready-state setup, trusted page restart/reentry, real-time observation, and
+  deterministic endpoint staging. It adds no shipped in-world control or later
+  treatment lifecycle.
 
 ## 2. What intentionally did not change
 
@@ -41,6 +46,7 @@ Added:
 - `src/app/Batch05CommandAdapter.test.ts`
 - `src/app/Batch05Integration.test.ts`
 - `docs/BATCH_05_ACCEPTANCE.md`
+- `scripts/quest-batch-05.mjs`
 
 Modified implementation and tests:
 
@@ -51,6 +57,7 @@ Modified implementation and tests:
 - `src/render/XrShellScene.tsx`
 - `tests/browser/desktop.spec.ts`
 - `tests/module-boundaries.test.mjs`
+- `package.json`
 
 Documentation changes are listed in section 9.
 
@@ -114,32 +121,56 @@ results.
 
 ## 6. Quest metrics and presentation gate
 
-The attached Quest 3 loaded the exact seated candidate at
+The authorized Quest 3 (`2G0YC5ZG0M052K`) ran Quest Browser
+`149.0.0.24.3.1013217646` on the exact seated route
 `http://127.0.0.1:5173/?mode=xr-shell&posture=seated&calibration=off` through ADB
-reverse. Before immersive entry, its flat browser panel reported a stable
-300-frame window at 30.0 FPS, 33.34 ms average, 33.90 ms p95, 0.006 ms
-simulation, 0.300 ms instance synchronization, 500 particles, 43 draw calls,
-and 24.5 MB heap. This is a browser-panel checkpoint, not immersive Quest
-acceptance.
+reverse. A stale prior tab was closed, the exact page was restarted, and a
+trusted browser input re-entered immersive VR. Remote state then reported the
+seated posture, a fresh ready-state Dose 5 trial, and an active XR session. Both
+controllers were subsequently tracked during the endpoint checks.
 
-Still required before this packet can close:
+The operator deliberately moved the physical dose control away from and back
+to Dose 5, pressed Start once, and observed the full 43-second trial. The final
+authoritative state was phase `complete`, 105 active aggregates, 65 suspended,
+40 settled, 395 merges, 9.186 merges/second, endpoint optical load `0.501182`,
+and global relative optical load `0.528000`. Its final controller-idle rolling
+window was:
 
-- immersive entry with both controllers tracked;
-- low/optimum/high qualitative result review;
-- left/right-eye transparency, depth ordering, floc visibility, wall opacity,
-  and common-angle review;
-- one full 500-particle trial through all current phases;
-- rolling immersive FPS, average/p95 frame time, simulation time, instance
-  synchronization, population, merge rate, draw calls, heap trend, visible GC,
-  and error observations;
-- comparison against the accepted Batch 04 shell baseline;
-- XR exit/interruption and deterministic resume/reset confirmation on device.
+| Average FPS | Average frame | p95 frame | Simulation | Instance sync | Active | Draw calls | JS heap |
+| ----------: | ------------: | --------: | ---------: | ------------: | -----: | ---------: | ------: |
+|      118.45 |       8.44 ms |   8.80 ms |   0.007 ms |      0.084 ms |    105 |          8 | 24.5 MB |
 
-No physical result is inferred from the passing software or flat-panel checks.
-The project owner parked the work for the evening before immersive entry. The
-verified Vite process was stopped, the Quest was disconnected, and local ADB
-forwards were removed. Resume by restoring the documented local route; do not
-treat the earlier loaded flat panel as a surviving session.
+Development-only endpoint staging then presented Dose 0 and Dose 10 without
+requiring the operator to leave VR. Both produced the exact accepted endpoint
+`0.737589`, global load `0.802000`, 429 active aggregates, 351 suspended, 78
+settled, and 71 merges. Controller-on rolling windows were:
+
+| Dose | Average FPS | Average frame | p95 frame | Simulation | Instance sync | Draw calls | JS heap |
+| ---: | ----------: | ------------: | --------: | ---------: | ------------: | ---------: | ------: |
+|    0 |      116.88 |       8.56 ms |   9.60 ms |   0.004 ms |      0.192 ms |        100 | 24.5 MB |
+|   10 |      116.88 |       8.56 ms |  10.20 ms |   0.003 ms |      0.200 ms |        102 | 24.5 MB |
+
+Draw calls are intentionally reported separately because the Dose 5 final
+window did not include active controller models while the endpoint windows did.
+Against the accepted Batch 04 controller-on baseline of 119.7 FPS and 8.90 ms
+p95, the integrated endpoint windows remain 116.9 FPS with a worst 10.20 ms
+p95, well inside the 72 FPS frame budget and with headroom for later bounded
+instrumentation.
+
+The seated project-owner operator reported that the scene “looked good” and
+accepted Dose 0 and Dose 10 as appropriately cloudier than Dose 5 and roughly
+equivalent to each other. The operator explicitly passed stereo consistency,
+transparency/depth ordering, floc visibility, wall appearance, common seated
+viewing angles, and visible hitching. The fresh-page immersive reentry and
+deterministic ready reset passed. Automated integration tests remain the
+evidence for mid-trial interruption/resume determinism.
+
+Standing posture was not repeated, consistent with the earlier owner waiver.
+This short gate is not thermal/endurance or release evidence. The remote
+instant-endpoint monitor twice needed one follow-up status poll after its
+initial five-second render-sync wait; each follow-up confirmed matching
+authoritative and rendered particle counts, and the monitor timeout is now ten
+seconds. No application defect or operator-visible hitch was observed.
 
 ## 7. Known compromises and deferred decisions
 
@@ -175,7 +206,8 @@ treat the earlier loaded flat panel as a surviving session.
 
 Remaining per-frame cost is simulation stepping, the existing particle
 instance synchronization/upload, band-texture byte updates, Three.js/R3F/WebXR
-rendering, and controller-model work. The immersive measurement remains open.
+rendering, and controller-model work. The accepted immersive measurements above
+do not justify spatial hashing, a free list, or increased capacity.
 
 ## 9. Documentation
 
@@ -192,11 +224,16 @@ Updated or added for the integration checkpoint:
 
 ## 10. Commit and gate
 
-Proposed commit:
+Implementation commit:
 
     feat: integrate proven coagulation simulation into XR apparatus
 
-Batch 05 gate: **open**. Software implementation, deterministic parity,
-desktop preservation, lifecycle hardening, allocation audit, and production
-build evidence pass. Physical immersive Quest presentation and performance
-evidence is still required before acceptance or the `xr-integration-proven` tag.
+Closing commit:
+
+    test: accept Batch 05 Quest integration
+
+Batch 05 gate: **passed**. Software integration, deterministic parity, desktop
+preservation, lifecycle hardening, allocation audit, seated physical
+interaction/presentation, low/optimum/high qualitative behavior, fresh-session
+reentry, and short rolling Quest performance evidence all pass. The
+`xr-integration-proven` tag may be applied to the closing commit.

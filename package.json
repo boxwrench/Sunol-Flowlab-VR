@@ -22,6 +22,7 @@
     "capture:apparatus": "node scripts/capture-batch-03-review.mjs --apparatus-only",
     "benchmark": "vitest run src/sim/benchmark.cli.test.ts --reporter=dot",
     "acceptance:03d": "vitest run src/sim/acceptance.cli.test.ts --reporter=dot",
+    "acceptance:05:quest": "node scripts/quest-batch-05.mjs",
     "lint": "eslint .",
     "format:check": "prettier --check ."
   },

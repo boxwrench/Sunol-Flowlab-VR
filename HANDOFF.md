@@ -1,20 +1,16 @@
 # Session Handoff
 
-Updated: 2026-07-16
+Updated: 2026-07-17
 
 ## Resume point
 
 - Repository: <https://github.com/boxwrench/Sunol-Flowlab-VR>
 - Branch: main
 - Published branch: main; use `git log -1 --oneline` for the current increment
-- Working tree: uncommitted Batch 05 integration candidate plus the separately
-  supplied untracked `AGENTS.md` authority file
-- Separate untracked file: `AGENTS.md` appeared outside this work, defines
-  repository-local authority, and must be preserved unless its owner directs
-  otherwise
-- Current milestone: Batch 05 software integration and deterministic parity
-  pass; physical immersive Quest presentation and performance acceptance is
-  open
+- Working tree: clean at the published Batch 05 closing commit
+- `AGENTS.md` is repository-local authority and intentionally ignored at the
+  repository root
+- Current milestone: Batch 05 accepted; Batch 06 is next and unstarted
 - Active plan authority: [IMPLEMENTATION_PLAN.md](IMPLEMENTATION_PLAN.md) and
   its ordered batch-00 through batch-11 Markdown files
 - Batch 03 technical evidence:
@@ -22,11 +18,12 @@ Updated: 2026-07-16
   closing decision: [docs/BATCH_03_ACCEPTANCE.md](docs/BATCH_03_ACCEPTANCE.md)
 - Batch 04 closing evidence:
   [docs/BATCH_04_ACCEPTANCE.md](docs/BATCH_04_ACCEPTANCE.md)
-- Batch 05 review-ready evidence:
+- Batch 05 closing evidence:
   [docs/BATCH_05_ACCEPTANCE.md](docs/BATCH_05_ACCEPTANCE.md)
 
-Resume on main. Batches 03 and 04 are complete. Batch 05 implementation is
-review-ready and waiting on its seated physical Quest gate.
+Resume on main. Batches 03, 04, and 05 are accepted. Do not pull Batch 07 or
+later instrumentation, persistence, ghost replay, environment, deployment, or
+release scope into Batch 06.
 
 The superseded Godot plan remains isolated under docs/archive for provenance.
 Use only the active indexed Markdown plan.
@@ -130,6 +127,20 @@ Use only the active indexed Markdown plan.
 - The bundled browser client separately clicked the rendered Start control and
   recorded one START_TRIAL, then grabbed the spherical lever handle and
   recorded a snapped release with no console/page error.
+- The physical Batch 05 seated session restarted the exact XR page into a fresh
+  active immersive session, tracked both controllers during endpoint review,
+  routed a deliberate dose movement and one physical Start, and completed the
+  canonical 43-second Dose 5 trial at the exact accepted state: 105 active, 65
+  suspended, 40 settled, 395 merges, and endpoint optical load 0.501182.
+- The Batch 05 Dose 5 controller-idle final window reported 118.45 FPS, 8.44 ms
+  average, 8.80 ms p95, 0.007 ms simulation, 0.084 ms instance sync, and 24.5 MB
+  heap. Controller-on Dose 0/10 windows reported 116.88 FPS and a worst 10.20 ms
+  p95 with 100–102 draw calls and the same 24.5 MB heap.
+- The seated project-owner operator reported that the integrated scene “looked
+  good” and passed low/optimum/high qualitative separation, stereo and
+  transparency presentation, floc visibility, wall appearance, common viewing
+  angles, and visible hitching. Standing and endurance were not repeated or
+  claimed.
 - The final physical Batch 04 session tracked both controllers, recorded 84
   validated commands and seven deliberate Start commands, and received an
   explicit seated operator pass for size, neutral reach, number readability,
@@ -226,10 +237,11 @@ The owner explicitly waived a standing repeat and the separately scored
 observed evidence. The accepted deck transform is shared by both posture
 presets; later headset/release testing may repeat standing use if practical.
 
-At this handoff, the Batch 05 Vite server is stopped, the Quest is disconnected,
-and the ADB reverse/debug forwards are removed. The previous seated flat-browser
-page never entered immersive VR and must not be treated as a surviving session.
-Restore the local route with the commands below.
+Batch 05 is accepted. Its seated integration gate covers deterministic parity,
+physical command routing, one complete optimum trial, low/high endpoint review,
+stereo/transparency presentation, fresh-session reentry, and short rolling
+performance. It does not claim standing, thermal/endurance, hosted deployment,
+or release acceptance.
 
 A hosted HTTPS deployment is not authorized. Localhost and the documented ADB
 reverse route remain the approved development paths. Thermal/endurance, later
@@ -263,15 +275,14 @@ forward, or authorize hosted deployment from this increment.
 
 ## Recommended next session
 
-1. Reattach and authorize the Quest 3, start the Vite server, restore the ADB
-   reverse/debug forwards, open the exact seated Batch 05 route, press Enter VR,
-   and report when the apparatus is visible.
-2. Run the bounded physical protocol: both controllers, dose and Start routing,
-   full optimum trial, low/high result checks, common-angle stereo/transparency
-   review, interruption/resume, rolling metrics, heap/GC, and error inspection.
-3. Record objective evidence in the Batch 05 packet and performance log. Accept
-   only if every physical criterion passes; otherwise isolate the smallest
-   integration defect without changing the accepted simulation/control APIs.
+1. Read `batch-06-treatment-cycle-and-authoritative-results.md` and the stable
+   contracts before starting a new bounded goal.
+2. Reconfirm Batch 06 scope against the accepted Batch 05 adapter and runtime;
+   preserve the single live simulation, static six-jar rack, and one optical-
+   load authority.
+3. Implement only the Batch 06 treatment-cycle/result boundary when explicitly
+   authorized. Keep Batch 07 instrumentation, persistence, canonical-jar
+   completion, and ghost recording/playback unstarted.
 
 ## Commands
 

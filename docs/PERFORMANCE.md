@@ -323,3 +323,37 @@ immersive frame rate, controller-inclusive cost, transparency ordering, or
 operator acceptance. Those measurements remain the final Batch 05 gate and
 will be compared with the accepted Batch 04 shell baseline of 119.7 FPS,
 8.90 ms p95, 86 controller-inclusive draw calls, and 57.5 MB heap.
+
+## 2026-07-17 - Batch 05 physical Quest integration acceptance
+
+- Device: Meta Quest 3, serial `2G0YC5ZG0M052K`
+- Browser: Quest Browser `149.0.0.24.3.1013217646`
+- Route: ADB reverse `tcp:5173` to `tcp:5173`; exact seated XR-shell URL
+- Simulation: canonical seed `1597463007`, config `fnv1a32-e8bf13e7`, 500
+  initial particles
+
+The exact seated page was restarted from a fresh ready state and re-entered
+immersive VR. Both controllers tracked during the endpoint observations. The
+operator routed a deliberate physical dose movement and one Start command,
+watched the complete real-time Dose 5 treatment, then reviewed deterministic
+Dose 0 and Dose 10 endpoint presentations in the same worn-headset session.
+
+| State                                 | Average FPS | Average frame | p95 frame | Simulation | Instance sync | Active | Draw calls | JS heap |
+| :------------------------------------ | ----------: | ------------: | --------: | ---------: | ------------: | -----: | ---------: | ------: |
+| Dose 5 complete, controllers idle     |      118.45 |       8.44 ms |   8.80 ms |   0.007 ms |      0.084 ms |    105 |          8 | 24.5 MB |
+| Dose 0 complete, controllers tracked  |      116.88 |       8.56 ms |   9.60 ms |   0.004 ms |      0.192 ms |    429 |        100 | 24.5 MB |
+| Dose 10 complete, controllers tracked |      116.88 |       8.56 ms |  10.20 ms |   0.003 ms |      0.200 ms |    429 |        102 | 24.5 MB |
+
+Dose 5 completed at 43 simulated seconds with 105 active, 65 suspended, and 40
+settled aggregates, 395 merges, and endpoint optical load `0.501182`. Doses 0
+and 10 each reached `0.737589`, with identical endpoint population and merge
+diagnostics. This preserves the accepted U-shaped qualitative response in the
+integrated headset path.
+
+The controller-on worst window, 116.88 FPS and 10.20 ms p95, retains substantial
+headroom over the 72 FPS frame budget. Draw-call values are not compared across
+controller-idle and controller-on rows. The seated project-owner operator
+reported that the scene “looked good” and passed low/optimum/high readability,
+stereo and transparency presentation, floc visibility, wall appearance, common
+angles, and visible hitching. No standing, thermal, endurance, or release claim
+is made. This closes the Batch 05 physical integration gate.
