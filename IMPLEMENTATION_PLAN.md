@@ -109,6 +109,14 @@ repeat, and visible smoothness. Batch 07 is next and unstarted.
 
 The hybrid direction maps runtime ownership to Batch 01A closure; hero-tank and jar-rack blockout plus recognition validation to Batch 03; interaction to Batch 04; integration to Batches 05-06; static jar summaries, complete memory, and treatment-ghost recording/playback runtime to Batch 07; live-versus-ghost readability to Batch 08; spectator presentation to Batch 09; presence to Batch 10; and release evidence to Batch 11.
 
+Portfolio presentation remains staged rather than pulled into the active Batch
+07 boundary. Batch 08 produces accepted final still and motion evidence while
+enforcing the Quest transparency budget. Batch 09 turns that evidence into the
+public repository front door: concise README media, an architecture/data-flow
+diagram, CI signal, testing lessons, and verified GitHub metadata. Batch 11 owns
+host-specific base paths, production request/bundle analysis, deployment,
+rollback, final branding, and verified related-project links.
+
 On 2026-07-16 the project owner resumed the previously parked Batch 03 work,
 preserved the 03R.1 repair, reconciled it with accepted Batch 04, and explicitly
 waived the fresh blinded jar-recognition rerun. The waiver closes Batch 03

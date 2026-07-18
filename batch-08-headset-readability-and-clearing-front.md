@@ -51,6 +51,11 @@ Create a repeatable test matrix covering:
 
 Capture video or screenshots with build hash and config hash.
 
+Produce one clean portfolio-ready hero still and one short representative motion
+clip from the accepted build for later Batch 09 README and repository use. Keep
+the exports compact, provenance-recorded, and free of development metrics; do
+not publish an obsolete intermediate visual merely to fill the README.
+
 ## Work package 08.2 - Optical-load band count and smoothing
 
 Evaluate the existing 12-16 band range:
@@ -124,6 +129,10 @@ Audit:
 - overlapping instrument glass;
 - stacked canonical jar walls and jar-summary gradients;
 - sorting artifacts.
+
+Record the number and worst overlap of transparent surfaces during each
+expensive phase. Treat additional transparent layers and any increase above 500
+particles as measurement-gated changes, not default polish.
 
 Simplification order when performance or clarity fails:
 
@@ -202,6 +211,8 @@ It is not required for this batch to pass.
 - pre/post dose-sweep comparison for every simulation-tuning change;
 - assertion that display-only changes do not alter endpoint values;
 - captured headset comparison matrix;
+- accepted portfolio-ready hero still and short motion source with build/config
+  identity;
 - comprehension-test notes;
 - transparency/draw-call audit;
 - Quest performance report;

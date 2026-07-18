@@ -1,6 +1,6 @@
 # Batch 07 Implementation Plan: Physical Instrumentation and Experiment Memory
 
-**Status:** Not started — predecessor gates remain open
+**Status:** Not started — Batch 06 is accepted; implementation requires explicit authorization
 **Depends on:** Batch 06 accepted  
 **May run in parallel with:** Instrument geometry and data wiring after interfaces freeze  
 **Primary gate:** The apparatus explains itself physically, records exactly one result per trial, persists the curve, and can record and replay a compatible prior treatment result without mutating the live simulation or requiring software chrome.

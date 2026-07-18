@@ -143,6 +143,30 @@ Ask new viewers after one autoplay cycle:
 
 Pass when viewers can explain the main idea without a spoken tutorial.
 
+## Work package 09.9 - Public repository front door
+
+Make the repository understandable before a visitor reads the internal batch
+record:
+
+- add the accepted Batch 08 hero still near the top of README.md;
+- provide a compact 5-15 second motion preview from the real accepted build when
+  its file size and accessibility treatment are appropriate; retain a still
+  fallback and do not make video the only explanation;
+- add one small Mermaid architecture/data-flow diagram showing the
+  /sim, /render, /xr, and /app boundaries and the single relative optical-load
+  authority feeding every presentation and memory consumer;
+- retain and verify the CI badge;
+- add a concise testing lesson that distinguishes the failed initial jar
+  recognition, bounded repair, documented waiver, and accepted treatment
+  readability without presenting the waived rerun as a pass;
+- keep the public description consistent with “personal educational portfolio
+  project” and “phenomenological coagulation model”;
+- verify the GitHub About description and topics against the final README;
+- avoid publishing a demo URL until Batch 11 has deployed and verified it.
+
+Keep detailed batch evidence in its existing documents. The README should link
+to that evidence without becoming another chronological build log.
+
 ## Explicit non-goals
 
 - No full desktop recreation of VR grabbing.
@@ -162,6 +186,8 @@ Pass when viewers can explain the main idea without a spoken tutorial.
 - browser smoke-test matrix;
 - final under-one-minute recording;
 - comprehension-test notes.
+- README media/link/render check, architecture-diagram render check, CI badge
+  check, and captured GitHub About/topic metadata.
 
 ## Review-agent checklist
 
@@ -172,6 +198,9 @@ Pass when viewers can explain the main idea without a spoken tutorial.
 - Is the camera consistent across dose conditions?
 - Can an unsupported or failed XR session recover cleanly?
 - Has desktop parity expanded scope unnecessarily?
+- Does the repository front door explain the product, show the accepted
+  experience, and expose the architecture and current CI state without requiring
+  the batch logs?
 
 ## Acceptance criteria
 
@@ -183,6 +212,9 @@ Pass when viewers can explain the main idea without a spoken tutorial.
 - A viewer can explain the experiment and identify the optimum without instructions.
 - XR entry is available where supported and failure returns safely to spectator mode.
 - The sequence is stable enough for portfolio screen recording.
+- The README and GitHub metadata present the accepted experience as a personal
+  educational portfolio project with current media, architecture, CI, and
+  appropriately scoped testing evidence.
 
 ## Suggested commit
 

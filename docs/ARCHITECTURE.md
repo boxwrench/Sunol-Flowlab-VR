@@ -33,7 +33,7 @@ Forbidden dependencies:
 
 ## Runtime data flow
 
-Physical or spectator input becomes a validated discrete command. The application layer applies it to lifecycle/domain code. src/app/SimulationRuntime.ts owns the deterministic state and fixed-step clock, while an app-owned frame driver advances that runtime inside the React Three Fiber canvas. Rendering receives a read-only state view and synchronizes reusable Three.js objects. Relative optical-load bands produced by the simulation are the sole process source for hero-tank appearance, clearing-front diagnostics, instruments, completed results, static canonical jar summaries, persistence, and replay. Historical Batch 02A code calls this normalized record turbidity; it is not calibrated NTU.
+Physical or spectator input becomes a validated discrete command. The application layer applies it to lifecycle/domain code. src/app/SimulationRuntime.ts owns the deterministic state and fixed-step clock, while an app-owned frame driver advances that runtime inside the React Three Fiber canvas. Rendering receives a read-only state view and synchronizes reusable Three.js objects. Relative optical-load bands produced by the simulation are the sole process source for hero-tank appearance, clearing-front diagnostics, instruments, completed results, static canonical jar summaries, persistence, and replay. This record is dimensionless and is not calibrated NTU.
 
 Development-only XR preflight adapters may report session, controller, and
 selection facts to app-owned low-frequency telemetry. They do not own or mutate

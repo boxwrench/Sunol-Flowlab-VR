@@ -46,6 +46,11 @@ Create a checklist of:
 - browser/device support matrix;
 - public assets and provenance;
 - environment variables and host configuration;
+- production entry and dynamic chunk inventory, compressed sizes, and the actual
+  request waterfall on the chosen host;
+- evidence showing whether IWER/emulator environment chunks are requested by the
+  production spectator and Quest routes; eliminate eager development-only cost
+  or document a measured runtime justification;
 - persistence schema version;
 - accepted simulation config hash and dose-sweep baseline.
 - approved hybrid design brief and recognition evidence;
@@ -181,6 +186,11 @@ Update:
 - `docs/DATA_BOUNDARY.md`: final review date and asset provenance location;
 - `CHANGELOG.md`: user-visible milestones only.
 
+Verify the repository About description, topics, CI badge, homepage URL, and
+public audience wording. Add reciprocal related-project links only after the
+target repositories and descriptions have been verified and approved; do not
+invent or imply a shared runtime.
+
 Add troubleshooting for:
 
 - XR unavailable;
@@ -193,7 +203,10 @@ Add troubleshooting for:
 
 - Deploy immutable release candidate.
 - Verify production URL and asset caching.
-- Confirm route behavior and base paths on the chosen host.
+- Configure and confirm Vite base-path behavior for the chosen host rather than
+  hard-coding a speculative GitHub Pages path before host selection.
+- Confirm direct, nested, refresh, asset, desktop, and XR route behavior under
+  that base path.
 - Record deployment ID and commit hash.
 - Define rollback to the previous known-good deployment.
 - Preserve the accepted desktop proof and final spectator recording.
@@ -226,6 +239,8 @@ The release cannot proceed with:
 - unresolved memory growth;
 - Quest performance below the accepted target;
 - root URL failing without XR;
+- production routes eagerly loading large emulator-only environment assets
+  without a measured justification;
 - development tuning chrome exposed publicly;
 - sensitive or unapproved branding/material;
 - non-reproducible build or missing lockfile.
@@ -270,6 +285,9 @@ Additionally:
 - no restricted material or development chrome ships;
 - docs, artifacts, deployment record, rollback plan, and release tag are complete.
 - recognition validation is recorded, hero-tank dominance is preserved, and no jar owns continuous process state.
+- the production request waterfall and bundle inventory prove that development
+  emulator assets are not eagerly loaded, or record an accepted measured reason
+  when exclusion is not technically available.
 
 ## Suggested tags and commit
 

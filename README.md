@@ -1,6 +1,8 @@
 # Sunol FlowLab VR
 
-Sunol FlowLab VR is an open-source educational experience for people interested in drinking-water treatment. It uses a VR-first tabletop coagulation experiment and a desktop spectator mode to show a qualitative idea: treatment response has an optimum, and both underdose and overdose can leave poorer water clarity.
+[![CI](https://github.com/boxwrench/Sunol-Flowlab-VR/actions/workflows/ci.yml/badge.svg)](https://github.com/boxwrench/Sunol-Flowlab-VR/actions/workflows/ci.yml)
+
+Sunol FlowLab VR is an open-source personal educational portfolio project for people interested in drinking-water treatment. It uses a VR-first tabletop coagulation experiment and a desktop spectator mode to show a qualitative idea: treatment response has an optimum, and both underdose and overdose can leave poorer water clarity.
 
 This is a **phenomenological coagulation model**, not dose-prediction software, operational guidance, CFD, or a calibrated model of a real plant. The setting and values are representative and fictionalized.
 

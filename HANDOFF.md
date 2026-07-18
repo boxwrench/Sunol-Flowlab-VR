@@ -12,6 +12,9 @@ Updated: 2026-07-17
 - `AGENTS.md` is repository-local authority and intentionally ignored at the
   repository root
 - Current milestone: Batch 06 accepted; Batch 07 is next and unstarted
+- Portfolio-evaluation recommendations are staged without expanding Batch 07:
+  final media/transparency evidence in Batch 08, repository front-door work in
+  Batch 09, and bundle/deployment/branding verification in Batch 11
 - Active plan authority: [IMPLEMENTATION_PLAN.md](IMPLEMENTATION_PLAN.md) and
   its ordered batch-00 through batch-11 Markdown files
 - Batch 03 technical evidence:
