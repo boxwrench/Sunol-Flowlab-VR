@@ -26,7 +26,8 @@ test('optical-load renderer uses two preallocated surfaces from one band authori
   const frameCallback = source.slice(source.indexOf('useFrame('))
 
   assert.equal((source.match(/<mesh\b/g) ?? []).length, 2)
-  assert.match(source, /bands: OpticalLoadBandsView/)
+  assert.match(source, /bands: OpticalLoadBandsPresentation/)
+  assert.match(source, /readonly values: ArrayLike<number>/)
   assert.match(source, /new Uint8Array\(bands\.values\.length\)/)
   assert.match(source, /new DataTexture/)
   assert.match(source, /createGradientMaterial\(texture, 0\.42\)/)

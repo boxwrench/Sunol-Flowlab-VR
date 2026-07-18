@@ -57,9 +57,10 @@ test('the app runtime owns deterministic state and clock lifecycle', async () =>
   assert.match(source, /stepPhenomenonWorkspace/)
 })
 
-test('Batch 05 composes one app-owned runtime into the shared hero tank renderer', async () => {
-  const [app, scene, apparatus] = await Promise.all([
+test('Batch 06 composes one app-owned treatment cycle into the shared hero tank renderer', async () => {
+  const [app, cycle, scene, apparatus, measurement] = await Promise.all([
     readFile(new URL('../src/app/XrShellApp.tsx', import.meta.url), 'utf8'),
+    readFile(new URL('../src/app/TreatmentCycle.ts', import.meta.url), 'utf8'),
     readFile(
       new URL('../src/render/XrShellScene.tsx', import.meta.url),
       'utf8',
@@ -68,13 +69,31 @@ test('Batch 05 composes one app-owned runtime into the shared hero tank renderer
       new URL('../src/render/XrShellApparatus.tsx', import.meta.url),
       'utf8',
     ),
+    readFile(
+      new URL('../src/render/MeasurementCue.tsx', import.meta.url),
+      'utf8',
+    ),
   ])
 
   assert.equal((app.match(/new SimulationRuntime\(/g) ?? []).length, 1)
-  assert.match(app, /new Batch05CommandAdapter\(runtime/)
+  assert.match(app, /new TreatmentCycleController\(/)
+  assert.match(app, /locked=\{!cycle\.controlAvailability\.doseEnabled\}/)
+  assert.match(app, /locked=\{!cycle\.controlAvailability\.startEnabled\}/)
+  assert.match(app, /opticalLoadBands=\{presentationOpticalLoadBands\}/)
+  assert.match(app, /presentationOpticalSource/)
+  assert.match(app, /cycle\.interrupt\('XR session ended'\)/)
+  assert.match(app, /cycle\.resumeAfterInterruption\(\)/)
+  assert.match(cycle, /TRIAL_TRANSITION_TABLE/)
+  assert.match(cycle, /createTrialResultV1/)
+  assert.doesNotMatch(cycle, /from 'react'|from 'three'/)
   assert.match(scene, /<HeroObservationTank/)
+  assert.match(scene, /measurementPhase=\{measurementPhase\}/)
   assert.match(scene, /particleState=\{particleState\}/)
   assert.match(scene, /opticalLoadBands=\{opticalLoadBands\}/)
   assert.doesNotMatch(apparatus, /EmptyHeroTank/)
   assert.equal((apparatus.match(/<JarTestBench\b/g) ?? []).length, 1)
+  assert.match(measurement, /phase === 'measuring'/)
+  assert.match(measurement, /visible=\{phase === 'complete'\}/)
+  assert.match(measurement, /visible=\{phase === 'refilling'\}/)
+  assert.doesNotMatch(measurement, /from '\.\.\/app|from '\.\.\/sim|useFrame/)
 })

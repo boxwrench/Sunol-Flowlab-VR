@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 
 import { FoundationScene } from '../render/FoundationScene'
 import {
@@ -13,8 +13,12 @@ import {
 } from '../xr/ControllerPreflight'
 import { MetricsOverlay } from './MetricsOverlay'
 import { developmentPerformance } from './performance'
-import { SimulationDriver } from './SimulationDriver'
 import { SimulationRuntime } from './SimulationRuntime'
+import {
+  DEFAULT_TREATMENT_CYCLE_CONFIG,
+  TreatmentCycleController,
+} from './TreatmentCycle'
+import { TreatmentCycleDriver } from './TreatmentCycleDriver'
 import { XrShellApp } from './XrShellApp'
 
 declare global {
@@ -67,8 +71,7 @@ function PhenomenonApp() {
   const presentationMode = urlParameters.get('mode') === 'proof'
   const reviewCaptureMode = urlParameters.get('capture') === 'review'
   const [entryError, setEntryError] = useState<string | null>(null)
-  const [selectedDose, setSelectedDose] = useState<DoseDetent>(5)
-  const [trialRunning, setTrialRunning] = useState(true)
+  const [, setStatusRevision] = useState(0)
   const xrPreflightRef = useRef<XrPreflightSnapshot>({
     sessionActive: false,
     leftControllerDetected: false,
@@ -80,6 +83,28 @@ function PhenomenonApp() {
   const runtimeRef = useRef<SimulationRuntime | null>(null)
   if (runtimeRef.current === null) runtimeRef.current = new SimulationRuntime()
   const runtime = runtimeRef.current
+  const cycleRef = useRef<TreatmentCycleController | null>(null)
+  if (cycleRef.current === null) {
+    cycleRef.current = new TreatmentCycleController(
+      runtime,
+      5,
+      DEFAULT_TREATMENT_CYCLE_CONFIG,
+      () => setStatusRevision((revision) => revision + 1),
+    )
+  }
+  const cycle = cycleRef.current
+  const completedOpticalLoadBands = useMemo(
+    () =>
+      cycle.result === null
+        ? null
+        : Object.freeze({ values: cycle.result.bandSnapshot }),
+    [cycle.result],
+  )
+  const presentationOpticalLoadBands =
+    completedOpticalLoadBands ?? runtime.opticalLoadBands
+  const presentationEndpointOpticalLoad =
+    cycle.result?.endpointOpticalLoad ??
+    endpointOpticalLoad(runtime.opticalLoadBands)
 
   const recordXrPreflightEvent = useCallback(
     (event: XrPreflightEvent): void => {
@@ -106,9 +131,17 @@ function PhenomenonApp() {
   )
 
   useEffect(() => {
-    runtime.start()
-    return () => runtime.pause()
-  }, [runtime])
+    const handleVisibility = () => {
+      if (document.visibilityState === 'hidden')
+        cycle.interrupt('document hidden')
+      else cycle.resumeAfterInterruption()
+    }
+    document.addEventListener('visibilitychange', handleVisibility)
+    return () => {
+      document.removeEventListener('visibilitychange', handleVisibility)
+      cycle.interrupt('app unmounted')
+    }
+  }, [cycle])
 
   useEffect(() => {
     if (!import.meta.env.DEV) return
@@ -120,7 +153,18 @@ function PhenomenonApp() {
         mode: 'phenomenon-trial',
         running: runtime.isRunning,
         dose: runtime.dose,
-        phase: runtime.phase,
+        selectedDose: cycle.selectedDose,
+        phase: cycle.phase,
+        simulationPhase: runtime.phase,
+        interrupted: cycle.isInterrupted,
+        controlAvailability: cycle.controlAvailability,
+        refillElapsedSeconds: cycle.refillElapsedSeconds,
+        presentationEpoch: cycle.presentationEpoch,
+        resultCount: cycle.resultCount,
+        result: cycle.result,
+        presentationOpticalSource:
+          cycle.result === null ? 'live-runtime' : 'trial-result',
+        lastFailure: cycle.lastFailure,
         simulationTimeSeconds: runtime.simulationTimeSeconds,
         activeParticles: runtime.state.activeCount,
         suspendedAggregates: population.suspendedAggregateCount,
@@ -131,7 +175,9 @@ function PhenomenonApp() {
         largestAggregateMassFraction: population.largestAggregateMassFraction,
         minimumVisibleSuspendedAggregatesDuringSettling:
           population.minimumVisibleSuspendedAggregatesDuringSettling,
-        endpointOpticalLoad: endpointOpticalLoad(runtime.opticalLoadBands),
+        endpointOpticalLoad:
+          cycle.result?.endpointOpticalLoad ??
+          endpointOpticalLoad(runtime.opticalLoadBands),
         globalRelativeOpticalLoad: runtime.opticalLoadBands.globalRelativeLoad,
         topClearFraction: clearing.topClearFraction,
         clearingFrontDepth: clearing.clearingFrontDepth,
@@ -142,9 +188,8 @@ function PhenomenonApp() {
     window.advanceTime = (milliseconds) => {
       if (!Number.isFinite(milliseconds) || milliseconds < 0)
         throw new RangeError('Advance time must be finite and non-negative')
-      runtime.pause()
-      setTrialRunning(false)
-      runtime.stepHeadless(Math.round(milliseconds / (1000 / 60)))
+      if (cycle.phase === 'REFILLING') cycle.advance(milliseconds / 1000)
+      else cycle.advanceHeadless(Math.round(milliseconds / (1000 / 60)))
     }
     window.render_xr_preflight_to_text = () =>
       JSON.stringify(xrPreflightRef.current)
@@ -153,28 +198,24 @@ function PhenomenonApp() {
       delete window.advanceTime
       delete window.render_xr_preflight_to_text
     }
-  }, [runtime])
+  }, [cycle, runtime])
 
   function runComparisonPreset(dose: DoseDetent): void {
-    runtime.reset(undefined, dose)
-    runtime.start()
-    setTrialRunning(true)
-    setSelectedDose(dose)
+    cycle.forceResetDevOnly()
+    cycle.dispatchCommand({ type: 'SET_DOSE', dose })
+    cycle.dispatchCommand({ type: 'START_TRIAL' })
   }
 
   function startTrial(): void {
-    runtime.start()
-    setTrialRunning(true)
+    cycle.dispatchCommand({ type: 'START_TRIAL' })
   }
 
-  function stopTrial(): void {
-    runtime.pause()
-    setTrialRunning(false)
+  function requestRefill(): void {
+    cycle.dispatchCommand({ type: 'RESET_TRIAL' })
   }
 
-  function resetTrial(): void {
-    runtime.reset(undefined, selectedDose)
-    setTrialRunning(false)
+  function forceResetTrial(): void {
+    cycle.forceResetDevOnly()
   }
 
   async function enterVr() {
@@ -197,7 +238,7 @@ function PhenomenonApp() {
       {presentationMode ? null : (
         <div className="app-heading">
           <h1>Sunol FlowLab VR</h1>
-          <p>Deterministic desktop coagulation phenomenon proof</p>
+          <p>Deterministic treatment-cycle proof</p>
           <button className="enter-vr" type="button" onClick={enterVr}>
             Enter VR
           </button>
@@ -216,7 +257,7 @@ function PhenomenonApp() {
                 key={dose}
                 id={`preset-${dose}`}
                 type="button"
-                aria-pressed={selectedDose === dose}
+                aria-pressed={cycle.selectedDose === dose}
                 onClick={() => runComparisonPreset(dose)}
               >
                 {label}
@@ -225,31 +266,35 @@ function PhenomenonApp() {
           </div>
           <div className={'simulation-review-row'}>
             <span role={'status'} aria-live={'polite'}>
-              {trialRunning ? 'Trial running' : 'Trial stopped'}
+              Phase {cycle.phase} · Dose {cycle.selectedDose}
             </span>
             <div
               className={'simulation-controls'}
               role={'group'}
-              aria-label={'Simulation playback'}
+              aria-label={'Treatment cycle controls'}
             >
               <button
                 id={'trial-start'}
                 type={'button'}
-                disabled={trialRunning}
+                disabled={!cycle.controlAvailability.startEnabled}
                 onClick={startTrial}
               >
                 Start
               </button>
               <button
-                id={'trial-stop'}
+                id={'trial-refill'}
                 type={'button'}
-                disabled={!trialRunning}
-                onClick={stopTrial}
+                disabled={!cycle.controlAvailability.refillEnabled}
+                onClick={requestRefill}
               >
-                Stop
+                Refill
               </button>
-              <button id={'trial-reset'} type={'button'} onClick={resetTrial}>
-                Reset
+              <button
+                id={'trial-reset'}
+                type={'button'}
+                onClick={forceResetTrial}
+              >
+                Force Reset
               </button>
             </div>
           </div>
@@ -258,12 +303,23 @@ function PhenomenonApp() {
       {import.meta.env.DEV && !presentationMode ? <MetricsOverlay /> : null}
       <FoundationScene
         animateParticleTransitions={!reviewCaptureMode}
+        measurementPhase={
+          cycle.phase === 'MEASURING'
+            ? 'measuring'
+            : cycle.phase === 'COMPLETE'
+              ? 'complete'
+              : cycle.phase === 'REFILLING'
+                ? 'refilling'
+                : 'idle'
+        }
+        measurementRelativeOpticalLoad={presentationEndpointOpticalLoad}
         particleState={runtime.state}
-        opticalLoadBands={runtime.opticalLoadBands}
+        opticalLoadBands={presentationOpticalLoadBands}
         preserveDrawingBuffer={reviewCaptureMode}
+        presentationEpoch={cycle.presentationEpoch}
         recordParticleFrame={recordParticleFrame}
       >
-        <SimulationDriver runtime={runtime} />
+        <TreatmentCycleDriver cycle={cycle} />
         {import.meta.env.DEV ? (
           <ControllerPreflight recordEvent={recordXrPreflightEvent} />
         ) : null}

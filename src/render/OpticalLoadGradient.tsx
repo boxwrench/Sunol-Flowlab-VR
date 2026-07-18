@@ -9,8 +9,6 @@ import {
   UnsignedByteType,
 } from 'three'
 
-import type { OpticalLoadBandsView } from '../sim'
-
 const vertexShader = /* glsl */ `
   varying vec2 vUv;
 
@@ -49,8 +47,12 @@ function createGradientMaterial(texture: DataTexture, opacityScale: number) {
   })
 }
 
+export interface OpticalLoadBandsPresentation {
+  readonly values: ArrayLike<number>
+}
+
 interface OpticalLoadGradientProps {
-  readonly bands: OpticalLoadBandsView
+  readonly bands: OpticalLoadBandsPresentation
 }
 
 export function OpticalLoadGradient({ bands }: OpticalLoadGradientProps) {

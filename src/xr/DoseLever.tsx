@@ -11,6 +11,7 @@ import {
   moveDetentControl,
   releaseDetentControl,
   selectDetent,
+  setDetentControlLocked,
   syncDetentControl,
   type DetentControlState,
   type XrControlHandedness,
@@ -19,6 +20,7 @@ import {
 interface DoseLeverProps {
   readonly dose: DoseIndex
   readonly emitCommand: (command: AppCommand) => void
+  readonly locked: boolean
   readonly recordState: (state: DetentControlState) => void
 }
 
@@ -59,7 +61,12 @@ const LABEL_SEGMENT_COUNT = Array.from({ length: 11 }, (_, dose) =>
 const LABEL_COLOR = new Color('#e2fff8')
 const SELECTED_LABEL_COLOR = new Color('#ffcf7d')
 
-export function DoseLever({ dose, emitCommand, recordState }: DoseLeverProps) {
+export function DoseLever({
+  dose,
+  emitCommand,
+  locked,
+  recordState,
+}: DoseLeverProps) {
   const mountRef = useRef<Group>(null)
   const localPoint = useMemo(() => new Vector3(), [])
   const stateRef = useRef(createDetentControlState(dose))
@@ -86,6 +93,10 @@ export function DoseLever({ dose, emitCommand, recordState }: DoseLeverProps) {
     const nextState = syncDetentControl(stateRef.current, dose)
     commitState(nextState)
   }, [dose])
+
+  useEffect(() => {
+    commitState(setDetentControlLocked(stateRef.current, locked))
+  }, [locked])
 
   function commitState(nextState: DetentControlState, command?: AppCommand) {
     if (nextState !== stateRef.current) {
@@ -142,7 +153,7 @@ export function DoseLever({ dose, emitCommand, recordState }: DoseLeverProps) {
   }
 
   const active = visualState.interaction.pointerId !== null
-  const leverColor = active ? '#ffbd59' : '#65d8cf'
+  const leverColor = locked ? '#667773' : active ? '#ffbd59' : '#65d8cf'
 
   return (
     <group ref={mountRef} position={[-0.22, 0, -0.2]}>
@@ -225,6 +236,12 @@ export function DoseLever({ dose, emitCommand, recordState }: DoseLeverProps) {
         <cylinderGeometry args={[0.075, 0.085, 0.11, 24]} />
         <meshStandardMaterial color={'#a8c8c1'} roughness={0.4} />
       </mesh>
+      {locked ? (
+        <mesh position={[0, 0.17, 0.18]} rotation={[0, Math.PI / 2, 0]}>
+          <boxGeometry args={[0.28, 0.035, 0.035]} />
+          <meshStandardMaterial color={'#b78345'} roughness={0.5} />
+        </mesh>
+      ) : null}
     </group>
   )
 }

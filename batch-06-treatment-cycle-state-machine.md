@@ -1,6 +1,6 @@
 # Batch 06 Implementation Plan: Complete Treatment-Cycle State Machine
 
-**Status:** Not started — predecessor gates remain open
+**Status:** Accepted — seated Quest treatment-cycle, readability, refill, and performance gates pass
 **Depends on:** Batch 05 accepted  
 **May run in parallel with:** State-test authoring, instrument concepts, pacing review  
 **Primary gate:** One complete trial has a clear beginning, treatment sequence, fixed measurement, recorded result, and deterministic refill/reset.

@@ -2,7 +2,7 @@ import { Canvas } from '@react-three/fiber'
 import { XR } from '@react-three/xr'
 import type { ReactNode } from 'react'
 
-import type { OpticalLoadBandsView, ParticleStateView } from '../sim'
+import type { ParticleStateView } from '../sim'
 import { xrStore } from '../xr/store'
 import { HeroObservationTank } from './HeroObservationTank'
 import { JarTestBench } from './JarTestBench'
@@ -12,22 +12,30 @@ import {
   DESKTOP_CAMERA_TARGET,
 } from './layout'
 import type { ParticleFrameRecorder } from './ParticleCloud'
+import type { MeasurementPresentationPhase } from './MeasurementCue'
+import type { OpticalLoadBandsPresentation } from './OpticalLoadGradient'
 
 interface FoundationSceneProps {
   readonly animateParticleTransitions?: boolean
   readonly children?: ReactNode
+  readonly measurementPhase?: MeasurementPresentationPhase
+  readonly measurementRelativeOpticalLoad?: number
   readonly particleState: ParticleStateView
-  readonly opticalLoadBands: OpticalLoadBandsView
+  readonly opticalLoadBands: OpticalLoadBandsPresentation
   readonly preserveDrawingBuffer?: boolean
+  readonly presentationEpoch?: number
   readonly recordParticleFrame: ParticleFrameRecorder
 }
 
 export function FoundationScene({
   animateParticleTransitions = true,
   children,
+  measurementPhase = 'idle',
+  measurementRelativeOpticalLoad = 0,
   particleState,
   opticalLoadBands,
   preserveDrawingBuffer = false,
+  presentationEpoch = 0,
   recordParticleFrame,
 }: FoundationSceneProps) {
   return (
@@ -45,7 +53,10 @@ export function FoundationScene({
         <group position={[...APPARATUS_WORLD_POSITION]}>
           <HeroObservationTank
             animateParticleTransitions={animateParticleTransitions}
+            measurementPhase={measurementPhase}
+            measurementRelativeOpticalLoad={measurementRelativeOpticalLoad}
             particleState={particleState}
+            presentationEpoch={presentationEpoch}
             opticalLoadBands={opticalLoadBands}
             recordParticleFrame={recordParticleFrame}
           />

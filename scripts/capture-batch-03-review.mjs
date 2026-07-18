@@ -175,7 +175,7 @@ try {
         const nextState = JSON.parse(
           await page.evaluate(() => window.render_game_to_text?.() ?? '{}'),
         )
-        if (nextState.phase !== 'complete') {
+        if (nextState.phase !== 'COMPLETE') {
           throw new Error(
             `Comparison ${letter} did not reach the complete phase`,
           )

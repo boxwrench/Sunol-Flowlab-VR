@@ -57,12 +57,14 @@ export type ParticleFrameRecorder = (
 
 interface ParticleCloudProps {
   readonly animateTransitions?: boolean
+  readonly presentationEpoch?: number
   readonly state: ParticleStateView
   readonly recordFrame: ParticleFrameRecorder
 }
 
 export function ParticleCloud({
   animateTransitions = true,
+  presentationEpoch = 0,
   state,
   recordFrame,
 }: ParticleCloudProps) {
@@ -73,6 +75,7 @@ export function ParticleCloud({
     () => makePresentationState(state.capacity),
     [state.capacity],
   )
+  const previousPresentationEpoch = useRef(presentationEpoch)
 
   useFrame(({ gl }, deltaSeconds) => {
     const syncStart = performance.now()
@@ -80,6 +83,7 @@ export function ParticleCloud({
     if (mesh === null) return
     const resetDetected =
       !animateTransitions ||
+      presentationEpoch !== previousPresentationEpoch.current ||
       state.activeCount > presentation.previousActiveCount
     const positionBlend = followBlend(deltaSeconds, POSITION_FOLLOW_SECONDS)
     const scaleBlend = followBlend(deltaSeconds, SCALE_FOLLOW_SECONDS)
@@ -152,6 +156,7 @@ export function ParticleCloud({
       instance += 1
     }
     presentation.previousActiveCount = state.activeCount
+    previousPresentationEpoch.current = presentationEpoch
     mesh.count = instance
     mesh.instanceMatrix.needsUpdate = true
     if (mesh.instanceColor !== null) mesh.instanceColor.needsUpdate = true

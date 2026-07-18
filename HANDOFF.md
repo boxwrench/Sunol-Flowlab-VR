@@ -7,10 +7,11 @@ Updated: 2026-07-17
 - Repository: <https://github.com/boxwrench/Sunol-Flowlab-VR>
 - Branch: main
 - Published branch: main; use `git log -1 --oneline` for the current increment
-- Working tree: clean at the published Batch 05 closing commit
+- Working tree: published Batch 06 closing increment; inspect
+  `git status --short`
 - `AGENTS.md` is repository-local authority and intentionally ignored at the
   repository root
-- Current milestone: Batch 05 accepted; Batch 06 is next and unstarted
+- Current milestone: Batch 06 accepted; Batch 07 is next and unstarted
 - Active plan authority: [IMPLEMENTATION_PLAN.md](IMPLEMENTATION_PLAN.md) and
   its ordered batch-00 through batch-11 Markdown files
 - Batch 03 technical evidence:
@@ -20,10 +21,13 @@ Updated: 2026-07-17
   [docs/BATCH_04_ACCEPTANCE.md](docs/BATCH_04_ACCEPTANCE.md)
 - Batch 05 closing evidence:
   [docs/BATCH_05_ACCEPTANCE.md](docs/BATCH_05_ACCEPTANCE.md)
+- Batch 06 closing evidence:
+  [docs/BATCH_06_ACCEPTANCE.md](docs/BATCH_06_ACCEPTANCE.md)
 
-Resume on main. Batches 03, 04, and 05 are accepted. Do not pull Batch 07 or
-later instrumentation, persistence, ghost replay, environment, deployment, or
-release scope into Batch 06.
+Resume on main after the accepted Batch 06 closing increment. Batches 03 through
+06 are accepted. Batch 07 is next and unstarted; review its plan and contracts
+before implementation. Do not pull Batch 08 or later visual comparison,
+environment, deployment, or release scope into Batch 07.
 
 The superseded Godot plan remains isolated under docs/archive for provenance.
 Use only the active indexed Markdown plan.
@@ -55,10 +59,9 @@ Use only the active indexed Markdown plan.
 - Authoritative diameter ratios are preserved in rendered floc scale. Short
   render-local position, scale, and consumed-particle exit smoothing improves
   merge readability without adding simulation merge-event state.
-- Development review controls provide Start, Stop, and Reset without moving
-  lifecycle ownership out of SimulationRuntime. Stop preserves the current
-  state; Reset restores the selected dose and canonical seed at time zero and
-  remains stopped; Start resumes the current state. Proof mode hides them.
+- Development review controls provide legal Start, complete-only Refill, and a
+  clearly named Force Reset without moving lifecycle ownership out of the
+  app-domain controller. Proof mode hides them.
 - One table-mounted six-jar bench with open rectangular vessels. The jars are
   static canonical presets for doses 0, 2, 4, 6, 8, and 10; one instanced draw
   gives all six the same frozen raw-water fill, and they are not six live
@@ -74,9 +77,17 @@ Use only the active indexed Markdown plan.
 - The Batch 05 XR route composes exactly one app-owned `SimulationRuntime` into
   the shared live hero-tank renderer while retaining the Batch 04 controls,
   posture transforms, floor/reference frame, and static six-jar rack.
-- A pure app-owned adapter accepts ready-state integer dose changes, starts a
-  deterministic trial, rejects invalid/non-ready commands with a log record,
-  pauses on XR/visibility interruption, and resumes without hidden catch-up.
+- The current app-owned Batch 06 controller accepts ready-state integer dose
+  changes, runs the explicit seven-phase sequence, rejects invalid/non-ready
+  commands with a log record, pauses on XR/visibility interruption, and resumes
+  without hidden catch-up. The Batch 05 adapter remains only as historical test
+  coverage and is no longer composed into either route.
+- One exactly-once immutable `TrialResultV1` captures the authoritative
+  12-band endpoint at 43 simulation seconds. COMPLETE water and detector
+  presentation read from that frozen result rather than the paused runtime.
+- The minimal physical measurement cue provides emitter, beam, detector, and
+  result lamp states. A two-second inlet stream marks deterministic refill and
+  controls unlock only after it finishes.
 - The physically accepted dose interaction uses a smaller operator-facing arc,
   a near-side direct-grab target, and locally generated instanced labels 0
   through 10. It maps constrained movement to all eleven validated integer
@@ -98,17 +109,18 @@ Use only the active indexed Markdown plan.
 - 20 repository-contract tests pass, including XR ownership, integration
   composition, detent, pointer-
   capture, and Start-latch source contracts.
-- 100 Vitest tests across 23 files pass, including exact low/optimum/high app-
-  runtime parity, 60/120 Hz parity, bounded interruption recovery, all eleven detents,
-  mechanical travel clamping, duplicate suppression, direct snapping, locking,
-  release behavior, and one-emission-per-press Start behavior.
+- 109 Vitest tests across 24 files pass, including the full transition matrix,
+  legal/illegal commands, fixed timing, centralized time scale, exactly-once
+  immutable result, result/runtime isolation, deterministic refill,
+  interruption/long-stall recovery, all eleven detents, lock suppression, and
+  one-emission-per-press Start behavior.
 - Canonical, reverse-order, reset-purity, and nine-seed sweeps pass.
 - Mass/diameter invariants, deterministic merge history, fractal settling,
   optical-load authority, local transport, population bounds, and the
   10,000-step finite-state path pass.
 - Type checking, lint, formatting, production build, and diff checks pass.
-- The conservative standalone production-path benchmark runs 2,580 steps in
-  70.3864 ms, averaging 0.026997 ms with 0.076100 ms p95.
+- The closing standalone production-path benchmark runs 2,580 steps in
+  23.9372 ms, averaging 0.009185 ms with 0.022100 ms p95.
 - The canonical optimum completes with 105 active, 65 suspended, and 40 settled
   aggregates; mean mass 4.761905; maximum mass 8; 1.6% largest-mass fraction;
   endpoint optical load 0.501182; and zero mass error.
@@ -116,11 +128,11 @@ Use only the active indexed Markdown plan.
   visible suspended aggregates, 1.6% largest-mass fraction, and zero mass error.
 - The bundled browser client completed the same optimum state with a readable
   clearing front and no console errors.
-- Five Playwright browser tests pass. The XR integration scenario proves that
-  `SET_DOSE` changes only ready state, the rendered Start control resets/starts
-  the selected deterministic trial, Dose 0 reaches the exact endpoint, runtime
-  and performance diagnostics synchronize, and non-ready dose input is
-  rejected. The four existing desktop/review scenarios still pass.
+- Five Playwright browser tests pass. Shared desktop and XR scenarios prove
+  READY through COMPLETE, fixed measurement/result capture, result-backed
+  endpoint presentation, deterministic REFILLING back to READY, locked controls,
+  exact endpoints, and synchronized diagnostics. Existing comparison/proof
+  scenarios still pass.
 - The pre/post eleven-dose sweep has identical endpoints at every detent and
   the complete nine-seed corpus still passes under config
   `fnv1a32-e8bf13e7`.
@@ -243,6 +255,16 @@ stereo/transparency presentation, fresh-session reentry, and short rolling
 performance. It does not claim standing, thermal/endurance, hosted deployment,
 or release acceptance.
 
+Batch 06 is accepted. All automated checks, the unchanged
+eleven-dose/nine-seed corpus, production build, required browser-client run, and
+inspected RAPID_MIX/MEASURING/COMPLETE/REFILLING desktop captures pass. A fresh
+seated Quest run also recorded the exact physical Start, phase order, immutable
+result, refill-to-READY state, and 117.2-120.1 FPS later-phase windows with
+9.0-9.8 ms p95. A second Dose 5 run reproduced the result without rejected
+commands. The seated project-owner operator replied “pass” to the combined
+review of phase distinction, lock feedback, measurement conclusion, refill
+readability and invitation to repeat, and visible smoothness.
+
 A hosted HTTPS deployment is not authorized. Localhost and the documented ADB
 reverse route remain the approved development paths. Thermal/endurance, later
 headset ergonomics beyond this Batch 04 protocol, ghost runtime, hosted
@@ -270,19 +292,17 @@ Keep spatial hashing deferred unless a recorded bottleneck justifies it.
 Version 1 has no free list. The observed flicker justifies the current bounded
 render-local smoothing, but simulation merge-event metadata remains deferred.
 Do not add a second simulation, copy hot arrays into React state, give the jars
-live state, add ghost runtime ahead of its planned batch, pull Batch 06 lifecycle
-forward, or authorize hosted deployment from this increment.
+live state, add ghost runtime ahead of its planned batch, pull Batch 07
+instrumentation/persistence forward, or authorize hosted deployment from this
+increment.
 
 ## Recommended next session
 
-1. Read `batch-06-treatment-cycle-and-authoritative-results.md` and the stable
-   contracts before starting a new bounded goal.
-2. Reconfirm Batch 06 scope against the accepted Batch 05 adapter and runtime;
-   preserve the single live simulation, static six-jar rack, and one optical-
-   load authority.
-3. Implement only the Batch 06 treatment-cycle/result boundary when explicitly
-   authorized. Keep Batch 07 instrumentation, persistence, canonical-jar
-   completion, and ghost recording/playback unstarted.
+1. Review the Batch 07 plan, ghost-replay design, and stable contracts before
+   changing code.
+2. Begin Batch 07 only as an explicitly authorized bounded goal. Preserve the
+   accepted Batch 06 treatment loop and keep Batch 08 visual-comparison scope
+   unstarted.
 
 ## Commands
 
@@ -295,6 +315,11 @@ forward, or authorize hosted deployment from this increment.
     npm run format:check
     npm run build
     npm run test:browser
+    npm run acceptance:06:quest -- status
+    npm run acceptance:06:quest -- restart
+    npm run acceptance:06:quest -- prepare 5
+    npm run acceptance:06:quest -- watch
+    npm run acceptance:06:quest -- refill
     npm run dev -- --port 5173
     adb devices
     adb reverse tcp:5173 tcp:5173

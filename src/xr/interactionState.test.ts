@@ -15,6 +15,7 @@ import {
   releaseStartButton,
   selectDetent,
   setDetentControlLocked,
+  setStartButtonLocked,
 } from './interactionState'
 
 describe('11-detent dose interaction model', () => {
@@ -78,5 +79,17 @@ describe('start button latch', () => {
     const released = releaseStartButton(held.state, 3)
     const pressedAgain = pressStartButton(released, 3, 'right')
     expect(pressedAgain.command).toEqual({ type: 'START_TRIAL' })
+  })
+
+  it('suppresses presses while locked and resets cleanly when unlocked', () => {
+    const locked = setStartButtonLocked(createStartButtonState(), true)
+    const suppressed = pressStartButton(locked, 4, 'left')
+
+    expect(suppressed.state).toBe(locked)
+    expect(suppressed.command).toBeUndefined()
+
+    const unlocked = setStartButtonLocked(locked, false)
+    const pressed = pressStartButton(unlocked, 4, 'left')
+    expect(pressed.command).toEqual({ type: 'START_TRIAL' })
   })
 })

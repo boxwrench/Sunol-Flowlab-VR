@@ -17,12 +17,12 @@ test('desktop foundation loads with explicit VR entry and a render surface', asy
   await expect(page.getByRole('button', { name: 'Enter VR' })).toBeVisible()
   await expect(page.getByLabel('Development performance metrics')).toBeVisible()
   await expect(page.getByLabel('Comparison presets')).toBeVisible()
-  await expect(page.getByLabel('Simulation playback')).toBeVisible()
+  await expect(page.getByLabel('Treatment cycle controls')).toBeVisible()
   await expect(page.locator('canvas')).toBeVisible()
   await expect(
     page
       .getByLabel('Development performance metrics')
-      .getByText('24 draw calls'),
+      .getByText('28 draw calls'),
   ).toBeVisible()
   const xrPreflight = await page.evaluate(() =>
     JSON.parse(window.render_xr_preflight_to_text?.() ?? '{}'),
@@ -38,34 +38,84 @@ test('desktop foundation loads with explicit VR entry and a render surface', asy
   expect(browserErrors).toEqual([])
 })
 
-test('review controls start, stop, and deterministically reset the trial', async ({
+test('desktop treatment cycle starts, completes, refills, and resets deterministically', async ({
   page,
-}) => {
+}, testInfo) => {
   await page.goto('/')
 
   const state = () =>
     page.evaluate(() => JSON.parse(window.render_game_to_text?.() ?? '{}'))
 
-  await page.getByRole('button', { name: 'Stop' }).click()
-  const stopped = await state()
-  expect(stopped.running).toBe(false)
-  await page.waitForTimeout(120)
-  expect((await state()).simulationTimeSeconds).toBe(
-    stopped.simulationTimeSeconds,
-  )
+  expect(await state()).toMatchObject({
+    phase: 'READY',
+    running: false,
+    selectedDose: 5,
+    simulationTimeSeconds: 0,
+  })
 
-  await page.getByRole('button', { name: 'Reset' }).click()
+  await page.getByRole('button', { name: 'Start' }).click()
+  await page.evaluate(() => window.advanceTime?.(100))
+  const running = await state()
+  expect(running.phase).toBe('RAPID_MIX')
+  expect(running.running).toBe(true)
+  expect(running.simulationTimeSeconds).toBeGreaterThanOrEqual(0.1)
+  expect(running.simulationTimeSeconds).toBeLessThan(0.5)
+
+  await page.getByRole('button', { name: 'Force Reset' }).click()
   const reset = await state()
   expect(reset.running).toBe(false)
-  expect(reset.phase).toBe('rapidMix')
+  expect(reset.phase).toBe('READY')
+  expect(reset.simulationPhase).toBe('rapidMix')
   expect(reset.simulationTimeSeconds).toBe(0)
   expect(reset.activeParticles).toBe(500)
 
   await page.getByRole('button', { name: 'Start' }).click()
-  await page.waitForTimeout(120)
-  const resumed = await state()
-  expect(resumed.running).toBe(true)
-  expect(resumed.simulationTimeSeconds).toBeGreaterThan(0)
+  await page.evaluate(() => window.advanceTime?.(41_000))
+  const measuring = await state()
+  expect(measuring).toMatchObject({
+    phase: 'MEASURING',
+    result: null,
+    resultCount: 0,
+  })
+  expect(measuring.simulationTimeSeconds).toBeGreaterThanOrEqual(41)
+  expect(measuring.simulationTimeSeconds).toBeLessThan(43)
+  await page.locator('canvas').screenshot({
+    path: testInfo.outputPath('batch-06-measuring.png'),
+  })
+  await page.evaluate(() => window.advanceTime?.(2_000))
+  const complete = await state()
+  expect(complete).toMatchObject({
+    phase: 'COMPLETE',
+    presentationOpticalSource: 'trial-result',
+    resultCount: 1,
+    running: false,
+    simulationTimeSeconds: 43,
+  })
+  expect(complete.result).toMatchObject({
+    schemaVersion: 1,
+    dose: 5,
+    endpointOpticalLoad: 0.5011820349166183,
+  })
+  await page.locator('canvas').screenshot({
+    path: testInfo.outputPath('batch-06-complete.png'),
+  })
+
+  await page.getByRole('button', { name: 'Refill' }).click()
+  expect(await state()).toMatchObject({
+    activeParticles: 500,
+    phase: 'REFILLING',
+    result: null,
+    simulationTimeSeconds: 0,
+  })
+  await page.locator('canvas').screenshot({
+    path: testInfo.outputPath('batch-06-refilling.png'),
+  })
+  await page.evaluate(() => window.advanceTime?.(2_000))
+  expect(await state()).toMatchObject({
+    phase: 'READY',
+    selectedDose: 5,
+    simulationTimeSeconds: 0,
+  })
 })
 
 test('comparison presets deterministically expose the U-shaped endpoint', async ({
@@ -108,7 +158,7 @@ test('proof mode leaves an unlabeled canvas for recognition review', async ({
   )
 })
 
-test('XR integration routes commands into the shared authoritative simulation', async ({
+test('XR route runs the shared treatment cycle with locked controls and refill', async ({
   page,
 }) => {
   await page.goto('/?mode=xr-shell&calibration=off')
@@ -123,11 +173,11 @@ test('XR integration routes commands into the shared authoritative simulation', 
     page.evaluate(() => JSON.parse(window.render_xr_shell_to_text?.() ?? '{}'))
 
   expect(await state()).toMatchObject({
-    mode: 'simulation-xr-integration',
+    mode: 'treatment-cycle',
     activeParticles: 500,
     commandCount: 0,
     dose: 5,
-    lifecycle: 'ready',
+    phase: 'READY',
     running: false,
     sessionActive: false,
     simulationConfigHash: 'fnv1a32-e8bf13e7',
@@ -138,11 +188,17 @@ test('XR integration routes commands into the shared authoritative simulation', 
   const setDose = await page.evaluate(() =>
     window.dispatch_xr_shell_command?.({ type: 'SET_DOSE', dose: 0 }),
   )
-  expect(setDose).toMatchObject({ accepted: true, dose: 0 })
+  expect(setDose).toMatchObject({
+    accepted: true,
+    dose: 0,
+    eventType: 'SET_DOSE',
+    from: 'READY',
+    to: 'READY',
+  })
   expect(await state()).toMatchObject({
     dose: 0,
     simulationDose: 5,
-    lifecycle: 'ready',
+    phase: 'READY',
   })
 
   await page.locator('canvas').click({ position: { x: 542, y: 256 } })
@@ -150,19 +206,44 @@ test('XR integration routes commands into the shared authoritative simulation', 
   await expect.poll(async () => (await state()).commandCount).toBe(2)
   expect(await state()).toMatchObject({
     lastCommand: { type: 'START_TRIAL' },
-    lifecycle: 'running',
+    phase: 'RAPID_MIX',
     running: true,
     simulationDose: 0,
-    startButtonPhase: 'released',
+    startButtonPhase: 'locked',
     startCommandCount: 1,
   })
 
-  await page.evaluate(() => window.advanceTime?.(43_000))
+  expect(await state()).toMatchObject({
+    controlAvailability: {
+      doseEnabled: false,
+      refillEnabled: false,
+      startEnabled: false,
+    },
+    leverPhase: 'locked',
+  })
+  await page.evaluate(() => window.advanceTime?.(41_000))
+  const xrMeasuring = await state()
+  expect(xrMeasuring).toMatchObject({
+    phase: 'MEASURING',
+    result: null,
+    resultCount: 0,
+  })
+  expect(xrMeasuring.simulationTimeSeconds).toBeGreaterThanOrEqual(41)
+  expect(xrMeasuring.simulationTimeSeconds).toBeLessThan(43)
+  await page.evaluate(() => window.advanceTime?.(2_000))
   const completed = await state()
+  expect(completed.phase).toBe('COMPLETE')
+  expect(completed.presentationOpticalSource).toBe('trial-result')
   expect(completed.simulationTimeSeconds).toBe(43)
   expect(completed.endpointOpticalLoad).toBeCloseTo(0.7375886586965295, 12)
   expect(completed.mergeCount).toBeGreaterThan(0)
   expect(completed.mergesPerSecond).toBeGreaterThan(0)
+  expect(completed.resultCount).toBe(1)
+  expect(completed.result).toMatchObject({
+    schemaVersion: 1,
+    dose: 0,
+    endpointOpticalLoad: 0.7375886586965295,
+  })
   const readPerformanceReport = () =>
     page.evaluate(() =>
       JSON.parse(window.render_performance_to_text?.() ?? '{}'),
@@ -183,20 +264,31 @@ test('XR integration routes commands into the shared authoritative simulation', 
     performanceReport.metrics.averageInstanceSyncMs,
   ).toBeGreaterThanOrEqual(0)
 
-  await page.mouse.move(424, 254)
-  await page.mouse.down()
-  await page.mouse.up()
-  await expect.poll(async () => (await state()).leverPhase).toBe('snapped')
-  expect((await state()).commandCount).toBe(2)
-
-  await page.evaluate(() => window.reset_xr_trial_to_ready?.())
+  const refill = await page.evaluate(() =>
+    window.dispatch_xr_shell_command?.({ type: 'RESET_TRIAL' }),
+  )
+  expect(refill).toMatchObject({
+    accepted: true,
+    from: 'COMPLETE',
+    to: 'REFILLING',
+  })
   expect(await state()).toMatchObject({
     activeParticles: 500,
     dose: 0,
-    lifecycle: 'ready',
+    phase: 'REFILLING',
+    result: null,
     running: false,
     simulationDose: 0,
     simulationTimeSeconds: 0,
+  })
+  await page.evaluate(() => window.advanceTime?.(2_000))
+  expect(await state()).toMatchObject({
+    controlAvailability: {
+      doseEnabled: true,
+      refillEnabled: false,
+      startEnabled: true,
+    },
+    phase: 'READY',
   })
   expect(
     await page.evaluate(() =>

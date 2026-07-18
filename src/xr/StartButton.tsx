@@ -1,5 +1,5 @@
 import type { ThreeEvent } from '@react-three/fiber'
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 import type { AppCommand } from '../app/commands'
 import {
@@ -7,18 +7,28 @@ import {
   hoverStartButton,
   pressStartButton,
   releaseStartButton,
+  setStartButtonLocked,
   type StartButtonState,
   type XrControlHandedness,
 } from './interactionState'
 
 interface StartButtonProps {
   readonly emitCommand: (command: AppCommand) => void
+  readonly locked: boolean
   readonly recordState: (state: StartButtonState) => void
 }
 
-export function StartButton({ emitCommand, recordState }: StartButtonProps) {
+export function StartButton({
+  emitCommand,
+  locked,
+  recordState,
+}: StartButtonProps) {
   const stateRef = useRef(createStartButtonState())
   const [visualState, setVisualState] = useState(stateRef.current)
+
+  useEffect(() => {
+    commitState(setStartButtonLocked(stateRef.current, locked))
+  }, [locked])
 
   function commitState(nextState: StartButtonState, command?: AppCommand) {
     if (nextState !== stateRef.current) {
@@ -69,12 +79,26 @@ export function StartButton({ emitCommand, recordState }: StartButtonProps) {
       >
         <cylinderGeometry args={[0.11, 0.11, 0.09, 32]} />
         <meshStandardMaterial
-          color={pressed ? '#7dcf72' : hovered ? '#9ae68e' : '#65c55a'}
+          color={
+            locked
+              ? '#68736d'
+              : pressed
+                ? '#7dcf72'
+                : hovered
+                  ? '#9ae68e'
+                  : '#65c55a'
+          }
           emissive={pressed ? '#184d19' : '#123a16'}
           emissiveIntensity={pressed ? 0.75 : 0.4}
           roughness={0.42}
         />
       </mesh>
+      {locked ? (
+        <mesh position={[0, 0.14, 0]} rotation={[0, Math.PI / 4, 0]}>
+          <boxGeometry args={[0.22, 0.025, 0.035]} />
+          <meshStandardMaterial color={'#b78345'} roughness={0.5} />
+        </mesh>
+      ) : null}
     </group>
   )
 }

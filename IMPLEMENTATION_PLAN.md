@@ -46,17 +46,18 @@ The work remains staged: Workstream 03D exposes the authoritative samples; Batch
 
 ## Current status
 
-| Batch | Status                 | Gate                                                   |
-| ----- | ---------------------- | ------------------------------------------------------ |
-| 00    | Substantially complete | Hosted HTTPS route remains open                        |
-| 01A   | Accepted               | Uninterrupted post-fix rendered observation recorded   |
-| 01B   | Partially accepted     | Local Quest route passed; hosted smoke remains open    |
-| 02A   | Accepted               | Deterministic 11-dose phenomenon proof recorded        |
-| 02B   | Deferred               | Spatial hash and simulation merge events need evidence |
-| 03    | Accepted               | Fresh recognition rerun waived by project owner        |
-| 04    | Accepted               | Quest interaction accepted with documented waivers     |
-| 05    | Accepted               | Seated Quest integration and performance passed        |
-| 06–11 | Not started            | Batch 06 is the next authorized plan boundary          |
+| Batch | Status                 | Gate                                                    |
+| ----- | ---------------------- | ------------------------------------------------------- |
+| 00    | Substantially complete | Hosted HTTPS route remains open                         |
+| 01A   | Accepted               | Uninterrupted post-fix rendered observation recorded    |
+| 01B   | Partially accepted     | Local Quest route passed; hosted smoke remains open     |
+| 02A   | Accepted               | Deterministic 11-dose phenomenon proof recorded         |
+| 02B   | Deferred               | Spatial hash and simulation merge events need evidence  |
+| 03    | Accepted               | Fresh recognition rerun waived by project owner         |
+| 04    | Accepted               | Quest interaction accepted with documented waivers      |
+| 05    | Accepted               | Seated Quest integration and performance passed         |
+| 06    | Accepted               | Seated Quest cycle, readability, and performance passed |
+| 07–11 | Not started            | Batch 07 remains outside the active plan boundary       |
 
 An [earlier Godot implementation plan](docs/archive/Sunol%20FlowLab%20Implementation%20Plan%20%28superseded%20Godot%29.pdf) is retained only as a superseded source artifact for provenance and is non-binding for this greenfield WebXR repository. The stale duplicate Batch 03 snapshot and superseded pre-research mechanics were removed from the active tree; Git history preserves them. Only [the indexed Batch 03 plan](batch-03-desktop-phenomenon-proof.md) is authoritative.
 
@@ -98,7 +99,13 @@ Batch 05. Batch 05 is accepted in its closing packet: deterministic parity,
 desktop preservation, physical dose/Start routing, a complete real-time Dose 5
 run, seated stereo/transparency review, low/optimum/high qualitative behavior,
 fresh-session reentry, and 116.9–118.5 FPS rolling Quest windows pass. Batch 06
-is next and remains unstarted.
+is accepted with the seven-phase controller, immutable fixed-
+endpoint result, locked controls, deterministic refill, lifecycle handling,
+minimal physical measurement cue, and shared desktop/XR flow. Automated,
+desktop-rendered, and physical Quest phase/result/refill/performance checks
+pass. The seated project-owner operator also passed phase distinction, locked-
+control feedback, measurement conclusion, refill readability and invitation to
+repeat, and visible smoothness. Batch 07 is next and unstarted.
 
 The hybrid direction maps runtime ownership to Batch 01A closure; hero-tank and jar-rack blockout plus recognition validation to Batch 03; interaction to Batch 04; integration to Batches 05-06; static jar summaries, complete memory, and treatment-ghost recording/playback runtime to Batch 07; live-versus-ghost readability to Batch 08; spectator presentation to Batch 09; presence to Batch 10; and release evidence to Batch 11.
 

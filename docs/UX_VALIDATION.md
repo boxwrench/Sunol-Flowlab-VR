@@ -172,3 +172,18 @@ remaining validation gate, not evidence that the repaired jars passed it.
 The initial failed responses, the bounded 03R.1 repair, and the residual
 recognition risk remain part of the permanent record. A later fresh review may
 still be run as optional risk reduction if jar-rack confusion reappears.
+
+## Batch 06 seated treatment-cycle acceptance
+
+On 2026-07-17 the project-owner water-treatment operator completed the combined
+seated Quest review after a fresh immersive entry, one deliberate physical
+Start, the full real-time treatment sequence, completed measurement, controlled
+refill, and a repeat Dose 5 result. The acceptance prompt covered whether the
+phases felt distinct, the locked dose and Start controls communicated their
+state, the beam and result lamp read as the conclusion, refill read clearly and
+invited another trial, and any visible hitching occurred. The owner's verdict
+was “pass.”
+
+This informed operator check closes Batch 06 pacing and readability. Standing,
+endurance, thermal, hosted-deployment, and release validation were not performed
+or inferred.

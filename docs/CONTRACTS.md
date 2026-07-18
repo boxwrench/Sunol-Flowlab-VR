@@ -30,6 +30,15 @@ export interface TreatmentPhaseTimeline {
   readonly measurementTime: number
 }
 
+export type TrialPhase =
+  | 'READY'
+  | 'RAPID_MIX'
+  | 'FLOCCULATION'
+  | 'SETTLING'
+  | 'MEASURING'
+  | 'COMPLETE'
+  | 'REFILLING'
+
 export interface TrialResultV1 {
   readonly schemaVersion: 1
   readonly id: string
@@ -95,6 +104,23 @@ export interface PerformanceMetrics {
 ```
 
 Runtime input validation must reject non-integer or out-of-range doses even when TypeScript types are bypassed. Reset with identical inputs must restore identical initial arrays without reallocating their capacity.
+
+The Batch 06 treatment-cycle controller owns the explicit app-domain sequence
+`READY -> RAPID_MIX -> FLOCCULATION -> SETTLING -> MEASURING -> COMPLETE ->
+REFILLING -> READY`. The authoritative default phase endpoints are 6, 21, 41,
+and 43 simulation seconds; the complete state holds until refill is requested,
+the refill hold is 2 seconds, and the single global simulation time scale
+defaults to 1. `SET_DOSE` and `START_TRIAL` are legal only from `READY`;
+`RESET_TRIAL` is the temporary Batch 06 refill-action hook and is legal only
+from `COMPLETE`. Lifecycle interruption pauses the app-owned controller
+without hidden catch-up. `PAUSE_TRIAL` and `CLEAR_EXPERIMENT_LOG` remain
+outside the Batch 06 controller.
+
+`TrialResultV1` is captured exactly once when the authoritative simulation
+reaches the fixed 43-second endpoint. The result object, its band snapshot, and
+its phase timeline are immutable. Batch 06 emits the completed result but does
+not persist it, update canonical jars, construct the final plot/log, or record
+a treatment ghost.
 
 The plot and versioned experiment log are the complete history for DoseIndex 0 through 10. Canonical jar summaries are application-owned, update once when a completed result exactly matches 0, 2, 4, 6, 8, or 10, and remain static between completions. Odd-dose results never update a jar. Summary display values derive from TrialResultV1, contain no clock or process behavior, clear with the experiment log, and rebuild deterministically from persisted completed results.
 

@@ -1,18 +1,31 @@
-import type { OpticalLoadBandsView, ParticleStateView } from '../sim'
+import type { ParticleStateView } from '../sim'
 import { HERO_TANK_LOCAL_POSITION } from './layout'
+import {
+  MeasurementCue,
+  type MeasurementPresentationPhase,
+} from './MeasurementCue'
 import { ParticleCloud, type ParticleFrameRecorder } from './ParticleCloud'
-import { OpticalLoadGradient } from './OpticalLoadGradient'
+import {
+  OpticalLoadGradient,
+  type OpticalLoadBandsPresentation,
+} from './OpticalLoadGradient'
 
 interface HeroObservationTankProps {
   readonly animateParticleTransitions?: boolean
+  readonly measurementPhase?: MeasurementPresentationPhase
+  readonly measurementRelativeOpticalLoad?: number
   readonly particleState: ParticleStateView
-  readonly opticalLoadBands: OpticalLoadBandsView
+  readonly presentationEpoch?: number
+  readonly opticalLoadBands: OpticalLoadBandsPresentation
   readonly recordParticleFrame: ParticleFrameRecorder
 }
 
 export function HeroObservationTank({
   animateParticleTransitions = true,
+  measurementPhase = 'idle',
+  measurementRelativeOpticalLoad = 0,
   particleState,
+  presentationEpoch = 0,
   opticalLoadBands,
   recordParticleFrame,
 }: HeroObservationTankProps) {
@@ -21,8 +34,13 @@ export function HeroObservationTank({
       <OpticalLoadGradient bands={opticalLoadBands} />
       <ParticleCloud
         animateTransitions={animateParticleTransitions}
+        presentationEpoch={presentationEpoch}
         state={particleState}
         recordFrame={recordParticleFrame}
+      />
+      <MeasurementCue
+        phase={measurementPhase}
+        relativeOpticalLoad={measurementRelativeOpticalLoad}
       />
 
       <mesh position={[0, -0.025, 0]}>

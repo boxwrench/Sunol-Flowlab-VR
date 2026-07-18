@@ -55,6 +55,8 @@ test('Start control is a discrete single-emission latch', async () => {
   assert.match(button, /setPointerCapture/)
   assert.match(button, /releasePointerCapture/)
   assert.match(model, /state\.phase === 'pressed'/)
+  assert.match(model, /state\.phase === 'locked'/)
+  assert.match(button, /setStartButtonLocked/)
   assert.match(model, /type: 'START_TRIAL'/)
   assert.doesNotMatch(button, /useFrame/)
 })

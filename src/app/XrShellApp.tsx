@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 
 import { XrShellScene } from '../render/XrShellScene'
 import { endpointOpticalLoad } from '../sim'
@@ -14,23 +14,23 @@ import {
   type XrShellInputSnapshot,
 } from '../xr/XrShellInputMonitor'
 import { xrStore } from '../xr/store'
-import {
-  Batch05CommandAdapter,
-  type Batch05CommandRecord,
-  type Batch05TrialLifecycle,
-} from './Batch05CommandAdapter'
 import type { AppCommand, DoseIndex } from './commands'
 import { MetricsOverlay } from './MetricsOverlay'
 import { developmentPerformance } from './performance'
-import { SimulationDriver } from './SimulationDriver'
 import {
   CANONICAL_SIMULATION_SEED,
   SimulationRuntime,
 } from './SimulationRuntime'
+import {
+  DEFAULT_TREATMENT_CYCLE_CONFIG,
+  TreatmentCycleController,
+  type TreatmentCycleRecord,
+} from './TreatmentCycle'
+import { TreatmentCycleDriver } from './TreatmentCycleDriver'
 
 declare global {
   interface Window {
-    dispatch_xr_shell_command?: (command: unknown) => Batch05CommandRecord
+    dispatch_xr_shell_command?: (command: unknown) => TreatmentCycleRecord
     render_xr_shell_to_text?: () => string
     reset_xr_trial_to_ready?: () => void
   }
@@ -40,10 +40,9 @@ interface XrShellSnapshot extends XrShellInputSnapshot {
   commandCount: number
   dose: DoseIndex
   lastCommand: AppCommand | null
-  lastCommandResult: Batch05CommandRecord | null
+  lastCommandResult: TreatmentCycleRecord | null
   leverHandedness: string
   leverPhase: string
-  lifecycle: Batch05TrialLifecycle
   posture: string
   rejectedCommandCount: number
   startButtonHandedness: string
@@ -59,28 +58,45 @@ export function XrShellApp() {
   const showCalibrationMarker =
     import.meta.env.DEV && urlParameters.get('calibration') !== 'off'
   const [entryError, setEntryError] = useState<string | null>(null)
-  const [selectedDose, setSelectedDose] = useState<DoseIndex>(5)
   const [statusRevision, setStatusRevision] = useState(0)
   const runtimeRef = useRef<SimulationRuntime | null>(null)
   if (runtimeRef.current === null) runtimeRef.current = new SimulationRuntime()
   const runtime = runtimeRef.current
-  const adapterRef = useRef<Batch05CommandAdapter | null>(null)
-  if (adapterRef.current === null) {
-    adapterRef.current = new Batch05CommandAdapter(runtime, 5, (record) => {
-      if (!record.accepted) {
-        console.warn(
-          'Sunol FlowLab rejected XR command',
-          JSON.stringify(record),
-        )
-      } else if (import.meta.env.DEV) {
-        console.info(
-          'Sunol FlowLab accepted XR command',
-          JSON.stringify(record),
-        )
-      }
-    })
+  const cycleRef = useRef<TreatmentCycleController | null>(null)
+  if (cycleRef.current === null) {
+    cycleRef.current = new TreatmentCycleController(
+      runtime,
+      5,
+      DEFAULT_TREATMENT_CYCLE_CONFIG,
+      (record) => {
+        if (!record.accepted) {
+          console.warn(
+            'Sunol FlowLab rejected treatment-cycle event',
+            JSON.stringify(record),
+          )
+        } else if (import.meta.env.DEV) {
+          console.info(
+            'Sunol FlowLab accepted treatment-cycle event',
+            JSON.stringify(record),
+          )
+        }
+        setStatusRevision((revision) => revision + 1)
+      },
+    )
   }
-  const adapter = adapterRef.current
+  const cycle = cycleRef.current
+  const completedOpticalLoadBands = useMemo(
+    () =>
+      cycle.result === null
+        ? null
+        : Object.freeze({ values: cycle.result.bandSnapshot }),
+    [cycle.result],
+  )
+  const presentationOpticalLoadBands =
+    completedOpticalLoadBands ?? runtime.opticalLoadBands
+  const presentationEndpointOpticalLoad =
+    cycle.result?.endpointOpticalLoad ??
+    endpointOpticalLoad(runtime.opticalLoadBands)
   const commandLogRef = useRef<Array<AppCommand | undefined>>(
     new Array(COMMAND_LOG_CAPACITY),
   )
@@ -93,7 +109,6 @@ export function XrShellApp() {
     leftControllerDetected: false,
     leverHandedness: 'none',
     leverPhase: 'idle',
-    lifecycle: 'ready',
     posture,
     rejectedCommandCount: 0,
     rightControllerDetected: false,
@@ -104,12 +119,11 @@ export function XrShellApp() {
   })
 
   const dispatchCommand = useCallback(
-    (input: unknown): Batch05CommandRecord => {
-      const result = adapter.dispatch(input)
+    (input: unknown): TreatmentCycleRecord => {
+      const result = cycle.dispatchCommand(input)
       const snapshot = snapshotRef.current
       snapshot.lastCommandResult = result
-      snapshot.lifecycle = adapter.lifecycle
-      snapshot.dose = adapter.selectedDose
+      snapshot.dose = cycle.selectedDose
 
       if (!result.accepted) {
         snapshot.rejectedCommandCount += 1
@@ -120,9 +134,7 @@ export function XrShellApp() {
           (commandLogWriteIndexRef.current + 1) % COMMAND_LOG_CAPACITY
         snapshot.commandCount += 1
         snapshot.lastCommand = command
-        if (command.type === 'SET_DOSE') {
-          setSelectedDose(command.dose)
-        } else if (command.type === 'START_TRIAL') {
+        if (command.type === 'START_TRIAL') {
           snapshot.startCommandCount += 1
         }
       }
@@ -130,7 +142,7 @@ export function XrShellApp() {
       setStatusRevision((revision) => revision + 1)
       return result
     },
-    [adapter],
+    [cycle],
   )
 
   const emitCommand = useCallback(
@@ -156,13 +168,14 @@ export function XrShellApp() {
     (input: XrShellInputSnapshot) => {
       const snapshot = snapshotRef.current
       if (snapshot.sessionActive && !input.sessionActive) {
-        adapter.interrupt()
-        snapshot.lifecycle = adapter.lifecycle
+        cycle.interrupt('XR session ended')
+      } else if (!snapshot.sessionActive && input.sessionActive) {
+        cycle.resumeAfterInterruption()
       }
       Object.assign(snapshot, input)
       setStatusRevision((revision) => revision + 1)
     },
-    [adapter],
+    [cycle],
   )
 
   const recordParticleFrame = useCallback(
@@ -184,17 +197,19 @@ export function XrShellApp() {
 
   useEffect(() => {
     const interruptForVisibility = () => {
-      if (document.visibilityState !== 'hidden') return
-      adapter.interrupt()
-      snapshotRef.current.lifecycle = adapter.lifecycle
+      if (document.visibilityState === 'hidden') {
+        cycle.interrupt('document hidden')
+      } else {
+        cycle.resumeAfterInterruption()
+      }
       setStatusRevision((revision) => revision + 1)
     }
     document.addEventListener('visibilitychange', interruptForVisibility)
     return () => {
       document.removeEventListener('visibilitychange', interruptForVisibility)
-      adapter.interrupt()
+      cycle.interrupt('app unmounted')
     }
-  }, [adapter])
+  }, [cycle])
 
   useEffect(() => {
     if (!import.meta.env.DEV) return
@@ -203,21 +218,32 @@ export function XrShellApp() {
       return JSON.stringify({
         coordinateSystem:
           'meters; local-floor origin at viewer start; apparatus translated once to world position; simulation coordinates are tank-local',
-        mode: 'simulation-xr-integration',
+        mode: 'treatment-cycle',
         ...snapshotRef.current,
-        lifecycle: adapter.lifecycle,
+        phase: cycle.phase,
+        simulationPhase: runtime.phase,
+        interrupted: cycle.isInterrupted,
+        controlAvailability: cycle.controlAvailability,
+        refillElapsedSeconds: cycle.refillElapsedSeconds,
+        presentationEpoch: cycle.presentationEpoch,
+        resultCount: cycle.resultCount,
+        result: cycle.result,
+        presentationOpticalSource:
+          cycle.result === null ? 'live-runtime' : 'trial-result',
+        lastFailure: cycle.lastFailure,
         running: runtime.isRunning,
         simulationSeed: CANONICAL_SIMULATION_SEED,
         simulationConfigHash: runtime.configHash,
         simulationDose: runtime.dose,
         simulationTimeSeconds: runtime.simulationTimeSeconds,
-        phase: runtime.phase,
         activeParticles: runtime.state.activeCount,
         suspendedAggregates: population.suspendedAggregateCount,
         settledAggregates: population.settledAggregateCount,
         mergeCount: runtime.mergeCount,
         mergesPerSecond: runtime.mergeRatePerSecond,
-        endpointOpticalLoad: endpointOpticalLoad(runtime.opticalLoadBands),
+        endpointOpticalLoad:
+          cycle.result?.endpointOpticalLoad ??
+          endpointOpticalLoad(runtime.opticalLoadBands),
         globalRelativeOpticalLoad: runtime.opticalLoadBands.globalRelativeLoad,
       })
     }
@@ -225,18 +251,17 @@ export function XrShellApp() {
     window.render_xr_shell_to_text = renderState
     window.dispatch_xr_shell_command = dispatchCommand
     window.reset_xr_trial_to_ready = () => {
-      adapter.resetToReady()
+      cycle.forceResetDevOnly()
       const snapshot = snapshotRef.current
-      snapshot.lifecycle = adapter.lifecycle
-      snapshot.dose = adapter.selectedDose
-      setSelectedDose(adapter.selectedDose)
+      snapshot.dose = cycle.selectedDose
       setStatusRevision((revision) => revision + 1)
     }
     window.advanceTime = (milliseconds) => {
       if (!Number.isFinite(milliseconds) || milliseconds < 0) {
         throw new RangeError('Advance time must be finite and non-negative')
       }
-      runtime.stepHeadless(Math.round(milliseconds / (1000 / 60)))
+      if (cycle.phase === 'REFILLING') cycle.advance(milliseconds / 1000)
+      else cycle.advanceHeadless(Math.round(milliseconds / (1000 / 60)))
     }
     return () => {
       delete window.dispatch_xr_shell_command
@@ -245,7 +270,7 @@ export function XrShellApp() {
       delete window.reset_xr_trial_to_ready
       delete window.advanceTime
     }
-  }, [adapter, dispatchCommand, runtime])
+  }, [cycle, dispatchCommand, runtime])
 
   async function enterVr() {
     setEntryError(null)
@@ -269,7 +294,7 @@ export function XrShellApp() {
     <main className={'app-shell'}>
       <div className={'app-heading'}>
         <h1>Sunol FlowLab VR</h1>
-        <p>Simulation and XR integration proof</p>
+        <p>Deterministic treatment-cycle proof</p>
         <button className={'enter-vr'} type={'button'} onClick={enterVr}>
           Enter VR
         </button>
@@ -288,8 +313,8 @@ export function XrShellApp() {
             data-revision={statusRevision}
           >
             <span>
-              Dose {selectedDose} · {snapshot.leverPhase} ·{' '}
-              {snapshot.leverHandedness} hand · {snapshot.lifecycle}
+              Dose {cycle.selectedDose} · {snapshot.leverPhase} ·{' '}
+              {snapshot.leverHandedness} hand · {cycle.phase}
             </span>
             <span>
               Start commands {snapshot.startCommandCount} · accepted{' '}
@@ -301,20 +326,33 @@ export function XrShellApp() {
       ) : null}
 
       <XrShellScene
-        opticalLoadBands={runtime.opticalLoadBands}
+        measurementPhase={
+          cycle.phase === 'MEASURING'
+            ? 'measuring'
+            : cycle.phase === 'COMPLETE'
+              ? 'complete'
+              : cycle.phase === 'REFILLING'
+                ? 'refilling'
+                : 'idle'
+        }
+        measurementRelativeOpticalLoad={presentationEndpointOpticalLoad}
+        opticalLoadBands={presentationOpticalLoadBands}
         particleState={runtime.state}
         posture={posture}
+        presentationEpoch={cycle.presentationEpoch}
         recordParticleFrame={recordParticleFrame}
-        sceneChildren={<SimulationDriver runtime={runtime} />}
+        sceneChildren={<TreatmentCycleDriver cycle={cycle} />}
         showCalibrationMarker={showCalibrationMarker}
       >
         <DoseLever
-          dose={selectedDose}
+          dose={cycle.selectedDose}
           emitCommand={emitCommand}
+          locked={!cycle.controlAvailability.doseEnabled}
           recordState={recordDetentState}
         />
         <StartButton
           emitCommand={emitCommand}
+          locked={!cycle.controlAvailability.startEnabled}
           recordState={recordStartButtonState}
         />
         <XrShellInputMonitor recordSnapshot={recordInputSnapshot} />

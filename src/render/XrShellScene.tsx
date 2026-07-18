@@ -2,7 +2,7 @@ import { Canvas } from '@react-three/fiber'
 import { XR } from '@react-three/xr'
 import type { ReactNode } from 'react'
 
-import type { OpticalLoadBandsView, ParticleStateView } from '../sim'
+import type { ParticleStateView } from '../sim'
 import { XR_SHELL_POSTURE_LAYOUTS, type XrShellPosture } from '../xr/layout'
 import { xrStore } from '../xr/store'
 import { HeroObservationTank } from './HeroObservationTank'
@@ -13,12 +13,17 @@ import {
   DESKTOP_CAMERA_TARGET,
 } from './layout'
 import type { ParticleFrameRecorder } from './ParticleCloud'
+import type { MeasurementPresentationPhase } from './MeasurementCue'
+import type { OpticalLoadBandsPresentation } from './OpticalLoadGradient'
 
 interface XrShellSceneProps {
   readonly children?: ReactNode
-  readonly opticalLoadBands: OpticalLoadBandsView
+  readonly measurementPhase?: MeasurementPresentationPhase
+  readonly measurementRelativeOpticalLoad?: number
+  readonly opticalLoadBands: OpticalLoadBandsPresentation
   readonly particleState: ParticleStateView
   readonly posture: XrShellPosture
+  readonly presentationEpoch?: number
   readonly recordParticleFrame: ParticleFrameRecorder
   readonly sceneChildren?: ReactNode
   readonly showCalibrationMarker?: boolean
@@ -26,9 +31,12 @@ interface XrShellSceneProps {
 
 export function XrShellScene({
   children,
+  measurementPhase = 'idle',
+  measurementRelativeOpticalLoad = 0,
   opticalLoadBands,
   particleState,
   posture,
+  presentationEpoch = 0,
   recordParticleFrame,
   sceneChildren,
   showCalibrationMarker = false,
@@ -51,8 +59,11 @@ export function XrShellScene({
             controlReachMeters={layout.neutralReachMeters}
             heroTank={
               <HeroObservationTank
+                measurementPhase={measurementPhase}
+                measurementRelativeOpticalLoad={measurementRelativeOpticalLoad}
                 particleState={particleState}
                 opticalLoadBands={opticalLoadBands}
+                presentationEpoch={presentationEpoch}
                 recordParticleFrame={recordParticleFrame}
               />
             }

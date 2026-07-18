@@ -357,3 +357,51 @@ reported that the scene “looked good” and passed low/optimum/high readabilit
 stereo and transparency presentation, floc visibility, wall appearance, common
 angles, and visible hitching. No standing, thermal, endurance, or release claim
 is made. This closes the Batch 05 physical integration gate.
+
+## 2026-07-17 - Batch 06 physical treatment-cycle acceptance
+
+- Device: Meta Quest 3, serial `2G0YC5ZG0M052K`
+- Browser: Quest Browser `149.0.0.24.3.1013217646`
+- Route: ADB reverse `tcp:5173` to `tcp:5173`; exact seated XR-shell URL
+- Simulation: canonical seed `1597463007`, config
+  `fnv1a32-e8bf13e7`, Dose 5, 500 initial particles
+
+The page entered a fresh immersive session and both controllers tracked at
+Start. A deliberate right-hand physical Start emitted exactly one command.
+Remote state observed the complete domain sequence `RAPID_MIX`,
+`FLOCCULATION`, `SETTLING`, `MEASURING`, and `COMPLETE` at the
+authoritative 6, 21, 41, and 43 second boundaries. Dose and Start remained
+locked after start.
+
+| Snapshot     | Sim time | Average FPS | Average frame | p95 frame | Simulation | Instance sync | Draw calls | JS heap |
+| :----------- | -------: | ----------: | ------------: | --------: | ---------: | ------------: | ---------: | ------: |
+| Rapid start  |     0.00 |      108.07 |       9.25 ms |  14.10 ms |   0.004 ms |      0.274 ms |        122 | 31.2 MB |
+| Flocculation |     6.05 |      117.19 |       8.53 ms |   9.80 ms |   0.059 ms |      0.291 ms |        124 | 31.2 MB |
+| Settling     |    21.00 |      118.88 |       8.41 ms |   9.10 ms |   0.032 ms |      0.088 ms |        124 | 31.2 MB |
+| Measuring    |    41.00 |      120.06 |       8.33 ms |   9.00 ms |   0.033 ms |      0.077 ms |         96 | 31.2 MB |
+| Complete     |    43.00 |      117.64 |       8.50 ms |   9.00 ms |   0.034 ms |      0.080 ms |         98 | 31.2 MB |
+
+The rapid-start window includes the physical press and session-transition
+tail. All later phase windows retain substantial headroom over the 72 FPS
+target. COMPLETE froze one immutable result, switched the water presentation
+to that result, and matched the accepted canonical state: 105 active, 65
+suspended, 40 settled, 395 merges, and endpoint optical load `0.501182`.
+
+The controlled refill request was accepted from COMPLETE. A follow-up snapshot
+proved deterministic READY raw water at time zero with 500 active/suspended,
+zero settled and merges, no active result, and dose/Start unlocked. The first
+CDP wait used page-animation-frame polling and timed out even though the
+XR-loop-driven state reached READY; the harness now polls at a fixed 100 ms.
+The seated project-owner operator then replied “pass” to the combined review of
+distinct phase pacing, visible physical lock feedback, measurement as the
+conclusion, refill readability and invitation to repeat, and visible smoothness.
+This closes the bounded Batch 06 treatment-cycle gate. It is not standing,
+endurance, thermal, hosted-deployment, or release evidence.
+
+After the first refill, a second accepted Start completed at the same Dose 5
+endpoint with cumulative result count 2 and no rejected commands. The second
+immutable snapshot was identical except for its run-sequence identifier. A
+later refill request made while the headset was asleep remained paused in
+`REFILLING` with deterministic raw water and locked controls; the
+development preparation action safely restored READY at time zero. This is
+consistent with the no-hidden-catch-up lifecycle posture.

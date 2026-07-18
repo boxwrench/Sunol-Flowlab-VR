@@ -15,6 +15,7 @@ import {
   type OpticalLoadBandsView,
   type TreatmentPhase,
 } from '../sim'
+import type { TreatmentPhaseTimeline } from './trialResult'
 
 export const CANONICAL_SIMULATION_SEED = 0x5f3759df
 
@@ -25,6 +26,8 @@ export class SimulationRuntime {
   private readonly config: Readonly<PhenomenonConfig>
   private readonly workspace
   private readonly clock: FixedStepClock
+  private readonly phaseTimelineValue: TreatmentPhaseTimeline
+  private seedValue: number
 
   constructor(
     capacity = DEFAULT_PARTICLE_CAPACITY,
@@ -42,6 +45,17 @@ export class SimulationRuntime {
     this.state = this.workspace.particles
     this.opticalLoadBands = this.workspace.bands
     this.clock = new FixedStepClock(fixedTimestepSeconds, maxCatchUpSteps)
+    const coagulation = this.config.coagulation
+    const rapidMixEnd = coagulation.rapidMixSeconds
+    const flocculationEnd = rapidMixEnd + coagulation.flocculationSeconds
+    const settlingEnd = flocculationEnd + coagulation.settlingSeconds
+    this.phaseTimelineValue = Object.freeze({
+      rapidMixEnd,
+      flocculationEnd,
+      settlingEnd,
+      measurementTime: settlingEnd + coagulation.measurementSeconds,
+    })
+    this.seedValue = seed
     this.reset(seed, dose)
   }
 
@@ -57,12 +71,37 @@ export class SimulationRuntime {
     seed = CANONICAL_SIMULATION_SEED,
     dose: DoseDetent = this.workspace.dose,
   ): void {
+    this.seedValue = seed
     resetPhenomenonWorkspace(this.workspace, dose, seed, this.config)
     this.clock.reset()
   }
 
   get dose(): DoseDetent {
     return this.workspace.dose
+  }
+
+  get seed(): number {
+    return this.seedValue
+  }
+
+  get fixedTimestepSeconds(): number {
+    return this.clock.fixedTimestepSeconds
+  }
+
+  get phaseTimeline(): TreatmentPhaseTimeline {
+    return this.phaseTimelineValue
+  }
+
+  get remainingTreatmentSteps(): number {
+    const totalSteps = Math.round(
+      this.phaseTimelineValue.measurementTime /
+        this.config.fixedTimestepSeconds,
+    )
+    return Math.max(0, totalSteps - this.workspace.stepIndex)
+  }
+
+  get droppedSeconds(): number {
+    return this.clock.snapshot().droppedSeconds
   }
 
   get isRunning(): boolean {
