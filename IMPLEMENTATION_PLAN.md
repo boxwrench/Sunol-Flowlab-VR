@@ -117,6 +117,13 @@ diagram, CI signal, testing lessons, and verified GitHub metadata. Batch 11 owns
 host-specific base paths, production request/bundle analysis, deployment,
 rollback, final branding, and verified related-project links.
 
+[Post-v1 mechanistic coagulation research](docs/POST_V1_MECHANISTIC_COAGULATION_RESEARCH.md)
+is recorded outside this version 1 delivery plan. It does not change the
+Gaussian dose-response authority, accepted configuration, replay schemas, or
+Batches 07 through 11. Any later implementation begins only after version 1
+release, completion of the research gates, and explicit product-owner
+authorization.
+
 On 2026-07-16 the project owner resumed the previously parked Batch 03 work,
 preserved the 03R.1 repair, reconciled it with accepted Batch 04, and explicitly
 waived the fresh blinded jar-recognition rerun. The waiver closes Batch 03

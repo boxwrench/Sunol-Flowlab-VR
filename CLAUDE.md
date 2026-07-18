@@ -25,6 +25,8 @@ The final version 1 process model is governed by `docs/MODELING_RESEARCH_AMENDME
 
 Treatment-result replay is governed by `docs/GHOST_REPLAY_DESIGN.md`. Version 1 records authoritative optical-load bands at 10 Hz and replays them through an app-owned clock with bounded linear interpolation. It does not record particles or rerun the simulation. Recording, compatibility, storage, and playback belong to `/src/app`; `/src/render` consumes a subordinate read-only replay view. Do not add compression, a generalized storage layer, IndexedDB, WebAssembly, fixed-point math, cloud sync, or cross-device lockstep without the documented measurement or product trigger.
 
+Post-v1 mechanistic coagulation research is governed by `docs/POST_V1_MECHANISTIC_COAGULATION_RESEARCH.md`. It is a research direction, not authorization to add pH, alkalinity, hydrolysis, zeta, sweep-floc, G/breakage, SCD, DOC, UV254, or enhanced-coagulation state to version 1 or Batches 07 through 11. Implementation requires the accepted version 1 release, the documented research gates, new versioned compatibility boundaries, and explicit product-owner authorization.
+
 ## Toolchain policy
 
 Use Node.js 24.12.x with npm 11.18.x. Runtime and development packages are pinned exactly in `package.json`; the XR-sensitive anchor is `@react-three/xr` 6.6.30. Its bundled IWER emulator is the desktop XR preflight path. Dependency upgrades are isolated changes and are never combined with simulation tuning or XR interaction fixes.

@@ -15,6 +15,9 @@ Updated: 2026-07-17
 - Portfolio-evaluation recommendations are staged without expanding Batch 07:
   final media/transparency evidence in Batch 08, repository front-door work in
   Batch 09, and bundle/deployment/branding verification in Batch 11
+- Post-v1 mechanistic coagulation is preserved as research-only in
+  [docs/POST_V1_MECHANISTIC_COAGULATION_RESEARCH.md](docs/POST_V1_MECHANISTIC_COAGULATION_RESEARCH.md);
+  it adds no version 1 code, command, state, schema, or Batch 07–11 scope
 - Active plan authority: [IMPLEMENTATION_PLAN.md](IMPLEMENTATION_PLAN.md) and
   its ordered batch-00 through batch-11 Markdown files
 - Batch 03 technical evidence:

@@ -4,6 +4,7 @@
 - [Architecture decisions](DECISIONS.md)
 - [Approved version 1 modeling research amendment](MODELING_RESEARCH_AMENDMENT.md)
 - [Approved treatment-result ghost replay design](GHOST_REPLAY_DESIGN.md)
+- [Post-v1 mechanistic coagulation research contract](POST_V1_MECHANISTIC_COAGULATION_RESEARCH.md)
 - [Commands and data contracts](CONTRACTS.md)
 - [Dose-sweep regression contract](REGRESSION_CONTRACT.md)
 - [Batch 02A acceptance evidence](BATCH_02A_ACCEPTANCE.md)

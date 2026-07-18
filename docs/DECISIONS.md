@@ -61,3 +61,22 @@ Version 1 has no free list because a trial creates no replacement particles. Spa
 Every ghost carries schema, simulation, optical-proxy, band-layout, raw-water, configuration, phase, and endpoint metadata. Incompatible records are migrated through tested code, reduced to a labeled legacy summary, or refused clearly; they are never silently reinterpreted. Pure ghost playback does not advance or mutate the live simulation.
 
 Version 1 stores a small measured library with graceful quota and deletion behavior. It starts with straightforward Float32 samples and the simplest existing persistence path that passes size and blocking-write measurements. Compression, a generalized storage layer, particle replay, replay by recomputation, WebAssembly, fixed-point math, cloud sync, and cross-device lockstep remain outside scope.
+
+## ADR-010: Post-v1 mechanistic coagulation research
+
+[The post-v1 mechanistic coagulation research contract](POST_V1_MECHANISTIC_COAGULATION_RESEARCH.md)
+preserves a future teaching direction in which buffered pH, alum
+hydrolysis/precipitate surrogates, charge neutralization, and sweep floc produce
+attachment behavior rather than reading one configured Gaussian optimum.
+
+This is an approved research direction, not an approved implementation or a
+version 1 change. Charge-neutralization and sweep contributions must remain
+separately inspectable; zeta alone cannot stand in for sweep floc; pH cannot be
+a fixed decrement per dose; SCD cannot be presented as direct zeta or a
+universal zero target; and enhanced coagulation remains a later independent
+extension.
+
+Version 1 and Batches 07 through 11 retain the accepted phenomenological model.
+Production work requires the contract's research gates, new versioned
+configuration and compatibility boundaries, side-by-side evidence, and explicit
+product-owner authorization after release.
