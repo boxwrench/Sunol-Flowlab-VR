@@ -405,3 +405,46 @@ later refill request made while the headset was asleep remained paused in
 `REFILLING` with deterministic raw water and locked controls; the
 development preparation action safely restored READY at time zero. This is
 consistent with the no-hidden-catch-up lifecycle posture.
+
+## 2026-07-17 - Batch 07 automated candidate measurements
+
+The Batch 07 candidate preserves config `fnv1a32-e8bf13e7` and the canonical
+Dose 5 endpoint `0.5011820349166183`. The fresh headless benchmark completed
+2,580 steps in 29.4614 ms total, averaging 0.011264 ms with 0.028700 ms p95.
+
+One finalized 43-second treatment ghost contains 431 sample-major records by 12
+bands at 10 Hz. Actual localStorage JSON measured 50.9–54.9 KB per ghost across
+the tested Dose 0 and Dose 5 histories. The configured three-record library is
+approximately 165 KB, so neither compression nor IndexedDB is justified.
+
+The optimized desktop renderer reports 51 draw calls ready and 53 complete.
+The first unoptimized instrument candidate reached 115 desktop draw calls; its
+individual digit and gauge-tick meshes were replaced with instancing before the
+candidate gate. The browser regression now enforces a ceiling of 70 draw calls.
+
+Quest 3 serial `2G0YC5ZG0M052K` is connected and exposes the correct seated URL.
+The first immersive restart timed out while foreground user presence was not
+available. Its inactive flat-panel metrics are not immersive evidence and are
+not used for acceptance. Fresh rolling stereo metrics remain required.
+
+## 2026-07-17 - Batch 07 partial seated Quest measurements
+
+- Device: Meta Quest 3, serial `2G0YC5ZG0M052K`
+- Browser: Quest Browser `149.0.0.24.3.1013217646`
+- Route: exact seated XR shell, staged Dose 0/5/10 history restored
+- Trial: operator-started Dose 5, canonical seed `1597463007`, config
+  `fnv1a32-e8bf13e7`
+
+| Snapshot  | Sim time | Average FPS | Average frame | p95 frame | Simulation | Instance sync | Draw calls | JS heap |
+| :-------- | -------: | ----------: | ------------: | --------: | ---------: | ------------: | ---------: | ------: |
+| Settling  |    36.98 |      119.19 |       8.39 ms |   9.30 ms |   0.028 ms |      0.065 ms |        164 | 37.3 MB |
+| Measuring |    41.08 |      119.11 |       8.40 ms |   9.10 ms |   0.027 ms |      0.061 ms |        170 | 37.3 MB |
+| Complete  |    43.00 |      114.21 |       8.76 ms |   9.50 ms |   0.041 ms |      0.063 ms |        170 | 37.3 MB |
+
+Both controllers tracked during the monitored run. One physical Start produced
+one immutable Dose 5 result at endpoint `0.5011820349166183`, appended one
+fourth plot point, and retained the fourth ghost as pending because the three
+configured slots were full. There were no rejected commands. These rolling
+stereo measurements pass the technical performance posture, but the visual and
+physical-control review paused before an owner verdict; they do not close Batch
+07 alone.

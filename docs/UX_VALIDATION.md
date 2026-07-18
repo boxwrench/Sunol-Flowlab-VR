@@ -187,3 +187,43 @@ was “pass.”
 This informed operator check closes Batch 06 pacing and readability. Standing,
 endurance, thermal, hosted-deployment, and release validation were not performed
 or inferred.
+
+## Batch 07 seated combined review — pending
+
+Use one combined seated Quest review to conserve operator time. Confirm that:
+
+1. the tank remains the visual focus while the five phase lamps, gauge, and
+   0–10 plot are readable;
+2. the six jars read as static canonical summaries rather than six live tanks
+   or the complete history;
+3. measurement moves the relative gauge and a completed trial creates one plot
+   point and updates only its exact canonical jar;
+4. refill, the two-press tear sheet, and the separate ghost controls cannot be
+   confused;
+5. ghost selection, play/pause, progress, reset, ended, delete, and pending-
+   replacement feedback are understandable without software chrome;
+6. the operator is naturally inclined to change dose and seek a lower plotted
+   result; and
+7. no visible hitching, uncomfortable reach, or seated readability problem is
+   present.
+
+Batch 07 remains unaccepted until the project-owner operator supplies a verdict
+and fresh immersive performance metrics are captured. Batch 08 comparison
+visuals are explicitly excluded from this review.
+
+### 2026-07-17 partial session
+
+The project-owner operator entered the exact seated Quest route with the
+0/5/10 comparison staged. Without being told which dose was best, the operator
+selected Dose 5 and started one physical trial. This is consistent with using
+the visible minimum as the next experiment, but the operator's reasoning and
+the overall readability verdict were not collected before the session paused.
+
+The run completed with one Start, no rejected commands, both controllers
+tracked, exactly one new plotted result, and a pending fourth ghost at the
+three-record limit. The owner said it was a “good start” and requested that the
+visual test continue tomorrow. This is partial evidence, not acceptance.
+
+Resume with items 1–5 and 7 above, including physical ghost play/pause/reset,
+pending replacement, refill, and deliberate two-press sheet clearing. Record
+why Dose 5 was selected and the final pass/issues verdict.

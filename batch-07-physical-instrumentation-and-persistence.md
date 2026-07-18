@@ -1,6 +1,8 @@
 # Batch 07 Implementation Plan: Physical Instrumentation and Experiment Memory
 
-**Status:** Not started — Batch 06 is accepted; implementation requires explicit authorization
+**Status:** Published candidate checkpoint — automated gates and seated Quest
+performance pass; the paused readability, comprehension, physical-control, and
+final-verdict checks remain open
 **Depends on:** Batch 06 accepted  
 **May run in parallel with:** Instrument geometry and data wiring after interfaces freeze  
 **Primary gate:** The apparatus explains itself physically, records exactly one result per trial, persists the curve, and can record and replay a compatible prior treatment result without mutating the live simulation or requiring software chrome.
@@ -84,6 +86,11 @@ Build a physical board that:
 - remains legible at arm’s length.
 
 Document the repeated-dose policy before implementation.
+
+**Selected policy:** the versioned log retains every completion. The mounted
+plot draws one small point for every completion and applies only a deterministic
+horizontal presentation offset when a dose repeats; it never averages or
+replaces history. Canonical jars independently show the latest matching result.
 
 The plot must accept every integer dose. Odd-dose trials remain fully visible and persisted even though no canonical jar summary changes.
 
@@ -229,6 +236,11 @@ The ghost library is a bounded comparison aid, not the complete experiment memor
 - Handle unavailable storage, quota failure, future schemas, and partial writes without silently losing the experiment log or live result.
 - Offer explicit deletion or replacement when the configured limit is reached.
 - Keep ghost deletion separate from plot/log clearing unless a clearly labeled, deliberately tested “clear all local data” action is later approved.
+
+**Selected policy:** localStorage retains at most three validated ghosts. A
+completion auto-saves while capacity remains. The fourth candidate remains
+explicitly pending until the operator deletes a ghost or deliberately replaces
+the oldest. Experiment history remains complete regardless of ghost capacity.
 
 ### Work package 07D.4 - Independent playback runtime
 

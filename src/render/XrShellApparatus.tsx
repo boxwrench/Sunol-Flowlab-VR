@@ -1,12 +1,17 @@
 import type { ReactNode } from 'react'
 
-import { JarTestBench } from './JarTestBench'
+import {
+  JarTestBench,
+  type CanonicalJarSummaryPresentation,
+} from './JarTestBench'
 
 interface XrShellApparatusProps {
   readonly calibrationEyeHeightMeters: number
   readonly controlReachMeters: number
   readonly children?: ReactNode
+  readonly canonicalJarSummaries?: readonly CanonicalJarSummaryPresentation[]
   readonly heroTank: ReactNode
+  readonly instrumentation?: ReactNode
   readonly showCalibrationMarker: boolean
 }
 
@@ -14,13 +19,16 @@ export function XrShellApparatus({
   calibrationEyeHeightMeters,
   controlReachMeters,
   children,
+  canonicalJarSummaries = [],
   heroTank,
+  instrumentation,
   showCalibrationMarker,
 }: XrShellApparatusProps) {
   return (
     <group>
       {heroTank}
-      <JarTestBench />
+      <JarTestBench summaries={canonicalJarSummaries} />
+      {instrumentation}
       <group position={[0, 0, 1.8 - controlReachMeters]}>{children}</group>
       {showCalibrationMarker ? (
         <CalibrationMarker eyeHeightMeters={calibrationEyeHeightMeters} />

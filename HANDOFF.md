@@ -7,11 +7,12 @@ Updated: 2026-07-17
 - Repository: <https://github.com/boxwrench/Sunol-Flowlab-VR>
 - Branch: main
 - Published branch: main; use `git log -1 --oneline` for the current increment
-- Working tree: published Batch 06 closing increment; inspect
-  `git status --short`
+- Working tree: published Batch 07 candidate checkpoint and separate published
+  alpha-zeta research-contract refinement; inspect `git status --short`
 - `AGENTS.md` is repository-local authority and intentionally ignored at the
   repository root
-- Current milestone: Batch 06 accepted; Batch 07 is next and unstarted
+- Current milestone: Batch 07 automated candidate and seated Quest performance
+  pass; the paused visual/control verdict remains open
 - Portfolio-evaluation recommendations are staged without expanding Batch 07:
   final media/transparency evidence in Batch 08, repository front-door work in
   Batch 09, and bundle/deployment/branding verification in Batch 11
@@ -29,11 +30,17 @@ Updated: 2026-07-17
   [docs/BATCH_05_ACCEPTANCE.md](docs/BATCH_05_ACCEPTANCE.md)
 - Batch 06 closing evidence:
   [docs/BATCH_06_ACCEPTANCE.md](docs/BATCH_06_ACCEPTANCE.md)
+- Batch 07 candidate evidence:
+  [docs/BATCH_07_ACCEPTANCE.md](docs/BATCH_07_ACCEPTANCE.md)
 
-Resume on main after the accepted Batch 06 closing increment. Batches 03 through
-06 are accepted. Batch 07 is next and unstarted; review its plan and contracts
-before implementation. Do not pull Batch 08 or later visual comparison,
-environment, deployment, or release scope into Batch 07.
+Resume on main in the existing Batch 07 seated Quest visual review. Batches 03
+through 06 are accepted. Batch 07 implementation, local automated/rendered
+evidence, and a successful 114.21 FPS / 9.50 ms p95 operator-started Dose 5 run
+are complete. Acceptance is intentionally withheld until the paused
+readability, comprehension, and physical-control checks receive an owner
+verdict.
+Do not pull Batch 08 live-versus-ghost presentation, environment, deployment,
+or release scope into this gate.
 
 The superseded Godot plan remains isolated under docs/archive for provenance.
 Use only the active indexed Markdown plan.
@@ -69,11 +76,11 @@ Use only the active indexed Markdown plan.
   clearly named Force Reset without moving lifecycle ownership out of the
   app-domain controller. Proof mode hides them.
 - One table-mounted six-jar bench with open rectangular vessels. The jars are
-  static canonical presets for doses 0, 2, 4, 6, 8, and 10; one instanced draw
-  gives all six the same frozen raw-water fill, and they are not six live
-  simulations.
-- The future complete plot and experiment log remain the canonical memory for
-  all eleven dose values. Static jars are summaries only.
+  static canonical presets for doses 0, 2, 4, 6, 8, and 10. Batch 07 now feeds
+  each completed canonical jar its latest immutable summary; missing results
+  retain the frozen raw-water fill. They are not six live simulations.
+- The versioned experiment log and mounted plot are the complete memory for all
+  eleven dose values and repeated trials. Static jars remain summaries only.
 - Unlabeled proof mode and regenerated randomized low/optimum/high review
   captures.
 - Local physical Quest route previously accepted over ADB reverse for immersive
@@ -188,7 +195,7 @@ Use only the active indexed Markdown plan.
 The production build retains the expected non-failing large-chunk warnings from
 the emulator environment assets.
 
-## Work Package 03R.1 candidate and remaining validation
+## Work Package 03R.1 accepted foundation and Batch 07 behavior
 
 The six jars may reuse the hero tank's water, haze, and clearing visual language,
 but they must not be live clones of its runtime. The accepted lifecycle is:
@@ -196,7 +203,7 @@ but they must not be live clones of its runtime. The accepted lifecycle is:
 1. Before a canonical trial has completed, every jar contains the same frozen
    raw-water fill. This is a static apparatus cue so the vessels do not look
    empty; it is not a treatment result.
-2. In the later intended write-on-completion behavior, finishing an exact
+2. Finishing an exact
    canonical dose 0, 2, 4, 6, 8, or 10 replaces only that jar's fill once with
    a frozen summary derived from the immutable completed `TrialResultV1` and
    `CanonicalJarSummary`.
@@ -206,12 +213,11 @@ but they must not be live clones of its runtime. The accepted lifecycle is:
 4. The mounted plot and experiment log remain the sole complete memory for all
    eleven doses; the six jars remain partial canonical summaries.
 
-03R.1 implements only the initial frozen raw-water fill as one six-instance
-draw using shared geometry and material inside the existing open rectangular
-vessels. It reuses the hero tank's cloudy-water palette and adds no dose-
-specific differences, settled-result claims, `useFrame`, simulation imports,
-or process calculation. The existing table, paddles, rims, vessel geometry,
-and hero-tank hierarchy are retained.
+03R.1 supplied the initial frozen raw-water fill as one six-instance draw using
+shared geometry and material. Batch 07 retains that fallback and adds static
+app-fed result tokens without adding `useFrame`, simulation imports, or process
+calculation to the jar rack. The existing table, paddles, rims, vessel geometry,
+and hero-tank hierarchy remain intact.
 
 Recorded implementation evidence for 03R.1:
 
@@ -298,17 +304,19 @@ Keep spatial hashing deferred unless a recorded bottleneck justifies it.
 Version 1 has no free list. The observed flicker justifies the current bounded
 render-local smoothing, but simulation merge-event metadata remains deferred.
 Do not add a second simulation, copy hot arrays into React state, give the jars
-live state, add ghost runtime ahead of its planned batch, pull Batch 07
-instrumentation/persistence forward, or authorize hosted deployment from this
-increment.
+live state, pull Batch 08 ghost-comparison visuals forward, or authorize hosted
+deployment from this increment.
 
 ## Recommended next session
 
-1. Review the Batch 07 plan, ghost-replay design, and stable contracts before
-   changing code.
-2. Begin Batch 07 only as an explicitly authorized bounded goal. Preserve the
-   accepted Batch 06 treatment loop and keep Batch 08 visual-comparison scope
-   unstarted.
+1. Wake and wear the connected Quest 3, then restart the seated route; the
+   persisted 0/5/10 history and three ghosts should restore.
+2. Finish the paused checklist in `docs/UX_VALIDATION.md`: instrument/jar
+   readability, ghost play/pause/reset/status/progress, pending replacement,
+   refill, two-press clear, Dose 5 reasoning, reach, and final verdict.
+3. If the operator passes, update the candidate acceptance packet to accepted,
+   rerun the final checks, commit, tag `instrumentation-complete`, and push.
+4. Keep Batch 08 visual-comparison scope unstarted until that acceptance.
 
 ## Commands
 
@@ -326,6 +334,14 @@ increment.
     npm run acceptance:06:quest -- prepare 5
     npm run acceptance:06:quest -- watch
     npm run acceptance:06:quest -- refill
+    npm run acceptance:07:quest -- status
+    npm run acceptance:07:quest -- restart
+    npm run acceptance:07:quest -- stage-review
+    npm run acceptance:07:quest -- prepare 4
+    npm run acceptance:07:quest -- watch
+    npm run acceptance:07:quest -- replay
+    npm run acceptance:07:quest -- clear
+    npm run acceptance:07:quest -- refill
     npm run dev -- --port 5173
     adb devices
     adb reverse tcp:5173 tcp:5173

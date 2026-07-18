@@ -19,6 +19,8 @@ import type { TreatmentPhaseTimeline } from './trialResult'
 
 export const CANONICAL_SIMULATION_SEED = 0x5f3759df
 
+export type OpticalLoadStepObserver = (bands: OpticalLoadBandsView) => void
+
 export class SimulationRuntime {
   readonly state: ParticleStateView
   readonly opticalLoadBands: OpticalLoadBandsView
@@ -28,6 +30,7 @@ export class SimulationRuntime {
   private readonly clock: FixedStepClock
   private readonly phaseTimelineValue: TreatmentPhaseTimeline
   private seedValue: number
+  private opticalLoadStepObserver: OpticalLoadStepObserver | null = null
 
   constructor(
     capacity = DEFAULT_PARTICLE_CAPACITY,
@@ -145,6 +148,10 @@ export class SimulationRuntime {
     )
   }
 
+  setOpticalLoadStepObserver(observer: OpticalLoadStepObserver | null): void {
+    this.opticalLoadStepObserver = observer
+  }
+
   step(elapsedSeconds: number): number {
     return this.clock.advance(elapsedSeconds, this.stepSimulation)
   }
@@ -157,5 +164,6 @@ export class SimulationRuntime {
     if (timestepSeconds !== this.config.fixedTimestepSeconds)
       throw new RangeError('Runtime and phenomenon timesteps must match')
     stepPhenomenonWorkspace(this.workspace, this.config)
+    this.opticalLoadStepObserver?.(this.workspace.bands)
   }
 }

@@ -80,3 +80,18 @@ Version 1 and Batches 07 through 11 retain the accepted phenomenological model.
 Production work requires the contract's research gates, new versioned
 configuration and compatibility boundaries, side-by-side evidence, and explicit
 product-owner authorization after release.
+
+## ADR-011: Batch 07 experiment memory and bounded ghost policy
+
+The versioned experiment log is the complete append-only memory for all integer
+doses and deduplicates by immutable trial ID. The mounted plot shows every
+completion; repeated doses receive a small deterministic horizontal display
+offset rather than averaging or replacing data. Each canonical jar is rebuilt
+from the latest matching result and is never a second history source.
+
+The initial ghost library uses the measured localStorage path and stores at
+most three uncompressed Float32 band histories. Valid completions auto-save
+until full. A later candidate remains pending for an explicit oldest-record
+replacement or deletion decision. Experiment-history clear and ghost deletion
+remain separate deliberate actions. Quota or corrupt-data failures stay in the
+application layer and cannot alter live simulation state.

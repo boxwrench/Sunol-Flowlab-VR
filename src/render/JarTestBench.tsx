@@ -1,5 +1,5 @@
 import { useLayoutEffect, useMemo, useRef } from 'react'
-import { DoubleSide, InstancedMesh, Matrix4, Path, Shape } from 'three'
+import { Color, DoubleSide, InstancedMesh, Matrix4, Path, Shape } from 'three'
 
 import {
   JAR_TEST_RACK_BASE_HEIGHT_METERS,
@@ -52,12 +52,26 @@ function createRectangularRing(width: number, depth: number, border: number) {
   return shape
 }
 
-export function JarTestBench() {
+export interface CanonicalJarSummaryPresentation {
+  readonly dose: (typeof CANONICAL_JAR_DOSES)[number]
+  readonly trialId: string
+  readonly displayClarity: number
+}
+
+interface JarTestBenchProps {
+  readonly summaries?: readonly CanonicalJarSummaryPresentation[]
+}
+
+const RAW_WATER_COLOR = new Color(RAW_WATER_FILL_COLOR)
+const CLEARED_WATER_COLOR = new Color('#a9d6bd')
+
+export function JarTestBench({ summaries = [] }: JarTestBenchProps) {
   const fillsRef = useRef<InstancedMesh>(null)
   const jarsRef = useRef<InstancedMesh>(null)
   const paddlesRef = useRef<InstancedMesh>(null)
   const rimsRef = useRef<InstancedMesh>(null)
   const tableLegsRef = useRef<InstancedMesh>(null)
+  const summaryTokensRef = useRef<InstancedMesh>(null)
   const transform = useMemo(() => new Matrix4(), [])
   const jarWallShape = useMemo(
     () =>
@@ -84,12 +98,14 @@ export function JarTestBench() {
     const paddles = paddlesRef.current
     const rims = rimsRef.current
     const tableLegs = tableLegsRef.current
+    const summaryTokens = summaryTokensRef.current
     if (
       fills === null ||
       jars === null ||
       paddles === null ||
       rims === null ||
-      tableLegs === null
+      tableLegs === null ||
+      summaryTokens === null
     )
       return
 
@@ -97,6 +113,17 @@ export function JarTestBench() {
       const x = (index - 2.5) * 0.25
       transform.makeTranslation(x, 0.17, 0)
       fills.setMatrixAt(index, transform)
+      const dose = CANONICAL_JAR_DOSES[index]
+      const summary = summaries.find((candidate) => candidate.dose === dose)
+      fills.setColorAt(
+        index,
+        summary === undefined
+          ? RAW_WATER_COLOR
+          : RAW_WATER_COLOR.clone().lerp(
+              CLEARED_WATER_COLOR,
+              summary.displayClarity,
+            ),
+      )
       transform.makeRotationX(-Math.PI / 2)
       transform.setPosition(x, 0.04, 0)
       jars.setMatrixAt(index, transform)
@@ -107,6 +134,7 @@ export function JarTestBench() {
       rims.setMatrixAt(index, transform)
     }
     fills.instanceMatrix.needsUpdate = true
+    if (fills.instanceColor !== null) fills.instanceColor.needsUpdate = true
     jars.instanceMatrix.needsUpdate = true
     paddles.instanceMatrix.needsUpdate = true
     rims.instanceMatrix.needsUpdate = true
@@ -117,7 +145,19 @@ export function JarTestBench() {
       tableLegs.setMatrixAt(index, transform)
     }
     tableLegs.instanceMatrix.needsUpdate = true
-  }, [transform])
+
+    let tokenIndex = 0
+    for (let index = 0; index < CANONICAL_JAR_DOSES.length; index += 1) {
+      const dose = CANONICAL_JAR_DOSES[index]
+      if (!summaries.some((summary) => summary.dose === dose)) continue
+      const x = (index - 2.5) * 0.25
+      transform.makeTranslation(x, 0.61, 0.07)
+      summaryTokens.setMatrixAt(tokenIndex, transform)
+      tokenIndex += 1
+    }
+    summaryTokens.count = tokenIndex
+    summaryTokens.instanceMatrix.needsUpdate = true
+  }, [summaries, transform])
 
   return (
     <group position={[-1.2, 0.02, 0.48]} rotation={[0, 0.08, 0]}>
@@ -140,10 +180,22 @@ export function JarTestBench() {
         >
           <boxGeometry args={[...RAW_WATER_FILL_DIMENSIONS]} />
           <meshStandardMaterial
-            color={RAW_WATER_FILL_COLOR}
+            color={'#ffffff'}
             roughness={0.72}
             transparent
             opacity={0.92}
+            vertexColors
+          />
+        </instancedMesh>
+        <instancedMesh
+          ref={summaryTokensRef}
+          args={[undefined, undefined, CANONICAL_JAR_DOSES.length]}
+        >
+          <octahedronGeometry args={[0.035, 0]} />
+          <meshStandardMaterial
+            color={'#ffbd59'}
+            emissive={'#7a3f12'}
+            emissiveIntensity={0.45}
           />
         </instancedMesh>
         <instancedMesh

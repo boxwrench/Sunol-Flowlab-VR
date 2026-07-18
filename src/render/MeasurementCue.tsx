@@ -17,7 +17,7 @@ export function MeasurementCue({
   const detectorIntensity = active ? 0.45 + normalizedLoad * 1.55 : 0.08
 
   return (
-    <group position={[0, 0.34, 0.3]}>
+    <group position={[0, 0.34, 0]}>
       <mesh position={[-0.82, 0, 0]}>
         <cylinderGeometry args={[0.055, 0.055, 0.12, 16]} />
         <meshStandardMaterial color={'#324b49'} roughness={0.52} />
@@ -43,11 +43,11 @@ export function MeasurementCue({
         </mesh>
       ) : null}
 
-      <mesh position={[0.82, 0, 0]}>
+      <mesh position={[0, 0, 0.4]}>
         <boxGeometry args={[0.1, 0.14, 0.1]} />
         <meshStandardMaterial color={'#324b49'} roughness={0.52} />
       </mesh>
-      <mesh position={[0.76, 0, 0]} rotation={[0, Math.PI / 2, 0]}>
+      <mesh position={[0, 0, 0.34]} rotation={[Math.PI / 2, 0, 0]}>
         <circleGeometry args={[0.032, 16]} />
         <meshStandardMaterial
           color={active ? '#76e8dc' : '#55726e'}
@@ -57,7 +57,7 @@ export function MeasurementCue({
         />
       </mesh>
 
-      <mesh position={[0.9, 0.12, 0]} visible={phase === 'complete'}>
+      <mesh position={[0.12, 0.12, 0.4]} visible={phase === 'complete'}>
         <sphereGeometry args={[0.03, 12, 8]} />
         <meshStandardMaterial
           color={'#ffcf7d'}

@@ -24,6 +24,7 @@
     "acceptance:03d": "vitest run src/sim/acceptance.cli.test.ts --reporter=dot",
     "acceptance:05:quest": "node scripts/quest-batch-05.mjs",
     "acceptance:06:quest": "node scripts/quest-batch-06.mjs",
+    "acceptance:07:quest": "node scripts/quest-batch-07.mjs",
     "lint": "eslint .",
     "format:check": "prettier --check ."
   },

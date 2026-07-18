@@ -15,6 +15,13 @@ export type AppCommand =
   | { type: 'PAUSE_TRIAL' }
   | { type: 'RESET_TRIAL' }
   | { type: 'CLEAR_EXPERIMENT_LOG' }
+  | { type: 'SELECT_GHOST'; trialId: string }
+  | { type: 'PLAY_GHOST'; trialId: string }
+  | { type: 'PAUSE_GHOST' }
+  | { type: 'SEEK_GHOST'; elapsedSeconds: number }
+  | { type: 'RESET_GHOST' }
+  | { type: 'DELETE_GHOST'; trialId: string }
+  | { type: 'REPLACE_OLDEST_GHOST' }
 
 export interface RelativeOpticalLoadBands {
   readonly values: Readonly<Float32Array>
@@ -65,6 +72,7 @@ export interface TreatmentGhostV1 {
   readonly simulationConfigHash: string
   readonly sampleRateHz: number
   readonly durationSeconds: number
+  readonly sampleCount: number
   readonly bandCount: number
   readonly bandEdges: Readonly<Float32Array>
   readonly samples: Readonly<Float32Array>
@@ -73,11 +81,13 @@ export interface TreatmentGhostV1 {
 }
 
 export type GhostPlaybackCommand =
+  | { type: 'SELECT_GHOST'; trialId: string }
   | { type: 'PLAY_GHOST'; trialId: string }
   | { type: 'PAUSE_GHOST' }
   | { type: 'SEEK_GHOST'; elapsedSeconds: number }
   | { type: 'RESET_GHOST' }
   | { type: 'DELETE_GHOST'; trialId: string }
+  | { type: 'REPLACE_OLDEST_GHOST' }
 
 export interface CanonicalJarSummary {
   readonly dose: CanonicalDosePreset
@@ -127,3 +137,9 @@ The plot and versioned experiment log are the complete history for DoseIndex 0 t
 Persistence is owned outside `/src/sim`. Every stored document has an integer `schemaVersion`; unsupported future versions fail closed, corrupt input is discarded safely, and stored results never alter raw-water initialization.
 
 Treatment ghosts use sample-major flat storage with exactly `sampleCount * bandCount` finite normalized values. Recording and playback are app-owned, use the same optical-load samples as every live consumer, and never mutate or recompute the live simulation. The plot and experiment log remain the complete trial memory; a size-limited ghost library is a separately deletable subset for comparison.
+
+Batch 07 selects a three-record ghost limit. Valid completions auto-save until
+that limit; a later candidate remains pending for explicit delete or oldest-
+record replacement. Clearing experiment history does not delete ghosts. The
+plot retains every completion, including repeats, while canonical jars rebuild
+from the latest matching even-dose result.

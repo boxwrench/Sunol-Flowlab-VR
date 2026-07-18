@@ -57,7 +57,8 @@ The work remains staged: Workstream 03D exposes the authoritative samples; Batch
 | 04    | Accepted               | Quest interaction accepted with documented waivers      |
 | 05    | Accepted               | Seated Quest integration and performance passed         |
 | 06    | Accepted               | Seated Quest cycle, readability, and performance passed |
-| 07–11 | Not started            | Batch 07 remains outside the active plan boundary       |
+| 07    | Candidate checkpoint   | Quest performance passed; visual/control verdict paused |
+| 08–11 | Not started            | Batch 08 begins only after Batch 07 acceptance          |
 
 An [earlier Godot implementation plan](docs/archive/Sunol%20FlowLab%20Implementation%20Plan%20%28superseded%20Godot%29.pdf) is retained only as a superseded source artifact for provenance and is non-binding for this greenfield WebXR repository. The stale duplicate Batch 03 snapshot and superseded pre-research mechanics were removed from the active tree; Git history preserves them. Only [the indexed Batch 03 plan](batch-03-desktop-phenomenon-proof.md) is authoritative.
 
@@ -105,7 +106,16 @@ minimal physical measurement cue, and shared desktop/XR flow. Automated,
 desktop-rendered, and physical Quest phase/result/refill/performance checks
 pass. The seated project-owner operator also passed phase distinction, locked-
 control feedback, measurement conclusion, refill readability and invitation to
-repeat, and visible smoothness. Batch 07 is next and unstarted.
+repeat, and visible smoothness. Batch 07 now has a complete implementation
+candidate: physical phase lamps, relative-load gauge, 90-degree nephelometer,
+all-dose plot, static canonical summaries, refill and deliberate clear
+controls, versioned complete history, and bounded treatment-ghost recording,
+persistence, and playback. All local automated and rendered-browser gates pass.
+The seated Quest performance portion passed with one operator-started Dose 5
+run at 114.21 FPS and 9.50 ms p95. The owner called it a “good start” and paused
+before the remaining instrument/jar readability, replay/refill/clear controls,
+Dose 5 reasoning, and final verdict. Those checks remain the only open Batch 07
+gate; Batch 08 has not started.
 
 The hybrid direction maps runtime ownership to Batch 01A closure; hero-tank and jar-rack blockout plus recognition validation to Batch 03; interaction to Batch 04; integration to Batches 05-06; static jar summaries, complete memory, and treatment-ghost recording/playback runtime to Batch 07; live-versus-ghost readability to Batch 08; spectator presentation to Batch 09; presence to Batch 10; and release evidence to Batch 11.
 

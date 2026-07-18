@@ -19,11 +19,19 @@ test('desktop foundation loads with explicit VR entry and a render surface', asy
   await expect(page.getByLabel('Comparison presets')).toBeVisible()
   await expect(page.getByLabel('Treatment cycle controls')).toBeVisible()
   await expect(page.locator('canvas')).toBeVisible()
-  await expect(
-    page
-      .getByLabel('Development performance metrics')
-      .getByText('28 draw calls'),
-  ).toBeVisible()
+  await expect
+    .poll(async () => {
+      const report = await page.evaluate(() =>
+        JSON.parse(window.render_performance_to_text?.() ?? '{}'),
+      )
+      return report.metrics?.drawCalls ?? 0
+    })
+    .toBeGreaterThan(28)
+  const performance = await page.evaluate(() =>
+    JSON.parse(window.render_performance_to_text?.() ?? '{}'),
+  )
+  expect(performance.metrics.drawCalls).toBeGreaterThan(28)
+  expect(performance.metrics.drawCalls).toBeLessThanOrEqual(70)
   const xrPreflight = await page.evaluate(() =>
     JSON.parse(window.render_xr_preflight_to_text?.() ?? '{}'),
   )
@@ -144,6 +152,86 @@ test('comparison presets deterministically expose the U-shaped endpoint', async 
   expect(optimum.endpointOpticalLoad).toBeLessThan(overdose.endpointOpticalLoad)
 })
 
+test('Batch 7 persists complete memory, restores jars, and replays independently', async ({
+  page,
+}, testInfo) => {
+  await page.goto('/')
+  await page.evaluate(() => localStorage.clear())
+  await page.reload()
+  const state = () =>
+    page.evaluate(() => JSON.parse(window.render_game_to_text?.() ?? '{}'))
+
+  await page.getByRole('button', { name: 'Underdose 0' }).click()
+  await page.evaluate(() => window.advanceTime?.(43_000))
+  const completed = await state()
+  expect(completed.batch07).toMatchObject({
+    experimentPointCount: 1,
+    ghostCount: 1,
+    selectedGhostTrialId: completed.result.id,
+  })
+  expect(completed.batch07.canonicalSummaries).toEqual([
+    expect.objectContaining({ dose: 0, trialId: completed.result.id }),
+  ])
+  expect(completed.batch07.ghostSerializedBytes).toBeGreaterThan(40_000)
+  expect(completed.batch07.ghostSerializedBytes).toBeLessThan(75_000)
+  await page.locator('canvas').screenshot({
+    path: testInfo.outputPath('batch-07-complete-memory.png'),
+  })
+
+  await page.reload()
+  const restored = await state()
+  expect(restored.phase).toBe('READY')
+  expect(restored.simulationTimeSeconds).toBe(0)
+  expect(restored.batch07).toMatchObject({
+    experimentPointCount: 1,
+    experimentStatus: 'restored',
+    ghostCount: 1,
+    ghostLibraryStatus: 'restored',
+  })
+  expect(restored.batch07.canonicalSummaries[0]).toMatchObject({
+    dose: 0,
+    trialId: completed.result.id,
+  })
+
+  expect(
+    await page.evaluate(() =>
+      window.dispatch_batch07_command?.({ type: 'CLEAR_EXPERIMENT_LOG' }),
+    ),
+  ).toMatchObject({ accepted: true })
+  const cleared = await state()
+  expect(cleared.batch07).toMatchObject({
+    experimentPointCount: 0,
+    canonicalSummaries: [],
+    ghostCount: 1,
+  })
+
+  expect(
+    await page.evaluate(
+      (trialId) =>
+        window.dispatch_batch07_command?.({ type: 'PLAY_GHOST', trialId }),
+      completed.result.id,
+    ),
+  ).toMatchObject({ accepted: true })
+  await page.evaluate(() => window.advanceTime?.(10_000))
+  const replaying = await state()
+  expect(replaying.simulationTimeSeconds).toBe(0)
+  expect(replaying.resultCount).toBe(0)
+  expect(replaying.batch07.playback).toMatchObject({
+    trialId: completed.result.id,
+    status: 'playing',
+    elapsedSeconds: 10,
+  })
+
+  expect(
+    await page.evaluate(
+      (trialId) =>
+        window.dispatch_batch07_command?.({ type: 'DELETE_GHOST', trialId }),
+      completed.result.id,
+    ),
+  ).toMatchObject({ accepted: true })
+  expect((await state()).batch07.ghostCount).toBe(0)
+})
+
 test('proof mode leaves an unlabeled canvas for recognition review', async ({
   page,
 }) => {
@@ -201,9 +289,11 @@ test('XR route runs the shared treatment cycle with locked controls and refill',
     phase: 'READY',
   })
 
-  await page.locator('canvas').click({ position: { x: 542, y: 256 } })
-
-  await expect.poll(async () => (await state()).commandCount).toBe(2)
+  await expect(async () => {
+    if ((await state()).phase === 'READY')
+      await page.locator('canvas').click({ position: { x: 543, y: 257 } })
+    expect((await state()).commandCount).toBe(2)
+  }).toPass({ timeout: 5_000 })
   expect(await state()).toMatchObject({
     lastCommand: { type: 'START_TRIAL' },
     phase: 'RAPID_MIX',

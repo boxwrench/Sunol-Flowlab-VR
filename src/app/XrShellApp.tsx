@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 
 import { XrShellScene } from '../render/XrShellScene'
+import { PhysicalInstrumentation } from '../render/PhysicalInstrumentation'
 import { endpointOpticalLoad } from '../sim'
 import { DoseLever } from '../xr/DoseLever'
 import type {
@@ -15,6 +16,12 @@ import {
 } from '../xr/XrShellInputMonitor'
 import { xrStore } from '../xr/store'
 import type { AppCommand, DoseIndex } from './commands'
+import {
+  Batch07ExperimentController,
+  browserStorage,
+  type Batch07CommandResult,
+} from './Batch07ExperimentController'
+import { Batch07Driver } from './Batch07Driver'
 import { MetricsOverlay } from './MetricsOverlay'
 import { developmentPerformance } from './performance'
 import {
@@ -26,11 +33,12 @@ import {
   TreatmentCycleController,
   type TreatmentCycleRecord,
 } from './TreatmentCycle'
-import { TreatmentCycleDriver } from './TreatmentCycleDriver'
 
 declare global {
   interface Window {
-    dispatch_xr_shell_command?: (command: unknown) => TreatmentCycleRecord
+    dispatch_xr_shell_command?: (
+      command: unknown,
+    ) => TreatmentCycleRecord | Batch07CommandResult
     render_xr_shell_to_text?: () => string
     reset_xr_trial_to_ready?: () => void
   }
@@ -40,7 +48,7 @@ interface XrShellSnapshot extends XrShellInputSnapshot {
   commandCount: number
   dose: DoseIndex
   lastCommand: AppCommand | null
-  lastCommandResult: TreatmentCycleRecord | null
+  lastCommandResult: TreatmentCycleRecord | Batch07CommandResult | null
   leverHandedness: string
   leverPhase: string
   posture: string
@@ -62,6 +70,15 @@ export function XrShellApp() {
   const runtimeRef = useRef<SimulationRuntime | null>(null)
   if (runtimeRef.current === null) runtimeRef.current = new SimulationRuntime()
   const runtime = runtimeRef.current
+  const experimentRef = useRef<Batch07ExperimentController | null>(null)
+  if (experimentRef.current === null) {
+    experimentRef.current = new Batch07ExperimentController(
+      runtime,
+      browserStorage(),
+      () => setStatusRevision((revision) => revision + 1),
+    )
+  }
+  const experiment = experimentRef.current
   const cycleRef = useRef<TreatmentCycleController | null>(null)
   if (cycleRef.current === null) {
     cycleRef.current = new TreatmentCycleController(
@@ -69,6 +86,7 @@ export function XrShellApp() {
       5,
       DEFAULT_TREATMENT_CYCLE_CONFIG,
       (record) => {
+        experiment.handleCycleRecord(record)
         if (!record.accepted) {
           console.warn(
             'Sunol FlowLab rejected treatment-cycle event',
@@ -97,6 +115,7 @@ export function XrShellApp() {
   const presentationEndpointOpticalLoad =
     cycle.result?.endpointOpticalLoad ??
     endpointOpticalLoad(runtime.opticalLoadBands)
+  const experimentSnapshot = experiment.snapshot()
   const commandLogRef = useRef<Array<AppCommand | undefined>>(
     new Array(COMMAND_LOG_CAPACITY),
   )
@@ -119,8 +138,8 @@ export function XrShellApp() {
   })
 
   const dispatchCommand = useCallback(
-    (input: unknown): TreatmentCycleRecord => {
-      const result = cycle.dispatchCommand(input)
+    (input: unknown): TreatmentCycleRecord | Batch07CommandResult => {
+      const result = experiment.dispatch(cycle, input)
       const snapshot = snapshotRef.current
       snapshot.lastCommandResult = result
       snapshot.dose = cycle.selectedDose
@@ -142,7 +161,7 @@ export function XrShellApp() {
       setStatusRevision((revision) => revision + 1)
       return result
     },
-    [cycle],
+    [cycle, experiment],
   )
 
   const emitCommand = useCallback(
@@ -228,6 +247,7 @@ export function XrShellApp() {
         presentationEpoch: cycle.presentationEpoch,
         resultCount: cycle.resultCount,
         result: cycle.result,
+        batch07: experiment.snapshot(),
         presentationOpticalSource:
           cycle.result === null ? 'live-runtime' : 'trial-result',
         lastFailure: cycle.lastFailure,
@@ -262,6 +282,7 @@ export function XrShellApp() {
       }
       if (cycle.phase === 'REFILLING') cycle.advance(milliseconds / 1000)
       else cycle.advanceHeadless(Math.round(milliseconds / (1000 / 60)))
+      experiment.advancePlayback(milliseconds / 1000)
     }
     return () => {
       delete window.dispatch_xr_shell_command
@@ -270,7 +291,7 @@ export function XrShellApp() {
       delete window.reset_xr_trial_to_ready
       delete window.advanceTime
     }
-  }, [cycle, dispatchCommand, runtime])
+  }, [cycle, dispatchCommand, experiment, runtime])
 
   async function enterVr() {
     setEntryError(null)
@@ -289,6 +310,38 @@ export function XrShellApp() {
   }
 
   const snapshot = snapshotRef.current
+  const instrumentation = (
+    <PhysicalInstrumentation
+      canonicalSummaries={experimentSnapshot.canonicalSummaries}
+      ghosts={experiment.library.records.map((ghost) => ({
+        trialId: ghost.trialId,
+        doseIndex: ghost.doseIndex,
+      }))}
+      instrumentView={experiment.instrumentView}
+      onClearHistory={() => dispatchCommand({ type: 'CLEAR_EXPERIMENT_LOG' })}
+      onDeleteGhost={(trialId) =>
+        dispatchCommand({ type: 'DELETE_GHOST', trialId })
+      }
+      onPauseGhost={() => dispatchCommand({ type: 'PAUSE_GHOST' })}
+      onPlayGhost={(trialId) =>
+        dispatchCommand({ type: 'PLAY_GHOST', trialId })
+      }
+      onRefill={() => dispatchCommand({ type: 'RESET_TRIAL' })}
+      onReplaceOldestGhost={() =>
+        dispatchCommand({ type: 'REPLACE_OLDEST_GHOST' })
+      }
+      onResetGhost={() => dispatchCommand({ type: 'RESET_GHOST' })}
+      onSelectGhost={(trialId) =>
+        dispatchCommand({ type: 'SELECT_GHOST', trialId })
+      }
+      pendingGhostTrialId={experimentSnapshot.pendingGhostTrialId}
+      phase={cycle.phase}
+      replayView={experiment.replayInstrumentView}
+      plotPoints={experimentSnapshot.plottedResults}
+      refillEnabled={cycle.controlAvailability.refillEnabled}
+      selectedGhostTrialId={experimentSnapshot.selectedGhostTrialId}
+    />
+  )
 
   return (
     <main className={'app-shell'}>
@@ -326,6 +379,8 @@ export function XrShellApp() {
       ) : null}
 
       <XrShellScene
+        canonicalJarSummaries={experimentSnapshot.canonicalSummaries}
+        instrumentation={instrumentation}
         measurementPhase={
           cycle.phase === 'MEASURING'
             ? 'measuring'
@@ -341,7 +396,7 @@ export function XrShellApp() {
         posture={posture}
         presentationEpoch={cycle.presentationEpoch}
         recordParticleFrame={recordParticleFrame}
-        sceneChildren={<TreatmentCycleDriver cycle={cycle} />}
+        sceneChildren={<Batch07Driver cycle={cycle} experiment={experiment} />}
         showCalibrationMarker={showCalibrationMarker}
       >
         <DoseLever

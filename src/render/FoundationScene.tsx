@@ -5,7 +5,10 @@ import type { ReactNode } from 'react'
 import type { ParticleStateView } from '../sim'
 import { xrStore } from '../xr/store'
 import { HeroObservationTank } from './HeroObservationTank'
-import { JarTestBench } from './JarTestBench'
+import {
+  JarTestBench,
+  type CanonicalJarSummaryPresentation,
+} from './JarTestBench'
 import {
   APPARATUS_WORLD_POSITION,
   DESKTOP_CAMERA_POSITION,
@@ -18,6 +21,8 @@ import type { OpticalLoadBandsPresentation } from './OpticalLoadGradient'
 interface FoundationSceneProps {
   readonly animateParticleTransitions?: boolean
   readonly children?: ReactNode
+  readonly canonicalJarSummaries?: readonly CanonicalJarSummaryPresentation[]
+  readonly instrumentation?: ReactNode
   readonly measurementPhase?: MeasurementPresentationPhase
   readonly measurementRelativeOpticalLoad?: number
   readonly particleState: ParticleStateView
@@ -30,6 +35,8 @@ interface FoundationSceneProps {
 export function FoundationScene({
   animateParticleTransitions = true,
   children,
+  canonicalJarSummaries = [],
+  instrumentation,
   measurementPhase = 'idle',
   measurementRelativeOpticalLoad = 0,
   particleState,
@@ -60,7 +67,8 @@ export function FoundationScene({
             opticalLoadBands={opticalLoadBands}
             recordParticleFrame={recordParticleFrame}
           />
-          <JarTestBench />
+          <JarTestBench summaries={canonicalJarSummaries} />
+          {instrumentation}
           <gridHelper args={[8, 16, '#315b59', '#173332']} />
         </group>
       </XR>

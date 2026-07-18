@@ -6,6 +6,13 @@ export type AppCommand =
   | { type: 'PAUSE_TRIAL' }
   | { type: 'RESET_TRIAL' }
   | { type: 'CLEAR_EXPERIMENT_LOG' }
+  | { type: 'SELECT_GHOST'; trialId: string }
+  | { type: 'PLAY_GHOST'; trialId: string }
+  | { type: 'PAUSE_GHOST' }
+  | { type: 'SEEK_GHOST'; elapsedSeconds: number }
+  | { type: 'RESET_GHOST' }
+  | { type: 'DELETE_GHOST'; trialId: string }
+  | { type: 'REPLACE_OLDEST_GHOST' }
 
 export function isDoseIndex(value: unknown): value is DoseIndex {
   return (

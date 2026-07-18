@@ -6,6 +6,7 @@ import type { ParticleStateView } from '../sim'
 import { XR_SHELL_POSTURE_LAYOUTS, type XrShellPosture } from '../xr/layout'
 import { xrStore } from '../xr/store'
 import { HeroObservationTank } from './HeroObservationTank'
+import type { CanonicalJarSummaryPresentation } from './JarTestBench'
 import { XrShellApparatus } from './XrShellApparatus'
 import {
   APPARATUS_WORLD_POSITION,
@@ -18,6 +19,8 @@ import type { OpticalLoadBandsPresentation } from './OpticalLoadGradient'
 
 interface XrShellSceneProps {
   readonly children?: ReactNode
+  readonly canonicalJarSummaries?: readonly CanonicalJarSummaryPresentation[]
+  readonly instrumentation?: ReactNode
   readonly measurementPhase?: MeasurementPresentationPhase
   readonly measurementRelativeOpticalLoad?: number
   readonly opticalLoadBands: OpticalLoadBandsPresentation
@@ -31,6 +34,8 @@ interface XrShellSceneProps {
 
 export function XrShellScene({
   children,
+  canonicalJarSummaries = [],
+  instrumentation,
   measurementPhase = 'idle',
   measurementRelativeOpticalLoad = 0,
   opticalLoadBands,
@@ -56,6 +61,7 @@ export function XrShellScene({
         <group position={[...APPARATUS_WORLD_POSITION]}>
           <XrShellApparatus
             calibrationEyeHeightMeters={layout.calibrationEyeHeightMeters}
+            canonicalJarSummaries={canonicalJarSummaries}
             controlReachMeters={layout.neutralReachMeters}
             heroTank={
               <HeroObservationTank
@@ -67,6 +73,7 @@ export function XrShellScene({
                 recordParticleFrame={recordParticleFrame}
               />
             }
+            instrumentation={instrumentation}
             showCalibrationMarker={showCalibrationMarker}
           >
             <group

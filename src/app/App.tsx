@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 
 import { FoundationScene } from '../render/FoundationScene'
+import { PhysicalInstrumentation } from '../render/PhysicalInstrumentation'
 import {
   clearingFrontDiagnostics,
   endpointOpticalLoad,
@@ -11,6 +12,12 @@ import {
   ControllerPreflight,
   type XrPreflightEvent,
 } from '../xr/ControllerPreflight'
+import {
+  Batch07ExperimentController,
+  browserStorage,
+  type Batch07CommandResult,
+} from './Batch07ExperimentController'
+import { Batch07Driver } from './Batch07Driver'
 import { MetricsOverlay } from './MetricsOverlay'
 import { developmentPerformance } from './performance'
 import { SimulationRuntime } from './SimulationRuntime'
@@ -18,7 +25,6 @@ import {
   DEFAULT_TREATMENT_CYCLE_CONFIG,
   TreatmentCycleController,
 } from './TreatmentCycle'
-import { TreatmentCycleDriver } from './TreatmentCycleDriver'
 import { XrShellApp } from './XrShellApp'
 
 declare global {
@@ -26,6 +32,9 @@ declare global {
     render_game_to_text?: () => string
     advanceTime?: (milliseconds: number) => void
     render_xr_preflight_to_text?: () => string
+    dispatch_batch07_command?: (
+      command: unknown,
+    ) => Batch07CommandResult | import('./TreatmentCycle').TreatmentCycleRecord
   }
 }
 
@@ -83,13 +92,22 @@ function PhenomenonApp() {
   const runtimeRef = useRef<SimulationRuntime | null>(null)
   if (runtimeRef.current === null) runtimeRef.current = new SimulationRuntime()
   const runtime = runtimeRef.current
+  const experimentRef = useRef<Batch07ExperimentController | null>(null)
+  if (experimentRef.current === null) {
+    experimentRef.current = new Batch07ExperimentController(
+      runtime,
+      browserStorage(),
+      () => setStatusRevision((revision) => revision + 1),
+    )
+  }
+  const experiment = experimentRef.current
   const cycleRef = useRef<TreatmentCycleController | null>(null)
   if (cycleRef.current === null) {
     cycleRef.current = new TreatmentCycleController(
       runtime,
       5,
       DEFAULT_TREATMENT_CYCLE_CONFIG,
-      () => setStatusRevision((revision) => revision + 1),
+      (record) => experiment.handleCycleRecord(record),
     )
   }
   const cycle = cycleRef.current
@@ -105,6 +123,41 @@ function PhenomenonApp() {
   const presentationEndpointOpticalLoad =
     cycle.result?.endpointOpticalLoad ??
     endpointOpticalLoad(runtime.opticalLoadBands)
+  const experimentSnapshot = experiment.snapshot()
+  const instrumentation = (
+    <PhysicalInstrumentation
+      canonicalSummaries={experimentSnapshot.canonicalSummaries}
+      ghosts={experiment.library.records.map((ghost) => ({
+        trialId: ghost.trialId,
+        doseIndex: ghost.doseIndex,
+      }))}
+      instrumentView={experiment.instrumentView}
+      onClearHistory={() =>
+        experiment.dispatch(cycle, { type: 'CLEAR_EXPERIMENT_LOG' })
+      }
+      onDeleteGhost={(trialId) =>
+        experiment.dispatch(cycle, { type: 'DELETE_GHOST', trialId })
+      }
+      onPauseGhost={() => experiment.dispatch(cycle, { type: 'PAUSE_GHOST' })}
+      onPlayGhost={(trialId) =>
+        experiment.dispatch(cycle, { type: 'PLAY_GHOST', trialId })
+      }
+      onRefill={() => experiment.dispatch(cycle, { type: 'RESET_TRIAL' })}
+      onReplaceOldestGhost={() =>
+        experiment.dispatch(cycle, { type: 'REPLACE_OLDEST_GHOST' })
+      }
+      onResetGhost={() => experiment.dispatch(cycle, { type: 'RESET_GHOST' })}
+      onSelectGhost={(trialId) =>
+        experiment.dispatch(cycle, { type: 'SELECT_GHOST', trialId })
+      }
+      pendingGhostTrialId={experimentSnapshot.pendingGhostTrialId}
+      phase={cycle.phase}
+      replayView={experiment.replayInstrumentView}
+      plotPoints={experimentSnapshot.plottedResults}
+      refillEnabled={cycle.controlAvailability.refillEnabled}
+      selectedGhostTrialId={experimentSnapshot.selectedGhostTrialId}
+    />
+  )
 
   const recordXrPreflightEvent = useCallback(
     (event: XrPreflightEvent): void => {
@@ -162,6 +215,7 @@ function PhenomenonApp() {
         presentationEpoch: cycle.presentationEpoch,
         resultCount: cycle.resultCount,
         result: cycle.result,
+        batch07: experiment.snapshot(),
         presentationOpticalSource:
           cycle.result === null ? 'live-runtime' : 'trial-result',
         lastFailure: cycle.lastFailure,
@@ -190,28 +244,32 @@ function PhenomenonApp() {
         throw new RangeError('Advance time must be finite and non-negative')
       if (cycle.phase === 'REFILLING') cycle.advance(milliseconds / 1000)
       else cycle.advanceHeadless(Math.round(milliseconds / (1000 / 60)))
+      experiment.advancePlayback(milliseconds / 1000)
     }
     window.render_xr_preflight_to_text = () =>
       JSON.stringify(xrPreflightRef.current)
+    window.dispatch_batch07_command = (command) =>
+      experiment.dispatch(cycle, command)
     return () => {
       delete window.render_game_to_text
       delete window.advanceTime
       delete window.render_xr_preflight_to_text
+      delete window.dispatch_batch07_command
     }
-  }, [cycle, runtime])
+  }, [cycle, experiment, runtime])
 
   function runComparisonPreset(dose: DoseDetent): void {
     cycle.forceResetDevOnly()
-    cycle.dispatchCommand({ type: 'SET_DOSE', dose })
-    cycle.dispatchCommand({ type: 'START_TRIAL' })
+    experiment.dispatch(cycle, { type: 'SET_DOSE', dose })
+    experiment.dispatch(cycle, { type: 'START_TRIAL' })
   }
 
   function startTrial(): void {
-    cycle.dispatchCommand({ type: 'START_TRIAL' })
+    experiment.dispatch(cycle, { type: 'START_TRIAL' })
   }
 
   function requestRefill(): void {
-    cycle.dispatchCommand({ type: 'RESET_TRIAL' })
+    experiment.dispatch(cycle, { type: 'RESET_TRIAL' })
   }
 
   function forceResetTrial(): void {
@@ -303,6 +361,8 @@ function PhenomenonApp() {
       {import.meta.env.DEV && !presentationMode ? <MetricsOverlay /> : null}
       <FoundationScene
         animateParticleTransitions={!reviewCaptureMode}
+        canonicalJarSummaries={experimentSnapshot.canonicalSummaries}
+        instrumentation={instrumentation}
         measurementPhase={
           cycle.phase === 'MEASURING'
             ? 'measuring'
@@ -319,7 +379,7 @@ function PhenomenonApp() {
         presentationEpoch={cycle.presentationEpoch}
         recordParticleFrame={recordParticleFrame}
       >
-        <TreatmentCycleDriver cycle={cycle} />
+        <Batch07Driver cycle={cycle} experiment={experiment} />
         {import.meta.env.DEV ? (
           <ControllerPreflight recordEvent={recordXrPreflightEvent} />
         ) : null}
