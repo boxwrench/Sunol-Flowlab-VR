@@ -1,8 +1,9 @@
 # Batch 07 Implementation Plan: Physical Instrumentation and Experiment Memory
 
 **Status:** Published candidate checkpoint — automated gates and seated Quest
-performance pass; the paused readability, comprehension, physical-control, and
-final-verdict checks remain open
+performance pass; the readability, comprehension, physical-control, and final-
+verdict checks remain open and were explicitly deferred by the project owner on
+2026-07-19; they are now included in one combined Batch 07/08 Quest review
 **Depends on:** Batch 06 accepted  
 **May run in parallel with:** Instrument geometry and data wiring after interfaces freeze  
 **Primary gate:** The apparatus explains itself physically, records exactly one result per trial, persists the curve, and can record and replay a compatible prior treatment result without mutating the live simulation or requiring software chrome.

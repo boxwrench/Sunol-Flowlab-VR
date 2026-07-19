@@ -17,12 +17,14 @@ import {
 import type { ParticleFrameRecorder } from './ParticleCloud'
 import type { MeasurementPresentationPhase } from './MeasurementCue'
 import type { OpticalLoadBandsPresentation } from './OpticalLoadGradient'
+import type { GhostComparisonPresentationView } from './TreatmentGhostComparison'
 
 interface FoundationSceneProps {
   readonly animateParticleTransitions?: boolean
   readonly children?: ReactNode
   readonly canonicalJarSummaries?: readonly CanonicalJarSummaryPresentation[]
   readonly instrumentation?: ReactNode
+  readonly ghostComparisonView?: GhostComparisonPresentationView
   readonly measurementPhase?: MeasurementPresentationPhase
   readonly measurementRelativeOpticalLoad?: number
   readonly particleState: ParticleStateView
@@ -37,6 +39,7 @@ export function FoundationScene({
   children,
   canonicalJarSummaries = [],
   instrumentation,
+  ghostComparisonView,
   measurementPhase = 'idle',
   measurementRelativeOpticalLoad = 0,
   particleState,
@@ -62,6 +65,7 @@ export function FoundationScene({
             animateParticleTransitions={animateParticleTransitions}
             measurementPhase={measurementPhase}
             measurementRelativeOpticalLoad={measurementRelativeOpticalLoad}
+            ghostComparisonView={ghostComparisonView}
             particleState={particleState}
             presentationEpoch={presentationEpoch}
             opticalLoadBands={opticalLoadBands}

@@ -69,3 +69,21 @@ test('jar-test bench has six static app-fed canonical summaries with no process 
     /useFrame|Particle|OpticalLoad|SimulationRuntime|FixedStep|TrialResult/,
   )
 })
+
+test('Batch 8 ghost comparison is one opaque read-only marker', async () => {
+  const source = await readFile(
+    new URL('../src/render/TreatmentGhostComparison.tsx', import.meta.url),
+    'utf8',
+  )
+  const frameCallback = source.slice(source.indexOf('useFrame('))
+
+  assert.equal((source.match(/<mesh\b/g) ?? []).length, 1)
+  assert.match(source, /view\.clearingFrontDepth/)
+  assert.match(source, /view\.status !== 'empty'/)
+  assert.doesNotMatch(source, /transparent|opacity=/)
+  assert.doesNotMatch(
+    source,
+    /Particle|SimulationRuntime|TreatmentGhostPlayback/,
+  )
+  assert.doesNotMatch(frameCallback, /new (?:Matrix4|Vector3|Array)\b/)
+})

@@ -1,11 +1,18 @@
 # Batch 07 Candidate Acceptance Packet
 
-Date: 2026-07-17
+Date: 2026-07-17  
+Gate status updated: 2026-07-19
 
 Status: **Candidate; not yet accepted.** All local automated, deterministic,
 architecture, persistence, rendered-browser, and build gates pass. Seated Quest
-readability, comprehension, physical-control, and immersive performance remain
-the only open acceptance gate.
+readability, comprehension, and physical-control checks remain the only open
+acceptance gate; the immersive performance row has passed.
+
+On 2026-07-19 the project owner explicitly deferred the remaining human review
+so that safe candidate hardening could be batched. Later that day, the owner
+authorized Batch 08 technical work as a scheduling exception and directed one
+combined Quest review for both batches. This is not a pass, waiver, or Batch 07
+acceptance.
 
 ## What changed
 
@@ -84,8 +91,10 @@ working tree but is not Batch 07 runtime scope.
 
 ## Verification completed
 
-- `npm test`: 20 repository-contract tests and 128 Vitest tests pass across 28
+- `npm test`: 21 repository-contract tests and 133 Vitest tests pass across 30
   Vitest files.
+- The application-command boundary rejects unknown commands, invalid dose
+  detents, missing ghost IDs, and non-finite seek payloads.
 - `npm run test:browser`: all six Playwright scenarios pass.
 - `npm run typecheck`: pass.
 - `npm run lint`: pass.
@@ -94,7 +103,7 @@ working tree but is not Batch 07 runtime scope.
   under `fnv1a32-e8bf13e7`.
 - `npm run benchmark`: 2,580 steps in 29.4614 ms total, 0.011264 ms average,
   0.028700 ms p95; canonical endpoint remains `0.5011820349166183`.
-- `npm run build`: 359 modules transform and production build passes. Existing
+- `npm run build`: 360 modules transform and production build passes. Existing
   non-failing emulator-asset chunk warnings remain.
 - Required web-game client ready and XR Start captures completed with no console
   error artifact; both screenshots and the completed-memory screenshot were
@@ -105,8 +114,9 @@ working tree but is not Batch 07 runtime scope.
 - One 43-second, 10 Hz, 12-band JSON ghost measures 50.9–54.9 KB depending on
   sample values. Three records are approximately 165 KB, so IndexedDB and
   compression are not justified for the configured library.
-- Desktop headless rendered checkpoints report 51 draw calls ready and 53 draw
-  calls complete. The browser suite enforces a ceiling of 70.
+- Desktop headless rendered checkpoints report 51 draw calls ready, 53 draw
+  calls complete, and 55 with the Batch 08 prior-front comparison visible. The
+  browser suite enforces a ceiling of 71.
 - The physical digit and gauge tick geometry is instanced; the earlier
   unoptimized 115-draw-call desktop candidate was rejected before acceptance.
 
@@ -126,8 +136,9 @@ working tree but is not Batch 07 runtime scope.
   Dose 5 completed at 114.21 FPS and 9.50 ms p95 after the operator selected it
   from staged 0/5/10 data. The owner called this a “good start” and paused before
   the physical replay/refill/clear sequence and final readability verdict.
-- Batch 08 still owns the subordinate live-versus-ghost water comparison. Batch
-  07 exposes only physical selection/status/progress and the playback runtime.
+- The owner-authorized Batch 08 technical candidate now adds one subordinate
+  opaque prior-front marker. Its human interpretation and live-plus-ghost Quest
+  cost remain in the combined Batch 07/08 gate.
 - Standing, endurance, thermal, hosted deployment, and release evidence remain
   outside this gate.
 
@@ -156,3 +167,6 @@ Do not tag or mark Batch 07 accepted yet. Proposed closing commit remains
 `feat: add instrumentation, persistence, and treatment-result ghosts`; proposed
 accepted tag remains `instrumentation-complete` after the three pending Quest
 rows pass or receive explicit documented waivers.
+
+The remaining rows now belong to the combined Batch 07/08 checklist in
+`docs/UX_VALIDATION.md`. Do not tag Batch 07 from Batch 08 desktop evidence.

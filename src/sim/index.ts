@@ -89,6 +89,7 @@ export {
 } from './phenomenon'
 export {
   DEFAULT_OPTICAL_LOAD_CONFIG,
+  clearingFrontDepthFromValues,
   clearingFrontDiagnostics,
   createOpticalLoadBands,
   endpointOpticalLoad,

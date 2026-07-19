@@ -21,13 +21,14 @@ Original prompt: batch 7
   handle, two-press tear sheet, small ghost controls, static canonical-jar
   summaries, and 90-degree detector geometry. Typecheck and targeted render
   tests pass.
-- Full repository suite passes: 20 contract tests and 128 Vitest tests. All six
+- Full repository suite passes: 21 contract tests and 133 Vitest tests. All six
   rendered Playwright scenarios pass, including restart persistence, canonical
   restore, history clear, independent ghost replay, deletion, and XR Start.
 - Simulation acceptance and benchmark pass without model drift. The current
-  production build transforms 359 modules. Desktop instrumentation reports 51
-  ready and 53 complete draw calls. One 12-band, 43-second, 10 Hz ghost measures
-  50.9–54.9 KB as JSON; the configured three-record library is about 165 KB.
+  production build transforms 360 modules. Desktop instrumentation reports 51
+  ready, 53 complete, and 55 compatible-ghost-comparison draw calls. One
+  12-band, 43-second, 10 Hz ghost measures 50.9–54.9 KB as JSON; the configured
+  three-record library is about 165 KB.
 - Quest 3 remains connected and exposes the seated route. The first immersive
   restart attempt timed out because user presence/foreground entry was not
   available; no physical Batch 7 performance or comprehension claim is made.
@@ -40,11 +41,31 @@ Original prompt: batch 7
   rolling window held 114.21 FPS with 9.50 ms p95. The owner called it a “good
   start” and paused the visual review until tomorrow before the replay, refill,
   clear-sheet, comprehension, and final-verdict checks.
+- On 2026-07-19 the owner explicitly deferred the remaining human Quest gate.
+  The gate remains open; it was not passed or waived, and Batch 08 remains
+  unstarted.
+- Batched candidate hardening tightened the exported application-command type
+  guard so unknown command names, invalid dose detents, missing ghost IDs, and
+  non-finite seek times cannot be represented as valid `AppCommand` values.
+  Focused regression coverage and type checking pass.
+- Later on 2026-07-19 the owner authorized Batch 08 technical work before the
+  open Batch 07 human verdict and requested one combined human review. This is a
+  scheduling exception, not Batch 07 acceptance.
+- Added display-only 0.16-second optical-band smoothing with immediate epoch
+  reset. The recorder and all process consumers retain unsmoothed authoritative
+  samples; no simulation config or endpoint changed.
+- Added one opaque prior clearing-front marker driven by the app-owned replay
+  view. It adds no ghost particles, second tank, replay recomputation, or
+  transparency layer. The rendered compatible-ghost checkpoint reports 55
+  development draw calls.
+- Added automated low/optimum/high, flocculation, settling, measurement, refill,
+  and compatible-ghost capture points. The required bundled browser client
+  completed Dose 5 with exact endpoint state and no console-error artifact.
 
 ## Current TODO
 
-- Resume the existing seated Quest visual review.
-- Check physical replay/status/progress/reset and pending replacement, refill,
-  deliberate two-press clear, overall readability/reach, and Dose 5 reasoning.
-- If the owner passes that gate, finalize the acceptance packet, tag, and
-  publish the bounded Batch 7 increment.
+- Run one combined seated Quest review for the remaining Batch 07 instrument,
+  jar, replay/refill/clear rows and Batch 08 clearing/prior-front/performance
+  rows.
+- Do not represent either batch as accepted before that verdict and do not start
+  Batch 09.

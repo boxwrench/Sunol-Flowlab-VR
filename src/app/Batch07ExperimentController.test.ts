@@ -1,7 +1,10 @@
 import { describe, expect, it } from 'vitest'
 
 import type { KeyValueStorage } from './experimentMemory'
-import { Batch07ExperimentController } from './Batch07ExperimentController'
+import {
+  Batch07ExperimentController,
+  isAppCommand,
+} from './Batch07ExperimentController'
 import { SimulationRuntime } from './SimulationRuntime'
 import { TreatmentCycleController } from './TreatmentCycle'
 
@@ -47,6 +50,29 @@ function completeTrial(
 }
 
 describe('Batch07ExperimentController', () => {
+  it('keeps the prior-front view hidden and neutral without a loaded ghost', () => {
+    const harness = createHarness()
+    harness.experiment.advancePlayback(1)
+    expect(harness.experiment.replayComparisonView).toEqual({
+      status: 'empty',
+      clearingFrontDepth: 0,
+    })
+  })
+
+  it('validates every external application-command shape', () => {
+    expect(isAppCommand({ type: 'SET_DOSE', dose: 5 })).toBe(true)
+    expect(isAppCommand({ type: 'PLAY_GHOST', trialId: 'trial-1' })).toBe(true)
+    expect(isAppCommand({ type: 'SEEK_GHOST', elapsedSeconds: 2.5 })).toBe(true)
+    expect(isAppCommand({ type: 'PAUSE_GHOST' })).toBe(true)
+
+    expect(isAppCommand({ type: 'SET_DOSE', dose: 5.5 })).toBe(false)
+    expect(isAppCommand({ type: 'PLAY_GHOST' })).toBe(false)
+    expect(isAppCommand({ type: 'SEEK_GHOST', elapsedSeconds: Infinity })).toBe(
+      false,
+    )
+    expect(isAppCommand({ type: 'UNKNOWN_COMMAND' })).toBe(false)
+  })
+
   it('captures one log point, canonical summary, and ghost per completion only', () => {
     const harness = createHarness()
     completeTrial(harness, 4)
@@ -105,6 +131,13 @@ describe('Batch07ExperimentController', () => {
     expect(result.accepted).toBe(true)
     harness.experiment.advancePlayback(20)
     expect(harness.experiment.playback.view.elapsedSeconds).toBe(20)
+    expect(harness.experiment.replayComparisonView.status).toBe('playing')
+    expect(
+      harness.experiment.replayComparisonView.clearingFrontDepth,
+    ).toBeGreaterThanOrEqual(0)
+    expect(
+      harness.experiment.replayComparisonView.clearingFrontDepth,
+    ).toBeLessThanOrEqual(1)
     expect(harness.runtime.simulationTimeSeconds).toBe(time)
     expect(Array.from(harness.runtime.state.positionX)).toEqual(positions)
     expect(harness.cycle.resultCount).toBe(count)

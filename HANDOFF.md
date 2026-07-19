@@ -1,18 +1,18 @@
 # Session Handoff
 
-Updated: 2026-07-17
+Updated: 2026-07-19
 
 ## Resume point
 
 - Repository: <https://github.com/boxwrench/Sunol-Flowlab-VR>
 - Branch: main
 - Published branch: main; use `git log -1 --oneline` for the current increment
-- Working tree: published Batch 07 candidate checkpoint and separate published
-  alpha-zeta research-contract refinement; inspect `git status --short`
+- Working tree: combined Batch 07/08 technical-candidate increment; inspect
+  `git status --short` and `git log -1 --oneline`
 - `AGENTS.md` is repository-local authority and intentionally ignored at the
   repository root
-- Current milestone: Batch 07 automated candidate and seated Quest performance
-  pass; the paused visual/control verdict remains open
+- Current milestone: Batch 07 and Batch 08 technical candidates; one combined
+  Quest visual/control/comparison verdict remains open
 - Portfolio-evaluation recommendations are staged without expanding Batch 07:
   final media/transparency evidence in Batch 08, repository front-door work in
   Batch 09, and bundle/deployment/branding verification in Batch 11
@@ -32,15 +32,19 @@ Updated: 2026-07-17
   [docs/BATCH_06_ACCEPTANCE.md](docs/BATCH_06_ACCEPTANCE.md)
 - Batch 07 candidate evidence:
   [docs/BATCH_07_ACCEPTANCE.md](docs/BATCH_07_ACCEPTANCE.md)
+- Batch 08 candidate evidence and display choices:
+  [docs/BATCH_08_CANDIDATE.md](docs/BATCH_08_CANDIDATE.md) and
+  [docs/TUNING.md](docs/TUNING.md)
 
-Resume on main in the existing Batch 07 seated Quest visual review. Batches 03
-through 06 are accepted. Batch 07 implementation, local automated/rendered
-evidence, and a successful 114.21 FPS / 9.50 ms p95 operator-started Dose 5 run
-are complete. Acceptance is intentionally withheld until the paused
-readability, comprehension, and physical-control checks receive an owner
-verdict.
-Do not pull Batch 08 live-versus-ghost presentation, environment, deployment,
-or release scope into this gate.
+Resume on main with Batch 07 as an unaccepted candidate. Batches 03 through 06
+are accepted. Batch 07 implementation, local automated/rendered evidence, and a
+successful 114.21 FPS / 9.50 ms p95 operator-started Dose 5 run are complete.
+On 2026-07-19 the owner deferred the remaining human readability,
+comprehension, and physical-control review, then authorized Batch 08 technical
+work and one combined Quest review. Batch 08 now has a bounded display-only
+candidate: allocation-free optical-band smoothing plus one opaque prior-front
+marker driven by app-owned replay. Neither batch is accepted yet. Do not pull
+Batch 09, environment, deployment, or release scope into this gate.
 
 The superseded Godot plan remains isolated under docs/archive for provenance.
 Use only the active indexed Markdown plan.
@@ -114,15 +118,17 @@ Use only the active indexed Markdown plan.
   interaction phases, accepted/rejected command counts, authoritative runtime
   diagnostics, merge rate, optical load, and rolling render telemetry for
   remote inspection without introducing simulation ownership in `/src/xr`.
-- Approved treatment-result ghost design remains staged for Batches 07-08.
-  There is no ghost runtime, particle replay, or replay recomputation.
+- Batch 07 implements app-owned 10 Hz treatment-ghost recording, bounded
+  localStorage persistence, compatibility validation, and independent playback.
+  Batch 08 adds render-local optical smoothing and one subordinate opaque prior-
+  front marker. There is no particle replay or replay recomputation.
 
 ## Current evidence
 
-- 20 repository-contract tests pass, including XR ownership, integration
+- 21 repository-contract tests pass, including XR ownership, integration
   composition, detent, pointer-
   capture, and Start-latch source contracts.
-- 109 Vitest tests across 24 files pass, including the full transition matrix,
+- 133 Vitest tests across 30 files pass, including the full transition matrix,
   legal/illegal commands, fixed timing, centralized time scale, exactly-once
   immutable result, result/runtime isolation, deterministic refill,
   interruption/long-stall recovery, all eleven detents, lock suppression, and
@@ -279,7 +285,8 @@ readability and invitation to repeat, and visible smoothness.
 
 A hosted HTTPS deployment is not authorized. Localhost and the documented ADB
 reverse route remain the approved development paths. Thermal/endurance, later
-headset ergonomics beyond this Batch 04 protocol, ghost runtime, hosted
+headset ergonomics beyond this Batch 04 protocol, Batch 08 ghost-comparison
+presentation, hosted
 deployment, and release gates remain later work.
 
 Public-data and fictionalization restrictions in
@@ -309,14 +316,15 @@ deployment from this increment.
 
 ## Recommended next session
 
-1. Wake and wear the connected Quest 3, then restart the seated route; the
-   persisted 0/5/10 history and three ghosts should restore.
-2. Finish the paused checklist in `docs/UX_VALIDATION.md`: instrument/jar
-   readability, ghost play/pause/reset/status/progress, pending replacement,
-   refill, two-press clear, Dose 5 reasoning, reach, and final verdict.
-3. If the operator passes, update the candidate acceptance packet to accepted,
-   rerun the final checks, commit, tag `instrumentation-complete`, and push.
-4. Keep Batch 08 visual-comparison scope unstarted until that acceptance.
+1. Restart the seated Quest route with staged 0/5/10 history and a compatible
+   selected ghost.
+2. Run the single combined checklist in `docs/UX_VALIDATION.md`: Batch 07
+   instrument/jar/control comprehension plus Batch 08 clearing, prior-front
+   interpretation, common angles, and live-plus-ghost performance.
+3. Record Dose 5 reasoning, the worst p95/draw-call window, and one final pass or
+   issue list.
+4. If the combined gate passes, update both candidate packets, tag Batch 07 and
+   Batch 08 at their accepted commits, and only then open Batch 09.
 
 ## Commands
 

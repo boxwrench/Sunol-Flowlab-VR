@@ -95,3 +95,22 @@ until full. A later candidate remains pending for an explicit oldest-record
 replacement or deletion decision. Experiment-history clear and ghost deletion
 remain separate deliberate actions. Quota or corrupt-data failures stay in the
 application layer and cannot alter live simulation state.
+
+## ADR-012: Combined Batch 07/08 gate and minimal prior-front comparison
+
+On 2026-07-19 the project owner authorized Batch 08 machine-verifiable work
+before the remaining Batch 07 human verdict so both batches can close through
+one combined Quest review. This scheduling exception does not accept or waive
+Batch 07 and does not authorize Batch 09.
+
+Batch 08 retains 12 authoritative bands, GPU linear vertical interpolation,
+the accepted water color/opacity mapping, and 500 particles. Render-local
+temporal smoothing uses one preallocated buffer and a 0.16-second exponential
+time constant, snapping immediately on presentation-epoch changes. Recording,
+results, gauge, plot, persistence, and replay samples remain unsmoothed.
+
+The selected ghost visual is one opaque prior clearing-front marker driven by
+an app-owned read-only replay view. It adds no ghost particles, second tank,
+recomputation, or transparent overlay. More elaborate ghost gradients, gauge
+traces, and plot lines remain rejected unless the combined human review shows
+the single marker is insufficient.

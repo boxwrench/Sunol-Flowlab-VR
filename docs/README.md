@@ -15,6 +15,8 @@
 - [Batch 05 integration acceptance packet](BATCH_05_ACCEPTANCE.md)
 - [Batch 06 treatment-cycle acceptance packet](BATCH_06_ACCEPTANCE.md)
 - [Batch 07 instrumentation candidate packet](BATCH_07_ACCEPTANCE.md)
+- [Batch 08 technical candidate packet](BATCH_08_CANDIDATE.md)
+- [Batch 08 display tuning record](TUNING.md)
 - [Apparatus recognition validation](UX_VALIDATION.md)
 - [Visual behavior target](VISUAL_BEHAVIOR.md)
 - [Hybrid jar-test design direction](DESIGN_DIRECTION_JAR_TEST_HYBRID.md)

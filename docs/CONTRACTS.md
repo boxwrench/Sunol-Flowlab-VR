@@ -143,3 +143,12 @@ that limit; a later candidate remains pending for explicit delete or oldest-
 record replacement. Clearing experiment history does not delete ghosts. The
 plot retains every completion, including repeats, while canonical jars rebuild
 from the latest matching even-dose result.
+
+Batch 08 exposes one mutable app-owned replay-comparison view containing only
+playback status and normalized clearing-front depth. The depth uses the same
+threshold transform as the live clearing-front diagnostic and is `0` while
+playback is empty. `/render` may position one subordinate marker from this view;
+it may not derive a second optical value, own playback time, import the ghost
+runtime, or construct replay particles. Render-local optical-band temporal
+smoothing is display-only and resets immediately on a presentation-epoch
+change; authoritative recording and result values remain unsmoothed.

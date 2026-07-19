@@ -248,6 +248,9 @@ export function XrShellApp() {
         resultCount: cycle.resultCount,
         result: cycle.result,
         batch07: experiment.snapshot(),
+        batch08: {
+          ghostComparison: experiment.replayComparisonView,
+        },
         presentationOpticalSource:
           cycle.result === null ? 'live-runtime' : 'trial-result',
         lastFailure: cycle.lastFailure,
@@ -380,6 +383,7 @@ export function XrShellApp() {
 
       <XrShellScene
         canonicalJarSummaries={experimentSnapshot.canonicalSummaries}
+        ghostComparisonView={experiment.replayComparisonView}
         instrumentation={instrumentation}
         measurementPhase={
           cycle.phase === 'MEASURING'

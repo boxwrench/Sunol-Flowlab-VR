@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest'
 
 import { mergeParticlePair } from './aggregation'
 import {
+  clearingFrontDepthFromValues,
   clearingFrontDiagnostics,
   createOpticalLoadBands,
   endpointOpticalLoad,
@@ -116,5 +117,15 @@ describe('authoritative relative optical-load bands', () => {
     expect(diagnostics.topClearFraction).toBe(1)
     expect(diagnostics.clearingFrontDepth).toBeCloseTo(7 / 12)
     expect(diagnostics.upperZoneOpticalLoad).toBeCloseTo(0.075)
+  })
+
+  it('derives replay clearing-front depth directly from normalized bands', () => {
+    expect(
+      clearingFrontDepthFromValues(
+        new Float32Array([0.8, 0.7, 0.5, 0.2, 0.1, 0.05]),
+        0.25,
+      ),
+    ).toBeCloseTo(3 / 6)
+    expect(() => clearingFrontDepthFromValues([])).toThrow(RangeError)
   })
 })

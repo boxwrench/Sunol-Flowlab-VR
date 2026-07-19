@@ -1,5 +1,5 @@
 import { isDoseIndex, type AppCommand } from './commands'
-import { endpointOpticalLoad } from '../sim'
+import { clearingFrontDepthFromValues, endpointOpticalLoad } from '../sim'
 import { ExperimentMemory, type KeyValueStorage } from './experimentMemory'
 import type { SimulationRuntime } from './SimulationRuntime'
 import {
@@ -52,6 +52,11 @@ export interface Batch07Snapshot {
   }
 }
 
+export interface ReplayComparisonView {
+  status: string
+  clearingFrontDepth: number
+}
+
 type Now = () => string
 type ChangeListener = () => void
 
@@ -66,6 +71,7 @@ export class Batch07ExperimentController {
     elapsedSeconds: number
     durationSeconds: number
   }
+  readonly replayComparisonView: ReplayComparisonView
 
   private pendingCandidateValue: TreatmentGhostV1 | null = null
   private selectedGhostTrialIdValue: string | null = null
@@ -92,6 +98,10 @@ export class Batch07ExperimentController {
       status: this.playback.status,
       elapsedSeconds: this.playback.elapsedSeconds,
       durationSeconds: this.playback.durationSeconds,
+    }
+    this.replayComparisonView = {
+      status: this.playback.status,
+      clearingFrontDepth: 0,
     }
     this.selectedGhostTrialIdValue =
       this.library.records.at(-1)?.trialId ?? null
@@ -301,6 +311,11 @@ export class Batch07ExperimentController {
     this.replayInstrumentView.status = this.playback.status
     this.replayInstrumentView.elapsedSeconds = this.playback.elapsedSeconds
     this.replayInstrumentView.durationSeconds = this.playback.durationSeconds
+    this.replayComparisonView.status = this.playback.status
+    this.replayComparisonView.clearingFrontDepth =
+      this.playback.status === 'empty'
+        ? 0
+        : clearingFrontDepthFromValues(this.playback.bandValues)
   }
 }
 
@@ -314,8 +329,29 @@ export function browserStorage(): KeyValueStorage | null {
 
 export function isAppCommand(input: unknown): input is AppCommand {
   if (!isRecord(input) || typeof input.type !== 'string') return false
-  if (input.type === 'SET_DOSE') return isDoseIndex(input.dose)
-  return true
+  switch (input.type) {
+    case 'SET_DOSE':
+      return isDoseIndex(input.dose)
+    case 'SELECT_GHOST':
+    case 'PLAY_GHOST':
+    case 'DELETE_GHOST':
+      return typeof input.trialId === 'string'
+    case 'SEEK_GHOST':
+      return (
+        typeof input.elapsedSeconds === 'number' &&
+        Number.isFinite(input.elapsedSeconds)
+      )
+    case 'START_TRIAL':
+    case 'PAUSE_TRIAL':
+    case 'RESET_TRIAL':
+    case 'CLEAR_EXPERIMENT_LOG':
+    case 'PAUSE_GHOST':
+    case 'RESET_GHOST':
+    case 'REPLACE_OLDEST_GHOST':
+      return true
+    default:
+      return false
+  }
 }
 
 function accept(type: string): Batch07CommandResult {

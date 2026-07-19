@@ -1,5 +1,5 @@
 import { useFrame } from '@react-three/fiber'
-import { useEffect, useMemo } from 'react'
+import { useEffect, useMemo, useRef } from 'react'
 import {
   ClampToEdgeWrapping,
   DataTexture,
@@ -53,13 +53,34 @@ export interface OpticalLoadBandsPresentation {
 
 interface OpticalLoadGradientProps {
   readonly bands: OpticalLoadBandsPresentation
+  readonly presentationEpoch?: number
 }
 
-export function OpticalLoadGradient({ bands }: OpticalLoadGradientProps) {
+export const OPTICAL_LOAD_DISPLAY_SMOOTHING_SECONDS = 0.16
+
+export function displaySmoothingAlpha(
+  elapsedSeconds: number,
+  timeConstantSeconds = OPTICAL_LOAD_DISPLAY_SMOOTHING_SECONDS,
+): number {
+  if (!Number.isFinite(elapsedSeconds) || elapsedSeconds <= 0) return 0
+  if (!Number.isFinite(timeConstantSeconds) || timeConstantSeconds <= 0)
+    return 1
+  return 1 - Math.exp(-elapsedSeconds / timeConstantSeconds)
+}
+
+export function OpticalLoadGradient({
+  bands,
+  presentationEpoch = 0,
+}: OpticalLoadGradientProps) {
   const bandPixels = useMemo(
     () => new Uint8Array(bands.values.length),
     [bands.values.length],
   )
+  const displayValues = useMemo(
+    () => new Float32Array(bands.values.length),
+    [bands.values.length],
+  )
+  const displayEpochRef = useRef<number | null>(null)
   const texture = useMemo(() => {
     const nextTexture = new DataTexture(
       bandPixels,
@@ -94,9 +115,15 @@ export function OpticalLoadGradient({ bands }: OpticalLoadGradientProps) {
     [backMaterial, middleMaterial, texture],
   )
 
-  useFrame(() => {
-    for (let index = 0; index < bands.values.length; index += 1)
-      bandPixels[index] = Math.round(bands.values[index] * 255)
+  useFrame((_, elapsedSeconds) => {
+    const resetDisplay = displayEpochRef.current !== presentationEpoch
+    const alpha = resetDisplay ? 1 : displaySmoothingAlpha(elapsedSeconds)
+    displayEpochRef.current = presentationEpoch
+    for (let index = 0; index < bands.values.length; index += 1) {
+      const target = bands.values[index]
+      displayValues[index] += (target - displayValues[index]) * alpha
+      bandPixels[index] = Math.round(displayValues[index] * 255)
+    }
     texture.needsUpdate = true
   })
 

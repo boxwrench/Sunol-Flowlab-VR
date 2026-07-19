@@ -8,13 +8,47 @@ This is a **phenomenological coagulation model**, not dose-prediction software, 
 
 ## Project status
 
-Implementation is in progress through accepted Batch 06. Batch 00 is substantially complete, Batch 01A is accepted, and the local physical portion of Batch 01B is accepted on Quest 3; its hosted-URL smoke gate remains open. Reduced Batch 02A remains the immutable statistical prototype baseline. Batch 03 is [accepted with a documented fresh-recognition waiver](docs/BATCH_03_ACCEPTANCE.md), Batch 04 is accepted with documented physical-test waivers, Batch 05 passed seated Quest integration, and [Batch 06 passed its complete seated treatment-cycle gate](docs/BATCH_06_ACCEPTANCE.md). Batch 07 has a complete automated candidate with physical instrumentation, persistent experiment memory, static canonical summaries, and bounded treatment-result ghosts. Its seated Quest performance passed in a partial operator session; the visual comprehension and physical-control verdict resumes next. Spatial hashing remains measurement-gated and version 1 has no free list. See [PROGRESS.md](PROGRESS.md), the [Batch 07 candidate packet](docs/BATCH_07_ACCEPTANCE.md), and the [implementation-plan index](IMPLEMENTATION_PLAN.md).
+Implementation is in progress through accepted Batch 06, with Batch 07 and
+Batch 08 now at technical-candidate status. Batch 00 is substantially complete,
+Batch 01A is accepted, and the local physical portion of Batch 01B is accepted
+on Quest 3; its hosted-URL smoke gate remains open. Reduced Batch 02A remains
+the immutable statistical prototype baseline. Batch 03 is
+[accepted with a documented fresh-recognition waiver](docs/BATCH_03_ACCEPTANCE.md),
+Batch 04 is accepted with documented physical-test waivers, Batch 05 passed
+seated Quest integration, and
+[Batch 06 passed its complete seated treatment-cycle gate](docs/BATCH_06_ACCEPTANCE.md).
+The remaining Batch 07 instrument/control verdict and Batch 08 headset
+readability/comparison verdict are intentionally combined into one seated Quest
+review. Batches 09–11 remain unstarted. See [PROGRESS.md](PROGRESS.md), the
+[Batch 07 candidate packet](docs/BATCH_07_ACCEPTANCE.md), the
+[Batch 08 technical candidate packet](docs/BATCH_08_CANDIDATE.md), and the
+[implementation-plan index](IMPLEMENTATION_PLAN.md).
 
 The approved presentation direction is a [hybrid six-jar test bench and hero observation tank](docs/DESIGN_DIRECTION_JAR_TEST_HYBRID.md): one live authoritative simulation, six static canonical preset summaries, and a complete plot/log covering all eleven dose values.
 
-The current candidate runs one deterministic seven-phase treatment cycle with ready-only dose and Start controls, physical locked-state feedback, a 90-degree measurement cue, one immutable completed result, deterministic refill, a relative-result gauge, a complete 0–10 plot/log, persistent static canonical summaries, and bounded treatment-result ghost recording/playback.
+The current candidate runs one deterministic seven-phase treatment cycle with
+ready-only dose and Start controls, physical locked-state feedback, a 90-degree
+measurement cue, one immutable completed result, deterministic refill, a
+relative-result gauge, a complete 0–10 plot/log, persistent static canonical
+summaries, and bounded treatment-result ghost recording/playback. Batch 08 adds
+allocation-free display smoothing and one restrained opaque marker for a prior
+recording's clearing-front depth.
 
-The implemented [treatment-result ghost design](docs/GHOST_REPLAY_DESIGN.md) records the authoritative relative optical-load history for restrained previous-run comparison. It does not replay particles or recompute the simulation. Batch 07 owns its recording, compatibility, small-library persistence, and playback runtime; Batch 08 still owns the subordinate live-versus-ghost visual comparison.
+The implemented [treatment-result ghost design](docs/GHOST_REPLAY_DESIGN.md)
+records the authoritative relative optical-load history for restrained
+previous-run comparison. It does not replay particles or recompute the
+simulation. Batch 07 owns recording, compatibility, small-library persistence,
+and playback. Batch 08 consumes only the app-owned replay view for its single
+subordinate prior-front marker; it adds no second tank, ghost particles, or
+transparent ghost layer. The selected display choices are recorded in
+[docs/TUNING.md](docs/TUNING.md).
+
+The current automated checkpoint passes 21 repository-contract tests, 133
+Vitest tests across 30 files, all six rendered-browser scenarios, the canonical
+and nine-seed eleven-dose regression corpus, type checking, lint, production
+build, and the standalone simulation benchmark. The compatible-ghost desktop
+capture reports 55 development draw calls. These desktop checks do not replace
+the remaining combined Quest review.
 
 ## Built With
 
@@ -122,9 +156,16 @@ npm run benchmark
 npm run test:browser
 ```
 
-The desktop browser suite requires Playwright Chromium. The physical Quest development route and Batch 06 seated acceptance are documented; hosted-route, endurance, thermal, and release checks remain later manual gates.
+The desktop browser suite requires Playwright Chromium. The physical Quest
+development route and accepted Batch 06 seated evidence are documented;
+hosted-route, endurance, thermal, and release checks remain later manual gates.
 
-The physical XR route and Quest debugging workflow are documented in [docs/DEVICE_TESTING.md](docs/DEVICE_TESTING.md). Batch 07 adds `npm run acceptance:07:quest` for its seated candidate checks; acceptance remains open until the paused visual/control review receives an owner verdict.
+The physical XR route and Quest debugging workflow are documented in
+[docs/DEVICE_TESTING.md](docs/DEVICE_TESTING.md). Batch 07 provides
+`npm run acceptance:07:quest` for staging and remote inspection. The single
+remaining seated session follows the combined Batch 07/08 checklist in
+[docs/UX_VALIDATION.md](docs/UX_VALIDATION.md); neither candidate is marked
+accepted until that verdict is recorded.
 
 ## Architecture and contribution
 

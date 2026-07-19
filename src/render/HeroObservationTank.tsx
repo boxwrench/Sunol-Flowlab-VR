@@ -9,6 +9,10 @@ import {
   OpticalLoadGradient,
   type OpticalLoadBandsPresentation,
 } from './OpticalLoadGradient'
+import {
+  TreatmentGhostComparison,
+  type GhostComparisonPresentationView,
+} from './TreatmentGhostComparison'
 
 interface HeroObservationTankProps {
   readonly animateParticleTransitions?: boolean
@@ -16,6 +20,7 @@ interface HeroObservationTankProps {
   readonly measurementRelativeOpticalLoad?: number
   readonly particleState: ParticleStateView
   readonly presentationEpoch?: number
+  readonly ghostComparisonView?: GhostComparisonPresentationView
   readonly opticalLoadBands: OpticalLoadBandsPresentation
   readonly recordParticleFrame: ParticleFrameRecorder
 }
@@ -26,12 +31,19 @@ export function HeroObservationTank({
   measurementRelativeOpticalLoad = 0,
   particleState,
   presentationEpoch = 0,
+  ghostComparisonView,
   opticalLoadBands,
   recordParticleFrame,
 }: HeroObservationTankProps) {
   return (
     <group position={[...HERO_TANK_LOCAL_POSITION]}>
-      <OpticalLoadGradient bands={opticalLoadBands} />
+      <OpticalLoadGradient
+        bands={opticalLoadBands}
+        presentationEpoch={presentationEpoch}
+      />
+      {ghostComparisonView === undefined ? null : (
+        <TreatmentGhostComparison view={ghostComparisonView} />
+      )}
       <ParticleCloud
         animateTransitions={animateParticleTransitions}
         presentationEpoch={presentationEpoch}

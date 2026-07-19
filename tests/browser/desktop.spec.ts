@@ -1,3 +1,5 @@
+import { writeFile } from 'node:fs/promises'
+
 import { expect, test } from '@playwright/test'
 
 test('desktop foundation loads with explicit VR entry and a render surface', async ({
@@ -78,7 +80,17 @@ test('desktop treatment cycle starts, completes, refills, and resets determinist
   expect(reset.activeParticles).toBe(500)
 
   await page.getByRole('button', { name: 'Start' }).click()
-  await page.evaluate(() => window.advanceTime?.(41_000))
+  await page.evaluate(() => window.advanceTime?.(10_000))
+  expect((await state()).phase).toBe('FLOCCULATION')
+  await page.locator('canvas').screenshot({
+    path: testInfo.outputPath('batch-08-flocculation.png'),
+  })
+  await page.evaluate(() => window.advanceTime?.(20_000))
+  expect((await state()).phase).toBe('SETTLING')
+  await page.locator('canvas').screenshot({
+    path: testInfo.outputPath('batch-08-settling.png'),
+  })
+  await page.evaluate(() => window.advanceTime?.(11_000))
   const measuring = await state()
   expect(measuring).toMatchObject({
     phase: 'MEASURING',
@@ -128,15 +140,21 @@ test('desktop treatment cycle starts, completes, refills, and resets determinist
 
 test('comparison presets deterministically expose the U-shaped endpoint', async ({
   page,
-}) => {
+}, testInfo) => {
   await page.goto('/')
 
   async function runPreset(name: string) {
     await page.getByRole('button', { name }).click()
     await page.evaluate(() => window.advanceTime?.(43_000))
-    return page.evaluate(() =>
+    const nextState = await page.evaluate(() =>
       JSON.parse(window.render_game_to_text?.() ?? '{}'),
     )
+    await page.locator('canvas').screenshot({
+      path: testInfo.outputPath(
+        `batch-08-${name.toLowerCase().replaceAll(' ', '-')}.png`,
+      ),
+    })
+    return nextState
   }
 
   const underdose = await runPreset('Underdose 0')
@@ -212,14 +230,41 @@ test('Batch 7 persists complete memory, restores jars, and replays independently
       completed.result.id,
     ),
   ).toMatchObject({ accepted: true })
-  await page.evaluate(() => window.advanceTime?.(10_000))
+  await page.evaluate(() => window.advanceTime?.(35_000))
   const replaying = await state()
   expect(replaying.simulationTimeSeconds).toBe(0)
   expect(replaying.resultCount).toBe(0)
   expect(replaying.batch07.playback).toMatchObject({
     trialId: completed.result.id,
     status: 'playing',
-    elapsedSeconds: 10,
+    elapsedSeconds: 35,
+  })
+  expect(replaying.batch08.ghostComparison).toMatchObject({ status: 'playing' })
+  expect(replaying.batch08.ghostComparison.clearingFrontDepth).toBeGreaterThan(
+    0,
+  )
+  await expect
+    .poll(async () => {
+      const report = await page.evaluate(() =>
+        JSON.parse(window.render_performance_to_text?.() ?? '{}'),
+      )
+      return report.metrics?.sampleCount ?? 0
+    })
+    .toBeGreaterThan(0)
+  const comparisonPerformance = await page.evaluate(() =>
+    JSON.parse(window.render_performance_to_text?.() ?? '{}'),
+  )
+  expect(comparisonPerformance.metrics.drawCalls).toBeLessThanOrEqual(71)
+  await testInfo.attach('batch-08-ghost-comparison-performance', {
+    body: JSON.stringify(comparisonPerformance, null, 2),
+    contentType: 'application/json',
+  })
+  await writeFile(
+    testInfo.outputPath('batch-08-ghost-comparison-performance.json'),
+    `${JSON.stringify(comparisonPerformance, null, 2)}\n`,
+  )
+  await page.locator('canvas').screenshot({
+    path: testInfo.outputPath('batch-08-ghost-comparison.png'),
   })
 
   expect(

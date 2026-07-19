@@ -57,8 +57,9 @@ The work remains staged: Workstream 03D exposes the authoritative samples; Batch
 | 04    | Accepted               | Quest interaction accepted with documented waivers      |
 | 05    | Accepted               | Seated Quest integration and performance passed         |
 | 06    | Accepted               | Seated Quest cycle, readability, and performance passed |
-| 07    | Candidate checkpoint   | Quest performance passed; visual/control verdict paused |
-| 08–11 | Not started            | Batch 08 begins only after Batch 07 acceptance          |
+| 07    | Candidate checkpoint   | Technical gates pass; combined 07/08 human gate open    |
+| 08    | Technical candidate    | Combined Quest readability/performance verdict open     |
+| 09–11 | Not started            | Begin only after the combined 07/08 gate closes         |
 
 An [earlier Godot implementation plan](docs/archive/Sunol%20FlowLab%20Implementation%20Plan%20%28superseded%20Godot%29.pdf) is retained only as a superseded source artifact for provenance and is non-binding for this greenfield WebXR repository. The stale duplicate Batch 03 snapshot and superseded pre-research mechanics were removed from the active tree; Git history preserves them. Only [the indexed Batch 03 plan](batch-03-desktop-phenomenon-proof.md) is authoritative.
 
@@ -115,7 +116,14 @@ The seated Quest performance portion passed with one operator-started Dose 5
 run at 114.21 FPS and 9.50 ms p95. The owner called it a “good start” and paused
 before the remaining instrument/jar readability, replay/refill/clear controls,
 Dose 5 reasoning, and final verdict. Those checks remain the only open Batch 07
-gate; Batch 08 has not started.
+gate.
+
+On 2026-07-19 the project owner explicitly deferred that remaining human gate
+and subsequently authorized a scheduling exception for Batch 08 technical work
+so both batches can close through one combined Quest review. The exception is
+neither a Batch 07 pass nor a waiver. Batch 08's display-only implementation and
+desktop evidence may proceed; Batches 09–11 remain blocked until the combined
+07/08 gate closes.
 
 The hybrid direction maps runtime ownership to Batch 01A closure; hero-tank and jar-rack blockout plus recognition validation to Batch 03; interaction to Batch 04; integration to Batches 05-06; static jar summaries, complete memory, and treatment-ghost recording/playback runtime to Batch 07; live-versus-ghost readability to Batch 08; spectator presentation to Batch 09; presence to Batch 10; and release evidence to Batch 11.
 

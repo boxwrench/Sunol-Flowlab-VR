@@ -63,12 +63,20 @@ Invalid external commands fail at the app boundary. Unsupported XR and session f
 
 Batch 00 is substantially complete and Batch 01A is accepted. The local physical portion of Batch 01B is accepted on Quest 3; the hosted-HTTPS smoke remains open. Batch 02A remains the immutable statistical prototype baseline. Batch 03 is accepted with a documented fresh-recognition waiver: its final version 1 mass-authoritative model, deterministic fixed-capacity merging, fractal-derived diameter and capped settling, one projected-area optical-load authority, population-health diagnostics, canonical and nine-seed sweep evidence, 03R.1 static jar repair, and replacement-model Quest visibility are retained. Rendering presents the single optical authority on rear and lighter middle slices and uses only presentation-local merge smoothing. Spatial hashing remains deferred and a free list is excluded. Batch 04 is accepted.
 
-Batch 05 now routes the accepted XR commands through an app-owned adapter into
-one `SimulationRuntime`, composes the shared hero-tank renderer in XR, preserves
-the separate desktop proof, pauses on XR/visibility interruption, and keeps the
-canonical jars static. Exact headless/runtime band, population, merge, and
-60/120 Hz parity checks pass; physical immersive Quest acceptance remains open.
+Batch 05 is accepted with one app-owned `SimulationRuntime`, shared desktop/XR
+hero-tank rendering, validated physical commands, lifecycle interruption
+handling, deterministic parity, and measured Quest performance. Batch 06 is
+accepted with the seven-phase treatment controller, immutable endpoint result,
+locked controls, deterministic refill, and physical measurement cue.
 
-The approved treatment-result ghost is planned for app-owned recording,
-persistence, and playback in Batch 07 plus restrained presentation in Batch 08;
-no ghost runtime exists yet.
+Batch 07 is a complete but unaccepted candidate. It adds app-owned experiment
+memory, canonical jar summaries, physical instrumentation, 10 Hz treatment-
+ghost recording, bounded localStorage persistence, compatibility validation,
+and independent playback without particle replay or simulation recomputation.
+Automated, rendered-browser, and seated Quest performance evidence pass. The
+remaining human readability, comprehension, and physical-control verdict was
+explicitly deferred on 2026-07-19; it is not passed or waived. The owner then
+authorized Batch 08 technical work under a scheduling exception. Its technical
+candidate adds render-local optical-band smoothing and one opaque prior-front
+marker from an app-owned replay view. A combined Quest review now owns both
+open human gates; Batches 09–11 remain unstarted.

@@ -178,17 +178,30 @@ export function clearingFrontDiagnostics(
   for (let band = firstUpperBand; band < config.bandCount; band += 1)
     if (bands.values[band] <= config.upperClarityThreshold) clearUpperBands += 1
 
-  let contiguousClearBands = 0
-  for (let band = config.bandCount - 1; band >= 0; band -= 1) {
-    if (bands.values[band] > config.upperClarityThreshold) break
-    contiguousClearBands += 1
-  }
-
   return {
     topClearFraction: clearUpperBands / config.upperClarityBandCount,
-    clearingFrontDepth: contiguousClearBands / config.bandCount,
+    clearingFrontDepth: clearingFrontDepthFromValues(
+      bands.values,
+      config.upperClarityThreshold,
+    ),
     upperZoneOpticalLoad: upperColumnOpticalLoad(bands, config),
   }
+}
+
+export function clearingFrontDepthFromValues(
+  values: ArrayLike<number>,
+  upperClarityThreshold = DEFAULT_OPTICAL_LOAD_CONFIG.upperClarityThreshold,
+): number {
+  if (values.length === 0)
+    throw new RangeError('Clearing-front values must not be empty')
+  if (!Number.isFinite(upperClarityThreshold))
+    throw new RangeError('Clearing-front threshold must be finite')
+  let contiguousClearBands = 0
+  for (let band = values.length - 1; band >= 0; band -= 1) {
+    if (values[band] > upperClarityThreshold) break
+    contiguousClearBands += 1
+  }
+  return contiguousClearBands / values.length
 }
 
 function writeNormalizedBands(

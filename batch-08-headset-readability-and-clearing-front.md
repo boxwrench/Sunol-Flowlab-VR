@@ -1,6 +1,8 @@
 # Batch 08 Implementation Plan: Headset Readability and Clearing-Front Refinement
 
-**Status:** Not started — predecessor gates remain open
+**Status:** Technical candidate under an owner-authorized scheduling exception;
+the combined Batch 07/08 Quest readability, comprehension, and performance gate
+remains open
 **Depends on:** Batch 07 accepted  
 **May run in parallel with:** Recorded review, user comprehension testing, optional charge-vision spike  
 **Primary gate:** At arm’s length in stereo, the player can see floc growth, falling floc, top-down clearing, a final appearance consistent with the gauge, and a subordinate compatible prior-result ghost while the Quest sustains the performance target.
@@ -10,6 +12,11 @@
 > The clearing front and every clarity display remain transforms of the relative optical-load bands governed by [the modeling research amendment](docs/MODELING_RESEARCH_AMENDMENT.md). Visual smoothing and exaggeration cannot alter the authoritative process record.
 
 > Treatment-ghost visuals consume the app-owned read-only replay view governed by [the ghost replay design](docs/GHOST_REPLAY_DESIGN.md). They remain subordinate to the active trial and never introduce ghost particles or duplicate physics.
+
+> **Scheduling exception (2026-07-19):** The project owner authorized Batch 08
+> machine-verifiable work before the remaining Batch 07 human verdict so both
+> batches can use one combined Quest review. This does not mark Batch 07
+> accepted, waive either human gate, or authorize Batch 09.
 
 ## Goal
 

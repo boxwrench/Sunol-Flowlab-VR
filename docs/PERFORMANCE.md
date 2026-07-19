@@ -420,7 +420,8 @@ approximately 165 KB, so neither compression nor IndexedDB is justified.
 The optimized desktop renderer reports 51 draw calls ready and 53 complete.
 The first unoptimized instrument candidate reached 115 desktop draw calls; its
 individual digit and gauge-tick meshes were replaced with instancing before the
-candidate gate. The browser regression now enforces a ceiling of 70 draw calls.
+candidate gate. The Batch 07 browser regression enforced a ceiling of 70 draw
+calls; the one-draw Batch 08 marker raises the combined ceiling to 71.
 
 Quest 3 serial `2G0YC5ZG0M052K` is connected and exposes the correct seated URL.
 The first immersive restart timed out while foreground user presence was not
@@ -448,3 +449,20 @@ configured slots were full. There were no rejected commands. These rolling
 stereo measurements pass the technical performance posture, but the visual and
 physical-control review paused before an owner verdict; they do not close Batch
 07 alone.
+
+## 2026-07-19 - Batch 08 desktop ghost-comparison checkpoint
+
+The owner-authorized Batch 08 technical candidate adds one opaque prior-front
+marker and no transparent surface. A headless Chromium compatible-ghost capture
+at 35 seconds of app-owned playback reported 55 development draw calls, below
+the enforced ceiling of 71. The marker is absent when playback is empty.
+
+The capture used deterministic virtual-time stepping, so its two sampled frame
+times are not meaningful performance evidence and are intentionally omitted.
+The source audit retains two optical-gradient draws, two transparent hero side
+walls, one instanced jar-fill draw, one instanced jar-wall draw, and temporary
+measurement/refill effects. The prior-front marker adds one opaque draw only.
+
+Quest live-plus-ghost average and p95 frame time, controller-inclusive draw
+calls, stereo transparency ordering, and the 72 FPS verdict remain in the
+combined Batch 07/08 human gate.

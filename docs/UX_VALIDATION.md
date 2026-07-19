@@ -207,9 +207,9 @@ Use one combined seated Quest review to conserve operator time. Confirm that:
 7. no visible hitching, uncomfortable reach, or seated readability problem is
    present.
 
-Batch 07 remains unaccepted until the project-owner operator supplies a verdict
-and fresh immersive performance metrics are captured. Batch 08 comparison
-visuals are explicitly excluded from this review.
+Batch 07 remains unaccepted until the project-owner operator supplies a verdict.
+Under the later scheduling exception, this checklist is now combined with the
+Batch 08 comparison/readability review below.
 
 ### 2026-07-17 partial session
 
@@ -227,3 +227,29 @@ visual test continue tomorrow. This is partial evidence, not acceptance.
 Resume with items 1–5 and 7 above, including physical ghost play/pause/reset,
 pending replacement, refill, and deliberate two-press sheet clearing. Record
 why Dose 5 was selected and the final pass/issues verdict.
+
+### 2026-07-19 combined Batch 07/08 review authorization
+
+The project owner first deferred the remaining human gate, then authorized
+Batch 08 technical work and one combined human review. The partial session
+remains partial evidence; no pending row is treated as passed or waived.
+
+In one seated Quest session, complete the Batch 07 items above and also confirm:
+
+1. clear water progresses downward from the top while floc remains visible
+   below the clearing region;
+2. low, optimum, and high outcomes remain distinct and agree with the gauge,
+   plot, and static canonical summaries;
+3. the cyan prior-front marker is visible from common head angles but remains
+   subordinate to the live tank and is understood as a recorded result;
+4. play, pause, reset, seek/end, and incompatible/empty states never look like
+   a second live simulation;
+5. seated stereo transparency ordering and label readability remain acceptable;
+   and
+6. live-plus-ghost rolling performance remains above 72 FPS through
+   flocculation, settling, measuring, complete, and refill.
+
+Record the operator's Dose 5 reasoning, any confusing instrument or marker, the
+worst rolling p95 frame time/draw calls, and one final `pass` or issue list for
+the combined gate. Standing and a fresh non-operator review may be included if
+practical, but are not inferred from the seated verdict.

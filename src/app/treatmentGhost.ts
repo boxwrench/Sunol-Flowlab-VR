@@ -517,6 +517,10 @@ export class TreatmentGhostPlayback {
     return this.ghost?.durationSeconds ?? 0
   }
 
+  get bandValues(): Readonly<Float32Array> {
+    return this.values
+  }
+
   get view(): GhostPlaybackView {
     return {
       trialId: this.ghost?.trialId ?? null,
