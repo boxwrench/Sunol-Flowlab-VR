@@ -1,3 +1,5 @@
+import { mkdir, writeFile } from 'node:fs/promises'
+import path from 'node:path'
 import { chromium } from 'playwright'
 
 const CDP_URL = 'http://127.0.0.1:9222'
@@ -5,6 +7,14 @@ const TARGET_URL =
   'http://127.0.0.1:5173/?mode=xr-shell&posture=seated&calibration=off'
 const action = process.argv[2] ?? 'status'
 const argument = process.argv[3]
+const frameBudgetMs = 1_000 / 72
+const combinedReportPath = path.resolve(
+  'test-results/quest-batch-08-combined-latest.json',
+)
+const controlsReportPath = path.resolve(
+  'test-results/quest-batch-08-controls-latest.json',
+)
+let exitCode = 0
 
 const browser = await chromium.connectOverCDP(CDP_URL)
 const pages = browser.contexts().flatMap((context) => context.pages())
@@ -100,6 +110,8 @@ if (action === 'status') {
       `Review staging produced incomplete memory: ${JSON.stringify(current.state.batch07)}`,
     )
   print({ staged, current })
+} else if (action === 'review-ready') {
+  print(await prepareCombinedReview(page))
 } else if (action === 'start') {
   const before = await snapshot(page)
   const result = await page.evaluate(() =>
@@ -109,6 +121,16 @@ if (action === 'status') {
   print({ before, after: await snapshot(page) })
 } else if (action === 'watch') {
   print(await watchCompletion(page))
+} else if (action === 'watch-combined') {
+  const report = await watchCombinedCompletion(page)
+  await writeReport(combinedReportPath, report)
+  if (!report.technicalPass) exitCode = 1
+  print({ reportPath: combinedReportPath, ...report })
+} else if (action === 'watch-controls') {
+  const report = await watchCombinedControls(page)
+  await writeReport(controlsReportPath, report)
+  if (!report.technicalPass) exitCode = 1
+  print({ reportPath: controlsReportPath, ...report })
 } else if (action === 'replay') {
   print(await verifyReplayIndependence(page))
 } else if (action === 'clear') {
@@ -142,11 +164,301 @@ if (action === 'status') {
   print(await snapshot(page))
 } else {
   throw new Error(
-    'Use status, restart, stage-review, prepare <dose>, start, watch, replay, clear, or refill',
+    'Use status, restart, stage-review, review-ready, prepare <dose>, start, watch, watch-combined, watch-controls, replay, clear, or refill',
   )
 }
 
-process.exit(0)
+process.exit(exitCode)
+
+async function prepareCombinedReview(targetPage) {
+  const staged = []
+  let current = await snapshot(targetPage)
+  for (const dose of [0, 5, 10]) {
+    const alreadyPlotted = current.state.batch07.plottedResults.some(
+      (point) => point.dose === dose,
+    )
+    if (alreadyPlotted) continue
+    staged.push(await completeInstantTrial(targetPage, dose))
+    current = await snapshot(targetPage)
+  }
+  if (current.state.batch07.ghostCount === 0)
+    staged.push(await completeInstantTrial(targetPage, 5))
+
+  const prepared = await targetPage.evaluate(() => {
+    window.reset_xr_trial_to_ready?.()
+    const selectedDose = window.dispatch_xr_shell_command?.({
+      type: 'SET_DOSE',
+      dose: 5,
+    })
+    const state = JSON.parse(window.render_xr_shell_to_text?.() ?? '{}')
+    const trialId = state.batch07?.selectedGhostTrialId
+    if (selectedDose?.accepted !== true || typeof trialId !== 'string')
+      return { selectedDose, trialId }
+    const played = window.dispatch_xr_shell_command?.({
+      type: 'PLAY_GHOST',
+      trialId,
+    })
+    window.advanceTime?.(1_000)
+    const paused = window.dispatch_xr_shell_command?.({ type: 'PAUSE_GHOST' })
+    const sought = window.dispatch_xr_shell_command?.({
+      type: 'SEEK_GHOST',
+      elapsedSeconds: 35,
+    })
+    return { selectedDose, trialId, played, paused, sought }
+  })
+  for (const [command, result] of [
+    ['SET_DOSE', prepared.selectedDose],
+    ['PLAY_GHOST', prepared.played],
+    ['PAUSE_GHOST', prepared.paused],
+    ['SEEK_GHOST', prepared.sought],
+  ])
+    requireAccepted(result, command)
+
+  current = await snapshot(targetPage)
+  assertReady(current.state, 5)
+  const availableDoses = new Set(
+    current.state.batch07.plottedResults.map((point) => point.dose),
+  )
+  if (![0, 5, 10].every((dose) => availableDoses.has(dose)))
+    throw new Error('Combined review memory is missing a 0, 5, or 10 dose')
+  if (
+    current.state.batch07.playback.status !== 'paused' ||
+    Math.abs(current.state.batch07.playback.elapsedSeconds - 35) > 0.01 ||
+    current.state.batch08.ghostComparison.status !== 'paused'
+  )
+    throw new Error(
+      `Combined comparison was not parked at 35 seconds: ${JSON.stringify(current.state.batch07.playback)}`,
+    )
+  return {
+    staged,
+    checklist: [
+      'Read the mounted phase, dose, score, plot, and replay instruments without prompting.',
+      'Compare the live clearing front with the single opaque prior-front marker.',
+      'Confirm the 0, 5, and 10 static jars read as persistent summaries.',
+      'Use physical controls to start the live dose-5 trial.',
+      'After completion, exercise replay play/pause/reset, refill, and clear.',
+    ],
+    current,
+  }
+}
+
+async function completeInstantTrial(targetPage, dose) {
+  const state = await targetPage.evaluate((selectedDose) => {
+    window.reset_xr_trial_to_ready?.()
+    const selected = window.dispatch_xr_shell_command?.({
+      type: 'SET_DOSE',
+      dose: selectedDose,
+    })
+    const started = window.dispatch_xr_shell_command?.({ type: 'START_TRIAL' })
+    if (selected?.accepted !== true || started?.accepted !== true)
+      return { selected, started }
+    window.advanceTime?.(43_000)
+    return JSON.parse(window.render_xr_shell_to_text?.() ?? '{}')
+  }, dose)
+  if (state.phase !== 'COMPLETE' || state.result?.dose !== dose)
+    throw new Error(
+      `Instant review staging failed at dose ${dose}: ${JSON.stringify(state)}`,
+    )
+  return {
+    dose,
+    resultId: state.result.id,
+    endpointOpticalLoad: state.result.endpointOpticalLoad,
+  }
+}
+
+async function watchCombinedCompletion(targetPage) {
+  const initial = await snapshot(targetPage)
+  assertReady(initial.state, 5)
+  const initialPoints = initial.state.batch07.experimentPointCount
+  const initialGhosts = initial.state.batch07.ghostCount
+  const phases = []
+  const samplesByPhase = new Map()
+  let lastPhase = initial.state.phase
+  const deadline = Date.now() + 300_000
+
+  while (Date.now() < deadline) {
+    const current = await snapshot(targetPage)
+    addPerformanceSample(samplesByPhase, current)
+    if (current.state.phase !== lastPhase) {
+      phases.push({
+        phase: current.state.phase,
+        simulationTimeSeconds: current.state.simulationTimeSeconds,
+      })
+      lastPhase = current.state.phase
+    }
+    if (current.state.phase === 'COMPLETE') {
+      const observedPhases = phases.map((entry) => entry.phase)
+      const expectedPhases = [
+        'RAPID_MIX',
+        'FLOCCULATION',
+        'SETTLING',
+        'MEASURING',
+        'COMPLETE',
+      ]
+      if (JSON.stringify(observedPhases) !== JSON.stringify(expectedPhases))
+        throw new Error(
+          `Unexpected physical phase sequence: ${JSON.stringify(observedPhases)}`,
+        )
+      if (current.state.batch07.experimentPointCount !== initialPoints + 1)
+        throw new Error('Combined run did not append exactly one plot point')
+      const ghostRecorded =
+        initialGhosts < 3
+          ? current.state.batch07.ghostCount === initialGhosts + 1
+          : current.state.batch07.pendingGhostTrialId !== null
+      if (!ghostRecorded)
+        throw new Error('Combined run produced no saved or pending replay')
+      const performance = summarizePerformance(samplesByPhase)
+      const alerts = []
+      for (const phase of expectedPhases.slice(0, -1))
+        if (!performance.some((entry) => entry.phase === phase))
+          alerts.push(`${phase}: no rolling performance samples captured`)
+      for (const phase of performance) {
+        if (phase.minimumAverageFps < 72)
+          alerts.push(
+            `${phase.phase}: rolling average fell below 72 fps (${phase.minimumAverageFps.toFixed(1)})`,
+          )
+        if (phase.maximumP95FrameMs > frameBudgetMs)
+          alerts.push(
+            `${phase.phase}: rolling p95 exceeded ${frameBudgetMs.toFixed(2)} ms (${phase.maximumP95FrameMs.toFixed(2)} ms)`,
+          )
+      }
+      const controllersDetected =
+        current.state.leftControllerDetected === true &&
+        current.state.rightControllerDetected === true
+      if (!controllersDetected)
+        alerts.push('Both controllers were not detected')
+      return {
+        kind: 'combined-batch-07-08-trial',
+        capturedAt: new Date().toISOString(),
+        target: 'Quest 2-class, seated',
+        technicalPass: alerts.length === 0,
+        alerts,
+        controllersDetected,
+        phases,
+        performance,
+        initial: summarizeSnapshot(initial),
+        final: summarizeSnapshot(current),
+        humanVerdict:
+          'Record the operator verdict in docs/UX_VALIDATION.md; this report is technical evidence only.',
+      }
+    }
+    await delay(100)
+  }
+  throw new Error(
+    'Combined physical trial did not complete within five minutes',
+  )
+}
+
+async function watchCombinedControls(targetPage) {
+  const initial = await snapshot(targetPage)
+  if (initial.state.phase !== 'COMPLETE')
+    throw new Error('Run watch-controls from the completed trial state')
+  const initialGhosts = initial.state.batch07.ghostCount
+  const required = new Set([
+    'SELECT_GHOST',
+    'PLAY_GHOST',
+    'PAUSE_GHOST',
+    'RESET_GHOST',
+    'DELETE_GHOST',
+    'RESET_TRIAL',
+    'CLEAR_EXPERIMENT_LOG',
+  ])
+  if (initial.state.batch07.pendingGhostTrialId !== null)
+    required.add('REPLACE_OLDEST_GHOST')
+  const observed = []
+  let commandCount = initial.state.commandCount
+  const deadline = Date.now() + 300_000
+
+  while (Date.now() < deadline) {
+    const current = await snapshot(targetPage)
+    if (current.state.commandCount !== commandCount) {
+      commandCount = current.state.commandCount
+      const type = current.state.lastCommand?.type
+      if (typeof type === 'string') {
+        observed.push({
+          type,
+          phase: current.state.phase,
+          experimentPointCount: current.state.batch07.experimentPointCount,
+          ghostCount: current.state.batch07.ghostCount,
+          pendingGhostTrialId: current.state.batch07.pendingGhostTrialId,
+        })
+        required.delete(type)
+      }
+    }
+    const finished =
+      required.size === 0 &&
+      current.state.phase === 'READY' &&
+      current.state.batch07.experimentPointCount === 0
+    if (finished) {
+      const alerts = []
+      if (current.state.batch07.canonicalSummaries.length !== 0)
+        alerts.push('Clear left one or more canonical jar summaries')
+      if (current.state.batch07.ghostCount !== Math.max(0, initialGhosts - 1))
+        alerts.push('Ghost deletion/replacement produced an unexpected count')
+      return {
+        kind: 'combined-batch-07-08-controls',
+        capturedAt: new Date().toISOString(),
+        technicalPass: alerts.length === 0,
+        alerts,
+        observed,
+        initial: summarizeSnapshot(initial),
+        final: summarizeSnapshot(current),
+        humanVerdict:
+          'Record whether the physical controls and labels were understandable without prompting.',
+      }
+    }
+    await delay(100)
+  }
+  throw new Error(
+    `Physical control review timed out; still required: ${[...required].join(', ')}`,
+  )
+}
+
+function addPerformanceSample(samplesByPhase, current) {
+  const metrics = current.performance.metrics
+  if (
+    metrics === undefined ||
+    metrics.sampleCount === 0 ||
+    current.state.phase === 'READY'
+  )
+    return
+  const samples = samplesByPhase.get(current.state.phase) ?? []
+  samples.push({
+    averageFps: metrics.averageFps,
+    p95FrameMs: metrics.p95FrameMs,
+  })
+  samplesByPhase.set(current.state.phase, samples)
+}
+
+function summarizePerformance(samplesByPhase) {
+  return [...samplesByPhase].map(([phase, samples]) => ({
+    phase,
+    sampleCount: samples.length,
+    minimumAverageFps: Math.min(...samples.map((sample) => sample.averageFps)),
+    maximumP95FrameMs: Math.max(...samples.map((sample) => sample.p95FrameMs)),
+  }))
+}
+
+function summarizeSnapshot(value) {
+  return {
+    phase: value.state.phase,
+    dose: value.state.dose,
+    simulationTimeSeconds: value.state.simulationTimeSeconds,
+    resultId: value.state.result?.id ?? null,
+    experimentPointCount: value.state.batch07.experimentPointCount,
+    ghostCount: value.state.batch07.ghostCount,
+    pendingGhostTrialId: value.state.batch07.pendingGhostTrialId,
+    playback: value.state.batch07.playback,
+    ghostComparison: value.state.batch08.ghostComparison,
+    commandCount: value.state.commandCount,
+    rejectedCommandCount: value.state.rejectedCommandCount,
+  }
+}
+
+async function writeReport(reportPath, report) {
+  await mkdir(path.dirname(reportPath), { recursive: true })
+  await writeFile(reportPath, `${JSON.stringify(report, null, 2)}\n`)
+}
 
 async function watchCompletion(targetPage) {
   const initial = await snapshot(targetPage)

@@ -84,6 +84,12 @@ Standing, portfolio media selection, and non-operator review may be recorded in
 the same session if practical. They are not inferred from earlier seated
 evidence.
 
+The combined device harness is available as
+`npm run acceptance:08:quest -- review-ready`, followed by
+`watch-combined` and `watch-controls`. It writes bounded technical reports
+to `test-results/` while leaving the readability and comprehension decision
+to the project-owner operator.
+
 ## Gate decision
 
 Do not mark Batch 07 or Batch 08 accepted and do not create either accepted tag

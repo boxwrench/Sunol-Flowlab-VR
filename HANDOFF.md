@@ -316,8 +316,9 @@ deployment from this increment.
 
 ## Recommended next session
 
-1. Restart the seated Quest route with staged 0/5/10 history and a compatible
-   selected ghost.
+1. Restart the seated Quest route and run
+   `npm run acceptance:08:quest -- review-ready` to stage 0/5/10 history,
+   select a compatible ghost, and park the prior-front comparison.
 2. Run the single combined checklist in `docs/UX_VALIDATION.md`: Batch 07
    instrument/jar/control comprehension plus Batch 08 clearing, prior-front
    interpretation, common angles, and live-plus-ghost performance.
@@ -350,6 +351,9 @@ deployment from this increment.
     npm run acceptance:07:quest -- replay
     npm run acceptance:07:quest -- clear
     npm run acceptance:07:quest -- refill
+    npm run acceptance:08:quest -- review-ready
+    npm run acceptance:08:quest -- watch-combined
+    npm run acceptance:08:quest -- watch-controls
     npm run dev -- --port 5173
     adb devices
     adb reverse tcp:5173 tcp:5173

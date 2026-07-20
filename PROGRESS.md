@@ -61,10 +61,16 @@ Original prompt: batch 7
 - Added automated low/optimum/high, flocculation, settling, measurement, refill,
   and compatible-ghost capture points. The required bundled browser client
   completed Dose 5 with exact endpoint state and no console-error artifact.
+- Added one combined Quest review harness. It non-destructively stages 0/5/10
+  comparison memory, parks the prior-front replay at 35 seconds, records the
+  physical trial phase/performance evidence, and separately records accepted
+  replay/refill/clear commands. Reports remain technical evidence and cannot
+  supply the open human verdict.
 
 ## Current TODO
 
-- Run one combined seated Quest review for the remaining Batch 07 instrument,
+- Run `acceptance:08:quest -- review-ready`, `watch-combined`, and
+  `watch-controls` during one seated Quest review for the Batch 07 instrument,
   jar, replay/refill/clear rows and Batch 08 clearing/prior-front/performance
   rows.
 - Do not represent either batch as accepted before that verdict and do not start

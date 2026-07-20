@@ -253,3 +253,18 @@ Record the operator's Dose 5 reasoning, any confusing instrument or marker, the
 worst rolling p95 frame time/draw calls, and one final `pass` or issue list for
 the combined gate. Standing and a fresh non-operator review may be included if
 practical, but are not inferred from the seated verdict.
+
+Use the bounded review harness for the same session:
+
+```powershell
+npm run acceptance:08:quest -- review-ready
+npm run acceptance:08:quest -- watch-combined
+npm run acceptance:08:quest -- watch-controls
+```
+
+Run each watcher before the corresponding physical action. The first report
+captures phase order, controller presence, memory changes, and 72 FPS/p95
+rolling evidence. The second captures accepted physical replay
+selection/play/pause/reset/delete, pending replacement, refill, and clear
+commands plus their storage boundaries. Neither report substitutes for the
+operator's plain-language interpretation or final verdict.

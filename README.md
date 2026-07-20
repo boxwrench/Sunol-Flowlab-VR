@@ -161,8 +161,10 @@ development route and accepted Batch 06 seated evidence are documented;
 hosted-route, endurance, thermal, and release checks remain later manual gates.
 
 The physical XR route and Quest debugging workflow are documented in
-[docs/DEVICE_TESTING.md](docs/DEVICE_TESTING.md). Batch 07 provides
-`npm run acceptance:07:quest` for staging and remote inspection. The single
+[docs/DEVICE_TESTING.md](docs/DEVICE_TESTING.md). The combined harness is
+`npm run acceptance:08:quest`: `review-ready` stages the bounded comparison,
+`watch-combined` records the physical trial and rolling performance, and
+`watch-controls` records replay/refill/clear command evidence. The single
 remaining seated session follows the combined Batch 07/08 checklist in
 [docs/UX_VALIDATION.md](docs/UX_VALIDATION.md); neither candidate is marked
 accepted until that verdict is recorded.

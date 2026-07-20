@@ -54,3 +54,40 @@ ergonomics, hosted deployment, and release work open. Exact results are in
 ## Gate capture
 
 For every real-device gate, record headset model, OS version, Quest Browser version, build/config hash, connection route, controller handedness, average/p95 frame time, draw calls, and any console errors in `docs/PERFORMANCE.md`.
+
+## Combined Batch 07/08 seated route
+
+With Vite running, USB debugging authorized, and the headset wearing the
+operator, establish both forwards:
+
+```powershell
+adb reverse tcp:5173 tcp:5173
+adb forward tcp:9222 localabstract:chrome_devtools_remote
+npm run acceptance:08:quest -- restart
+npm run acceptance:08:quest -- review-ready
+```
+
+`review-ready` fills only missing 0, 5, and 10 plot points, guarantees one
+compatible replay, resets the live trial to ready at Dose 5, and parks replay
+at 35 seconds for the prior-front comparison. This deterministic staging is not
+human evidence.
+
+Start the monitor before asking the operator to press the physical Start
+control:
+
+```powershell
+npm run acceptance:08:quest -- watch-combined
+```
+
+After the trial completes, start the control monitor and ask the operator to
+use physical replay selection, play, pause, reset, and delete; accept pending
+replay replacement when present; refill the tank; and deliberately clear the
+tear sheet:
+
+```powershell
+npm run acceptance:08:quest -- watch-controls
+```
+
+The two monitors write JSON evidence under `test-results/`. A technical pass
+does not answer readability or comprehension questions; record the operator's
+combined verdict in `docs/UX_VALIDATION.md`.

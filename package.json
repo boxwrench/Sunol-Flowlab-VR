@@ -25,6 +25,7 @@
     "acceptance:05:quest": "node scripts/quest-batch-05.mjs",
     "acceptance:06:quest": "node scripts/quest-batch-06.mjs",
     "acceptance:07:quest": "node scripts/quest-batch-07.mjs",
+    "acceptance:08:quest": "node scripts/quest-batch-07.mjs",
     "lint": "eslint .",
     "format:check": "prettier --check ."
   },
