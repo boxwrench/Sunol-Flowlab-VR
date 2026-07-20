@@ -60,7 +60,7 @@ export function StartButton({
   const hovered = visualState.phase === 'hovered'
 
   return (
-    <group position={[0.38, 0, 0]}>
+    <group position={[0.38, 0, 0]} scale={0.75}>
       <mesh position={[0, 0.04, 0]}>
         <cylinderGeometry args={[0.145, 0.17, 0.08, 32]} />
         <meshStandardMaterial color={'#263f3c'} roughness={0.75} />

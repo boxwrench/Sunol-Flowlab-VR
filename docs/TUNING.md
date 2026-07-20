@@ -69,6 +69,11 @@ toward and face the operator: local Z moves from 0.12 m to 0.48 m and yaw moves
 from -0.22 to -0.72 radians. Instrument height and internal control layout stay
 unchanged.
 
+The next seated adjustment moves the backboard another 0.14 m toward the
+operator to local Z 0.62 m. The accepted dose dial and Start control retain
+their center positions and command behavior while each root visual/interaction
+group is uniformly scaled to 75%.
+
 ## Automated comparison matrix
 
 The rendered-browser suite now captures named evidence for:

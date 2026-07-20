@@ -85,6 +85,10 @@ Original prompt: batch 7
 - A second seated adjustment brings the backboard 0.36 m toward the operator
   to apparatus-local Z 0.48 m and increases its inward yaw from -0.22 to -0.72
   radians so its face addresses the seated position.
+- A final small placement pass brings the backboard another 0.14 m forward to
+  local Z 0.62 m. Uniformly scaled the DoseLever and StartButton root groups to
+  75%, preserving their control centers, discrete commands, and relative
+  placement.
 
 ## Current TODO
 

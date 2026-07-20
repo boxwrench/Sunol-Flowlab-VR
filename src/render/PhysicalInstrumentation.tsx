@@ -110,7 +110,7 @@ export function buildPlotMarkers(
 
 export function PhysicalInstrumentation(props: PhysicalInstrumentationProps) {
   return (
-    <group position={[2.1, 0.88, 0.48]} rotation={[0, -0.72, 0]}>
+    <group position={[2.1, 0.88, 0.62]} rotation={[0, -0.72, 0]}>
       <mesh>
         <boxGeometry args={[1.22, 1.3, 0.055]} />
         <meshStandardMaterial color={'#263d39'} roughness={0.76} />
