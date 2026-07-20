@@ -62,6 +62,11 @@ authoritative summaries; a render-only contrast transform clamps
 a visible cloudiness spectrum in the headset. It does not modify results,
 persistence, the plot, or the gauge.
 
+The follow-up seated review found the instrument backboard too close to the
+hero tank. Its apparatus-local X position moves from 1.72 m to 2.10 m, opening
+a clear visual gap on the tank's right while retaining the accepted facing
+angle and instrument height.
+
 ## Automated comparison matrix
 
 The rendered-browser suite now captures named evidence for:

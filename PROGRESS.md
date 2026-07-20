@@ -79,6 +79,9 @@ Original prompt: batch 7
   authoritative display-clarity range for a visibly stronger static
   cloudiness spectrum. The requested NTU unit was not used because the model
   remains dimensionless and uncalibrated.
+- Follow-up seated feedback found the instrument backboard too close to the
+  hero tank. Shifted the complete backboard 0.38 m to apparatus-local X 2.10 m,
+  preserving its height, facing angle, labels, and control layout.
 
 ## Current TODO
 
