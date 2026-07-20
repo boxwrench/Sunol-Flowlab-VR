@@ -164,18 +164,60 @@ tests across 31 files, plus six rendered Chromium scenarios. Quest evidence is
 kept separate from automated browser evidence so headset-specific claims remain
 traceable.
 
-## Development approach and AI collaboration
+## How I used Codex
 
-The treatment concept, safety boundaries, review decisions, and final product
-judgment come from the project owner's experience in drinking-water treatment.
-The application was developed incrementally with OpenAI Codex and GPT-5.6
-Thinking assisting with implementation, architecture review, test design,
-documentation, and product critique.
+I used OpenAI Codex as a hands-on engineering collaborator working directly in
+the repository. I did not ask it to generate a finished application from one
+large prompt. Instead, we worked through small implementation batches with a
+defined goal, explicit non-goals, automated checks, and a human acceptance gate.
 
-The project was not produced from one large prompt. Work was divided into
-bounded batches with explicit scope, tests, non-goals, and human acceptance
-gates. Generated code and recommendations were reviewed against the intended
-treatment lesson and tested in the headset before acceptance.
+Codex helped me:
+
+- turn the product concept into an implementation plan and stable architecture;
+- implement the deterministic coagulation model and WebXR application;
+- keep simulation, rendering, application lifecycle, and XR input ownership
+  separated;
+- write and run unit, regression, architecture, browser, and performance tests;
+- operate browser and Quest debugging tools, inspect failures, and propose
+  focused corrections;
+- maintain technical decisions, evidence, handoff notes, and release
+  documentation;
+- configure and verify the public GitHub Pages deployment.
+
+The working loop was:
+
+1. I described the treatment lesson or experience problem.
+2. Codex inspected the current repository and proposed or implemented a bounded
+   change.
+3. Automated tests and browser captures checked the implementation.
+4. I reviewed the experience in the Quest headset and explained what worked or
+   felt wrong.
+5. Codex revised the implementation, documented the result, and preserved the
+   accepted checkpoint.
+
+That headset feedback materially shaped the product. For example, I identified
+that the original instruments, replay controls, tank markers, and jar results
+were difficult to interpret. I directed the removal of misleading elements,
+requested plain-language labels and stronger jar-cloudiness differences, and
+iteratively adjusted the laboratory, dashboard, panorama, control sizes,
+position, and viewer height. Codex translated those decisions into tested
+repository changes; I made the final acceptance decisions in the headset.
+
+### Human judgment and treatment knowledge
+
+The treatment concept and responsible-use boundaries come from my experience
+working in drinking-water treatment. I decided:
+
+- what the simulation should teach;
+- which process behaviors could be simplified responsibly;
+- which visual explanations were clear or misleading;
+- which AI recommendations to accept, reject, or defer;
+- when the browser and headset experience was ready to ship.
+
+Codex accelerated implementation and verification, but it did not replace
+treatment judgment, physical testing, or product ownership. GPT-5.6 Thinking
+also assisted with higher-level product critique, architecture review, and
+planning.
 
 ## Contributing
 
