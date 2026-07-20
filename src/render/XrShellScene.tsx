@@ -1,5 +1,5 @@
 import { Canvas } from '@react-three/fiber'
-import { XR } from '@react-three/xr'
+import { XR, XROrigin } from '@react-three/xr'
 import type { ReactNode } from 'react'
 
 import type { ParticleStateView } from '../sim'
@@ -55,6 +55,7 @@ export function XrShellScene({
       }
     >
       <XR store={xrStore}>
+        <XROrigin position={[0, layout.playerOriginHeightOffsetMeters, 0]} />
         <color attach={'background'} args={['#081719']} />
         <ambientLight intensity={1.1} />
         <directionalLight position={[2, 4, 3]} intensity={1.7} />

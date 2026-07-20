@@ -4,6 +4,7 @@ export interface XrShellPostureLayout {
   readonly controlMountHeightMeters: number
   readonly calibrationEyeHeightMeters: number
   readonly neutralReachMeters: number
+  readonly playerOriginHeightOffsetMeters: number
 }
 
 export const XR_SHELL_POSTURE_LAYOUTS: Readonly<
@@ -13,11 +14,13 @@ export const XR_SHELL_POSTURE_LAYOUTS: Readonly<
     controlMountHeightMeters: 0.8,
     calibrationEyeHeightMeters: 1.68,
     neutralReachMeters: 0.48,
+    playerOriginHeightOffsetMeters: 0,
   },
   seated: {
     controlMountHeightMeters: 0.8,
     calibrationEyeHeightMeters: 1.2,
     neutralReachMeters: 0.48,
+    playerOriginHeightOffsetMeters: -0.2,
   },
 }
 
