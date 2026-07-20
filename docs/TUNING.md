@@ -57,17 +57,22 @@ TURBIDITY, LOWER = CLEARER, and explicit action labels. No network font or
 floating application panel is introduced.
 
 The rack is labeled JAR TEST. Canonical jar colors still consume only completed
-authoritative summaries; a render-only contrast transform squares the clamped
-`(displayClarity - 0.25) / 0.25` value so the stored 0.26–0.49 range reads as a
-visible dark-brown through light-tan cloudiness spectrum in the headset. The
+authoritative summaries. After continuous interpolation washed out in the
+headset, the render-only transform now classifies the clamped
+`(displayClarity - 0.25) / 0.25` value into deliberately separated dark
+(`< 0.25`), medium (`< 0.90`, displayed at 0.32), and light tiers. The stored 0.26–0.49 range
+therefore reads as an unambiguous dark-brown through light-tan spectrum. The
 unexplained amber tested-result diamonds were removed after seated review. The
 color transform does not modify results, persistence, the plot, or the gauge.
 
 Follow-up review requested transparent internal fluids and exact label
-alignment. The six fill instances now use one 0.80-opacity, depth-write-disabled
+alignment. The six fill instances now use one 0.82-opacity, depth-write-disabled
 material; their authoritative dark/medium/light brown colors remain unchanged.
 Each dose number is rendered from the same canonical index/X formula as its jar
 instead of relying on approximate spacing in one text string.
+
+The vessel-wall overlay is neutral and only 0.08 opacity so it cannot wash the
+three internal-fluid tiers toward the same beige.
 
 The follow-up seated review found the instrument backboard too close to the
 hero tank. Its apparatus-local X position moves from 1.72 m to 2.10 m, opening

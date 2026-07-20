@@ -100,6 +100,13 @@ Original prompt: batch 7
   string with six labels driven by the exact jar-center formula. Made the
   brown internal fills transparent at 0.80 opacity with depth writes disabled;
   doses 0/10 remain darkest, 2/8 medium, and 4/6 lightest.
+- In-headset review found the transparent continuous jar colors
+  indistinguishable. Replaced the subtle interpolation with three strongly
+  separated render-only result tiers and raised fill opacity slightly to 0.82;
+  authoritative summaries and stored endpoints remain unchanged.
+- The first tiered capture was still flattened by the beige jar-wall overlay.
+  Reduced the wall to 0.08 opacity and widened the fluid palette to near-black
+  brown, medium brown, and pale gold for headset legibility.
 
 ## Current TODO
 

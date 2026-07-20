@@ -10,7 +10,10 @@ import { jarDisplayContrast } from './JarTestBench'
 describe('Batch 7 physical instrumentation mappings', () => {
   it('expands authoritative jar clarity into a readable bounded spectrum', () => {
     expect(jarDisplayContrast(0.25)).toBe(0)
-    expect(jarDisplayContrast(0.375)).toBeCloseTo(0.25)
+    expect(jarDisplayContrast(0.3)).toBe(0)
+    expect(jarDisplayContrast(0.375)).toBe(0.32)
+    expect(jarDisplayContrast(0.47)).toBe(0.32)
+    expect(jarDisplayContrast(0.48)).toBe(1)
     expect(jarDisplayContrast(0.5)).toBe(1)
   })
 

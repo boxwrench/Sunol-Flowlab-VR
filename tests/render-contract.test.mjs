@@ -53,8 +53,8 @@ test('jar-test bench has six static app-fed canonical summaries with no process 
     source,
     /ref=\{fillsRef\}[\s\S]*?CANONICAL_JAR_DOSES\.length[\s\S]*?RAW_WATER_FILL_DIMENSIONS/,
   )
-  assert.match(source, /const RAW_WATER_FILL_COLOR = '#5b210a'/)
-  assert.match(source, /const CLEARED_WATER_COLOR = new Color\('#d99a48'\)/)
+  assert.match(source, /const RAW_WATER_FILL_COLOR = '#220600'/)
+  assert.match(source, /const CLEARED_WATER_COLOR = new Color\('#ffd68a'\)/)
   assert.match(source, /meshBasicMaterial[\s\S]*toneMapped=\{false\}/)
   assert.match(source, /fills\.setMatrixAt\(index, transform\)/)
   assert.match(source, /fills\.instanceMatrix\.needsUpdate = true/)
@@ -72,7 +72,7 @@ test('jar-test bench has six static app-fed canonical summaries with no process 
     source,
     /position=\{\[\(index - 2\.5\) \* 0\.25, 0\.58, 0\.08\]\}/,
   )
-  assert.match(source, /transparent[\s\S]*opacity=\{0\.8\}/)
+  assert.match(source, /transparent[\s\S]*opacity=\{0\.82\}/)
   assert.doesNotMatch(source, /cylinderGeometry|torusGeometry/)
   assert.doesNotMatch(
     source,

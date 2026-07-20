@@ -12,7 +12,7 @@ export const CANONICAL_JAR_DOSES = [0, 2, 4, 6, 8, 10] as const
 const JAR_VESSEL_DIMENSIONS = [0.18, 0.36, 0.16] as const
 const JAR_RIM_DIMENSIONS = [0.19, 0.014, 0.17] as const
 const RAW_WATER_FILL_DIMENSIONS = [0.158, 0.26, 0.138] as const
-const RAW_WATER_FILL_COLOR = '#5b210a'
+const RAW_WATER_FILL_COLOR = '#220600'
 const JAR_WALL_EXTRUSION = {
   depth: JAR_VESSEL_DIMENSIONS[1],
   bevelEnabled: false,
@@ -64,12 +64,14 @@ interface JarTestBenchProps {
 }
 
 const RAW_WATER_COLOR = new Color(RAW_WATER_FILL_COLOR)
-const CLEARED_WATER_COLOR = new Color('#d99a48')
+const CLEARED_WATER_COLOR = new Color('#ffd68a')
 
 export function jarDisplayContrast(displayClarity: number): number {
   if (!Number.isFinite(displayClarity)) return 0
   const normalized = Math.min(1, Math.max(0, (displayClarity - 0.25) / 0.25))
-  return normalized * normalized
+  if (normalized < 0.25) return 0
+  if (normalized < 0.9) return 0.32
+  return 1
 }
 
 export function JarTestBench({ summaries = [] }: JarTestBenchProps) {
@@ -182,7 +184,7 @@ export function JarTestBench({ summaries = [] }: JarTestBenchProps) {
           <meshBasicMaterial
             color={'#ffffff'}
             transparent
-            opacity={0.8}
+            opacity={0.82}
             depthWrite={false}
             toneMapped={false}
           />
@@ -196,7 +198,7 @@ export function JarTestBench({ summaries = [] }: JarTestBenchProps) {
             color={'#d8cbb5'}
             side={DoubleSide}
             transparent
-            opacity={0.2}
+            opacity={0.08}
             depthWrite={false}
           />
         </instancedMesh>

@@ -311,3 +311,8 @@ and the jar dose numbers visually misaligned. The chart is now smaller and
 right-anchored. Jar numbers use exact jar-center coordinates, and the brown
 internal fluids are transparent while preserving the requested symmetric
 dark/medium/light outcome ordering.
+
+In-headset follow-up found that the transparent continuous colors still looked
+the same. The display transform now uses three separated result tiers rather
+than a subtle continuous blend; this is a readability correction, not a change
+to stored results or the process model.
