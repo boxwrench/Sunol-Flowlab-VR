@@ -16,7 +16,7 @@ import {
 } from './layout'
 import type { ParticleFrameRecorder } from './ParticleCloud'
 import type { OpticalLoadBandsPresentation } from './OpticalLoadGradient'
-import { PlantEnvironment } from './PlantEnvironment'
+import { PlantEnvironment, type LabPanoramaId } from './PlantEnvironment'
 
 interface FoundationSceneProps {
   readonly animateParticleTransitions?: boolean
@@ -25,6 +25,7 @@ interface FoundationSceneProps {
   readonly instrumentation?: ReactNode
   readonly particleState: ParticleStateView
   readonly opticalLoadBands: OpticalLoadBandsPresentation
+  readonly panorama?: LabPanoramaId
   readonly preserveDrawingBuffer?: boolean
   readonly presentationEpoch?: number
   readonly recordParticleFrame: ParticleFrameRecorder
@@ -37,6 +38,7 @@ export function FoundationScene({
   instrumentation,
   particleState,
   opticalLoadBands,
+  panorama = 'hetchy',
   preserveDrawingBuffer = false,
   presentationEpoch = 0,
   recordParticleFrame,
@@ -53,7 +55,7 @@ export function FoundationScene({
         <color attach="background" args={['#081719']} />
         <ambientLight intensity={1.1} />
         <directionalLight position={[2, 4, 3]} intensity={1.7} />
-        <PlantEnvironment />
+        <PlantEnvironment panorama={panorama} />
         <group position={[...APPARATUS_WORLD_POSITION]}>
           <HeroObservationTank
             animateParticleTransitions={animateParticleTransitions}

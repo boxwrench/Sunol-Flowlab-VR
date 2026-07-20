@@ -336,7 +336,7 @@ test('XR route runs the shared treatment cycle with locked controls and refill',
 
   await expect(async () => {
     if ((await state()).phase === 'READY')
-      await page.locator('canvas').click({ position: { x: 463, y: 257 } })
+      await page.locator('canvas').click({ position: { x: 320, y: 370 } })
     expect((await state()).commandCount).toBe(2)
   }).toPass({ timeout: 5_000 })
   expect(await state()).toMatchObject({

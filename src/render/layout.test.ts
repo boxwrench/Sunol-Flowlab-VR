@@ -27,7 +27,7 @@ describe('shared desktop and XR apparatus layout', () => {
       DESKTOP_CAMERA_POSITION.map(
         (coordinate, index) => coordinate - DESKTOP_CAMERA_TARGET[index],
       ),
-    ).toEqual([3.1, 0.89, 4.6])
+    ).toEqual([2.75, 0.89, 4.6])
   })
 
   it('places the jar-test rack on a waist-height table', () => {
@@ -43,6 +43,6 @@ describe('shared desktop and XR apparatus layout', () => {
   })
 
   it('preserves the accepted desktop XR-shell interaction camera', () => {
-    expect(XR_SHELL_DESKTOP_CAMERA_TARGET).toEqual([0.4, 0, -1.8])
+    expect(XR_SHELL_DESKTOP_CAMERA_TARGET).toEqual([0.75, 0.86, -1.8])
   })
 })

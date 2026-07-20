@@ -156,7 +156,7 @@ export function DoseLever({
   const leverColor = locked ? '#667773' : active ? '#ffbd59' : '#65d8cf'
 
   return (
-    <group ref={mountRef} position={[-0.3, 0, -0.2]} scale={0.75}>
+    <group ref={mountRef} position={[-0.37, 0, -0.05]} scale={0.5625}>
       <mesh position={[0, 0.02, 0]}>
         <cylinderGeometry args={[0.34, 0.34, 0.04, 32]} />
         <meshStandardMaterial color={'#263f3c'} roughness={0.78} />

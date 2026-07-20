@@ -20,3 +20,15 @@
 - Inputs: repository-owned application geometry and the owner-supplied Hetchy
   panorama documented above.
 - Modification: none after capture.
+
+## Sunol panorama
+
+- Repository asset: `public/panoramas/sunol.jpg`
+- Source: exact project-owner-supplied file `sunol.jpg`, provided locally on
+  2026-07-20.
+- Creator and rights basis: the project owner confirmed on 2026-07-20 that this
+  is their own image and that they have permission to publish it.
+- Modification: none; the original JPEG bytes are retained. Runtime code maps
+  the 5.42:1 panoramic strip to an aspect-correct distant cylinder.
+- Content boundary: visual facility context only; no readable operating values,
+  control screens, tags, credentials, or access-control details are exposed.

@@ -175,12 +175,11 @@ Original prompt: batch 7
 
 ## Batch 10 current TODO
 
-- Load the candidate in seated Quest immersive WebXR for composition,
-  parallax, readability, reach-clearance, and controller-inclusive performance
-  review.
-- Iterate visual placement from the headset review before adding audio.
-- After visual acceptance, implement restrained event/process audio and mute
-  behavior, then repeat Quest performance and lifecycle checks.
+- Compare Hetchy and Sunol in seated Quest and select the release panorama.
+- Audition classic, quiet, and warm sound profiles; verify Mute, dose, Start,
+  phase, measurement, completion, and refill cues remain restrained.
+- Record one controller-inclusive Quest performance, reach, and audio-lifecycle
+  verdict, then accept or revise Batch 10.
 
 ## Batch 10 lab revision
 
@@ -229,3 +228,48 @@ Original prompt: batch 7
 - Extended all nine rear and side window mullions from the sill through the
   upper wall band so every visible beam now terminates inside the ceiling slab;
   this changes only existing instance transforms and adds no geometry or draw.
+- Added the project-owner-created 8,662 by 1,597 Sunol strip as the bounded
+  `?panorama=sunol` comparison while retaining Hetchy as the default. The owner
+  confirmed authorship and publication permission. Each strip now uses an
+  aspect-correct cylindrical height and the accepted 10 percent vertical shift.
+- Added a self-generated audio candidate with no external audio assets: classic,
+  quiet, and warm URL-selectable profiles; phase-linked room/process ambience;
+  restrained dose, Start, measurement, completion, refill, log-clear, and replay
+  cues; and a physical `MUTE` button beside Start.
+- Audio is app-owned, lazily unlocked by a user gesture, absent from simulation
+  and render ownership, suspended on document hide, and disposed on teardown.
+  Persistent process nodes allocate outside the hot loop; short-lived nodes are
+  intentionally allocated only for discrete sound events.
+- The focused browser interaction check physically toggled Mute off/on and
+  confirmed audio initialization without a console-error artifact. A warm-profile
+  Start press reported authoritative `RAPID_MIX` and the matching audio phase.
+  The full checkpoint now passes 24 contract tests and 139 Vitest tests across
+  31 files. Human headset listening remains the sound-quality authority.
+- First headset listening found the candidate barely audible and dominated by
+  uniform static. Reduced the continuous noise bed, raised master/event levels,
+  strengthened dose and Start mechanics, and added deterministic phase-specific
+  periodic detail: rapid-mix relay pulses, flocculation bubbles and ticks,
+  sparse settling bubbles, measurement chimes, and refill water/bubbles.
+- Confirmed the headset had remained on `panorama: hetchy` after the earlier
+  Android intent. Extended the Quest restart harness to accept panorama and
+  sound arguments, navigated the actual inspected tab, and confirmed the live
+  state now reports `panorama: sunol` with classic audio. Navigation correctly
+  ended the prior immersive session, so the user must re-enter VR for review.
+- Consolidated Dose, Start, Mute, and the new Hetchy/Sunol scenery selector on
+  one physical operator dashboard. Dose and Start are each 75 percent of their
+  immediately preceding headset-review size. The selector changes the in-scene
+  panorama without navigating or ending the XR session.
+- Extended the results backboard exactly five percent toward the operator's
+  right without moving its left edge, and added sparse synthesized two-note
+  ambient phrases to the existing generated soundscape. Music is muted by the
+  same physical control and remains independent of treatment results.
+- Completed the physical-dashboard headset pass: reduced its footprint to 75
+  percent, distributed Dose/Start/Mute/scenery controls across it, moved only
+  the dashboard to its owner-directed final horizontal position, and laid all
+  dashboard text flat. The apparatus/view offset and scenery-button text were
+  tuned separately so the tank remains visible and both labels clear the bezel.
+- The project owner accepted the resulting seated lab candidate and selected a
+  hosted v0.1.0 WebXR site as the release product. Narration, further concepts,
+  and a sideloadable APK are deferred. Release work now owns a frictionless root
+  URL, GitHub Pages deployment, hosted Quest verification, final still/video,
+  and the v0.1.0 tag.

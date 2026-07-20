@@ -40,7 +40,15 @@ if (page === undefined) {
 if (action === 'status') {
   print(await snapshot(page))
 } else if (action === 'restart') {
-  await page.goto(TARGET_URL, { waitUntil: 'domcontentloaded' })
+  const panorama = argument === 'sunol' ? 'sunol' : 'hetchy'
+  const requestedSound = process.argv[4]
+  const sound =
+    requestedSound === 'quiet' || requestedSound === 'warm'
+      ? requestedSound
+      : 'classic'
+  await page.goto(`${TARGET_URL}&panorama=${panorama}&sound=${sound}`, {
+    waitUntil: 'domcontentloaded',
+  })
   await page.bringToFront()
   await trustedClick(page, page.getByRole('button', { name: 'Enter VR' }))
   await page.waitForFunction(
@@ -164,7 +172,7 @@ if (action === 'status') {
   print(await snapshot(page))
 } else {
   throw new Error(
-    'Use status, restart, stage-review, review-ready, prepare <dose>, start, watch, watch-combined, watch-controls, replay, clear, or refill',
+    'Use status, restart [hetchy|sunol] [classic|quiet|warm], stage-review, review-ready, prepare <dose>, start, watch, watch-combined, watch-controls, replay, clear, or refill',
   )
 }
 

@@ -4,6 +4,7 @@ import { XrShellScene } from '../render/XrShellScene'
 import { InstrumentLabel } from '../render/InstrumentLabel'
 import { PhysicalInstrumentation } from '../render/PhysicalInstrumentation'
 import { endpointOpticalLoad } from '../sim'
+import { AudioMuteButton } from '../xr/AudioMuteButton'
 import { DoseLever } from '../xr/DoseLever'
 import type {
   DetentControlState,
@@ -11,6 +12,7 @@ import type {
 } from '../xr/interactionState'
 import { requireXrShellPosture } from '../xr/layout'
 import { StartButton } from '../xr/StartButton'
+import { ScenerySelector } from '../xr/ScenerySelector'
 import {
   XrShellInputMonitor,
   type XrShellInputSnapshot,
@@ -20,11 +22,17 @@ import type { AppCommand, DoseIndex } from './commands'
 import {
   Batch07ExperimentController,
   browserStorage,
+  isAppCommand,
   type Batch07CommandResult,
 } from './Batch07ExperimentController'
 import { Batch07Driver } from './Batch07Driver'
 import { MetricsOverlay } from './MetricsOverlay'
 import { developmentPerformance } from './performance'
+import {
+  ProcessAudioController,
+  requireProcessAudioFlavor,
+  type ProcessAudioCommand,
+} from './ProcessAudio'
 import {
   CANONICAL_SIMULATION_SEED,
   SimulationRuntime,
@@ -63,11 +71,22 @@ const COMMAND_LOG_CAPACITY = 64
 
 export function XrShellApp() {
   const urlParameters = new URLSearchParams(window.location.search)
+  const requestedPanorama =
+    urlParameters.get('panorama') === 'sunol' ? 'sunol' : 'hetchy'
+  const audioFlavor = requireProcessAudioFlavor(urlParameters.get('sound'))
   const posture = requireXrShellPosture(urlParameters.get('posture'))
   const showCalibrationMarker =
     import.meta.env.DEV && urlParameters.get('calibration') !== 'off'
   const [entryError, setEntryError] = useState<string | null>(null)
+  const [audioMuted, setAudioMuted] = useState(false)
+  const [panorama, setPanorama] = useState<'hetchy' | 'sunol'>(
+    requestedPanorama,
+  )
   const [statusRevision, setStatusRevision] = useState(0)
+  const audioRef = useRef<ProcessAudioController | null>(null)
+  if (audioRef.current === null)
+    audioRef.current = new ProcessAudioController(audioFlavor)
+  const audio = audioRef.current
   const runtimeRef = useRef<SimulationRuntime | null>(null)
   if (runtimeRef.current === null) runtimeRef.current = new SimulationRuntime()
   const runtime = runtimeRef.current
@@ -88,6 +107,7 @@ export function XrShellApp() {
       DEFAULT_TREATMENT_CYCLE_CONFIG,
       (record) => {
         experiment.handleCycleRecord(record)
+        audio.handleCycleRecord(record)
         if (!record.accepted) {
           console.warn(
             'Sunol FlowLab rejected treatment-cycle event',
@@ -146,6 +166,7 @@ export function XrShellApp() {
         snapshot.rejectedCommandCount += 1
       } else {
         const command = input as AppCommand
+        if (isAppCommand(input)) audio.handleCommand(input)
         commandLogRef.current[commandLogWriteIndexRef.current] = command
         commandLogWriteIndexRef.current =
           (commandLogWriteIndexRef.current + 1) % COMMAND_LOG_CAPACITY
@@ -159,7 +180,27 @@ export function XrShellApp() {
       setStatusRevision((revision) => revision + 1)
       return result
     },
-    [cycle, experiment],
+    [audio, cycle, experiment],
+  )
+
+  const emitAudioCommand = useCallback(
+    (command: ProcessAudioCommand) => {
+      if (command.type !== 'TOGGLE_MUTE') return
+      const muted = audio.toggleMuted()
+      setAudioMuted(muted)
+      setStatusRevision((revision) => revision + 1)
+    },
+    [audio],
+  )
+
+  const selectPanorama = useCallback(
+    (selection: 'hetchy' | 'sunol') => {
+      if (selection === panorama) return
+      audio.playDashboardClick()
+      setPanorama(selection)
+      setStatusRevision((revision) => revision + 1)
+    },
+    [audio, panorama],
   )
 
   const emitCommand = useCallback(
@@ -216,8 +257,10 @@ export function XrShellApp() {
     const interruptForVisibility = () => {
       if (document.visibilityState === 'hidden') {
         cycle.interrupt('document hidden')
+        audio.suspend()
       } else {
         cycle.resumeAfterInterruption()
+        audio.resume()
       }
       setStatusRevision((revision) => revision + 1)
     }
@@ -225,8 +268,9 @@ export function XrShellApp() {
     return () => {
       document.removeEventListener('visibilitychange', interruptForVisibility)
       cycle.interrupt('app unmounted')
+      audio.dispose()
     }
-  }, [cycle])
+  }, [audio, cycle])
 
   useEffect(() => {
     if (!import.meta.env.DEV) return
@@ -236,6 +280,7 @@ export function XrShellApp() {
         coordinateSystem:
           'meters; local-floor origin at viewer start; apparatus translated once to world position; simulation coordinates are tank-local',
         mode: 'treatment-cycle',
+        panorama,
         ...snapshotRef.current,
         phase: cycle.phase,
         simulationPhase: runtime.phase,
@@ -266,6 +311,7 @@ export function XrShellApp() {
           cycle.result?.endpointOpticalLoad ??
           endpointOpticalLoad(runtime.opticalLoadBands),
         globalRelativeOpticalLoad: runtime.opticalLoadBands.globalRelativeLoad,
+        audio: audio.snapshot,
       })
     }
     window.render_game_to_text = renderState
@@ -292,10 +338,11 @@ export function XrShellApp() {
       delete window.reset_xr_trial_to_ready
       delete window.advanceTime
     }
-  }, [cycle, dispatchCommand, experiment, runtime])
+  }, [audio, cycle, dispatchCommand, experiment, panorama, runtime])
 
   async function enterVr() {
     setEntryError(null)
+    audio.unlock()
     try {
       const session = await xrStore.enterVR()
       if (session === undefined) {
@@ -384,6 +431,7 @@ export function XrShellApp() {
         instrumentation={instrumentation}
         opticalLoadBands={presentationOpticalLoadBands}
         particleState={runtime.state}
+        panorama={panorama}
         posture={posture}
         presentationEpoch={cycle.presentationEpoch}
         recordParticleFrame={recordParticleFrame}
@@ -396,6 +444,16 @@ export function XrShellApp() {
           locked={!cycle.controlAvailability.doseEnabled}
           recordState={recordDetentState}
         />
+        <InstrumentLabel
+          text={'SET DOSE'}
+          width={0.22}
+          height={0.06}
+          position={[-0.37, 0.012, -0.29]}
+          rotation={[-Math.PI / 2, 0, 0]}
+          color={'#f4fff9'}
+          background={'#263f3c'}
+          fontScale={0.62}
+        />
         <StartButton
           emitCommand={emitCommand}
           label={
@@ -403,7 +461,8 @@ export function XrShellApp() {
               text={'START'}
               width={0.22}
               height={0.08}
-              position={[0, 0.075, 0.172]}
+              position={[0, 0.025, -0.23]}
+              rotation={[-Math.PI / 2, 0, 0]}
               color={'#f4fff9'}
               background={'#263f3c'}
               fontScale={0.7}
@@ -411,6 +470,58 @@ export function XrShellApp() {
           }
           locked={!cycle.controlAvailability.startEnabled}
           recordState={recordStartButtonState}
+        />
+        <AudioMuteButton
+          emitCommand={emitAudioCommand}
+          label={
+            <InstrumentLabel
+              text={'MUTE'}
+              width={0.2}
+              height={0.075}
+              position={[0, 0.025, -0.2]}
+              rotation={[-Math.PI / 2, 0, 0]}
+              color={'#f4fff9'}
+              background={'#263f3c'}
+              fontScale={0.68}
+            />
+          }
+          muted={audioMuted}
+        />
+        <ScenerySelector
+          emitSelection={selectPanorama}
+          hetchyLabel={
+            <InstrumentLabel
+              text={'HETCHY'}
+              width={0.17}
+              height={0.05}
+              position={[-0.115, 0.119, 0]}
+              rotation={[-Math.PI / 2, 0, 0]}
+              color={'#102522'}
+              fontScale={0.46}
+            />
+          }
+          selected={panorama}
+          sunolLabel={
+            <InstrumentLabel
+              text={'SUNOL'}
+              width={0.17}
+              height={0.05}
+              position={[0.115, 0.119, 0]}
+              rotation={[-Math.PI / 2, 0, 0]}
+              color={'#102522'}
+              fontScale={0.5}
+            />
+          }
+        />
+        <InstrumentLabel
+          text={'SCENERY'}
+          width={0.22}
+          height={0.06}
+          position={[0.36, 0.012, -0.19]}
+          rotation={[-Math.PI / 2, 0, 0]}
+          color={'#f4fff9'}
+          background={'#263f3c'}
+          fontScale={0.62}
         />
         <XrShellInputMonitor recordSnapshot={recordInputSnapshot} />
       </XrShellScene>

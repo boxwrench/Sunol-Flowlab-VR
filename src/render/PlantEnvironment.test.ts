@@ -9,7 +9,7 @@ describe('plant environment render budget', () => {
       materialCount: 5,
       triangles: 1114,
       externalTextureBytes: 3_947_484,
-      decodedPanoramaBytes: 33_549_312,
+      decodedPanoramaBytes: 55_332_856,
       generatedLabelTextureBytes: 1_638_400,
     })
   })

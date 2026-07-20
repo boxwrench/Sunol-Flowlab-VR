@@ -106,3 +106,52 @@ test('plant environment stays render-only and bounds its animated work', async (
   assert.match(source, /import\.meta\.env\.BASE_URL/)
   assert.match(source, /side=\{BackSide\}/)
 })
+
+test('process audio remains app-owned, generated, bounded, and gesture gated', async () => {
+  const audio = await readFile(
+    new URL('../src/app/ProcessAudio.ts', import.meta.url),
+    'utf8',
+  )
+  const muteButton = await readFile(
+    new URL('../src/xr/AudioMuteButton.tsx', import.meta.url),
+    'utf8',
+  )
+
+  assert.match(audio, /new AudioContext\(\)/)
+  assert.match(audio, /createDeterministicNoiseBuffer/)
+  assert.match(audio, /context\.sampleRate \* 2/)
+  assert.doesNotMatch(audio, /fetch\(|\.mp3|\.wav|useFrame|setInterval/)
+  assert.match(muteButton, /type: 'TOGGLE_MUTE'/)
+  assert.doesNotMatch(muteButton, /\.\.\/sim|SimulationRuntime/)
+})
+
+test('operator controls share one physical dashboard with bounded scenery choices', async () => {
+  const scene = await readFile(
+    new URL('../src/render/XrShellScene.tsx', import.meta.url),
+    'utf8',
+  )
+  const app = await readFile(
+    new URL('../src/app/XrShellApp.tsx', import.meta.url),
+    'utf8',
+  )
+  const dashboard = await readFile(
+    new URL('../src/render/ControlDashboard.tsx', import.meta.url),
+    'utf8',
+  )
+  const selector = await readFile(
+    new URL('../src/xr/ScenerySelector.tsx', import.meta.url),
+    'utf8',
+  )
+
+  assert.match(scene, /<ControlDashboard>\{children\}<\/ControlDashboard>/)
+  assert.match(app, /<DoseLever[\s\S]*<StartButton[\s\S]*<ScenerySelector/)
+  assert.match(dashboard, /position=\{\[-0\.35, 0, 0\]\}/)
+  assert.match(dashboard, /boxGeometry args=\{\[1\.125, 0\.11, 0\.585\]\}/)
+  assert.match(selector, /\(\['hetchy', 'sunol'\] as const\)/)
+  assert.match(app, /text=\{'SET DOSE'\}/)
+  assert.match(app, /text=\{'SCENERY'\}/)
+  assert.doesNotMatch(
+    dashboard + selector,
+    /\.\.\/sim|SimulationRuntime|useFrame/,
+  )
+})

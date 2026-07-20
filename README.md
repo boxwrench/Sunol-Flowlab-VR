@@ -22,10 +22,10 @@ Batch 04 is accepted with documented physical-test waivers, Batch 05 passed
 seated Quest integration, and
 [Batch 06 passed its complete seated treatment-cycle gate](docs/BATCH_06_ACCEPTANCE.md).
 Batches 07 and 08 passed their combined seated Quest instrument,
-control, readability, and comparison verdict. Batch 10 laboratory visuals are
-in active seated-headset review under an owner-authorized visual-first schedule;
-Batch 09 final capture remains deferred until those visuals and audio are
-accepted, and Batch 11 remains unstarted.
+control, readability, and comparison verdict. Batch 10 laboratory visuals,
+physical dashboard, selectable scenery, and generated audio passed iterative
+seated-headset review. Batch 09 final still/video capture and Batch 11 v0.1.0
+release hardening are now active; narration is explicitly deferred.
 See [PROGRESS.md](PROGRESS.md), the
 [Batch 07 acceptance packet](docs/BATCH_07_ACCEPTANCE.md), the
 [Batch 08 acceptance packet](docs/BATCH_08_CANDIDATE.md), and the
@@ -49,8 +49,8 @@ subordinate past-run gauge needle; it adds no second tank, ghost particles, or
 transparent ghost layer. The selected display choices are recorded in
 [docs/TUNING.md](docs/TUNING.md).
 
-The current automated checkpoint passes 23 repository-contract tests, 136
-Vitest tests across 30 files, all six rendered-browser scenarios, the canonical
+The current automated checkpoint passes 25 repository-contract tests, 139
+Vitest tests across 31 files, all six rendered-browser scenarios, the canonical
 and nine-seed eleven-dose regression corpus, type checking, lint, production
 build, and the standalone simulation benchmark. The compatible-ghost desktop
 capture reports 55 development draw calls. The combined seated Quest review is

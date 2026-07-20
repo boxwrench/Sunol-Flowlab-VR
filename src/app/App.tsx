@@ -77,6 +77,8 @@ export function App() {
 
 function PhenomenonApp() {
   const urlParameters = new URLSearchParams(window.location.search)
+  const panorama =
+    urlParameters.get('panorama') === 'sunol' ? 'sunol' : 'hetchy'
   const presentationMode = urlParameters.get('mode') === 'proof'
   const reviewCaptureMode = urlParameters.get('capture') === 'review'
   const [entryError, setEntryError] = useState<string | null>(null)
@@ -201,6 +203,7 @@ function PhenomenonApp() {
       return JSON.stringify({
         coordinateSystem: 'meters; origin tank center-bottom; +Y upward',
         mode: 'phenomenon-trial',
+        panorama,
         running: runtime.isRunning,
         dose: runtime.dose,
         selectedDose: cycle.selectedDose,
@@ -256,7 +259,7 @@ function PhenomenonApp() {
       delete window.render_xr_preflight_to_text
       delete window.dispatch_batch07_command
     }
-  }, [cycle, experiment, runtime])
+  }, [cycle, experiment, panorama, runtime])
 
   function runComparisonPreset(dose: DoseDetent): void {
     cycle.forceResetDevOnly()
@@ -365,6 +368,7 @@ function PhenomenonApp() {
         instrumentation={instrumentation}
         particleState={runtime.state}
         opticalLoadBands={presentationOpticalLoadBands}
+        panorama={panorama}
         preserveDrawingBuffer={reviewCaptureMode}
         presentationEpoch={cycle.presentationEpoch}
         recordParticleFrame={recordParticleFrame}

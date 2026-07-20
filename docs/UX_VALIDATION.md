@@ -331,3 +331,21 @@ summaries were restored. The project owner then stated that the batch was good.
 This records a pass for the combined Batch 07/08 human gate after the iterative
 issue/fix sequence above. Standing, non-operator, endurance, hosted, and release
 claims are not inferred from this seated verdict.
+
+### 2026-07-20 Batch 10 lab, dashboard, and audio verdict
+
+The project owner iteratively reviewed the complete laboratory candidate in a
+live seated Quest 3 session. The accepted scene uses a real four-wall lab and
+ceiling, owner-created Sunol and Hetchy panoramic scenery visible through real
+windows, lab benches and instruments, and one compact physical dashboard. Dose,
+Start, Mute, and the two-position scenery selector are labeled with text laid
+flat on the dashboard or button faces. The result backboard, operator-relative
+apparatus position, dashboard size, and dashboard placement reflect the final
+headset-directed spatial adjustments.
+
+The owner accepted the text and stated the product was essentially ready for a
+v0.1 release. Generated ambience, periodic mechanical/bubble details, and sparse
+music remain subordinate and share one physical Mute control. Narration and
+additional product ideas are explicitly deferred. This records the seated Batch
+10 human visual/audio gate as passed. Hosted-URL verification, final release
+capture, endurance, and non-operator review remain separate release evidence.

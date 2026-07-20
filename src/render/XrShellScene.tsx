@@ -15,7 +15,8 @@ import {
 } from './layout'
 import type { ParticleFrameRecorder } from './ParticleCloud'
 import type { OpticalLoadBandsPresentation } from './OpticalLoadGradient'
-import { PlantEnvironment } from './PlantEnvironment'
+import { PlantEnvironment, type LabPanoramaId } from './PlantEnvironment'
+import { ControlDashboard } from './ControlDashboard'
 
 interface XrShellSceneProps {
   readonly children?: ReactNode
@@ -23,6 +24,7 @@ interface XrShellSceneProps {
   readonly instrumentation?: ReactNode
   readonly opticalLoadBands: OpticalLoadBandsPresentation
   readonly particleState: ParticleStateView
+  readonly panorama?: LabPanoramaId
   readonly posture: XrShellPosture
   readonly presentationEpoch?: number
   readonly recordParticleFrame: ParticleFrameRecorder
@@ -36,6 +38,7 @@ export function XrShellScene({
   instrumentation,
   opticalLoadBands,
   particleState,
+  panorama = 'hetchy',
   posture,
   presentationEpoch = 0,
   recordParticleFrame,
@@ -55,7 +58,7 @@ export function XrShellScene({
         <color attach={'background'} args={['#081719']} />
         <ambientLight intensity={1.1} />
         <directionalLight position={[2, 4, 3]} intensity={1.7} />
-        <PlantEnvironment />
+        <PlantEnvironment panorama={panorama} />
         {sceneChildren}
         <group position={[...APPARATUS_WORLD_POSITION]}>
           <XrShellApparatus
@@ -77,7 +80,7 @@ export function XrShellScene({
               position={[0, layout.controlMountHeightMeters, 0]}
               rotation={[Math.PI / 12, 0, 0]}
             >
-              {children}
+              <ControlDashboard>{children}</ControlDashboard>
             </group>
           </XrShellApparatus>
         </group>

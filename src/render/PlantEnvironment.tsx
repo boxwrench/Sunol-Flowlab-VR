@@ -25,10 +25,21 @@ const BENCH_COLOR = '#445653'
 const BENCH_TOP_COLOR = '#d2d7cf'
 const ANALYZER_COLOR = '#273c42'
 const SCREEN_COLOR = '#76d8d1'
-const HETCHY_PANORAMA_URL = `${import.meta.env.BASE_URL}panoramas/hetchy.jpg`
+export type LabPanoramaId = 'hetchy' | 'sunol'
+
+const LAB_PANORAMAS: Readonly<
+  Record<LabPanoramaId, { readonly heightMeters: number; readonly url: string }>
+> = {
+  hetchy: {
+    heightMeters: 46.5,
+    url: `${import.meta.env.BASE_URL}panoramas/hetchy.jpg`,
+  },
+  sunol: {
+    heightMeters: 27.8,
+    url: `${import.meta.env.BASE_URL}panoramas/sunol.jpg`,
+  },
+}
 const PANORAMA_RADIUS_METERS = 24
-const PANORAMA_HEIGHT_METERS = 46.5
-const PANORAMA_VERTICAL_SHIFT_METERS = PANORAMA_HEIGHT_METERS * 0.1
 const STIRRER_SCALE = new Vector3(0.14, 0.025, 0.035)
 
 const LAB_BOXES: readonly LabBox[] = [
@@ -148,11 +159,15 @@ export const PLANT_ENVIRONMENT_RENDER_BUDGET = Object.freeze({
   triangles:
     LAB_BOXES.length * 12 + BEAKER_POSITIONS.length * (24 + 48) + 128 + 2,
   externalTextureBytes: 3_947_484,
-  decodedPanoramaBytes: 33_549_312,
+  decodedPanoramaBytes: 55_332_856,
   generatedLabelTextureBytes: LAB_LABEL_TEXTURE_WIDTH * 256 * 4,
 })
 
-export function PlantEnvironment() {
+export function PlantEnvironment({
+  panorama = 'hetchy',
+}: {
+  readonly panorama?: LabPanoramaId
+}) {
   const labBoxesRef = useRef<InstancedMesh>(null)
   const beakersRef = useRef<InstancedMesh>(null)
   const beakerFluidsRef = useRef<InstancedMesh>(null)
@@ -201,7 +216,7 @@ export function PlantEnvironment() {
   return (
     <group position={[...APPARATUS_WORLD_POSITION]}>
       <Suspense fallback={null}>
-        <LabPanorama />
+        <LabPanorama panorama={panorama} />
       </Suspense>
 
       <instancedMesh
@@ -252,8 +267,9 @@ export function PlantEnvironment() {
   )
 }
 
-function LabPanorama() {
-  const texture = useLoader(TextureLoader, HETCHY_PANORAMA_URL)
+function LabPanorama({ panorama }: { readonly panorama: LabPanoramaId }) {
+  const panoramaConfig = LAB_PANORAMAS[panorama]
+  const texture = useLoader(TextureLoader, panoramaConfig.url)
   const panoramaTexture = useMemo(() => {
     texture.colorSpace = SRGBColorSpace
     texture.wrapS = RepeatWrapping
@@ -264,12 +280,12 @@ function LabPanorama() {
   }, [texture])
 
   return (
-    <mesh position={[-0.4, PANORAMA_VERTICAL_SHIFT_METERS, 1.8]}>
+    <mesh position={[-0.4, panoramaConfig.heightMeters * 0.1, 1.8]}>
       <cylinderGeometry
         args={[
           PANORAMA_RADIUS_METERS,
           PANORAMA_RADIUS_METERS,
-          PANORAMA_HEIGHT_METERS,
+          panoramaConfig.heightMeters,
           64,
           1,
           true,
