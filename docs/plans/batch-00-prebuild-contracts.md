@@ -1,6 +1,6 @@
 # Batch 00 Implementation Plan: Pre-build Contracts
 
-**Status:** Substantially complete — local Quest route confirmed; hosted HTTPS remains open
+**Status:** Substantially complete - local and hosted Quest routes accepted
 **Depends on:** Project brief only  
 **May run in parallel with:** Visual reference gathering, public-data review, package verification  
 **Primary gate:** No serious feature implementation begins until the versioned stack, architecture boundaries, regression contract, and public-data boundary are recorded.

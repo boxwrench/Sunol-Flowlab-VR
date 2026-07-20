@@ -1,18 +1,16 @@
 # Batch 07 Implementation Plan: Physical Instrumentation and Experiment Memory
 
-**Status:** Published candidate checkpoint — automated gates and seated Quest
-performance pass; the readability, comprehension, physical-control, and final-
-verdict checks remain open and were explicitly deferred by the project owner on
-2026-07-19; they are now included in one combined Batch 07/08 Quest review
+**Status:** Accepted - automated, seated Quest, readability, comprehension,
+physical-control, and combined Batch 07/08 gates passed
 **Depends on:** Batch 06 accepted  
 **May run in parallel with:** Instrument geometry and data wiring after interfaces freeze  
 **Primary gate:** The apparatus explains itself physically, records exactly one result per trial, persists the curve, and can record and replay a compatible prior treatment result without mutating the live simulation or requiring software chrome.
 
-> This batch must also follow [the hybrid jar-test design direction](docs/DESIGN_DIRECTION_JAR_TEST_HYBRID.md). The design brief governs product intent and presentation meaning; this batch remains authoritative for timing, scope, tests, evidence, and acceptance.
+> This batch must also follow [the hybrid jar-test design direction](../DESIGN_DIRECTION_JAR_TEST_HYBRID.md). The design brief governs product intent and presentation meaning; this batch remains authoritative for timing, scope, tests, evidence, and acceptance.
 
-> Instruments, plots, persistence, and static jar summaries consume the dimensionless relative optical-load record governed by [the modeling research amendment](docs/MODELING_RESEARCH_AMENDMENT.md). User-facing labels must not imply calibrated NTU or real-dose guidance.
+> Instruments, plots, persistence, and static jar summaries consume the dimensionless relative optical-load record governed by [the modeling research amendment](../MODELING_RESEARCH_AMENDMENT.md). User-facing labels must not imply calibrated NTU or real-dose guidance.
 
-> Treatment-ghost recording, compatibility, persistence, deletion, and playback follow [the approved ghost replay design](docs/GHOST_REPLAY_DESIGN.md). Version 1 records bands, not particles, and never re-runs the simulation for playback.
+> Treatment-ghost recording, compatibility, persistence, deletion, and playback follow [the approved ghost replay design](../GHOST_REPLAY_DESIGN.md). Version 1 records bands, not particles, and never re-runs the simulation for playback.
 
 > **Human-review amendment (2026-07-20):** The first combined Quest review
 > rejected the unexplained phase lamps, optical sensor, and primitive-only

@@ -6,10 +6,10 @@
 
 This plan is governed by:
 
-- [the hybrid jar-test design direction](docs/DESIGN_DIRECTION_JAR_TEST_HYBRID.md) for product meaning and presentation;
-- [the modeling research amendment](docs/MODELING_RESEARCH_AMENDMENT.md) for final version 1 process behavior;
-- [the regression contract](docs/REGRESSION_CONTRACT.md) for numerical acceptance;
-- [the ghost replay design](docs/GHOST_REPLAY_DESIGN.md) only for the read-only samples a later app-owned recorder will consume.
+- [the hybrid jar-test design direction](../DESIGN_DIRECTION_JAR_TEST_HYBRID.md) for product meaning and presentation;
+- [the modeling research amendment](../MODELING_RESEARCH_AMENDMENT.md) for final version 1 process behavior;
+- [the regression contract](../REGRESSION_CONTRACT.md) for numerical acceptance;
+- [the ghost replay design](../GHOST_REPLAY_DESIGN.md) only for the read-only samples a later app-owned recorder will consume.
 
 The original pre-research Batch 03 mechanics plan is preserved in Git history, not as parallel active guidance.
 
@@ -46,7 +46,7 @@ The retained presentation baseline includes:
 - one unlabeled proof route and randomized review packet;
 - accepted project-owner operator composition feedback and short Quest evidence.
 
-[The Batch 03 progress packet](docs/BATCH_03_PROGRESS.md) records that evidence. It is comparison evidence for the pre-03D model, not acceptance of the final version 1 process behavior.
+[The Batch 03 progress packet](../BATCH_03_PROGRESS.md) records that evidence. It is comparison evidence for the pre-03D model, not acceptance of the final version 1 process behavior.
 
 The external apparatus-recognition and blinded low/optimum/high reviews remain
 required. Workstream 03D replacement captures are now ready, so those reviews
@@ -160,7 +160,7 @@ After the model passes scientific and numerical gates:
 3. regenerate randomized low/optimum/high review captures;
 4. run the apparatus-recognition protocol with at least one external water-treatment operator or educator and preferably one non-operator;
 5. run the blinded outcome comparison with an operator-informed reviewer and a non-operator;
-6. record responses in [UX_VALIDATION.md](docs/UX_VALIDATION.md).
+6. record responses in [UX_VALIDATION.md](../UX_VALIDATION.md).
 
 If scientific behavior is correct but differences are hard to see, adjust render-size exaggeration, visual morphology, optical mapping, phase pacing, or camera composition before increasing model complexity or particle count.
 
@@ -199,8 +199,8 @@ Stop before Batch 04 when any of the following is true:
 
 ## Closing packet
 
-The [Workstream 03D technical acceptance packet](docs/BATCH_03_03D_TECHNICAL_ACCEPTANCE.md)
+The [Workstream 03D technical acceptance packet](../BATCH_03_03D_TECHNICAL_ACCEPTANCE.md)
 records changed behavior, commands and results, old/new sweep evidence,
 population metrics, desktop performance, allocations, limitations, captures,
 and the owner-waived external recognition rerun. Final Batch 03 acceptance is
-recorded in [docs/BATCH_03_ACCEPTANCE.md](docs/BATCH_03_ACCEPTANCE.md).
+recorded in [docs/BATCH_03_ACCEPTANCE.md](../BATCH_03_ACCEPTANCE.md).

@@ -11,7 +11,7 @@ Prove the educational phenomenon before building generalized particle mechanics.
 
 ## Post-acceptance version 1 research routing
 
-Batch 02A remains accepted as the minimum phenomenon proof. The later [approved modeling research amendment](docs/MODELING_RESEARCH_AMENDMENT.md) supersedes conflicting version 1 implementation guidance without rewriting the Batch 02A evidence.
+Batch 02A remains accepted as the minimum phenomenon proof. The later [approved modeling research amendment](../MODELING_RESEARCH_AMENDMENT.md) supersedes conflicting version 1 implementation guidance without rewriting the Batch 02A evidence.
 
 The amendment's mass-authoritative state, fractal-derived diameter and density, deterministic merges, projected-area relative optical load, growth bound, and population-health validation are product-model refinements, not generalized engine work. They are routed to Workstream 03D so the replacement model is compared against the accepted curve and presentation before Batch 03 can close.
 
@@ -148,7 +148,7 @@ Before adding one of these, record the baseline workload, the observed bottlenec
 
 ## Acceptance result
 
-Batch 02A passed on 2026-07-15. The complete configuration, canonical curve, nine-seed results, benchmark, allocation audit, browser evidence, limitations, and intentional Batch 02B deferrals are recorded in [the acceptance packet](docs/BATCH_02A_ACCEPTANCE.md).
+Batch 02A passed on 2026-07-15. The complete configuration, canonical curve, nine-seed results, benchmark, allocation audit, browser evidence, limitations, and intentional Batch 02B deferrals are recorded in [the acceptance packet](../BATCH_02A_ACCEPTANCE.md).
 
 ## Required closing acceptance packet
 

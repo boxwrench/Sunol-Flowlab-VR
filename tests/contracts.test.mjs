@@ -26,9 +26,9 @@ test('binding Batch 00 contracts are present and mutually consistent', async () 
     read('docs/DATA_BOUNDARY.md'),
     read('docs/MODELING_RESEARCH_AMENDMENT.md'),
     read('docs/GHOST_REPLAY_DESIGN.md'),
-    read('batch-03-desktop-phenomenon-proof.md'),
-    read('batch-07-physical-instrumentation-and-persistence.md'),
-    read('batch-08-headset-readability-and-clearing-front.md'),
+    read('docs/plans/batch-03-desktop-phenomenon-proof.md'),
+    read('docs/plans/batch-07-physical-instrumentation-and-persistence.md'),
+    read('docs/plans/batch-08-headset-readability-and-clearing-front.md'),
   ])
 
   assert.match(authority, /Coagulation only/)

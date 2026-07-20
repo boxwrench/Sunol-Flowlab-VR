@@ -5,11 +5,11 @@
 **May run in parallel with:** State-test authoring, instrument concepts, pacing review  
 **Primary gate:** One complete trial has a clear beginning, treatment sequence, fixed measurement, recorded result, and deterministic refill/reset.
 
-> This batch must also follow [the hybrid jar-test design direction](docs/DESIGN_DIRECTION_JAR_TEST_HYBRID.md). The design brief governs product intent and presentation meaning; this batch remains authoritative for timing, scope, tests, evidence, and acceptance.
+> This batch must also follow [the hybrid jar-test design direction](../DESIGN_DIRECTION_JAR_TEST_HYBRID.md). The design brief governs product intent and presentation meaning; this batch remains authoritative for timing, scope, tests, evidence, and acceptance.
 
-> Trial results capture the one relative optical-load authority defined by [the modeling research amendment](docs/MODELING_RESEARCH_AMENDMENT.md). The state machine must not create a second process calculation or relabel the signal as calibrated turbidity.
+> Trial results capture the one relative optical-load authority defined by [the modeling research amendment](../MODELING_RESEARCH_AMENDMENT.md). The state machine must not create a second process calculation or relabel the signal as calibrated turbidity.
 
-> This batch exposes the immutable result and phase timeline required by [the ghost replay design](docs/GHOST_REPLAY_DESIGN.md), but it does not record, persist, or play ghosts.
+> This batch exposes the immutable result and phase timeline required by [the ghost replay design](../GHOST_REPLAY_DESIGN.md), but it does not record, persist, or play ghosts.
 
 ## Goal
 

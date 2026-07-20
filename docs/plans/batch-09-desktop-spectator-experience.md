@@ -1,15 +1,19 @@
 # Batch 09 Implementation Plan: Browser Presentation and Capture
 
-**Status:** Ready to begin — Batches 07 and 08 are accepted  
+**Status:** Capture-ready - final no-narration video remains
 **Depends on:** Accepted Batches 07-08 instrumentation and readability  
 **May run in parallel with:** Batch 10 environment and audio preparation  
-**Primary gate:** The same build is usable in Quest immersive WebXR and in the Chrome/Chromium browser simulation, and a repeatable operator-led task sequence can be captured with a concise narration.
+**Primary gate:** The same build is usable in Quest immersive WebXR and in the Chrome/Chromium browser simulation, and a repeatable operator-led task sequence can be captured. Narration is deferred for v0.1.
 
-> This batch follows [the hybrid jar-test design direction](docs/DESIGN_DIRECTION_JAR_TEST_HYBRID.md). The design brief governs product intent and presentation meaning; this plan governs Batch 09 scope, tests, evidence, and acceptance.
+> This batch follows [the hybrid jar-test design direction](../DESIGN_DIRECTION_JAR_TEST_HYBRID.md). The design brief governs product intent and presentation meaning; this plan governs Batch 09 scope, tests, evidence, and acceptance.
 
 ## Goal
 
 Make the existing browser simulation a clear desktop presentation and establish a simple recording workflow. The project owner performs the real low/optimum/high tasks while Codex captures the session. A short narration explains the purpose, dose-response result, hero tank, jar summaries, and plot.
+
+**v0.1 amendment:** The project owner deferred narration. The narration work
+package below is retained as a future option but is not a v0.1 acceptance gate.
+The final recording uses the real operator-led task sequence without narration.
 
 Batch 09 does not create a separate spectator product, cinematic autoplay system, or prerecorded fallback experience.
 

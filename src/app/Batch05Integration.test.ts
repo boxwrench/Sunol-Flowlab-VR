@@ -6,11 +6,11 @@ import {
   runPhenomenonTrial,
   totalTreatmentSteps,
 } from '../sim'
-import { Batch05CommandAdapter } from './Batch05CommandAdapter'
 import {
   CANONICAL_SIMULATION_SEED,
   SimulationRuntime,
 } from './SimulationRuntime'
+import { TreatmentCycleController } from './TreatmentCycle'
 
 const TOTAL_TRIAL_STEPS = totalTreatmentSteps(
   DEFAULT_PHENOMENON_CONFIG.fixedTimestepSeconds,
@@ -23,10 +23,12 @@ describe('Batch 05 desktop/XR simulation parity', () => {
     (dose) => {
       const expected = runPhenomenonTrial(dose, CANONICAL_SIMULATION_SEED)
       const runtime = new SimulationRuntime()
-      const adapter = new Batch05CommandAdapter(runtime)
+      const cycle = new TreatmentCycleController(runtime)
 
-      expect(adapter.dispatch({ type: 'SET_DOSE', dose }).accepted).toBe(true)
-      expect(adapter.dispatch({ type: 'START_TRIAL' }).accepted).toBe(true)
+      expect(cycle.dispatchCommand({ type: 'SET_DOSE', dose }).accepted).toBe(
+        true,
+      )
+      expect(cycle.dispatchCommand({ type: 'START_TRIAL' }).accepted).toBe(true)
       runtime.stepHeadless(TOTAL_TRIAL_STEPS)
 
       expect(runtime.configHash).toBe(expected.configHash)
@@ -53,22 +55,22 @@ describe('Batch 05 desktop/XR simulation parity', () => {
   it('pauses cleanly and bounds catch-up after an interruption', () => {
     const runtime = new SimulationRuntime()
     const positionStorage = runtime.state.positionX
-    const adapter = new Batch05CommandAdapter(runtime)
+    const cycle = new TreatmentCycleController(runtime)
 
-    adapter.dispatch({ type: 'START_TRIAL' })
+    cycle.dispatchCommand({ type: 'START_TRIAL' })
     expect(runtime.step(1 / 60)).toBe(1)
-    adapter.interrupt()
+    cycle.interrupt('test interruption')
     const interruptedAt = runtime.simulationTimeSeconds
 
     expect(runtime.step(60)).toBe(0)
     expect(runtime.simulationTimeSeconds).toBe(interruptedAt)
 
-    adapter.dispatch({ type: 'START_TRIAL' })
+    cycle.resumeAfterInterruption()
     expect(runtime.step(60)).toBe(5)
     expect(runtime.simulationTimeSeconds).toBeCloseTo(interruptedAt + 5 / 60)
 
-    adapter.resetToReady()
-    expect(adapter.lifecycle).toBe('ready')
+    cycle.forceResetDevOnly()
+    expect(cycle.phase).toBe('READY')
     expect(runtime.simulationTimeSeconds).toBe(0)
     expect(runtime.state.positionX).toBe(positionStorage)
   })
@@ -76,8 +78,8 @@ describe('Batch 05 desktop/XR simulation parity', () => {
 
 function runAtFrameRate(frameRate: number) {
   const runtime = new SimulationRuntime()
-  const adapter = new Batch05CommandAdapter(runtime)
-  adapter.dispatch({ type: 'START_TRIAL' })
+  const cycle = new TreatmentCycleController(runtime)
+  cycle.dispatchCommand({ type: 'START_TRIAL' })
 
   const frameCount = frameRate * 43
   for (let frame = 0; frame < frameCount; frame += 1) {

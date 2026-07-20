@@ -12,15 +12,6 @@
 - Content boundary: distant landscape only; no plant layout, operating data,
   control screens, tags, or restricted infrastructure content.
 
-## README laboratory screenshot
-
-- Repository asset: `docs/images/sunol-flowlab-lab/shot-0.png`
-- Source: self-created Playwright capture of this repository's Chrome/Chromium
-  proof-mode render on 2026-07-20.
-- Inputs: repository-owned application geometry and the owner-supplied Hetchy
-  panorama documented above.
-- Modification: none after capture.
-
 ## v0.1 hosted release screenshot
 
 - Repository asset: `docs/images/sunol-flowlab-v0.1/shot-0.png`

@@ -1,11 +1,11 @@
 # Batch 10 Implementation Plan: Presence, Environment, and Audio
 
-**Status:** In progress — owner-authorized visual-first scheduling exception
+**Status:** Accepted - seated laboratory, dashboard, scenery, and audio review passed
 **Depends on:** Core apparatus, instrumentation, and readability accepted; Batch 09 final capture remains deferred  
 **May run in parallel with:** Asset and audio preparation after Batch 03, but final integration occurs here  
 **Primary gate:** The scene reads as a stylized drinking-water plant, preserves instrument dominance and parallax, and maintains the Quest performance target.
 
-> This batch must also follow [the hybrid jar-test design direction](docs/DESIGN_DIRECTION_JAR_TEST_HYBRID.md). The design brief governs product intent and presentation meaning; this batch remains authoritative for timing, scope, tests, evidence, and acceptance.
+> This batch must also follow [the hybrid jar-test design direction](../DESIGN_DIRECTION_JAR_TEST_HYBRID.md). The design brief governs product intent and presentation meaning; this batch remains authoritative for timing, scope, tests, evidence, and acceptance.
 
 ## Goal
 
@@ -13,8 +13,9 @@ Add the minimum environmental and audio context needed for presence without turn
 
 The project owner explicitly moved Batch 10 visual work ahead of Batch 09
 capture framing because final presentation media should follow settled visuals.
-This exception does not waive Batch 09 browser-entry or narration work and does
-not authorize final capture before Batch 10 acceptance.
+This exception did not waive Batch 09 browser-entry work or authorize final
+capture before Batch 10 acceptance. Narration was later deferred by the project
+owner for v0.1.
 
 ## Agent execution rules
 

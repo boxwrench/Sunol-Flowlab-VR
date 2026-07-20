@@ -79,7 +79,8 @@ Modified:
   `tests/xr-interaction.test.mjs`,
   `scripts/capture-batch-03-review.mjs`, and `package.json`;
 - plan/contracts/progress: `IMPLEMENTATION_PLAN.md`, `PROGRESS.md`,
-  `batch-06-treatment-cycle-state-machine.md`, `docs/CONTRACTS.md`, `README.md`,
+  `docs/plans/batch-06-treatment-cycle-state-machine.md`,
+  `docs/CONTRACTS.md`, `README.md`,
   `HANDOFF.md`, `docs/PERFORMANCE.md`, and `docs/UX_VALIDATION.md`.
 
 ## 4. Commands run and exact results
@@ -190,7 +191,7 @@ visual review after observing the cycle and refill.
 
 - Stable phase/result/command semantics: `docs/CONTRACTS.md`
 - Active roadmap status: `IMPLEMENTATION_PLAN.md`
-- Batch plan status: `batch-06-treatment-cycle-state-machine.md`
+- Batch plan status: `docs/plans/batch-06-treatment-cycle-state-machine.md`
 - Running work record: `PROGRESS.md`
 - Closing physical and operator evidence: `docs/PERFORMANCE.md`,
   `docs/UX_VALIDATION.md`, `README.md`, and `HANDOFF.md`.

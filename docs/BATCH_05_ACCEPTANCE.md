@@ -214,7 +214,7 @@ do not justify spatial hashing, a free list, or increased capacity.
 Updated or added for the integration checkpoint:
 
 - this packet;
-- `batch-05-simulation-xr-integration.md`;
+- `docs/plans/batch-05-simulation-xr-integration.md`;
 - `IMPLEMENTATION_PLAN.md`;
 - `docs/ARCHITECTURE.md`;
 - `docs/PERFORMANCE.md`;

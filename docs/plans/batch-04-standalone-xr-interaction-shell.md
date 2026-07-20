@@ -22,9 +22,9 @@ final smaller numbered dial, near-side direct grab, neutral reach, integer
 detents, Start latch, and 120 FPS-class performance. The owner explicitly
 waived a standing repeat and the separately scored 50-request protocol. Exact
 evidence and exceptions are recorded in
-[the Batch 04 acceptance packet](docs/BATCH_04_ACCEPTANCE.md).
+[the Batch 04 acceptance packet](../BATCH_04_ACCEPTANCE.md).
 
-> This batch must also follow [the hybrid jar-test design direction](docs/DESIGN_DIRECTION_JAR_TEST_HYBRID.md). The design brief governs product intent and presentation meaning; this batch remains authoritative for timing, scope, tests, evidence, and acceptance.
+> This batch must also follow [the hybrid jar-test design direction](../DESIGN_DIRECTION_JAR_TEST_HYBRID.md). The design brief governs product intent and presentation meaning; this batch remains authoritative for timing, scope, tests, evidence, and acceptance.
 
 ## Goal
 

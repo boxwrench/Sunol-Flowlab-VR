@@ -1,13 +1,13 @@
 # Batch 11 Implementation Plan: Release Hardening and Deployment
 
-**Status:** In progress - hosted v0.1.0 candidate accepted on Quest
+**Status:** In progress - final video, release notes, and v0.1.0 tag remain
 **Depends on:** All prior batch gates accepted  
 **May run in parallel with:** Independent release review and documentation verification only  
 **Primary gate:** A reproducible public release works on Quest immersive WebXR and the Chrome/Chromium browser simulation, preserves the accepted dose-response behavior, contains no development or sensitive material, and can be rolled back safely.
 
-> This batch must also follow [the hybrid jar-test design direction](docs/DESIGN_DIRECTION_JAR_TEST_HYBRID.md). The design brief governs product intent and presentation meaning; this batch remains authoritative for timing, scope, tests, evidence, and acceptance.
+> This batch must also follow [the hybrid jar-test design direction](../DESIGN_DIRECTION_JAR_TEST_HYBRID.md). The design brief governs product intent and presentation meaning; this batch remains authoritative for timing, scope, tests, evidence, and acceptance.
 
-> Release validation must cover the treatment-result ghost’s recording, compatibility, storage, playback independence, cross-browser interpolation, and subordinate presentation as governed by [the ghost replay design](docs/GHOST_REPLAY_DESIGN.md).
+> Release validation must cover the treatment-result ghost’s recording, compatibility, storage, playback independence, cross-browser interpolation, and subordinate presentation as governed by [the ghost replay design](../GHOST_REPLAY_DESIGN.md).
 
 ## Goal
 
@@ -291,8 +291,8 @@ Additionally:
 
 ## Suggested tags and commit
 
-- Commit: `release: harden and deploy Sunol FlowLab VR Coagulation v1.0.0`
-- Tags: `release-candidate`, then `v1.0.0`
+- Commit: `release: publish Sunol FlowLab VR v0.1.0`
+- Tag: `v0.1.0`
 
 ## Required closing acceptance packet
 

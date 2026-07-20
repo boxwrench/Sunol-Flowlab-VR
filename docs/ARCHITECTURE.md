@@ -2,17 +2,32 @@
 
 ## Purpose
 
-Sunol FlowLab VR is one deployable web application with a portable deterministic simulation core. The architecture keeps educational process behavior testable without React, Three.js, WebGL, or a headset.
+Sunol FlowLab VR is one deployable WebXR application with a portable,
+deterministic simulation core. Educational process behavior remains testable
+without React, Three.js, WebGL, or a headset.
 
-## Modules
+## Repository layout
 
 ```text
 src/
   sim/       deterministic state and headless process behavior
-  render/    R3F/Three.js views of authoritative simulation output
+  app/       lifecycle, commands, results, persistence, replay, and audio
+  render/    React Three Fiber views of authoritative state
   xr/        WebXR session and physical-input adapters
-  app/       lifecycle, command routing, modes, and composition
+tests/       repository contracts and rendered-browser scenarios
+scripts/     capture and physical Quest review harnesses
+public/      shipped self-created panorama and favicon assets
+docs/
+  plans/     ordered implementation plans
+  evidence/  retained acceptance captures
+  images/    current public documentation media
+  archive/   explicitly superseded source material
 ```
+
+Root files are limited to the public project front door, current plan/handoff,
+toolchain configuration, governance, and license.
+
+## Module boundaries
 
 Allowed dependencies:
 
@@ -26,59 +41,76 @@ xr -> app command types
 
 Forbidden dependencies:
 
-- `sim` to browser, React, Three.js, rendering, XR, persistence, or application lifecycle;
-- `render` to independent chemistry, optical-load, scoring, or measurement calculations;
+- `sim` to browser, React, Three.js, rendering, XR, persistence, or
+  application lifecycle;
+- `render` to independent chemistry, optical-load, scoring, or measurement
+  calculations;
 - `xr` to particle state or treatment mechanics;
 - hot simulation state to React component state.
 
 ## Runtime data flow
 
-Physical or spectator input becomes a validated discrete command. The application layer applies it to lifecycle/domain code. src/app/SimulationRuntime.ts owns the deterministic state and fixed-step clock, while an app-owned frame driver advances that runtime inside the React Three Fiber canvas. Rendering receives a read-only state view and synchronizes reusable Three.js objects. Relative optical-load bands produced by the simulation are the sole process source for hero-tank appearance, clearing-front diagnostics, instruments, completed results, static canonical jar summaries, persistence, and replay. This record is dimensionless and is not calibrated NTU.
+Physical or pointer input becomes a validated discrete command. The application
+layer applies it to lifecycle/domain code. `SimulationRuntime` owns the
+deterministic state and fixed-step clock, while an app-owned frame driver
+advances that runtime inside the React Three Fiber canvas. Rendering receives a
+read-only state view and synchronizes reusable Three.js objects.
 
-Development-only XR preflight adapters may report session, controller, and
-selection facts to app-owned low-frequency telemetry. They do not own or mutate
-simulation state and are excluded from production presentation.
+Relative optical-load bands produced by `src/sim` are the sole process source
+for hero-tank appearance, instruments, completed results, static canonical jar
+summaries, persistence, and replay. This record is dimensionless and is not
+calibrated NTU.
 
-The hero tank is the only live process presentation. Canonical jars are application-owned write-on-completion summaries derived from completed results. The complete dose-response plot and versioned experiment log retain all eleven dose values and rebuild canonical summaries on restore; jars are never simulation owners or complete history.
+The hero tank is the only live process presentation. Canonical jars are
+application-owned, write-on-completion summaries. The mounted dose-response
+plot and versioned experiment log retain complete memory for all eleven doses.
 
-## Treatment-result replay data flow
+## Treatment-result replay
 
-The simulation exposes the same authoritative optical-load band view used by live presentation. An application-owned recorder samples that view at 10 Hz by simulation or application elapsed time, then creates a versioned treatment-ghost record with phase and compatibility metadata. Persistence and schema migration remain outside `/src/sim`.
+An application-owned recorder samples the authoritative optical-load bands at
+10 Hz and creates a versioned treatment-ghost record with phase and
+compatibility metadata. Persistence and schema migration remain outside
+`src/sim`.
 
-An application-owned playback clock performs sample lookup and bounded linear interpolation. Rendering receives a read-only replay view. The selected v1 presentation uses the saved run's authoritative endpoint as a labeled cyan past-run gauge needle; it does not place a comparison level inside the tank. Rendering does not reconstruct particles, calculate clarity, or own playback time. Pure ghost playback pauses the live simulation; live-versus-ghost comparison keeps the two states separate.
+An application-owned playback clock performs sample lookup and bounded linear
+interpolation. Rendering receives a read-only replay view. The accepted
+presentation uses the saved endpoint as a subordinate past-run gauge needle; it
+does not reconstruct particles, calculate a second result, or place a
+comparison level inside the tank.
 
 ## Determinism and performance
 
-- Fixed timestep and capped catch-up prevent display timing from changing results.
-- Seeded randomness is centralized; `Math.random()` is forbidden in `src/sim`.
-- Particle capacity is fixed and storage is typed/preallocated.
-- Per-frame allocations and additional transparent layers require measured justification.
+- Fixed timestep and capped catch-up prevent display timing from changing
+  results.
+- Seeded randomness is centralized; `Math.random()` is forbidden in
+  `src/sim`.
+- Particle capacity is fixed and storage is typed and preallocated.
+- React state is not updated per particle or per simulation step.
+- Per-frame allocations and added transparent layers require measured
+  justification.
 - Headless tests and benchmarks run without DOM or WebGL.
 
-## Error boundaries
+## Lifecycle and errors
 
-Invalid external commands fail at the app boundary. Unsupported XR and session failure return to a usable desktop mode. Persistence validates schema versions and cannot mutate simulation initialization. Missing, corrupt, truncated, quota-blocked, or incompatible ghost records degrade to a clear refusal or legacy summary without crashing or mutating the live simulation. Rendering failures produce a visible application error rather than a silent blank canvas.
+Invalid external commands fail at the app boundary. Visibility changes and XR
+session interruptions pause the treatment cycle without hidden catch-up.
+Persistence validates schema versions and cannot mutate simulation
+initialization. Missing, corrupt, truncated, quota-blocked, or incompatible
+records degrade to a clear refusal or legacy summary. Rendering failures
+produce a visible application error instead of a silent blank canvas.
 
-## Current state
+## Current deployed state
 
-Batch 00 is substantially complete and Batch 01A is accepted. The local physical portion of Batch 01B is accepted on Quest 3; the hosted-HTTPS smoke remains open. Batch 02A remains the immutable statistical prototype baseline. Batch 03 is accepted with a documented fresh-recognition waiver: its final version 1 mass-authoritative model, deterministic fixed-capacity merging, fractal-derived diameter and capped settling, one projected-area optical-load authority, population-health diagnostics, canonical and nine-seed sweep evidence, 03R.1 static jar repair, and replacement-model Quest visibility are retained. Rendering presents the single optical authority on rear and lighter middle slices and uses only presentation-local merge smoothing. Spatial hashing remains deferred and a free list is excluded. Batch 04 is accepted.
+The public root loads the seated Sunol laboratory in Chrome/Chromium and offers
+one explicit **Enter VR** action in Quest Browser. It uses one 500-particle
+authoritative simulation, physical instrumentation, a static six-jar rack, a
+complete result plot, bounded result replay, selectable scenery, and generated
+audio.
 
-Batch 05 is accepted with one app-owned `SimulationRuntime`, shared desktop/XR
-hero-tank rendering, validated physical commands, lifecycle interruption
-handling, deterministic parity, and measured Quest performance. Batch 06 is
-accepted with the seven-phase treatment controller, immutable endpoint result,
-locked controls and deterministic refill.
+The local and hosted Quest routes, final visual/audio presentation, corrected
+seated height, Dose 0/5/10 repeat cycle, refills, and immersive re-entry are
+accepted on Quest 3. The remaining v0.1 release work is the final demonstration
+video, release notes, and tag.
 
-Batch 07 is accepted. It adds app-owned experiment
-memory, canonical jar summaries, physical instrumentation, 10 Hz treatment-
-ghost recording, bounded localStorage persistence, compatibility validation,
-and independent playback without particle replay or simulation recomputation.
-Automated, rendered-browser, seated Quest performance, and final project-owner
-human evidence pass. Batch 08 is also accepted with render-local optical-band
-smoothing. The first combined Quest
-review passed the technical watcher but failed instrument comprehension. The
-remediation replaces the rejected in-tank prior-front marker with a labeled
-past-run gauge needle, removes the unexplained optical sensor, and adds plain-
-language labels. Subsequent seated iterations refined layout, controls, chart,
-jar tiers, and the START label. The project owner accepted the combined gate;
-Batch 09 is next and Batches 10–11 remain unstarted.
+See [IMPLEMENTATION_PLAN.md](../IMPLEMENTATION_PLAN.md) for current status and
+[docs/README.md](README.md) for design and validation evidence.

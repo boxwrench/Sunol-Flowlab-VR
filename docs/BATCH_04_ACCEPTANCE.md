@@ -57,7 +57,7 @@ Modified:
 - IMPLEMENTATION_PLAN.md
 - PROGRESS.md
 - HANDOFF.md
-- batch-04-standalone-xr-interaction-shell.md
+- docs/plans/batch-04-standalone-xr-interaction-shell.md
 - docs/PERFORMANCE.md
 
 Removed: none.

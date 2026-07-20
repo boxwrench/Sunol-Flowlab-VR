@@ -291,3 +291,13 @@ Original prompt: batch 7
   without moving the lab or desktop camera. The owner accepted the corrected
   height, then completed hosted Dose 0, Dose 5, and Dose 10 trials with refills
   plus XR exit/re-entry and reported a pass.
+- Repository curation moved the twelve detailed batch plans from the root into
+  `docs/plans/`, replaced stale status-heavy plan and handoff prose with concise
+  current indexes, categorized `docs/README.md`, and refreshed the deployed
+  architecture summary. Three unused transitional app modules and their
+  superseded adapter-only tests were removed; the valuable Batch 05 parity and
+  interruption checks now exercise the current `TreatmentCycleController`.
+- Removed the unused `@react-three/drei` direct dependency and its 33
+  transitive packages, plus one superseded pre-v0.1 README screenshot. Ignored
+  build output, test captures, logs, and TypeScript cache were cleared locally.
+  Git history remains the recovery path for pruned tracked files.

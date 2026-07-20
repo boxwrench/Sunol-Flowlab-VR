@@ -8,7 +8,6 @@ const manifest = JSON.parse(
 
 test('XR-sensitive runtime dependencies use exact compatible versions', () => {
   const expected = {
-    '@react-three/drei': '10.7.7',
     '@react-three/fiber': '9.6.1',
     '@react-three/xr': '6.6.30',
     react: '19.2.7',

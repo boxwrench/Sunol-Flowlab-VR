@@ -1,17 +1,16 @@
 # Batch 08 Implementation Plan: Headset Readability and Clearing-Front Refinement
 
-**Status:** Technical candidate under an owner-authorized scheduling exception;
-the combined Batch 07/08 Quest readability, comprehension, and performance gate
-remains open
+**Status:** Accepted - combined Batch 07/08 Quest readability, comprehension,
+comparison, and performance gate passed
 **Depends on:** Batch 07 accepted  
 **May run in parallel with:** Recorded review, user comprehension testing, optional charge-vision spike  
 **Primary gate:** At arm’s length in stereo, the player can see floc growth, falling floc, top-down clearing, a final appearance consistent with the gauge, and a subordinate compatible prior-result ghost while the Quest sustains the performance target.
 
-> This batch must also follow [the hybrid jar-test design direction](docs/DESIGN_DIRECTION_JAR_TEST_HYBRID.md). The design brief governs product intent and presentation meaning; this batch remains authoritative for timing, scope, tests, evidence, and acceptance.
+> This batch must also follow [the hybrid jar-test design direction](../DESIGN_DIRECTION_JAR_TEST_HYBRID.md). The design brief governs product intent and presentation meaning; this batch remains authoritative for timing, scope, tests, evidence, and acceptance.
 
-> The clearing front and every clarity display remain transforms of the relative optical-load bands governed by [the modeling research amendment](docs/MODELING_RESEARCH_AMENDMENT.md). Visual smoothing and exaggeration cannot alter the authoritative process record.
+> The clearing front and every clarity display remain transforms of the relative optical-load bands governed by [the modeling research amendment](../MODELING_RESEARCH_AMENDMENT.md). Visual smoothing and exaggeration cannot alter the authoritative process record.
 
-> Treatment-ghost visuals consume the app-owned read-only replay view governed by [the ghost replay design](docs/GHOST_REPLAY_DESIGN.md). They remain subordinate to the active trial and never introduce ghost particles or duplicate physics.
+> Treatment-ghost visuals consume the app-owned read-only replay view governed by [the ghost replay design](../GHOST_REPLAY_DESIGN.md). They remain subordinate to the active trial and never introduce ghost particles or duplicate physics.
 
 > **Scheduling exception (2026-07-19):** The project owner authorized Batch 08
 > machine-verifiable work before the remaining Batch 07 human verdict so both

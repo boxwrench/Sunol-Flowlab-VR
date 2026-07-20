@@ -159,8 +159,8 @@ npm run benchmark
 npm run test:browser
 ```
 
-The current checkpoint includes 26 repository-contract tests and 140 Vitest
-tests across 31 files, plus six rendered Chromium scenarios. Quest evidence is
+The current checkpoint includes 26 repository-contract tests and 137 Vitest
+tests across 30 files, plus six rendered Chromium scenarios. Quest evidence is
 kept separate from automated browser evidence so headset-specific claims remain
 traceable.
 

@@ -1,11 +1,11 @@
 # Batch 01 Implementation Plan: Foundation and WebXR Preflight
 
-**Status:** In progress — Track 1A accepted; Track 1B local device gate accepted, hosted gate open
+**Status:** Accepted - rendered foundation plus local and hosted Quest routes passed
 **Depends on:** Batch 00 contracts substantially complete; hosted-route closure remains part of Track 1B  
 **May run in parallel with:** Track 1A and Track 1B only under isolated ownership  
 **Primary gate:** The repository can render 500 deterministic particles with permanent metrics, and the actual Quest/WebXR toolchain is proven independently.
 
-> This batch must also follow [the hybrid jar-test design direction](docs/DESIGN_DIRECTION_JAR_TEST_HYBRID.md). The design brief governs product intent and presentation meaning; this batch remains authoritative for timing, scope, tests, evidence, and acceptance.
+> This batch must also follow [the hybrid jar-test design direction](../DESIGN_DIRECTION_JAR_TEST_HYBRID.md). The design brief governs product intent and presentation meaning; this batch remains authoritative for timing, scope, tests, evidence, and acceptance.
 
 ## Goal
 

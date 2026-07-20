@@ -6,9 +6,9 @@ interaction routing, reentry, and short rolling performance pass
 **May run in parallel with:** Review, parity-test preparation, trace analysis  
 **Primary gate:** The proven desktop simulation runs inside the proven XR apparatus with the same qualitative behavior, deterministic results, and acceptable Quest performance.
 
-> This batch must also follow [the hybrid jar-test design direction](docs/DESIGN_DIRECTION_JAR_TEST_HYBRID.md). The design brief governs product intent and presentation meaning; this batch remains authoritative for timing, scope, tests, evidence, and acceptance.
+> This batch must also follow [the hybrid jar-test design direction](../DESIGN_DIRECTION_JAR_TEST_HYBRID.md). The design brief governs product intent and presentation meaning; this batch remains authoritative for timing, scope, tests, evidence, and acceptance.
 
-> Integrate only the accepted Workstream 03D model governed by [the modeling research amendment](docs/MODELING_RESEARCH_AMENDMENT.md). Its dimensionless relative optical-load record is the sole process authority and is never calibrated NTU.
+> Integrate only the accepted Workstream 03D model governed by [the modeling research amendment](../MODELING_RESEARCH_AMENDMENT.md). Its dimensionless relative optical-load record is the sole process authority and is never calibrated NTU.
 
 ## Goal
 
