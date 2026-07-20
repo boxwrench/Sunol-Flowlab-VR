@@ -120,9 +120,6 @@ function PhenomenonApp() {
   )
   const presentationOpticalLoadBands =
     completedOpticalLoadBands ?? runtime.opticalLoadBands
-  const presentationEndpointOpticalLoad =
-    cycle.result?.endpointOpticalLoad ??
-    endpointOpticalLoad(runtime.opticalLoadBands)
   const experimentSnapshot = experiment.snapshot()
   const instrumentation = (
     <PhysicalInstrumentation
@@ -365,18 +362,7 @@ function PhenomenonApp() {
       <FoundationScene
         animateParticleTransitions={!reviewCaptureMode}
         canonicalJarSummaries={experimentSnapshot.canonicalSummaries}
-        ghostComparisonView={experiment.replayComparisonView}
         instrumentation={instrumentation}
-        measurementPhase={
-          cycle.phase === 'MEASURING'
-            ? 'measuring'
-            : cycle.phase === 'COMPLETE'
-              ? 'complete'
-              : cycle.phase === 'REFILLING'
-                ? 'refilling'
-                : 'idle'
-        }
-        measurementRelativeOpticalLoad={presentationEndpointOpticalLoad}
         particleState={runtime.state}
         opticalLoadBands={presentationOpticalLoadBands}
         preserveDrawingBuffer={reviewCaptureMode}

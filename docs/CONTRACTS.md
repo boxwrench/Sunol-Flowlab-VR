@@ -144,11 +144,12 @@ record replacement. Clearing experiment history does not delete ghosts. The
 plot retains every completion, including repeats, while canonical jars rebuild
 from the latest matching even-dose result.
 
-Batch 08 exposes one mutable app-owned replay-comparison view containing only
-playback status and normalized clearing-front depth. The depth uses the same
-threshold transform as the live clearing-front diagnostic and is `0` while
-playback is empty. `/render` may position one subordinate marker from this view;
-it may not derive a second optical value, own playback time, import the ghost
-runtime, or construct replay particles. Render-local optical-band temporal
-smoothing is display-only and resets immediately on a presentation-epoch
-change; authoritative recording and result values remain unsmoothed.
+Batch 08 exposes mutable app-owned replay views containing playback status,
+progress, the saved recording's authoritative endpoint optical load, and the
+normalized clearing-front depth. Empty playback exposes no endpoint and zero
+depth. The selected v1 rendering uses the endpoint only for a labeled cyan
+past-run gauge needle; it does not place the clearing-front depth inside the
+tank. `/render` may not derive a second optical value, own playback time, import
+the ghost runtime, or construct replay particles. Render-local optical-band
+temporal smoothing is display-only and resets immediately on a presentation-
+epoch change; authoritative recording and result values remain unsmoothed.

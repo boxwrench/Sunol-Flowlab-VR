@@ -66,7 +66,7 @@ if (action === 'status') {
   print(current)
 } else if (action === 'stage-review') {
   const staged = []
-  for (const dose of [0, 5, 10]) {
+  for (const dose of [0, 2, 4, 5, 6, 8, 10]) {
     await page.evaluate((selectedDose) => {
       window.reset_xr_trial_to_ready?.()
       const selected = window.dispatch_xr_shell_command?.({
@@ -173,7 +173,7 @@ process.exit(exitCode)
 async function prepareCombinedReview(targetPage) {
   const staged = []
   let current = await snapshot(targetPage)
-  for (const dose of [0, 5, 10]) {
+  for (const dose of [0, 2, 4, 5, 6, 8, 10]) {
     const alreadyPlotted = current.state.batch07.plottedResults.some(
       (point) => point.dose === dose,
     )
@@ -219,8 +219,8 @@ async function prepareCombinedReview(targetPage) {
   const availableDoses = new Set(
     current.state.batch07.plottedResults.map((point) => point.dose),
   )
-  if (![0, 5, 10].every((dose) => availableDoses.has(dose)))
-    throw new Error('Combined review memory is missing a 0, 5, or 10 dose')
+  if (![0, 2, 4, 5, 6, 8, 10].every((dose) => availableDoses.has(dose)))
+    throw new Error('Combined review memory is missing a canonical dose')
   if (
     current.state.batch07.playback.status !== 'paused' ||
     Math.abs(current.state.batch07.playback.elapsedSeconds - 35) > 0.01 ||
@@ -233,8 +233,8 @@ async function prepareCombinedReview(targetPage) {
     staged,
     checklist: [
       'Read the mounted phase, dose, score, plot, and replay instruments without prompting.',
-      'Compare the live clearing front with the single opaque prior-front marker.',
-      'Confirm the 0, 5, and 10 static jars read as persistent summaries.',
+      'Compare the live gauge with the labeled cyan past-run needle.',
+      'Confirm all six canonical jars show a readable cloudiness spectrum.',
       'Use physical controls to start the live dose-5 trial.',
       'After completion, exercise replay play/pause/reset, refill, and clear.',
     ],
@@ -299,13 +299,24 @@ async function watchCombinedCompletion(targetPage) {
         throw new Error(
           `Unexpected physical phase sequence: ${JSON.stringify(observedPhases)}`,
         )
-      if (current.state.batch07.experimentPointCount !== initialPoints + 1)
-        throw new Error('Combined run did not append exactly one plot point')
+      const resultId = current.state.result?.id
+      const pointAppended =
+        current.state.batch07.experimentPointCount === initialPoints + 1
+      const idempotentRepeat =
+        current.state.batch07.experimentPointCount === initialPoints &&
+        typeof resultId === 'string' &&
+        initial.state.batch07.plottedResults.some(
+          (point) => point.trialId === resultId,
+        )
+      if (!pointAppended && !idempotentRepeat)
+        throw new Error(
+          'Combined run produced neither one new plot point nor an idempotent restored result',
+        )
       const ghostRecorded =
         initialGhosts < 3
           ? current.state.batch07.ghostCount === initialGhosts + 1
           : current.state.batch07.pendingGhostTrialId !== null
-      if (!ghostRecorded)
+      if (!ghostRecorded && !idempotentRepeat)
         throw new Error('Combined run produced no saved or pending replay')
       const performance = summarizePerformance(samplesByPhase)
       const alerts = []
@@ -334,6 +345,7 @@ async function watchCombinedCompletion(targetPage) {
         technicalPass: alerts.length === 0,
         alerts,
         controllersDetected,
+        memoryDisposition: pointAppended ? 'appended' : 'idempotent-repeat',
         phases,
         performance,
         initial: summarizeSnapshot(initial),

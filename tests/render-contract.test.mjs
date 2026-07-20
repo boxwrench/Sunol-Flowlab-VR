@@ -53,16 +53,19 @@ test('jar-test bench has six static app-fed canonical summaries with no process 
     source,
     /ref=\{fillsRef\}[\s\S]*?CANONICAL_JAR_DOSES\.length[\s\S]*?RAW_WATER_FILL_DIMENSIONS/,
   )
-  assert.match(source, /const RAW_WATER_FILL_COLOR = '#6b7d57'/)
+  assert.match(source, /const RAW_WATER_FILL_COLOR = '#4f5940'/)
   assert.match(source, /fills\.setMatrixAt\(index, transform\)/)
   assert.match(source, /fills\.instanceMatrix\.needsUpdate = true/)
   assert.match(source, /fills\.setColorAt/)
   assert.match(source, /summaryTokensRef/)
   assert.match(source, /summary\.displayClarity/)
+  assert.match(source, /jarDisplayContrast\(summary\.displayClarity\)/)
   assert.match(source, /ref=\{tableLegsRef\}/)
   assert.match(source, /JAR_TEST_TABLETOP_HEIGHT_METERS/)
   assert.match(source, /JAR_VESSEL_DIMENSIONS/)
   assert.match(source, /JAR_RIM_DIMENSIONS/)
+  assert.match(source, /text=\{'JAR TEST'\}/)
+  assert.match(source, /DOSE {2}0 {5}2 {5}4 {5}6 {5}8 {4}10/)
   assert.doesNotMatch(source, /cylinderGeometry|torusGeometry/)
   assert.doesNotMatch(
     source,
@@ -70,20 +73,12 @@ test('jar-test bench has six static app-fed canonical summaries with no process 
   )
 })
 
-test('Batch 8 ghost comparison is one opaque read-only marker', async () => {
+test('the hero tank contains no unlabeled sensor or prior-front line', async () => {
   const source = await readFile(
-    new URL('../src/render/TreatmentGhostComparison.tsx', import.meta.url),
+    new URL('../src/render/HeroObservationTank.tsx', import.meta.url),
     'utf8',
   )
-  const frameCallback = source.slice(source.indexOf('useFrame('))
 
-  assert.equal((source.match(/<mesh\b/g) ?? []).length, 1)
-  assert.match(source, /view\.clearingFrontDepth/)
-  assert.match(source, /view\.status !== 'empty'/)
-  assert.doesNotMatch(source, /transparent|opacity=/)
-  assert.doesNotMatch(
-    source,
-    /Particle|SimulationRuntime|TreatmentGhostPlayback/,
-  )
-  assert.doesNotMatch(frameCallback, /new (?:Matrix4|Vector3|Array)\b/)
+  assert.doesNotMatch(source, /MeasurementCue|TreatmentGhostComparison/)
+  assert.doesNotMatch(source, /measurementPhase|ghostComparisonView/)
 })

@@ -1,37 +1,22 @@
 import type { ParticleStateView } from '../sim'
 import { HERO_TANK_LOCAL_POSITION } from './layout'
-import {
-  MeasurementCue,
-  type MeasurementPresentationPhase,
-} from './MeasurementCue'
 import { ParticleCloud, type ParticleFrameRecorder } from './ParticleCloud'
 import {
   OpticalLoadGradient,
   type OpticalLoadBandsPresentation,
 } from './OpticalLoadGradient'
-import {
-  TreatmentGhostComparison,
-  type GhostComparisonPresentationView,
-} from './TreatmentGhostComparison'
-
 interface HeroObservationTankProps {
   readonly animateParticleTransitions?: boolean
-  readonly measurementPhase?: MeasurementPresentationPhase
-  readonly measurementRelativeOpticalLoad?: number
   readonly particleState: ParticleStateView
   readonly presentationEpoch?: number
-  readonly ghostComparisonView?: GhostComparisonPresentationView
   readonly opticalLoadBands: OpticalLoadBandsPresentation
   readonly recordParticleFrame: ParticleFrameRecorder
 }
 
 export function HeroObservationTank({
   animateParticleTransitions = true,
-  measurementPhase = 'idle',
-  measurementRelativeOpticalLoad = 0,
   particleState,
   presentationEpoch = 0,
-  ghostComparisonView,
   opticalLoadBands,
   recordParticleFrame,
 }: HeroObservationTankProps) {
@@ -41,20 +26,12 @@ export function HeroObservationTank({
         bands={opticalLoadBands}
         presentationEpoch={presentationEpoch}
       />
-      {ghostComparisonView === undefined ? null : (
-        <TreatmentGhostComparison view={ghostComparisonView} />
-      )}
       <ParticleCloud
         animateTransitions={animateParticleTransitions}
         presentationEpoch={presentationEpoch}
         state={particleState}
         recordFrame={recordParticleFrame}
       />
-      <MeasurementCue
-        phase={measurementPhase}
-        relativeOpticalLoad={measurementRelativeOpticalLoad}
-      />
-
       <mesh position={[0, -0.025, 0]}>
         <boxGeometry args={[1.55, 0.05, 0.85]} />
         <meshStandardMaterial color={'#183d3c'} roughness={0.62} />

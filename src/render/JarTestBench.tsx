@@ -5,13 +5,14 @@ import {
   JAR_TEST_RACK_BASE_HEIGHT_METERS,
   JAR_TEST_TABLETOP_HEIGHT_METERS,
 } from './layout'
+import { InstrumentLabel } from './InstrumentLabel'
 
 export const CANONICAL_JAR_DOSES = [0, 2, 4, 6, 8, 10] as const
 
 const JAR_VESSEL_DIMENSIONS = [0.18, 0.36, 0.16] as const
 const JAR_RIM_DIMENSIONS = [0.19, 0.014, 0.17] as const
 const RAW_WATER_FILL_DIMENSIONS = [0.158, 0.26, 0.138] as const
-const RAW_WATER_FILL_COLOR = '#6b7d57'
+const RAW_WATER_FILL_COLOR = '#4f5940'
 const JAR_WALL_EXTRUSION = {
   depth: JAR_VESSEL_DIMENSIONS[1],
   bevelEnabled: false,
@@ -63,7 +64,12 @@ interface JarTestBenchProps {
 }
 
 const RAW_WATER_COLOR = new Color(RAW_WATER_FILL_COLOR)
-const CLEARED_WATER_COLOR = new Color('#a9d6bd')
+const CLEARED_WATER_COLOR = new Color('#d0f3e8')
+
+export function jarDisplayContrast(displayClarity: number): number {
+  if (!Number.isFinite(displayClarity)) return 0
+  return Math.min(1, Math.max(0, (displayClarity - 0.25) / 0.25))
+}
 
 export function JarTestBench({ summaries = [] }: JarTestBenchProps) {
   const fillsRef = useRef<InstancedMesh>(null)
@@ -121,7 +127,7 @@ export function JarTestBench({ summaries = [] }: JarTestBenchProps) {
           ? RAW_WATER_COLOR
           : RAW_WATER_COLOR.clone().lerp(
               CLEARED_WATER_COLOR,
-              summary.displayClarity,
+              jarDisplayContrast(summary.displayClarity),
             ),
       )
       transform.makeRotationX(-Math.PI / 2)
@@ -161,6 +167,14 @@ export function JarTestBench({ summaries = [] }: JarTestBenchProps) {
 
   return (
     <group position={[-1.2, 0.02, 0.48]} rotation={[0, 0.08, 0]}>
+      <InstrumentLabel
+        text={'JAR TEST'}
+        width={0.72}
+        height={0.16}
+        position={[0, 1.69, 0.1]}
+        background={'#203b39'}
+        fontScale={0.56}
+      />
       <mesh position={[0, JAR_TEST_TABLETOP_HEIGHT_METERS, 0]}>
         <boxGeometry args={[1.72, 0.08, 0.62]} />
         <meshStandardMaterial color={'#6c746a'} roughness={0.72} />
@@ -183,7 +197,7 @@ export function JarTestBench({ summaries = [] }: JarTestBenchProps) {
             color={'#ffffff'}
             roughness={0.72}
             transparent
-            opacity={0.92}
+            opacity={0.96}
             vertexColors
           />
         </instancedMesh>
@@ -234,6 +248,14 @@ export function JarTestBench({ summaries = [] }: JarTestBenchProps) {
           <boxGeometry args={[1.58, 0.055, 0.12]} />
           <meshStandardMaterial color={'#405d59'} roughness={0.6} />
         </mesh>
+        <InstrumentLabel
+          text={'DOSE  0     2     4     6     8    10'}
+          width={1.48}
+          height={0.09}
+          position={[0, 0.58, 0.08]}
+          background={'#203b39'}
+          fontScale={0.43}
+        />
         <mesh position={[-0.78, 0.35, 0]}>
           <boxGeometry args={[0.04, 0.7, 0.1]} />
           <meshStandardMaterial color={'#405d59'} roughness={0.6} />

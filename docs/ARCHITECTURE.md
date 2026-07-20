@@ -45,7 +45,7 @@ The hero tank is the only live process presentation. Canonical jars are applicat
 
 The simulation exposes the same authoritative optical-load band view used by live presentation. An application-owned recorder samples that view at 10 Hz by simulation or application elapsed time, then creates a versioned treatment-ghost record with phase and compatibility metadata. Persistence and schema migration remain outside `/src/sim`.
 
-An application-owned playback clock performs sample lookup and bounded linear interpolation. Rendering may show a subordinate replay gradient, clearing-front marker, gauge trace, or plot line from a read-only replay view. It does not reconstruct particles, calculate clarity, or own playback time. Pure ghost playback pauses the live simulation; live-versus-ghost comparison keeps the two states separate.
+An application-owned playback clock performs sample lookup and bounded linear interpolation. Rendering receives a read-only replay view. The selected v1 presentation uses the saved run's authoritative endpoint as a labeled cyan past-run gauge needle; it does not place a comparison level inside the tank. Rendering does not reconstruct particles, calculate clarity, or own playback time. Pure ghost playback pauses the live simulation; live-versus-ghost comparison keeps the two states separate.
 
 ## Determinism and performance
 
@@ -67,7 +67,7 @@ Batch 05 is accepted with one app-owned `SimulationRuntime`, shared desktop/XR
 hero-tank rendering, validated physical commands, lifecycle interruption
 handling, deterministic parity, and measured Quest performance. Batch 06 is
 accepted with the seven-phase treatment controller, immutable endpoint result,
-locked controls, deterministic refill, and physical measurement cue.
+locked controls and deterministic refill.
 
 Batch 07 is a complete but unaccepted candidate. It adds app-owned experiment
 memory, canonical jar summaries, physical instrumentation, 10 Hz treatment-
@@ -77,6 +77,9 @@ Automated, rendered-browser, and seated Quest performance evidence pass. The
 remaining human readability, comprehension, and physical-control verdict was
 explicitly deferred on 2026-07-19; it is not passed or waived. The owner then
 authorized Batch 08 technical work under a scheduling exception. Its technical
-candidate adds render-local optical-band smoothing and one opaque prior-front
-marker from an app-owned replay view. A combined Quest review now owns both
-open human gates; Batches 09–11 remain unstarted.
+candidate adds render-local optical-band smoothing. The first combined Quest
+review passed the technical watcher but failed instrument comprehension. The
+remediation replaces the rejected in-tank prior-front marker with a labeled
+past-run gauge needle, removes the unexplained optical sensor, and adds plain-
+language labels. A focused Quest rerun now owns both open human gates; Batches
+09–11 remain unstarted.

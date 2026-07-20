@@ -28,23 +28,22 @@ The approved presentation direction is a [hybrid six-jar test bench and hero obs
 
 The current candidate runs one deterministic seven-phase treatment cycle with
 ready-only dose and Start controls, physical locked-state feedback, a 90-degree
-measurement cue, one immutable completed result, deterministic refill, a
-relative-result gauge, a complete 0–10 plot/log, persistent static canonical
+one immutable completed result, deterministic refill, a labeled relative-
+turbidity gauge, a complete 0–10 plot/log, persistent static canonical
 summaries, and bounded treatment-result ghost recording/playback. Batch 08 adds
-allocation-free display smoothing and one restrained opaque marker for a prior
-recording's clearing-front depth.
+allocation-free display smoothing and a labeled past-run needle on the gauge.
 
 The implemented [treatment-result ghost design](docs/GHOST_REPLAY_DESIGN.md)
 records the authoritative relative optical-load history for restrained
 previous-run comparison. It does not replay particles or recompute the
 simulation. Batch 07 owns recording, compatibility, small-library persistence,
-and playback. Batch 08 consumes only the app-owned replay view for its single
-subordinate prior-front marker; it adds no second tank, ghost particles, or
+and playback. Batch 08 consumes only the app-owned replay view for its
+subordinate past-run gauge needle; it adds no second tank, ghost particles, or
 transparent ghost layer. The selected display choices are recorded in
 [docs/TUNING.md](docs/TUNING.md).
 
-The current automated checkpoint passes 21 repository-contract tests, 133
-Vitest tests across 30 files, all six rendered-browser scenarios, the canonical
+The current automated checkpoint passes 22 repository-contract tests, 133
+Vitest tests across 29 files, all six rendered-browser scenarios, the canonical
 and nine-seed eleven-dose regression corpus, type checking, lint, production
 build, and the standalone simulation benchmark. The compatible-ghost desktop
 capture reports 55 development draw calls. These desktop checks do not replace

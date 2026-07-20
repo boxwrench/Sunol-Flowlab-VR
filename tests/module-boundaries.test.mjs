@@ -58,7 +58,7 @@ test('the app runtime owns deterministic state and clock lifecycle', async () =>
 })
 
 test('Batch 06 composes one app-owned treatment cycle into the shared hero tank renderer', async () => {
-  const [app, cycle, scene, apparatus, measurement] = await Promise.all([
+  const [app, cycle, scene, apparatus] = await Promise.all([
     readFile(new URL('../src/app/XrShellApp.tsx', import.meta.url), 'utf8'),
     readFile(new URL('../src/app/TreatmentCycle.ts', import.meta.url), 'utf8'),
     readFile(
@@ -67,10 +67,6 @@ test('Batch 06 composes one app-owned treatment cycle into the shared hero tank 
     ),
     readFile(
       new URL('../src/render/XrShellApparatus.tsx', import.meta.url),
-      'utf8',
-    ),
-    readFile(
-      new URL('../src/render/MeasurementCue.tsx', import.meta.url),
       'utf8',
     ),
   ])
@@ -87,13 +83,9 @@ test('Batch 06 composes one app-owned treatment cycle into the shared hero tank 
   assert.match(cycle, /createTrialResultV1/)
   assert.doesNotMatch(cycle, /from 'react'|from 'three'/)
   assert.match(scene, /<HeroObservationTank/)
-  assert.match(scene, /measurementPhase=\{measurementPhase\}/)
   assert.match(scene, /particleState=\{particleState\}/)
   assert.match(scene, /opticalLoadBands=\{opticalLoadBands\}/)
   assert.doesNotMatch(apparatus, /EmptyHeroTank/)
   assert.equal((apparatus.match(/<JarTestBench\b/g) ?? []).length, 1)
-  assert.match(measurement, /phase === 'measuring'/)
-  assert.match(measurement, /visible=\{phase === 'complete'\}/)
-  assert.match(measurement, /visible=\{phase === 'refilling'\}/)
-  assert.doesNotMatch(measurement, /from '\.\.\/app|from '\.\.\/sim|useFrame/)
+  assert.doesNotMatch(scene, /MeasurementCue|TreatmentGhostComparison/)
 })

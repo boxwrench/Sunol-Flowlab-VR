@@ -103,20 +103,24 @@ run, seated stereo/transparency review, low/optimum/high qualitative behavior,
 fresh-session reentry, and 116.9–118.5 FPS rolling Quest windows pass. Batch 06
 is accepted with the seven-phase controller, immutable fixed-
 endpoint result, locked controls, deterministic refill, lifecycle handling,
-minimal physical measurement cue, and shared desktop/XR flow. Automated,
+and shared desktop/XR flow. Automated,
 desktop-rendered, and physical Quest phase/result/refill/performance checks
 pass. The seated project-owner operator also passed phase distinction, locked-
 control feedback, measurement conclusion, refill readability and invitation to
 repeat, and visible smoothness. Batch 07 now has a complete implementation
-candidate: physical phase lamps, relative-load gauge, 90-degree nephelometer,
-all-dose plot, static canonical summaries, refill and deliberate clear
+candidate: labeled phase readout, relative-turbidity gauge, labeled all-dose
+plot, static canonical summaries, refill and deliberate clear
 controls, versioned complete history, and bounded treatment-ghost recording,
 persistence, and playback. All local automated and rendered-browser gates pass.
 The seated Quest performance portion passed with one operator-started Dose 5
 run at 114.21 FPS and 9.50 ms p95. The owner called it a “good start” and paused
 before the remaining instrument/jar readability, replay/refill/clear controls,
-Dose 5 reasoning, and final verdict. Those checks remain the only open Batch 07
-gate.
+Dose 5 reasoning, and final verdict. The first combined review on 2026-07-20
+failed comprehension despite passing technical performance. Its remediation
+removes the unexplained sensor and in-tank comparison lines, adds plain-language
+instrument/control labels, labels the jar rack, increases the static jar
+display contrast, and moves prior-run comparison to a labeled cyan gauge
+needle. A focused human rerun remains the open Batch 07/08 gate.
 
 On 2026-07-19 the project owner explicitly deferred that remaining human gate
 and subsequently authorized a scheduling exception for Batch 08 technical work

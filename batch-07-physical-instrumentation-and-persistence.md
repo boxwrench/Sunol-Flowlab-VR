@@ -14,6 +14,14 @@ verdict checks remain open and were explicitly deferred by the project owner on
 
 > Treatment-ghost recording, compatibility, persistence, deletion, and playback follow [the approved ghost replay design](docs/GHOST_REPLAY_DESIGN.md). Version 1 records bands, not particles, and never re-runs the simulation for playback.
 
+> **Human-review amendment (2026-07-20):** The first combined Quest review
+> rejected the unexplained phase lamps, optical sensor, and primitive-only
+> controls. The approved remediation uses normal in-scene text, removes the
+> emitter/beam/detector/result lamp, labels the gauge as RELATIVE TURBIDITY,
+> labels the plot and actions, and labels the rack JAR TEST. This amendment
+> supersedes 07A.2's lamp preference, 07A.4, and 07C.1's no-text expectation.
+> The dimensionless no-NTU boundary remains binding.
+
 ## Goal
 
 Turn the complete treatment loop into an understandable experimental instrument through diegetic controls, readouts, plotting, and persistent experiment memory.

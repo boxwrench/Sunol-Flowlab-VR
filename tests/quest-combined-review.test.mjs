@@ -13,10 +13,12 @@ test('combined Quest review stages comparison state and records bounded evidence
   assert.match(harness, /action === 'review-ready'/)
   assert.match(harness, /action === 'watch-combined'/)
   assert.match(harness, /action === 'watch-controls'/)
-  assert.match(harness, /for \(const dose of \[0, 5, 10\]\)/)
+  assert.match(harness, /for \(const dose of \[0, 2, 4, 5, 6, 8, 10\]\)/)
   assert.match(harness, /elapsedSeconds: 35/)
   assert.match(harness, /frameBudgetMs = 1_000 \/ 72/)
   assert.match(harness, /minimumAverageFps < 72/)
+  assert.match(harness, /memoryDisposition/)
+  assert.match(harness, /idempotent-repeat/)
   assert.match(
     harness,
     /'RAPID_MIX',[\s\S]*'FLOCCULATION',[\s\S]*'SETTLING',[\s\S]*'MEASURING'/,

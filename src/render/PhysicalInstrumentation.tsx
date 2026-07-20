@@ -10,6 +10,7 @@ import {
 } from 'three'
 
 import type { CanonicalJarSummaryPresentation } from './JarTestBench'
+import { InstrumentLabel } from './InstrumentLabel'
 
 export type InstrumentationPhase =
   | 'READY'
@@ -39,6 +40,7 @@ export interface ReplayInstrumentView {
   status: string
   elapsedSeconds: number
   durationSeconds: number
+  relativeOpticalLoad: number | null
 }
 
 export interface PhysicalInstrumentationProps {
@@ -106,25 +108,24 @@ export function buildPlotMarkers(
   })
 }
 
-const PHASE_ORDER = [
-  'READY',
-  'ACTIVE',
-  'MEASURING',
-  'COMPLETE',
-  'REFILLING',
-] as const
-
 export function PhysicalInstrumentation(props: PhysicalInstrumentationProps) {
   return (
     <group position={[1.72, 0.88, 0.12]} rotation={[0, -0.22, 0]}>
       <mesh>
-        <boxGeometry args={[1.22, 1.12, 0.055]} />
+        <boxGeometry args={[1.22, 1.3, 0.055]} />
         <meshStandardMaterial color={'#263d39'} roughness={0.76} />
       </mesh>
-      <PhaseIndicator phase={props.phase} />
+      <InstrumentLabel
+        text={`PHASE: ${phaseLabel(props.phase)}`}
+        width={0.92}
+        height={0.105}
+        position={[0, 0.59, 0.12]}
+        background={'#263d39'}
+      />
       <RelativeLoadGauge
         phase={props.phase}
         instrumentView={props.instrumentView}
+        replayView={props.replayView}
       />
       <DoseResponsePlot points={props.plotPoints} />
       <PhysicalActionControls {...props} />
@@ -132,42 +133,17 @@ export function PhysicalInstrumentation(props: PhysicalInstrumentationProps) {
   )
 }
 
-function PhaseIndicator({ phase }: { readonly phase: InstrumentationPhase }) {
-  const activePhase =
-    phase === 'READY' ||
-    phase === 'MEASURING' ||
-    phase === 'COMPLETE' ||
-    phase === 'REFILLING'
-      ? phase
-      : 'ACTIVE'
-  return (
-    <group position={[-0.42, 0.43, 0.045]}>
-      {PHASE_ORDER.map((indicator, index) => {
-        const active = indicator === activePhase
-        return (
-          <mesh key={indicator} position={[index * 0.21, 0, 0]}>
-            <cylinderGeometry args={[0.052, 0.052, 0.035, 16]} />
-            <meshStandardMaterial
-              color={active ? phaseColor(indicator) : '#46605b'}
-              emissive={active ? phaseColor(indicator) : '#14211f'}
-              emissiveIntensity={active ? 1.25 : 0.08}
-              toneMapped={false}
-            />
-          </mesh>
-        )
-      })}
-    </group>
-  )
-}
-
 function RelativeLoadGauge({
   phase,
   instrumentView,
+  replayView,
 }: {
   readonly phase: InstrumentationPhase
   readonly instrumentView: InstrumentValueView
+  readonly replayView: ReplayInstrumentView
 }) {
   const needleRef = useRef<Group>(null)
+  const pastNeedleRef = useRef<Group>(null)
   const ticksRef = useRef<InstancedMesh>(null)
   const tickMatrix = useMemo(() => new Matrix4(), [])
   const currentAngle = useRef(
@@ -202,10 +178,25 @@ function RelativeLoadGauge({
     }
     if (needleRef.current !== null)
       needleRef.current.rotation.z = currentAngle.current
+    if (pastNeedleRef.current !== null) {
+      pastNeedleRef.current.visible = replayView.relativeOpticalLoad !== null
+      if (replayView.relativeOpticalLoad !== null)
+        pastNeedleRef.current.rotation.z = gaugeNeedleAngle(
+          replayView.relativeOpticalLoad,
+        )
+    }
   })
 
   return (
     <group position={[-0.35, 0.12, 0.045]}>
+      <InstrumentLabel
+        text={'RELATIVE\nTURBIDITY'}
+        width={0.43}
+        height={0.115}
+        position={[0, 0.29, 0.07]}
+        background={'#263d39'}
+        fontScale={0.78}
+      />
       <mesh>
         <circleGeometry args={[0.23, 32]} />
         <meshStandardMaterial color={'#d8ddc9'} roughness={0.8} />
@@ -220,6 +211,17 @@ function RelativeLoadGauge({
           <meshStandardMaterial color={'#d6533f'} roughness={0.4} />
         </mesh>
       </group>
+      <group ref={pastNeedleRef} visible={false}>
+        <mesh position={[0, 0.085, 0.038]}>
+          <boxGeometry args={[0.01, 0.17, 0.012]} />
+          <meshStandardMaterial
+            color={'#55d7d2'}
+            emissive={'#166b69'}
+            emissiveIntensity={0.65}
+            roughness={0.35}
+          />
+        </mesh>
+      </group>
       <mesh position={[0, 0, 0.04]}>
         <cylinderGeometry args={[0.027, 0.027, 0.025, 16]} />
         <meshStandardMaterial color={'#1c302d'} />
@@ -232,6 +234,30 @@ function RelativeLoadGauge({
         <boxGeometry args={[0.1, 0.025, 0.012]} />
         <meshStandardMaterial color={'#d9904d'} />
       </mesh>
+      <InstrumentLabel
+        text={'CLEAR'}
+        width={0.17}
+        height={0.045}
+        position={[-0.15, -0.205, 0.07]}
+        color={'#9af4e8'}
+        fontScale={0.54}
+      />
+      <InstrumentLabel
+        text={'CLOUDY'}
+        width={0.19}
+        height={0.045}
+        position={[0.15, -0.205, 0.07]}
+        color={'#ffc077'}
+        fontScale={0.5}
+      />
+      <InstrumentLabel
+        text={'CYAN = PAST RUN'}
+        width={0.26}
+        height={0.04}
+        position={[0, -0.255, 0.07]}
+        color={'#73eee8'}
+        fontScale={0.5}
+      />
     </group>
   )
 }
@@ -269,6 +295,14 @@ function DoseResponsePlot({
 
   return (
     <group position={[0.22, 0.05, 0.045]}>
+      <InstrumentLabel
+        text={'DOSE vs FINAL TURBIDITY\nLOWER = CLEARER'}
+        width={0.76}
+        height={0.105}
+        position={[0.12, 0.28, 0.07]}
+        background={'#263d39'}
+        fontScale={0.72}
+      />
       <mesh position={[0, -0.2, 0]}>
         <boxGeometry args={[1.02, 0.018, 0.014]} />
         <meshStandardMaterial color={'#b8c9bd'} />
@@ -381,7 +415,36 @@ function PhysicalActionControls(props: PhysicalInstrumentationProps) {
   }
 
   return (
-    <group position={[0, -0.43, 0.06]}>
+    <group position={[0, -0.53, 0.06]}>
+      <InstrumentLabel
+        text={'REFILL'}
+        width={0.18}
+        height={0.05}
+        position={[-0.43, 0.18, 0.06]}
+        fontScale={0.5}
+      />
+      <InstrumentLabel
+        text={'CLEAR RESULTS x2'}
+        width={0.28}
+        height={0.05}
+        position={[-0.18, 0.18, 0.06]}
+        fontScale={0.43}
+      />
+      <InstrumentLabel
+        text={'CLEAR\nx2'}
+        width={0.13}
+        height={0.075}
+        position={[-0.18, 0, 0.06]}
+        color={'#20302d'}
+        fontScale={0.8}
+      />
+      <InstrumentLabel
+        text={'COMPARE PAST RUN'}
+        width={0.46}
+        height={0.055}
+        position={[0.39, 0.18, 0.06]}
+        fontScale={0.48}
+      />
       <RefillHandle enabled={props.refillEnabled} onRefill={props.onRefill} />
       <TearSheet
         enabled={props.plotPoints.length > 0}
@@ -535,6 +598,48 @@ function GhostControls({
   )
   return (
     <group position={[0.14, 0, 0]}>
+      <InstrumentLabel
+        text={'SELECT'}
+        width={0.1}
+        height={0.04}
+        position={[0, 0, 0.04]}
+        color={'#102522'}
+        fontScale={0.58}
+      />
+      <InstrumentLabel
+        text={'PLAY'}
+        width={0.1}
+        height={0.04}
+        position={[0.13, 0, 0.04]}
+        color={'#102522'}
+        fontScale={0.62}
+      />
+      <InstrumentLabel
+        text={'RESET'}
+        width={0.1}
+        height={0.04}
+        position={[0.26, 0, 0.04]}
+        color={'#102522'}
+        fontScale={0.58}
+      />
+      <InstrumentLabel
+        text={'DELETE\nx2'}
+        width={0.1}
+        height={0.07}
+        position={[0.39, 0, 0.04]}
+        color={'#fff4ed'}
+        fontScale={0.78}
+      />
+      {pendingReplacement ? (
+        <InstrumentLabel
+          text={'SAVE\nNEW'}
+          width={0.1}
+          height={0.07}
+          position={[0.52, 0, 0.04]}
+          color={'#38220a'}
+          fontScale={0.78}
+        />
+      ) : null}
       {button(0, '#7bb8ad', onSelectNext, hasGhost)}
       {button(
         0.13,
@@ -589,18 +694,14 @@ function digitSegmentPosition(segment: string): readonly [number, number] {
   }
 }
 
-function phaseColor(phase: (typeof PHASE_ORDER)[number]): string {
+function phaseLabel(phase: InstrumentationPhase): string {
   switch (phase) {
-    case 'READY':
-      return '#65d8cf'
-    case 'ACTIVE':
-      return '#7bb8ff'
-    case 'MEASURING':
-      return '#ffe585'
-    case 'COMPLETE':
-      return '#78cf70'
-    case 'REFILLING':
-      return '#9ae8df'
+    case 'RAPID_MIX':
+      return 'RAPID MIX'
+    case 'FLOCCULATION':
+      return 'SLOW MIX / FLOC'
+    default:
+      return phase
   }
 }
 

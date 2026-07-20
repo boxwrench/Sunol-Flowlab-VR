@@ -192,7 +192,7 @@ or inferred.
 
 Use one combined seated Quest review to conserve operator time. Confirm that:
 
-1. the tank remains the visual focus while the five phase lamps, gauge, and
+1. the tank remains the visual focus while the phase readout, gauge, and
    0–10 plot are readable;
 2. the six jars read as static canonical summaries rather than six live tanks
    or the complete history;
@@ -240,8 +240,8 @@ In one seated Quest session, complete the Batch 07 items above and also confirm:
    below the clearing region;
 2. low, optimum, and high outcomes remain distinct and agree with the gauge,
    plot, and static canonical summaries;
-3. the cyan prior-front marker is visible from common head angles but remains
-   subordinate to the live tank and is understood as a recorded result;
+3. the cyan past-run gauge needle is visible from common head angles, remains
+   subordinate to the live needle, and is understood as a recorded result;
 4. play, pause, reset, seek/end, and incompatible/empty states never look like
    a second live simulation;
 5. seated stereo transparency ordering and label readability remain acceptable;
@@ -268,3 +268,32 @@ rolling evidence. The second captures accepted physical replay
 selection/play/pause/reset/delete, pending replacement, refill, and clear
 commands plus their storage boundaries. Neither report substitutes for the
 operator's plain-language interpretation or final verdict.
+
+### 2026-07-20 combined review — issue verdict and remediation
+
+The project-owner operator completed a physically started Dose 5 run. The
+technical watcher passed with both controllers detected, the complete phase
+sequence, one appended result, no alerts, a worst rolling average of 107.02
+FPS, and a worst rolling p95 of 12.50 ms.
+
+The human comprehension gate did not pass. The operator inferred that the large
+dial represented turbidity because it dropped during treatment, but could not
+identify the plot, the replay controls or their purpose, the detector cube, or
+the cyan and amber tank lines without explanation. Reset was discovered only
+by experimentation. The tank lines read incorrectly as vertical turbidity
+levels and were judged unnecessary. The physical-control watcher then timed
+out without accepted replay/refill/clear evidence; this is retained as an open
+row, not represented as operator error.
+
+The owner requested normal in-scene text, removal of the light sensor, removal
+of phase lamps, a JAR TEST bench label, and a stronger jar cloudiness spectrum.
+Remediation removes the emitter/beam/detector/result lamp and the cyan in-tank
+prior-front line; replaces lamps with PHASE text; labels the relative-turbidity
+dial, plot, replay, refill, clear, and destructive controls; moves past-run
+comparison to a labeled cyan gauge needle; and stages all six canonical doses
+so the jar spectrum remains derived from completed authoritative results.
+
+The request to label the dial NTU conflicts with the binding uncalibrated,
+dimensionless model boundary. The candidate therefore uses RELATIVE TURBIDITY;
+no calibrated NTU claim is introduced. The combined human gate remains open
+pending one focused readability/control rerun.

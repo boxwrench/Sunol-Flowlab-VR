@@ -21,7 +21,7 @@ Original prompt: batch 7
   handle, two-press tear sheet, small ghost controls, static canonical-jar
   summaries, and 90-degree detector geometry. Typecheck and targeted render
   tests pass.
-- Full repository suite passes: 21 contract tests and 133 Vitest tests. All six
+- Full repository suite passes: 22 contract tests and 133 Vitest tests. All six
   rendered Playwright scenarios pass, including restart persistence, canonical
   restore, history clear, independent ghost replay, deletion, and XR Start.
 - Simulation acceptance and benchmark pass without model drift. The current
@@ -61,17 +61,29 @@ Original prompt: batch 7
 - Added automated low/optimum/high, flocculation, settling, measurement, refill,
   and compatible-ghost capture points. The required bundled browser client
   completed Dose 5 with exact endpoint state and no console-error artifact.
-- Added one combined Quest review harness. It non-destructively stages 0/5/10
-  comparison memory, parks the prior-front replay at 35 seconds, records the
+- Added one combined Quest review harness. It non-destructively stages all six
+  canonical doses plus Dose 5, parks replay at 35 seconds, records the
   physical trial phase/performance evidence, and separately records accepted
   replay/refill/clear commands. Reports remain technical evidence and cannot
   supply the open human verdict.
+- On 2026-07-20 the combined live run passed technically: both controllers,
+  every phase, one appended result, no alerts, 107.02 FPS worst rolling
+  average, and 12.50 ms worst rolling p95. The human gate returned issues:
+  unlabeled dial/plot/replay controls, unclear replay purpose, an unexplained
+  detector cube, and misleading cyan/amber tank lines.
+- Removed the light-sensor geometry and both tank lines. Replaced phase lamps
+  with text, labeled the relative-turbidity gauge, dose/result plot, past-run
+  replay controls, refill, clear, and destructive actions, and moved past-run
+  comparison to a labeled cyan gauge needle.
+- Labeled the rack JAR TEST, staged all six canonical doses, and expanded their
+  authoritative display-clarity range for a visibly stronger static
+  cloudiness spectrum. The requested NTU unit was not used because the model
+  remains dimensionless and uncalibrated.
 
 ## Current TODO
 
-- Run `acceptance:08:quest -- review-ready`, `watch-combined`, and
-  `watch-controls` during one seated Quest review for the Batch 07 instrument,
-  jar, replay/refill/clear rows and Batch 08 clearing/prior-front/performance
-  rows.
+- Run one focused seated Quest rerun of the new text labels, jar spectrum,
+  past-run gauge comparison, and replay/refill/clear controls. The live-trial
+  performance row already has passing 2026-07-20 evidence.
 - Do not represent either batch as accepted before that verdict and do not start
   Batch 09.

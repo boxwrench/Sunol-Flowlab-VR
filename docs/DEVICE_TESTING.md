@@ -69,8 +69,9 @@ npm run acceptance:08:quest -- review-ready
 
 `review-ready` fills only missing 0, 5, and 10 plot points, guarantees one
 compatible replay, resets the live trial to ready at Dose 5, and parks replay
-at 35 seconds for the prior-front comparison. This deterministic staging is not
-human evidence.
+at 35 seconds for the labeled past-run gauge comparison. It also fills any
+missing canonical doses 0, 2, 4, 6, 8, and 10 so the jar spectrum uses actual
+completed results. This deterministic staging is not human evidence.
 
 Start the monitor before asking the operator to press the physical Start
 control:

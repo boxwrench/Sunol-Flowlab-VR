@@ -96,7 +96,7 @@ It is a stylized observation chamber inspired by jar-test behavior, not a litera
 
 ## 8. Source-of-truth rule
 
-Validated commands feed one authoritative deterministic simulation. Authoritative optical-load-band and trial-result records then feed the hero tank, canonical jar summaries, gauge, complete plot, measurement cue, audio, haptics, and the application-owned treatment-ghost recorder.
+Validated commands feed one authoritative deterministic simulation. Authoritative optical-load-band and trial-result records then feed the hero tank, canonical jar summaries, gauge, complete plot, audio, haptics, and the application-owned treatment-ghost recorder.
 
 Prohibited behavior includes:
 
@@ -157,11 +157,17 @@ A suitable application-owned record is:
 
 Summaries are cleared with experiment-log clearing, restored consistently with persistence, traceable to a completed result, updated only on trial completion, and static between updates.
 
-## 12. Measurement presentation
+## 12. Result presentation
 
-The nephelometer uses recognizable emitter-and-detector geometry around the sample zone. Initial implementation favors a narrow emissive beam or sample line, brief detector glow, physical gauge response, restrained sound, and intensity mapped from the authoritative sample.
+The v1 result is communicated by a plainly labeled relative-turbidity gauge and
+the mounted dose-versus-final-turbidity plot. The uncalibrated model does not
+display NTU. A 2026-07-20 Quest review found that the emitter, beam, detector,
+and result lamp did not explain themselves, so they are removed rather than
+retained as decorative measurement hardware.
 
-Expensive volumetric or layered transparency effects require a successful hero tank and physical Quest evidence first.
+The saved-run comparison uses a labeled cyan needle on the same gauge. It
+consumes the authoritative stored endpoint and does not create a second process
+value or a vertical level inside the tank.
 
 ## 13. Rendering and performance
 

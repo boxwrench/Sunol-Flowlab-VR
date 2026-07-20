@@ -70,6 +70,7 @@ export class Batch07ExperimentController {
     status: string
     elapsedSeconds: number
     durationSeconds: number
+    relativeOpticalLoad: number | null
   }
   readonly replayComparisonView: ReplayComparisonView
 
@@ -98,6 +99,7 @@ export class Batch07ExperimentController {
       status: this.playback.status,
       elapsedSeconds: this.playback.elapsedSeconds,
       durationSeconds: this.playback.durationSeconds,
+      relativeOpticalLoad: null,
     }
     this.replayComparisonView = {
       status: this.playback.status,
@@ -311,6 +313,10 @@ export class Batch07ExperimentController {
     this.replayInstrumentView.status = this.playback.status
     this.replayInstrumentView.elapsedSeconds = this.playback.elapsedSeconds
     this.replayInstrumentView.durationSeconds = this.playback.durationSeconds
+    this.replayInstrumentView.relativeOpticalLoad =
+      this.playback.status === 'empty'
+        ? null
+        : this.playback.view.endpointOpticalLoad
     this.replayComparisonView.status = this.playback.status
     this.replayComparisonView.clearingFrontDepth =
       this.playback.status === 'empty'

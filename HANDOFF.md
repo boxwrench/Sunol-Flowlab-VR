@@ -41,9 +41,11 @@ are accepted. Batch 07 implementation, local automated/rendered evidence, and a
 successful 114.21 FPS / 9.50 ms p95 operator-started Dose 5 run are complete.
 On 2026-07-19 the owner deferred the remaining human readability,
 comprehension, and physical-control review, then authorized Batch 08 technical
-work and one combined Quest review. Batch 08 now has a bounded display-only
-candidate: allocation-free optical-band smoothing plus one opaque prior-front
-marker driven by app-owned replay. Neither batch is accepted yet. Do not pull
+work and one combined Quest review. The 2026-07-20 technical run passed, but
+the human review rejected the unlabeled instruments and tank lines. The revised
+candidate retains allocation-free optical-band smoothing, removes the sensor
+and in-tank markers, and adds labeled physical instrumentation plus a past-run
+gauge needle. Neither batch is accepted yet. Do not pull
 Batch 09, environment, deployment, or release scope into this gate.
 
 The superseded Godot plan remains isolated under docs/archive for provenance.
@@ -100,11 +102,12 @@ Use only the active indexed Markdown plan.
   without hidden catch-up. The Batch 05 adapter remains only as historical test
   coverage and is no longer composed into either route.
 - One exactly-once immutable `TrialResultV1` captures the authoritative
-  12-band endpoint at 43 simulation seconds. COMPLETE water and detector
-  presentation read from that frozen result rather than the paused runtime.
-- The minimal physical measurement cue provides emitter, beam, detector, and
-  result lamp states. A two-second inlet stream marks deterministic refill and
-  controls unlock only after it finishes.
+  12-band endpoint at 43 simulation seconds. COMPLETE water and instruments
+  read from that frozen result rather than the paused runtime.
+- The human-rejected emitter, beam, detector, result lamp, phase lamps, and
+  in-tank prior-front marker have been removed. A plain-text phase readout and
+  labeled instruments replace them. A two-second inlet stream marks
+  deterministic refill and controls unlock only after it finishes.
 - The physically accepted dose interaction uses a smaller operator-facing arc,
   a near-side direct-grab target, and locally generated instanced labels 0
   through 10. It maps constrained movement to all eleven validated integer
@@ -120,15 +123,15 @@ Use only the active indexed Markdown plan.
   remote inspection without introducing simulation ownership in `/src/xr`.
 - Batch 07 implements app-owned 10 Hz treatment-ghost recording, bounded
   localStorage persistence, compatibility validation, and independent playback.
-  Batch 08 adds render-local optical smoothing and one subordinate opaque prior-
-  front marker. There is no particle replay or replay recomputation.
+  Batch 08 adds render-local optical smoothing and a labeled subordinate
+  past-run gauge needle. There is no particle replay or replay recomputation.
 
 ## Current evidence
 
-- 21 repository-contract tests pass, including XR ownership, integration
+- 22 repository-contract tests pass, including XR ownership, integration
   composition, detent, pointer-
   capture, and Start-latch source contracts.
-- 133 Vitest tests across 30 files pass, including the full transition matrix,
+- 133 Vitest tests across 29 files pass, including the full transition matrix,
   legal/illegal commands, fixed timing, centralized time scale, exactly-once
   immutable result, result/runtime isolation, deterministic refill,
   interruption/long-stall recovery, all eleven detents, lock suppression, and
@@ -317,13 +320,12 @@ deployment from this increment.
 ## Recommended next session
 
 1. Restart the seated Quest route and run
-   `npm run acceptance:08:quest -- review-ready` to stage 0/5/10 history,
-   select a compatible ghost, and park the prior-front comparison.
-2. Run the single combined checklist in `docs/UX_VALIDATION.md`: Batch 07
-   instrument/jar/control comprehension plus Batch 08 clearing, prior-front
-   interpretation, common angles, and live-plus-ghost performance.
-3. Record Dose 5 reasoning, the worst p95/draw-call window, and one final pass or
-   issue list.
+   `npm run acceptance:08:quest -- review-ready` to stage every canonical jar,
+   select a compatible ghost, and park the labeled past-run gauge comparison.
+2. Run a focused headset check of text readability, the jar spectrum, graph
+   meaning, past-run purpose, and replay/refill/clear controls.
+3. Record one final pass or issue list. The live-trial phase/performance row
+   already passed on 2026-07-20.
 4. If the combined gate passes, update both candidate packets, tag Batch 07 and
    Batch 08 at their accepted commits, and only then open Batch 09.
 

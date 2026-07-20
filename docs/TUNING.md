@@ -1,6 +1,6 @@
 # Batch 08 Display Tuning Record
 
-Date: 2026-07-19
+Date: 2026-07-20
 
 ## Status and change classification
 
@@ -32,21 +32,35 @@ gauge target, or ghost record.
 
 ## Treatment-ghost comparison
 
-The selected Batch 08 comparison is one short, opaque cyan marker showing the
-prior recording's clearing-front depth. It consumes a mutable read-only view
-maintained by the app-owned playback clock. It is hidden when no ghost is
-loaded, remains visually subordinate to the tank and live floc, and adds:
+The initial short cyan clearing-front marker failed the 2026-07-20 worn-headset
+comprehension check: it read as an unrealistic vertical turbidity level. The
+selected remediation is a labeled cyan past-run needle on the relative-
+turbidity gauge. It consumes the saved recording's authoritative endpoint,
+remains visually subordinate to the live needle, and adds:
 
 - no ghost particles or morphology;
 - no second simulation or tank;
 - no replay recomputation;
 - no transparent layer; and
-- one draw call while visible.
+- no comparison geometry inside the hero tank.
 
-The existing physical ghost controls continue to communicate selection,
-playing/paused/ended state, and progress. The combined human review must confirm
-that the marker reads as a prior recorded result rather than a second live
-process.
+The physical ghost controls now carry plain-language labels. The focused human
+rerun must confirm that their purpose and the cyan past-run needle are
+understood without explanation.
+
+## Instrument and jar readability
+
+The same review found that primitive-only affordances did not explain the phase,
+plot, replay, refill, reset, or clear-history actions. The remediation uses
+locally generated canvas-texture labels: PHASE, RELATIVE TURBIDITY, DOSE vs FINAL
+TURBIDITY, LOWER = CLEARER, and explicit action labels. No network font or
+floating application panel is introduced.
+
+The rack is labeled JAR TEST. Canonical jar colors still consume only completed
+authoritative summaries; a render-only contrast transform clamps
+`(displayClarity - 0.25) / 0.25` to 0–1 so the stored 0.26–0.49 range reads as
+a visible cloudiness spectrum in the headset. It does not modify results,
+persistence, the plot, or the gauge.
 
 ## Automated comparison matrix
 
@@ -65,20 +79,19 @@ combined Quest gate because a flat capture cannot establish those claims.
 
 The source-level transparent draw sources remain bounded:
 
-| Source                            |       Draws | Visibility              |
-| --------------------------------- | ----------: | ----------------------- |
-| Rear and middle optical gradients |           2 | Always                  |
-| Hero-tank side walls              |           2 | Always                  |
-| Six canonical jar fills           | 1 instanced | Always                  |
-| Six canonical jar walls           | 1 instanced | Always                  |
-| Nephelometer beam                 |           1 | Measuring only          |
-| Refill stream and ring            |           2 | Refilling only          |
-| Prior clearing-front marker       |    1 opaque | Compatible ghost loaded |
+| Source                            |       Draws | Visibility     |
+| --------------------------------- | ----------: | -------------- |
+| Rear and middle optical gradients |           2 | Always         |
+| Hero-tank side walls              |           2 | Always         |
+| Six canonical jar fills           | 1 instanced | Always         |
+| Six canonical jar walls           | 1 instanced | Always         |
+| Refill stream and ring            |           2 | Refilling only |
 
-The compatible-ghost browser capture reported 55 development draw calls,
-below the enforced ceiling of 71. Its virtual-time frame samples are not a
-physical performance claim. Quest live-plus-ghost p95 timing and stereo
-transparency ordering remain in the combined gate.
+The previous compatible-ghost browser capture reported 55 development draw
+calls, below the enforced ceiling of 71. The rejected marker and beam have
+since been removed; normal-text meshes and the gauge needle replace them. Its
+virtual-time frame samples are not a physical performance claim. Quest
+live-plus-ghost p95 timing and stereo readability remain in the focused rerun.
 
 ## Combined human gate
 

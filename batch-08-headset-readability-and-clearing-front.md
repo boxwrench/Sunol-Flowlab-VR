@@ -18,6 +18,12 @@ remains open
 > batches can use one combined Quest review. This does not mark Batch 07
 > accepted, waive either human gate, or authorize Batch 09.
 
+> **Human-review amendment (2026-07-20):** The cyan in-tank prior-front marker
+> failed comprehension because it read as an unrealistic vertical turbidity
+> level. The selected comparison is now a labeled cyan past-run needle on the
+> relative-turbidity gauge. Work package 08.9's marker exploration is retained
+> as rejected evidence, not as the current candidate.
+
 ## Goal
 
 Tune the already-correct treatment loop for visual comprehension in the real headset. This batch may change display transforms and accepted simulation tuning only through controlled regression review.

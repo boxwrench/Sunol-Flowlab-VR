@@ -112,9 +112,6 @@ export function XrShellApp() {
   )
   const presentationOpticalLoadBands =
     completedOpticalLoadBands ?? runtime.opticalLoadBands
-  const presentationEndpointOpticalLoad =
-    cycle.result?.endpointOpticalLoad ??
-    endpointOpticalLoad(runtime.opticalLoadBands)
   const experimentSnapshot = experiment.snapshot()
   const commandLogRef = useRef<Array<AppCommand | undefined>>(
     new Array(COMMAND_LOG_CAPACITY),
@@ -383,18 +380,7 @@ export function XrShellApp() {
 
       <XrShellScene
         canonicalJarSummaries={experimentSnapshot.canonicalSummaries}
-        ghostComparisonView={experiment.replayComparisonView}
         instrumentation={instrumentation}
-        measurementPhase={
-          cycle.phase === 'MEASURING'
-            ? 'measuring'
-            : cycle.phase === 'COMPLETE'
-              ? 'complete'
-              : cycle.phase === 'REFILLING'
-                ? 'refilling'
-                : 'idle'
-        }
-        measurementRelativeOpticalLoad={presentationEndpointOpticalLoad}
         opticalLoadBands={presentationOpticalLoadBands}
         particleState={runtime.state}
         posture={posture}

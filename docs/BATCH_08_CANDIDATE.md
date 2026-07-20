@@ -1,6 +1,6 @@
 # Batch 08 Technical Candidate Packet
 
-Date: 2026-07-19
+Date: 2026-07-20
 
 Status: **Technical candidate; not accepted.** The project owner authorized a
 scheduling exception that batches Batch 08 machine-verifiable work before the
@@ -15,8 +15,11 @@ human gates.
   0.16-second time constant and immediate epoch reset.
 - Refactored the existing clearing-front diagnostic into a shared normalized-
   band transform without changing its output.
-- Added one opaque prior-front marker driven by the app-owned interpolated ghost
-  playback view.
+- Replaced the human-rejected in-tank prior-front marker with a labeled cyan
+  past-run needle on the relative-turbidity gauge.
+- Removed the unlabeled emitter, beam, detector, and result lamp from the tank.
+- Replaced primitive phase lamps with a plain-text phase readout and added
+  readable instrument/control labels.
 - Exposed concise Batch 08 comparison state through the existing development
   text hook.
 - Added unit, ownership, browser-state, screenshot, and draw-call regression
@@ -38,8 +41,8 @@ human gates.
   randomness, and result count unchanged.
 - Display smoothing owns one reusable `Float32Array` and performs no per-frame
   allocation.
-- The ghost marker is one opaque mesh and has no simulation or playback-runtime
-  import.
+- Past-run comparison remains a read-only render of app-owned replay values and
+  has no simulation or playback-runtime ownership.
 - The compatible-ghost desktop capture reports 55 development draw calls under
   the enforced ceiling of 71.
 - The required bundled browser client completed Dose 5 at endpoint
@@ -47,7 +50,7 @@ human gates.
 
 ## Verification completed
 
-- `npm test`: 21 repository-contract tests and 133 Vitest tests pass across 30
+- `npm test`: 22 repository-contract tests and 133 Vitest tests pass across 29
   Vitest files.
 - `npm run test:browser`: all six Playwright scenarios pass and emit the Batch
   08 phase, endpoint, and compatible-ghost captures.
@@ -73,8 +76,8 @@ The combined seated Quest review must establish:
    replacement, and clear behavior;
 2. clear top-down progression, visible floc growth/settling, and agreement among
    the tank, gauge, plot, and static jar summaries;
-3. the prior-front marker is visible but subordinate and is understood as a
-   recorded result;
+3. the labeled past-run gauge needle is understood as a recorded result and
+   never as a second live simulation;
 4. common seated head angles remain legible with acceptable transparency
    ordering; and
 5. live-plus-ghost performance retains the 72 FPS posture through the expensive

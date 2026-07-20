@@ -5,8 +5,15 @@ import {
   gaugeNeedleAngle,
   pressDeliberateAction,
 } from './PhysicalInstrumentation'
+import { jarDisplayContrast } from './JarTestBench'
 
 describe('Batch 7 physical instrumentation mappings', () => {
+  it('expands authoritative jar clarity into a readable bounded spectrum', () => {
+    expect(jarDisplayContrast(0.25)).toBe(0)
+    expect(jarDisplayContrast(0.375)).toBeCloseTo(0.5)
+    expect(jarDisplayContrast(0.5)).toBe(1)
+  })
+
   it('maps the normalized authority to a bounded gauge angle', () => {
     expect(gaugeNeedleAngle(0)).toBeCloseTo(Math.PI * 0.36)
     expect(gaugeNeedleAngle(1)).toBeCloseTo(-Math.PI * 0.36)
