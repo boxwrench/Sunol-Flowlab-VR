@@ -359,3 +359,14 @@ the hosted result was "very good." This accepts the public-route immersive
 entry and the final Sunol-default lab, dashboard, scenery, and audio
 presentation on the target headset. It does not infer endurance, thermal,
 non-operator usability, or video-capture evidence.
+
+### 2026-07-20 hosted height and repeat-cycle verdict
+
+The hosted origin initially placed the seated owner higher than the accepted
+review position. A seated-only -0.20 m `XROrigin` correction lowered the player
+without moving the room, apparatus, dashboard, or desktop camera. The owner
+accepted the corrected height, then completed Dose 0, Dose 5, and Dose 10 to
+completion with refills, exited immersive VR, and re-entered. The final verdict
+was "pass," with no reported stutter, excessive heat, broken controls or audio,
+or visual corruption. This is a bounded owner-operated repeat-cycle check, not
+a quantified long-duration thermal trace or non-operator study.

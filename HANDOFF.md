@@ -11,7 +11,7 @@ Updated: 2026-07-20
   `git status --short` and `git log -1 --oneline`
 - `AGENTS.md` is repository-local authority and intentionally ignored at the
   repository root
-- Current milestone: hosted v0.1.0 candidate accepted on Quest; video/tag gates
+- Current milestone: hosted Quest/repeat-cycle accepted; video/tag gates
 - Portfolio-evaluation recommendations are staged without expanding Batch 07:
   final media/transparency evidence in Batch 08, repository front-door work in
   Batch 09, and bundle/deployment/branding verification in Batch 11
@@ -42,8 +42,9 @@ plain-language labels, retuned the apparatus and controls, aligned the jar
 labels, and established clear transparent result tiers. After the final START
 plaque, the project owner accepted the combined human gate. Batch 10 lab,
 dashboard, scenery, and audio work is also accepted. The HTTPS GitHub Pages
-candidate is deployed and accepted in immersive Quest review; endurance
-evidence, operator-led video, and v0.1.0 release tagging remain.
+candidate is deployed and accepted in immersive Quest review. The corrected
+height and bounded repeat-cycle/re-entry check also passed; operator-led video
+and v0.1.0 release tagging remain.
 
 The superseded Godot plan remains isolated under docs/archive for provenance.
 Use only the active indexed Markdown plan.
@@ -286,8 +287,9 @@ readability and invitation to repeat, and visible smoothness.
 The hosted HTTPS deployment is authorized and live at
 `https://boxwrench.github.io/Sunol-Flowlab-VR/`. Localhost and the documented
 ADB reverse route remain development paths. Hosted Quest entry and final
-visual/audio review passed on 2026-07-20. Thermal/endurance, final video, and
-release tagging remain open gates.
+visual/audio review passed on 2026-07-20. The seated height correction and
+bounded repeat-cycle/re-entry check passed later that day. A quantified thermal
+trace is not claimed; final video and release tagging remain open gates.
 
 Public-data and fictionalization restrictions in
 [docs/DATA_BOUNDARY.md](docs/DATA_BOUNDARY.md) remain binding. The model is
@@ -315,9 +317,7 @@ jars live state. Narration, new product ideas, and APK packaging are deferred.
 
 ## Recommended next session
 
-1. Run the bounded endurance/repeat-cycle release check on the accepted hosted
-   commit.
-2. Record the owner-operated low/optimum/high video without narration, then tag
+1. Record the owner-operated low/optimum/high video without narration, then tag
    and publish v0.1.0 if the hosted checks pass.
 
 ## Commands

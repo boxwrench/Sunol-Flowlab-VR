@@ -27,9 +27,9 @@ Batches 07 and 08 passed their combined seated Quest instrument,
 control, readability, and comparison verdict. Batch 10 laboratory visuals,
 physical dashboard, selectable scenery, and generated audio passed iterative
 seated-headset review. The final hosted still is captured, and the deployed URL
-has passed immersive Quest review. Batch 09 operator-led video capture and the
-remaining Batch 11 endurance check are now active; narration and a sideloadable
-APK are explicitly deferred.
+has passed immersive Quest review plus a bounded low/optimum/high repeat-cycle
+and re-entry check. Batch 09 operator-led video capture is now the remaining
+release gate; narration and a sideloadable APK are explicitly deferred.
 See [PROGRESS.md](PROGRESS.md), the
 [Batch 07 acceptance packet](docs/BATCH_07_ACCEPTANCE.md), the
 [Batch 08 acceptance packet](docs/BATCH_08_CANDIDATE.md), and the
@@ -176,8 +176,9 @@ npm run test:browser
 
 The desktop browser suite requires Playwright Chromium. The physical Quest
 development route and accepted seated evidence are documented. The public HTTPS
-route is deployed and its immersive Quest entry is accepted. Endurance,
-thermal, and final release approval remain manual gates.
+route is deployed, and its immersive Quest entry and bounded repeat-cycle check
+are accepted. Final media and release approval remain; no quantified thermal
+trace is claimed.
 
 The physical XR route and Quest debugging workflow are documented in
 [docs/DEVICE_TESTING.md](docs/DEVICE_TESTING.md). The combined harness is

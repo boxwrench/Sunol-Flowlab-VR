@@ -286,3 +286,8 @@ Original prompt: batch 7
   immersive experience, and accepted the hosted candidate as "very good."
   This closes the hosted-entry and final visual/audio review gate. The bounded
   endurance/repeat-cycle check, operator-led video, and v0.1.0 tag remain.
+- Hosted follow-up found the per-origin viewer height approximately 20 cm too
+  high. Commit `d37e27f` added a seated-only -0.20 m XR player-origin offset
+  without moving the lab or desktop camera. The owner accepted the corrected
+  height, then completed hosted Dose 0, Dose 5, and Dose 10 trials with refills
+  plus XR exit/re-entry and reported a pass.

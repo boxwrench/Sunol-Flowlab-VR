@@ -61,7 +61,7 @@ The work remains staged: Workstream 03D exposes the authoritative samples; Batch
 | 08    | Accepted               | Headset readability and combined Quest verdict passed   |
 | 09    | Capture-ready          | Final still/video remain; narration deferred for v0.1.0 |
 | 10    | Accepted               | Seated lab, dashboard, scenery, and audio accepted      |
-| 11    | In progress            | Endurance, video, and v0.1.0 publication remain         |
+| 11    | In progress            | Video and v0.1.0 publication remain                     |
 
 An [earlier Godot implementation plan](docs/archive/Sunol%20FlowLab%20Implementation%20Plan%20%28superseded%20Godot%29.pdf) is retained only as a superseded source artifact for provenance and is non-binding for this greenfield WebXR repository. The stale duplicate Batch 03 snapshot and superseded pre-research mechanics were removed from the active tree; Git history preserves them. Only [the indexed Batch 03 plan](batch-03-desktop-phenomenon-proof.md) is authoritative.
 

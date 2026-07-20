@@ -479,3 +479,18 @@ requests or console errors during remote pre-entry inspection. The project
 owner then entered immersive WebXR and accepted the visual/audio result as
 "very good." This is hosted load and entry evidence, not a replacement for the
 separate bounded endurance and thermal measurements.
+
+## 2026-07-20 - Hosted height correction and repeat-cycle check
+
+- Corrected commit: `d37e27f`
+- Seated player-origin offset: -0.20 m
+- Hosted sequence: Dose 0 complete, refill, Dose 5 complete, refill, Dose 10
+  complete, refill, immersive exit, and immersive re-entry
+- Owner verdict: pass
+
+The owner reported no stuttering, excessive heat, broken controls or audio, or
+visual corruption during the bounded sequence. Automated validation for the
+corrected commit passed 26 repository tests, 31 Vitest files with 140 tests,
+six single-worker Chromium scenarios, typecheck, lint, formatting, benchmark,
+and the production Pages build in CI. This evidence closes the bounded
+repeat-cycle release gate; it does not claim a laboratory thermal trace.
