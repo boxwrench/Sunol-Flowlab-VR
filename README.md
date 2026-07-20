@@ -1,166 +1,151 @@
 # Sunol FlowLab VR
 
 [![CI](https://github.com/boxwrench/Sunol-Flowlab-VR/actions/workflows/ci.yml/badge.svg)](https://github.com/boxwrench/Sunol-Flowlab-VR/actions/workflows/ci.yml)
+[![Deploy](https://github.com/boxwrench/Sunol-Flowlab-VR/actions/workflows/pages.yml/badge.svg)](https://github.com/boxwrench/Sunol-Flowlab-VR/actions/workflows/pages.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+
+A VR-first, hands-on coagulation experiment for learning why the best treatment
+dose is not always the largest dose.
 
 **[Launch Sunol FlowLab VR](https://boxwrench.github.io/Sunol-Flowlab-VR/)**
 
-Sunol FlowLab VR is an open-source personal educational portfolio project for people interested in drinking-water treatment. It uses a VR-first tabletop coagulation experiment, viewable in immersive Quest WebXR or the Chrome/Chromium in-browser VR simulation, to show a qualitative idea: treatment response has an optimum, and both underdose and overdose can leave poorer water clarity.
+![Sunol FlowLab VR coagulation experiment in a water-quality lab](docs/images/sunol-flowlab-v0.1/shot-0.png)
 
-This is a **phenomenological coagulation model**, not dose-prediction software, operational guidance, CFD, or a calibrated model of a real plant. The setting and values are representative and fictionalized.
+Sunol FlowLab VR is an open-source personal educational portfolio project
+inspired by drinking-water treatment. It presents one tabletop experiment in a
+fictionalized water-quality laboratory. Choose a relative coagulant dose,
+observe floc formation and settling, compare the resulting water clarity, and
+build a dose-response curve across repeated trials.
 
-![Sunol FlowLab VR coagulation experiment in the water-quality lab](docs/images/sunol-flowlab-v0.1/shot-0.png)
+The experience runs at the same URL in immersive Meta Quest WebXR and as a
+desktop spectator simulation in Chrome or Chromium.
 
-_Current Chrome/Chromium simulation view. The same apparatus and laboratory
-composition are used in immersive Quest WebXR._
+## What it demonstrates
 
-## Project status
+Coagulation has an optimum region:
 
-The hosted v0.1.0 release candidate is live. Batch 00 is substantially complete,
-Batch 01A is accepted, and the local physical portion of Batch 01B is accepted
-on Quest 3; its hosted-URL smoke gate remains open. Reduced Batch 02A remains
-the immutable statistical prototype baseline. Batch 03 is
-[accepted with a documented fresh-recognition waiver](docs/BATCH_03_ACCEPTANCE.md),
-Batch 04 is accepted with documented physical-test waivers, Batch 05 passed
-seated Quest integration, and
-[Batch 06 passed its complete seated treatment-cycle gate](docs/BATCH_06_ACCEPTANCE.md).
-Batches 07 and 08 passed their combined seated Quest instrument,
-control, readability, and comparison verdict. Batch 10 laboratory visuals,
-physical dashboard, selectable scenery, and generated audio passed iterative
-seated-headset review. The final hosted still is captured, and the deployed URL
-has passed immersive Quest review plus a bounded low/optimum/high repeat-cycle
-and re-entry check. Batch 09 operator-led video capture is now the remaining
-release gate; narration and a sideloadable APK are explicitly deferred.
-See [PROGRESS.md](PROGRESS.md), the
-[Batch 07 acceptance packet](docs/BATCH_07_ACCEPTANCE.md), the
-[Batch 08 acceptance packet](docs/BATCH_08_CANDIDATE.md), and the
-[implementation-plan index](IMPLEMENTATION_PLAN.md).
+- too little dose leaves particles insufficiently destabilized;
+- a near-optimum dose promotes aggregation and settling;
+- too much dose can also produce a poorer result.
 
-The approved presentation direction is a [hybrid six-jar test bench and hero observation tank](docs/DESIGN_DIRECTION_JAR_TEST_HYBRID.md): one live authoritative simulation, six static canonical preset summaries, and a complete plot/log covering all eleven dose values.
+The live observation tank makes the treatment cycle visible. A physical gauge
+and mounted plot summarize the result, while the six-jar rack preserves static
+summaries for canonical doses 0, 2, 4, 6, 8, and 10.
 
-The accepted experience runs one deterministic seven-phase treatment cycle with
-ready-only labeled dose and Start controls, physical locked-state feedback,
-one immutable completed result, deterministic refill, a labeled relative-
-turbidity gauge, a complete 0–10 plot/log, persistent static canonical
-summaries, and bounded treatment-result ghost recording/playback. Batch 08 adds
-allocation-free display smoothing and a labeled past-run needle on the gauge.
+This is a **phenomenological coagulation model**, not dose-prediction software,
+a calibrated plant model, CFD, or operational guidance. It does not report NTU
+and must not be used for operations, engineering design, or treatment
+decisions. All displayed values and the laboratory setting are representative
+and fictionalized.
 
-The implemented [treatment-result ghost design](docs/GHOST_REPLAY_DESIGN.md)
-records the authoritative relative optical-load history for restrained
-previous-run comparison. It does not replay particles or recompute the
-simulation. Batch 07 owns recording, compatibility, small-library persistence,
-and playback. Batch 08 consumes only the app-owned replay view for its
-subordinate past-run gauge needle; it adds no second tank, ghost particles, or
-transparent ghost layer. The selected display choices are recorded in
-[docs/TUNING.md](docs/TUNING.md).
+## Try the experience
 
-The current automated checkpoint passes 25 repository-contract tests, 139
-Vitest tests across 31 files, all six rendered-browser scenarios, the canonical
-and nine-seed eleven-dose regression corpus, type checking, lint, production
-build, and the standalone simulation benchmark. The compatible-ghost desktop
-capture reports 55 development draw calls. The combined seated Quest review is
-recorded separately in the acceptance packets.
+### Meta Quest
 
-## Built With
+1. Open the [hosted experience](https://boxwrench.github.io/Sunol-Flowlab-VR/)
+   in Quest Browser.
+2. Sit comfortably, then select **Enter VR**.
+3. Use a controller to set a dose from 0 through 10.
+4. Press **Start** and watch the complete treatment cycle.
+5. Read the **Relative Turbidity** gauge and result plot.
+6. Refill, choose another dose, and compare the outcomes.
 
-- **OpenAI Codex**
-- **GPT-5.6 Thinking**
-- WebXR
-- React
-- TypeScript
-- Three.js
-- React Three Fiber
-- Vite
-- Vitest
-- Playwright
-- Node.js
+The v0.1 experience is designed and tested for seated use on Quest 3. It also
+includes a physical mute control and selectable Sunol or Hetchy scenery.
 
-## How Codex and GPT-5.6 Were Used
+### Desktop Chrome or Chromium
 
-Sunol FlowLab VR was built through an AI-assisted development workflow using both **OpenAI Codex** and **GPT-5.6 Thinking**.
+Open the same link in a current Chrome or Chromium-based desktop browser. The
+lab renders directly as a spectator experience, and its physical controls can
+be operated with pointer input. No mobile-specific experience is provided.
 
-### OpenAI Codex
+## The experiment
 
-Codex worked directly with the repository and was used to:
+| Instrument               | Purpose                                                      |
+| ------------------------ | ------------------------------------------------------------ |
+| Dose dial                | Selects one of eleven relative doses, 0 through 10           |
+| Start button             | Begins one deterministic treatment trial                     |
+| Hero observation tank    | Shows rapid mix, flocculation, settling, and clarification   |
+| Relative Turbidity gauge | Displays the dimensionless optical-load result               |
+| Results plot             | Preserves the complete dose-response history                 |
+| Jar Test rack            | Shows static summaries for doses 0, 2, 4, 6, 8, and 10       |
+| Replay controls          | Compare a limited saved result with the current result       |
+| Refill control           | Restores the same deterministic raw-water starting condition |
 
-- scaffold and implement the WebXR application;
-- create the deterministic simulation foundation;
-- refactor simulation ownership out of the rendering layer;
-- write and run unit, architecture, and repository-contract tests;
-- build performance telemetry and headless benchmarks;
-- review code against the project's architecture rules;
-- update implementation plans, handoff notes, and technical documentation;
-- break larger milestones into small, testable repository changes.
+One live simulation is authoritative. The jars are summaries rather than six
+additional simulations, and the plot and experiment log retain results for all
+eleven dose settings.
 
-Work was divided into narrow batches with explicit scope, tests, non-goals, and completion evidence. Codex-generated changes were reviewed before being accepted.
+## v0.1 status
 
-### GPT-5.6 Thinking
+The public release candidate is deployed and has passed:
 
-GPT-5.6 was used for the higher-level product and engineering work around the implementation, including:
+- immersive entry and seated review on Meta Quest 3;
+- the final laboratory, dashboard, scenery, labeling, and audio review;
+- a hosted Dose 0, Dose 5, and Dose 10 repeat cycle with refills;
+- immersive exit and re-entry;
+- deterministic dose-sweep and simulation regression checks;
+- unit, architecture, browser, type, lint, build, and benchmark checks.
 
-- turning the original idea into a focused product concept;
-- reviewing the repository architecture and identifying boundary problems;
-- designing the hybrid six-jar bench and hero observation tank;
-- deciding how the project should balance realism, readability, and headset performance;
-- challenging unnecessary scope and premature engine design;
-- developing the implementation roadmap and acceptance criteria;
-- reviewing feedback from other models and consolidating it into repository-ready briefs;
-- helping explain the project clearly for operators, developers, and hackathon judges.
+The final no-narration demonstration video and the `v0.1.0` release tag remain.
+A sideloadable APK and narration are intentionally deferred.
 
-### Human Role
+Detailed evidence is recorded in [PROGRESS.md](PROGRESS.md),
+[the implementation plan](IMPLEMENTATION_PLAN.md),
+[UX validation](docs/UX_VALIDATION.md), and
+[performance notes](docs/PERFORMANCE.md).
 
-The project direction and treatment knowledge came from my experience working in drinking-water treatment.
+## How it works
 
-I made the final decisions about:
+The application keeps process behavior separate from presentation:
 
-- what the simulation should teach;
-- which treatment behaviors were appropriate to simplify;
-- what could be presented responsibly;
-- which AI recommendations to accept or reject;
-- whether generated code and documentation matched the intended experience.
+| Area         | Responsibility                                                                           |
+| ------------ | ---------------------------------------------------------------------------------------- |
+| `src/sim`    | Deterministic state, seeded randomness, aggregation, settling, and relative optical load |
+| `src/app`    | Trial lifecycle, orchestration, results, persistence, replay, and audio                  |
+| `src/render` | Three.js and React Three Fiber presentation of authoritative state                       |
+| `src/xr`     | WebXR sessions and discrete physical input commands                                      |
 
-Codex and GPT-5.6 accelerated the engineering and design process, but they did not replace operator judgment, testing, or human review.
+The simulation uses fixed-capacity representative particles with
+mass-conserving deterministic merges. Suspended projected area supplies one
+vertically binned, dimensionless relative optical-load record used throughout
+the water appearance, gauge, plot, persistence, jar summaries, and result
+replay.
 
-## Development Approach
+Saved replays contain optical-load bands sampled at 10 Hz. They do not record
+particles or rerun the simulation. See
+[the architecture](docs/ARCHITECTURE.md),
+[modeling research amendment](docs/MODELING_RESEARCH_AMENDMENT.md), and
+[ghost replay design](docs/GHOST_REPLAY_DESIGN.md).
 
-The project was not generated from one large prompt. It was built in small increments:
+## Local development
 
-1. Define the product and safety boundaries.
-2. Establish the architecture and pinned toolchain.
-3. Implement deterministic simulation primitives.
-4. Add tests and performance evidence.
-5. Review the result.
-6. Correct architecture drift before adding more features.
-7. Continue into the next bounded implementation batch.
+Requirements:
 
-This workflow made the AI contribution traceable and kept the project from expanding into a general-purpose simulator before the central educational idea was proven.
-
-## Toolchain
-
-- Node.js 24.12.x and npm 11.18.x
-- Vite 8.1.4, React 19.2.7, and TypeScript 6.0.3
-- Three.js 0.165.0, React Three Fiber 9.6.1, Drei 10.7.7
-- **@react-three/xr 6.6.30**
-- Vitest 4.1.10 and Playwright 1.61.1
-
-Three.js 0.165.0 is intentionally aligned with the IWER emulator bundled by the pinned XR package so the application and emulator share one compatible Three.js instance. All versions are exact. Dependency upgrades are isolated from simulation tuning and XR interaction changes.
-
-## Getting started
+- Node.js 24.12.x
+- npm 11.18.x
+- current Chrome or Chromium
 
 ```sh
 npm ci
 npm run dev
 ```
 
-Open `http://localhost:5173` in Chrome for the built-in Quest 3 emulator. Use
-`npm run dev:https` only when an HTTPS origin is needed for same-network device
-testing. The production Pages build is `npm run build:pages`.
+Open `http://localhost:5173`. Development mode includes the Quest 3 IWER
+emulator supplied by the pinned XR package. Use `npm run dev:https` when a
+same-network headset test requires an HTTPS origin.
 
-Version 1 targets only current Quest Browser for immersive WebXR and current
-Chrome, or an equivalent Chromium-based desktop browser, for the in-browser VR
-simulation. Mobile browsers, Firefox, and Safari/WebKit are not supported
-targets.
+Create a production or GitHub Pages build with:
 
-Validation commands:
+```sh
+npm run build
+npm run build:pages
+```
+
+The physical-device and remote-debugging workflow is documented in
+[docs/DEVICE_TESTING.md](docs/DEVICE_TESTING.md).
+
+## Validation
 
 ```sh
 npm test
@@ -174,26 +159,33 @@ npm run benchmark
 npm run test:browser
 ```
 
-The desktop browser suite requires Playwright Chromium. The physical Quest
-development route and accepted seated evidence are documented. The public HTTPS
-route is deployed, and its immersive Quest entry and bounded repeat-cycle check
-are accepted. Final media and release approval remain; no quantified thermal
-trace is claimed.
+The current checkpoint includes 26 repository-contract tests and 140 Vitest
+tests across 31 files, plus six rendered Chromium scenarios. Quest evidence is
+kept separate from automated browser evidence so headset-specific claims remain
+traceable.
 
-The physical XR route and Quest debugging workflow are documented in
-[docs/DEVICE_TESTING.md](docs/DEVICE_TESTING.md). The combined harness is
-`npm run acceptance:08:quest`: `review-ready` stages the bounded comparison,
-`watch-combined` records the physical trial and rolling performance, and
-`watch-controls` records replay/refill/clear command evidence. The combined
-Batch 07/08 seated checklist and accepted verdict are recorded in
-[docs/UX_VALIDATION.md](docs/UX_VALIDATION.md).
+## Development approach and AI collaboration
 
-## Architecture and contribution
+The treatment concept, safety boundaries, review decisions, and final product
+judgment come from the project owner's experience in drinking-water treatment.
+The application was developed incrementally with OpenAI Codex and GPT-5.6
+Thinking assisting with implementation, architecture review, test design,
+documentation, and product critique.
 
-The deterministic simulation stays independent of React, Three.js, and WebXR. Read [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) before changing module boundaries. Public-data restrictions are binding and documented in [docs/DATA_BOUNDARY.md](docs/DATA_BOUNDARY.md).
+The project was not produced from one large prompt. Work was divided into
+bounded batches with explicit scope, tests, non-goals, and human acceptance
+gates. Generated code and recommendations were reviewed against the intended
+treatment lesson and tested in the headset before acceptance.
 
-Contributions from water professionals, educators, designers, and developers are welcome. See [CONTRIBUTING.md](CONTRIBUTING.md), [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md), and [SECURITY.md](SECURITY.md).
+## Contributing
+
+Contributions from water professionals, educators, designers, and developers
+are welcome. Read [CONTRIBUTING.md](CONTRIBUTING.md) and the binding
+[public-data boundary](docs/DATA_BOUNDARY.md) before submitting changes.
+
+Please do not contribute sensitive facility information, proprietary operating
+values, official branding, or material that implies endorsement.
 
 ## License
 
-Licensed under the [MIT License](LICENSE).
+Sunol FlowLab VR is available under the [MIT License](LICENSE).
