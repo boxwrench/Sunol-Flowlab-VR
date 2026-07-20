@@ -89,3 +89,20 @@ test('the hero tank contains no unlabeled sensor or prior-front line', async () 
   assert.doesNotMatch(source, /MeasurementCue|TreatmentGhostComparison/)
   assert.doesNotMatch(source, /measurementPhase|ghostComparisonView/)
 })
+
+test('plant environment stays render-only and bounds its animated work', async () => {
+  const source = await readFile(
+    new URL('../src/render/PlantEnvironment.tsx', import.meta.url),
+    'utf8',
+  )
+  const frameCallback = source.slice(source.indexOf('useFrame('))
+
+  assert.doesNotMatch(source, /\.\.\/sim|SimulationRuntime|useState/)
+  assert.equal((source.match(/<instancedMesh\b/g) ?? []).length, 3)
+  assert.match(source, /deltaSeconds \* 0\.7/)
+  assert.doesNotMatch(frameCallback, /new (?:Matrix4|Vector3|Array|Color)\b/)
+  assert.doesNotMatch(source, /shadow|useTexture/)
+  assert.equal((source.match(/useLoader\(TextureLoader/g) ?? []).length, 1)
+  assert.match(source, /import\.meta\.env\.BASE_URL/)
+  assert.match(source, /side=\{BackSide\}/)
+})

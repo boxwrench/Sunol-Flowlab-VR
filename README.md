@@ -6,6 +6,11 @@ Sunol FlowLab VR is an open-source personal educational portfolio project for pe
 
 This is a **phenomenological coagulation model**, not dose-prediction software, operational guidance, CFD, or a calibrated model of a real plant. The setting and values are representative and fictionalized.
 
+![Sunol FlowLab VR coagulation experiment in the water-quality lab](docs/images/sunol-flowlab-lab/shot-0.png)
+
+_Current Chrome/Chromium simulation view. The same apparatus and laboratory
+composition are used in immersive Quest WebXR._
+
 ## Project status
 
 Implementation is in progress through accepted Batch 08. Batch 00 is substantially complete,
@@ -17,7 +22,10 @@ Batch 04 is accepted with documented physical-test waivers, Batch 05 passed
 seated Quest integration, and
 [Batch 06 passed its complete seated treatment-cycle gate](docs/BATCH_06_ACCEPTANCE.md).
 Batches 07 and 08 passed their combined seated Quest instrument,
-control, readability, and comparison verdict. Batches 09–11 remain unstarted.
+control, readability, and comparison verdict. Batch 10 laboratory visuals are
+in active seated-headset review under an owner-authorized visual-first schedule;
+Batch 09 final capture remains deferred until those visuals and audio are
+accepted, and Batch 11 remains unstarted.
 See [PROGRESS.md](PROGRESS.md), the
 [Batch 07 acceptance packet](docs/BATCH_07_ACCEPTANCE.md), the
 [Batch 08 acceptance packet](docs/BATCH_08_CANDIDATE.md), and the
@@ -41,8 +49,8 @@ subordinate past-run gauge needle; it adds no second tank, ghost particles, or
 transparent ghost layer. The selected display choices are recorded in
 [docs/TUNING.md](docs/TUNING.md).
 
-The current automated checkpoint passes 22 repository-contract tests, 134
-Vitest tests across 29 files, all six rendered-browser scenarios, the canonical
+The current automated checkpoint passes 23 repository-contract tests, 136
+Vitest tests across 30 files, all six rendered-browser scenarios, the canonical
 and nine-seed eleven-dose regression corpus, type checking, lint, production
 build, and the standalone simulation benchmark. The compatible-ghost desktop
 capture reports 55 development draw calls. The combined seated Quest review is

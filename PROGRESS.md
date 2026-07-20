@@ -133,3 +133,99 @@ Original prompt: batch 7
   work and use the established IWER/browser test path for immersive preflight.
 - Standing, endurance, hosted deployment, and release work remain open in their
   governing later batches.
+
+# Batch 10 working notes
+
+- 2026-07-20: The project owner explicitly reordered the work so Batch 10
+  visuals precede Batch 09 framing, screenshots, narration rehearsal, and final
+  recording. This is a scheduling exception, not a Batch 09 acceptance.
+- Added the one-page environment budget and composition plan at
+  `docs/BATCH_10_ENVIRONMENT_BUDGET.md`.
+- Added one shared render-only `PlantEnvironment` for desktop and XR: real
+  floor, raised deck, structural columns, short safety rail, large L-shaped
+  pipe run, partial basin, labeled slow flocculator silhouette, and no textures,
+  shadows, simulation imports, or per-frame allocations.
+- The first unconsolidated candidate failed the existing browser ceiling at 79
+  ready-state draw calls. Instancing the structural boxes and pipe segments
+  reduced the same composition to the established 70 ready / 71 replay
+  ceilings; the tests were not relaxed.
+- Raised only the Foundation desktop look target to working height. Preserved
+  the accepted XR-shell desktop interaction camera after a fixed-coordinate
+  canvas regression exposed that the shared camera change had moved Start.
+- Reduced the two existing real-time light intensities and labeled the distant
+  motion `FLOCCULATION BASIN` so it is not an unexplained decorative symbol.
+- The required bundled browser client reports healthy authoritative READY state
+  with no error artifact after each visual increment. Its default frame remains
+  occluded below the horizon by the gray XR/development ground presentation;
+  this is already tracked as later browser-framing work and is not portfolio
+  capture evidence.
+- Local visual-candidate validation passes: 23 Node contract tests, 135 Vitest
+  tests across 29 files, all six Chromium scenarios, typecheck, production
+  build, lint, and `git diff --check`.
+- Quest 3 `2G0YC5ZG0M052K` is connected with the 5173 reverse and 9222 DevTools
+  forward active. The live seated page reports READY, immersive session active,
+  500 particles, 120 FPS-class idle cadence, 8.9 ms p95, and no application
+  failure. Controllers were not currently detected, so this is preparation
+  evidence rather than the controller-inclusive Batch 10 verdict.
+- Added an executable static environment audit: five source draws, five
+  materials, approximately 326 instanced triangles, no external texture bytes,
+  and approximately 1.61 MB for the one self-created generated sign texture.
+  Its focused Vitest coverage and the post-audit bundled-client READY/error
+  check pass.
+
+## Batch 10 current TODO
+
+- Load the candidate in seated Quest immersive WebXR for composition,
+  parallax, readability, reach-clearance, and controller-inclusive performance
+  review.
+- Iterate visual placement from the headset review before adding audio.
+- After visual acceptance, implement restrained event/process audio and mute
+  behavior, then repeat Quest performance and lifecycle checks.
+
+## Batch 10 lab revision
+
+- The first headset review rejected the flocculation-basin setting because the
+  experiment should be situated in a lab.
+- Replaced the entire industrial environment with a four-wall water-quality lab:
+  large rear and side window openings, three perimeter benches, eight
+  transparent beakers, three analyzers with physical screens, ceiling panels,
+  and one slow magnetic stir bar. The accepted experiment apparatus remains
+  unchanged.
+- Extended the fourth wall behind both desktop cameras after the first lab
+  render correctly showed that the camera had initially been placed outside the
+  room.
+- The revised lab remains five source draws, five materials, and approximately
+  974 triangles. Focused typecheck/unit checks, the bundled-client READY/error
+  pass, screenshot inspection, and all six Chromium scenarios pass.
+- The window openings currently show the development void. Integrate the
+  owner's panorama only after it is attached, inspect it as a 2:1
+  equirectangular source, and record provenance.
+- The revised lab hot-loaded into the active seated Quest session. Both
+  controllers are detected at READY; the stable 300-frame window reports
+  119.98 FPS, 9.0 ms p95, 30 draw calls, 500 particles, and no application
+  failure. Human composition feedback remains the visual authority.
+- Integrated the exact owner-provided 5,216 by 1,608 Hetchy panoramic strip as
+  a distant inward-facing cylinder outside the real lab windows. A cylinder is
+  intentional because the 3.24:1 source is not a 2:1 equirectangular image.
+- Changed the `JAR TEST` marker to a larger solid light plaque with dark text so
+  it no longer reads as transparent against the room.
+- After headset feedback, raised the panorama one meter and added a complete
+  room-spanning ceiling behind the three existing light panels. The ceiling
+  shares the instanced structure draw; the audited environment remains five
+  source draws and five materials at approximately 1,114 triangles.
+- Post-change contract tests, all 136 Vitest tests, typecheck, and lint pass.
+  The required bundled browser client rendered healthy authoritative READY
+  state with no console-error artifact, and visual inspection confirms the
+  panorama is window-bounded and the ceiling closes the room.
+- The same candidate is live in the seated Quest session with no application
+  failure. Its current 300-frame development sample reports 112.77 average FPS,
+  14 ms p95, 36 draw calls, and 500 particles while a compatible ghost replay
+  is paused. Controllers were not held during this status sample, so the next
+  human interaction pass remains the controller-inclusive authority.
+- Follow-up headset feedback moved the panorama from the provisional one-meter
+  lift to an exact 10 percent vertical shift, extended the front wall into the
+  ceiling slab to close the last seam, and rebuilt the opaque `JAR TEST` plaque
+  as a large physical sign mounted across the rack top for reliable visibility.
+- Extended all nine rear and side window mullions from the sill through the
+  upper wall band so every visible beam now terminates inside the ceiling slab;
+  this changes only existing instance transforms and adds no geometry or draw.

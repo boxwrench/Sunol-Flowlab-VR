@@ -10,6 +10,7 @@ import {
   JAR_TEST_TABLETOP_HEIGHT_METERS,
   XR_CONTROL_DECK_LOCAL_X_METERS,
   XR_MIN_START_CLEARANCE_METERS,
+  XR_SHELL_DESKTOP_CAMERA_TARGET,
 } from './layout'
 
 describe('shared desktop and XR apparatus layout', () => {
@@ -26,7 +27,7 @@ describe('shared desktop and XR apparatus layout', () => {
       DESKTOP_CAMERA_POSITION.map(
         (coordinate, index) => coordinate - DESKTOP_CAMERA_TARGET[index],
       ),
-    ).toEqual([3.1, 1.75, 4.6])
+    ).toEqual([3.1, 0.89, 4.6])
   })
 
   it('places the jar-test rack on a waist-height table', () => {
@@ -39,5 +40,9 @@ describe('shared desktop and XR apparatus layout', () => {
 
   it('centers the XR control deck on the headset start origin', () => {
     expect(APPARATUS_WORLD_POSITION[0] + XR_CONTROL_DECK_LOCAL_X_METERS).toBe(0)
+  })
+
+  it('preserves the accepted desktop XR-shell interaction camera', () => {
+    expect(XR_SHELL_DESKTOP_CAMERA_TARGET).toEqual([0.4, 0, -1.8])
   })
 })

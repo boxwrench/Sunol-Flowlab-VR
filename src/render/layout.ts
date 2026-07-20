@@ -15,5 +15,7 @@ export const DESKTOP_CAMERA_POSITION: readonly [number, number, number] = [
   3.5, 1.75, 2.8,
 ]
 export const DESKTOP_CAMERA_TARGET: readonly [number, number, number] = [
-  0.4, 0, -1.8,
+  0.4, 0.86, -1.8,
 ]
+export const XR_SHELL_DESKTOP_CAMERA_TARGET: readonly [number, number, number] =
+  [0.4, 0, -1.8]

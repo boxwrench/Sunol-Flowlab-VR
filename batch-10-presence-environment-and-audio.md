@@ -1,7 +1,7 @@
 # Batch 10 Implementation Plan: Presence, Environment, and Audio
 
-**Status:** Not started — predecessor gates remain open
-**Depends on:** Core apparatus, instrumentation, readability, and browser presentation accepted  
+**Status:** In progress — owner-authorized visual-first scheduling exception
+**Depends on:** Core apparatus, instrumentation, and readability accepted; Batch 09 final capture remains deferred  
 **May run in parallel with:** Asset and audio preparation after Batch 03, but final integration occurs here  
 **Primary gate:** The scene reads as a stylized drinking-water plant, preserves instrument dominance and parallax, and maintains the Quest performance target.
 
@@ -10,6 +10,11 @@
 ## Goal
 
 Add the minimum environmental and audio context needed for presence without turning the project into a plant walkthrough or spending the frame budget on scenery.
+
+The project owner explicitly moved Batch 10 visual work ahead of Batch 09
+capture framing because final presentation media should follow settled visuals.
+This exception does not waive Batch 09 browser-entry or narration work and does
+not authorize final capture before Batch 10 acceptance.
 
 ## Agent execution rules
 
@@ -54,10 +59,10 @@ Reject any asset that is not visible or useful from the station.
 
 Build:
 
-- real 3D floor around the table;
-- nearby equipment base or deck;
-- simple structural frame/columns;
-- one short handrail/catwalk section.
+- real 3D floor around the experiment station;
+- four stylized lab walls with large window openings;
+- perimeter lab benches and cabinets;
+- simple ceiling light panels.
 
 Purpose: believable near-field parallax and scale reference.
 
@@ -65,11 +70,10 @@ Purpose: believable near-field parallax and scale reference.
 
 Build a restrained set:
 
-- large pipes and elbows;
-- partial flocculation or sedimentation basin silhouette;
-- one repeated pipe/column module;
-- one distant pump, day tank, or process-skid silhouette only if it strengthens identity;
-- sparse utility signage and indicator lights.
+- transparent beakers with bounded internal fluids;
+- a repeated benchtop-analyzer module;
+- repeated bench, cabinet, and window-frame modules;
+- sparse laboratory signage and analyzer screens.
 
 Merge or instance repeated geometry where practical.
 
@@ -77,9 +81,9 @@ Merge or instance repeated geometry where practical.
 
 Choose one:
 
-- distant paddle/flocculator silhouette;
-- slow mixer;
-- subtle basin surface movement.
+- slow magnetic stir bar on a lab bench;
+- restrained analyzer indicator motion;
+- another similarly legible low-cost lab element.
 
 Requirements:
 
@@ -167,12 +171,18 @@ Revalidate:
 
 Evaluate only after the low-poly scene passes.
 
+The project owner requested that their panorama appear outside the lab's large
+windows. Integration begins when that source image is attached; do not invent a
+replacement image.
+
 Guardrails:
 
-- monoscopic true 2:1 equirectangular image;
+- monoscopic 2:1 equirectangular image on a sphere, or an audited panoramic
+  strip on an inward-facing distant cylinder;
 - distant scenery only;
 - nearby floor, table, rails, tank, and controls remain real 3D;
-- start around 4K and compress to KTX2/Basis;
+- begin with the exact owner source for projection review, then resize or
+  compress to KTX2/Basis if it is retained;
 - one shared `KTX2Loader`, `detectSupport(renderer)` once;
 - preserve development void fallback;
 - reject panorama if it harms labels, style, load time, or frame rate;

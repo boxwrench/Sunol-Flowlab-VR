@@ -16,6 +16,7 @@ import {
 } from './layout'
 import type { ParticleFrameRecorder } from './ParticleCloud'
 import type { OpticalLoadBandsPresentation } from './OpticalLoadGradient'
+import { PlantEnvironment } from './PlantEnvironment'
 
 interface FoundationSceneProps {
   readonly animateParticleTransitions?: boolean
@@ -50,8 +51,9 @@ export function FoundationScene({
       <XR store={xrStore}>
         {children}
         <color attach="background" args={['#081719']} />
-        <ambientLight intensity={1.35} />
-        <directionalLight position={[2, 4, 3]} intensity={2.2} />
+        <ambientLight intensity={1.1} />
+        <directionalLight position={[2, 4, 3]} intensity={1.7} />
+        <PlantEnvironment />
         <group position={[...APPARATUS_WORLD_POSITION]}>
           <HeroObservationTank
             animateParticleTransitions={animateParticleTransitions}
@@ -62,7 +64,6 @@ export function FoundationScene({
           />
           <JarTestBench summaries={canonicalJarSummaries} />
           {instrumentation}
-          <gridHelper args={[8, 16, '#315b59', '#173332']} />
         </group>
       </XR>
     </Canvas>

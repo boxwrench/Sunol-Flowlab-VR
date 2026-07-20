@@ -11,10 +11,11 @@ import { XrShellApparatus } from './XrShellApparatus'
 import {
   APPARATUS_WORLD_POSITION,
   DESKTOP_CAMERA_POSITION,
-  DESKTOP_CAMERA_TARGET,
+  XR_SHELL_DESKTOP_CAMERA_TARGET,
 } from './layout'
 import type { ParticleFrameRecorder } from './ParticleCloud'
 import type { OpticalLoadBandsPresentation } from './OpticalLoadGradient'
+import { PlantEnvironment } from './PlantEnvironment'
 
 interface XrShellSceneProps {
   readonly children?: ReactNode
@@ -46,12 +47,15 @@ export function XrShellScene({
     <Canvas
       camera={{ position: [...DESKTOP_CAMERA_POSITION], fov: 42 }}
       dpr={[1, 1.5]}
-      onCreated={({ camera }) => camera.lookAt(...DESKTOP_CAMERA_TARGET)}
+      onCreated={({ camera }) =>
+        camera.lookAt(...XR_SHELL_DESKTOP_CAMERA_TARGET)
+      }
     >
       <XR store={xrStore}>
         <color attach={'background'} args={['#081719']} />
-        <ambientLight intensity={1.35} />
-        <directionalLight position={[2, 4, 3]} intensity={2.2} />
+        <ambientLight intensity={1.1} />
+        <directionalLight position={[2, 4, 3]} intensity={1.7} />
+        <PlantEnvironment />
         {sceneChildren}
         <group position={[...APPARATUS_WORLD_POSITION]}>
           <XrShellApparatus
@@ -76,7 +80,6 @@ export function XrShellScene({
               {children}
             </group>
           </XrShellApparatus>
-          <gridHelper args={[8, 16, '#315b59', '#173332']} />
         </group>
       </XR>
     </Canvas>

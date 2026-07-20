@@ -155,14 +155,6 @@ export function JarTestBench({ summaries = [] }: JarTestBenchProps) {
 
   return (
     <group position={[-1.2, 0.02, 0.48]} rotation={[0, 0.08, 0]}>
-      <InstrumentLabel
-        text={'JAR TEST'}
-        width={0.72}
-        height={0.16}
-        position={[0, 1.69, 0.1]}
-        background={'#203b39'}
-        fontScale={0.56}
-      />
       <mesh position={[0, JAR_TEST_TABLETOP_HEIGHT_METERS, 0]}>
         <boxGeometry args={[1.72, 0.08, 0.62]} />
         <meshStandardMaterial color={'#6c746a'} roughness={0.72} />
@@ -221,10 +213,19 @@ export function JarTestBench({ summaries = [] }: JarTestBenchProps) {
           <boxGeometry args={[1.55, 0.04, 0.34]} />
           <meshStandardMaterial color={'#203b39'} roughness={0.8} />
         </mesh>
-        <mesh position={[0, 0.69, 0]}>
-          <boxGeometry args={[1.58, 0.055, 0.12]} />
-          <meshStandardMaterial color={'#405d59'} roughness={0.6} />
+        <mesh position={[0, 0.76, 0]}>
+          <boxGeometry args={[1.35, 0.22, 0.12]} />
+          <meshStandardMaterial color={'#274743'} roughness={0.6} />
         </mesh>
+        <InstrumentLabel
+          text={'JAR TEST'}
+          width={1.1}
+          height={0.18}
+          position={[0, 0.76, 0.061]}
+          background={'#f2eee2'}
+          color={'#102a27'}
+          fontScale={0.62}
+        />
         {CANONICAL_JAR_DOSES.map((dose, index) => (
           <InstrumentLabel
             key={dose}
