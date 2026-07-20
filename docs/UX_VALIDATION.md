@@ -349,3 +349,13 @@ music remain subordinate and share one physical Mute control. Narration and
 additional product ideas are explicitly deferred. This records the seated Batch
 10 human visual/audio gate as passed. Hosted-URL verification, final release
 capture, endurance, and non-operator review remain separate release evidence.
+
+### 2026-07-20 hosted Quest release-candidate verdict
+
+The project owner opened the HTTPS GitHub Pages candidate at
+`https://boxwrench.github.io/Sunol-Flowlab-VR/` in Quest Browser and entered the
+immersive experience through the single Enter VR action. The owner confirmed
+the hosted result was "very good." This accepts the public-route immersive
+entry and the final Sunol-default lab, dashboard, scenery, and audio
+presentation on the target headset. It does not infer endurance, thermal,
+non-operator usability, or video-capture evidence.

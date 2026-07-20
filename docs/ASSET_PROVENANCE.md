@@ -21,6 +21,15 @@
   panorama documented above.
 - Modification: none after capture.
 
+## v0.1 hosted release screenshot
+
+- Repository asset: `docs/images/sunol-flowlab-v0.1/shot-0.png`
+- Source: self-created Playwright capture of the deployed GitHub Pages v0.1.0
+  release candidate on 2026-07-20.
+- Inputs: repository-owned application geometry and the owner-created Sunol
+  panorama documented below.
+- Modification: none after capture.
+
 ## Sunol panorama
 
 - Repository asset: `public/panoramas/sunol.jpg`

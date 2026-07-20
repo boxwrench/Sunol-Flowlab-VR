@@ -466,3 +466,16 @@ measurement/refill effects. The prior-front marker adds one opaque draw only.
 Quest live-plus-ghost average and p95 frame time, controller-inclusive draw
 calls, stereo transparency ordering, and the 72 FPS verdict remain in the
 combined Batch 07/08 human gate.
+
+## 2026-07-20 - Hosted v0.1.0 candidate smoke
+
+- URL: `https://boxwrench.github.io/Sunol-Flowlab-VR/`
+- Deployed commit: `4ab62c1`
+- Device: Meta Quest 3, serial `2G0YC5ZG0M052K`
+- Browser route: public HTTPS GitHub Pages entry
+
+The deployed page presented one canvas and one Enter VR action with no failed
+requests or console errors during remote pre-entry inspection. The project
+owner then entered immersive WebXR and accepted the visual/audio result as
+"very good." This is hosted load and entry evidence, not a replacement for the
+separate bounded endurance and thermal measurements.

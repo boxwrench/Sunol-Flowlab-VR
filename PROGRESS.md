@@ -273,3 +273,16 @@ Original prompt: batch 7
   and a sideloadable APK are deferred. Release work now owns a frictionless root
   URL, GitHub Pages deployment, hosted Quest verification, final still/video,
   and the v0.1.0 tag.
+- Published commit `4ab62c1` through the repository's HTTPS-enforced GitHub
+  Pages workflow at `https://boxwrench.github.io/Sunol-Flowlab-VR/`. The bare
+  URL now opens the complete seated Sunol experience with one Enter VR action;
+  the prior diagnostic desktop controls remain on `?mode=desktop` only.
+- The exact repository-subpath preview and deployed origin each loaded one
+  canvas and one Enter VR button with no failed requests or console errors.
+  Production requested only the main application chunk; the emitted IWER room
+  and emulator chunks were not eagerly requested. The hosted final still is
+  retained under `docs/images/sunol-flowlab-v0.1/`.
+- The project owner opened that exact HTTPS URL in Quest Browser, entered the
+  immersive experience, and accepted the hosted candidate as "very good."
+  This closes the hosted-entry and final visual/audio review gate. The bounded
+  endurance/repeat-cycle check, operator-led video, and v0.1.0 tag remain.

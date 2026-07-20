@@ -11,7 +11,7 @@ Updated: 2026-07-20
   `git status --short` and `git log -1 --oneline`
 - `AGENTS.md` is repository-local authority and intentionally ignored at the
   repository root
-- Current milestone: Batches 07 and 08 accepted; Batch 09 is next
+- Current milestone: hosted v0.1.0 candidate accepted on Quest; video/tag gates
 - Portfolio-evaluation recommendations are staged without expanding Batch 07:
   final media/transparency evidence in Batch 08, repository front-door work in
   Batch 09, and bundle/deployment/branding verification in Batch 11
@@ -40,9 +40,10 @@ passed; the first human review returned actionable instrument-comprehension
 issues. Iterative seated Quest revisions removed misleading geometry, added
 plain-language labels, retuned the apparatus and controls, aligned the jar
 labels, and established clear transparent result tiers. After the final START
-plaque, the project owner accepted the combined human gate. Batch 09 is now the
-next planned increment; environment, deployment, and release remain later
-scope.
+plaque, the project owner accepted the combined human gate. Batch 10 lab,
+dashboard, scenery, and audio work is also accepted. The HTTPS GitHub Pages
+candidate is deployed and accepted in immersive Quest review; endurance
+evidence, operator-led video, and v0.1.0 release tagging remain.
 
 The superseded Godot plan remains isolated under docs/archive for provenance.
 Use only the active indexed Markdown plan.
@@ -282,11 +283,11 @@ commands. The seated project-owner operator replied “pass” to the combined
 review of phase distinction, lock feedback, measurement conclusion, refill
 readability and invitation to repeat, and visible smoothness.
 
-A hosted HTTPS deployment is not authorized. Localhost and the documented ADB
-reverse route remain the approved development paths. Thermal/endurance, later
-headset ergonomics beyond this Batch 04 protocol, Batch 08 ghost-comparison
-presentation, hosted
-deployment, and release gates remain later work.
+The hosted HTTPS deployment is authorized and live at
+`https://boxwrench.github.io/Sunol-Flowlab-VR/`. Localhost and the documented
+ADB reverse route remain development paths. Hosted Quest entry and final
+visual/audio review passed on 2026-07-20. Thermal/endurance, final video, and
+release tagging remain open gates.
 
 Public-data and fictionalization restrictions in
 [docs/DATA_BOUNDARY.md](docs/DATA_BOUNDARY.md) remain binding. The model is
@@ -309,20 +310,15 @@ hot simulation state into React state.
 Keep spatial hashing deferred unless a recorded bottleneck justifies it.
 Version 1 has no free list. The observed flicker justifies the current bounded
 render-local smoothing, but simulation merge-event metadata remains deferred.
-Do not add a second simulation, copy hot arrays into React state, give the jars
-live state, pull Batch 08 ghost-comparison visuals forward, or authorize hosted
-deployment from this increment.
+Do not add a second simulation, copy hot arrays into React state, or give the
+jars live state. Narration, new product ideas, and APK packaging are deferred.
 
 ## Recommended next session
 
-1. Open Batch 09 as a separate browser-presentation increment. Support only
-   Quest immersive WebXR and the Chrome/Chromium in-browser VR simulation.
-   Rehearse an owner-operated low/optimum/high task card, capture it, and draft
-   concise narration; defer final polished footage until Batch 10 is accepted.
-2. Preserve the accepted seated apparatus, simulation authority, and Quest
-   performance posture.
-3. Keep standing, endurance, hosted deployment, and release work in their
-   governing later batches.
+1. Run the bounded endurance/repeat-cycle release check on the accepted hosted
+   commit.
+2. Record the owner-operated low/optimum/high video without narration, then tag
+   and publish v0.1.0 if the hosted checks pass.
 
 ## Commands
 

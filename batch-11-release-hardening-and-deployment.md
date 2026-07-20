@@ -1,6 +1,6 @@
 # Batch 11 Implementation Plan: Release Hardening and Deployment
 
-**Status:** Not started — predecessor gates remain open
+**Status:** In progress - hosted v0.1.0 candidate accepted on Quest
 **Depends on:** All prior batch gates accepted  
 **May run in parallel with:** Independent release review and documentation verification only  
 **Primary gate:** A reproducible public release works on Quest immersive WebXR and the Chrome/Chromium browser simulation, preserves the accepted dose-response behavior, contains no development or sensitive material, and can be rolled back safely.
@@ -216,8 +216,8 @@ Add troubleshooting for:
 
 After product-owner approval:
 
-- tag `release-candidate` if not already present;
-- tag `v1.0.0` on the accepted commit;
+- tag `release-candidate` if useful for the final review;
+- tag `v0.1.0` on the accepted commit;
 - create concise release notes describing the actual shipped loop;
 - list known limitations honestly;
 - do not advertise deferred features.

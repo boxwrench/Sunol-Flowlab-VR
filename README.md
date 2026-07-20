@@ -2,18 +2,20 @@
 
 [![CI](https://github.com/boxwrench/Sunol-Flowlab-VR/actions/workflows/ci.yml/badge.svg)](https://github.com/boxwrench/Sunol-Flowlab-VR/actions/workflows/ci.yml)
 
+**[Launch Sunol FlowLab VR](https://boxwrench.github.io/Sunol-Flowlab-VR/)**
+
 Sunol FlowLab VR is an open-source personal educational portfolio project for people interested in drinking-water treatment. It uses a VR-first tabletop coagulation experiment, viewable in immersive Quest WebXR or the Chrome/Chromium in-browser VR simulation, to show a qualitative idea: treatment response has an optimum, and both underdose and overdose can leave poorer water clarity.
 
 This is a **phenomenological coagulation model**, not dose-prediction software, operational guidance, CFD, or a calibrated model of a real plant. The setting and values are representative and fictionalized.
 
-![Sunol FlowLab VR coagulation experiment in the water-quality lab](docs/images/sunol-flowlab-lab/shot-0.png)
+![Sunol FlowLab VR coagulation experiment in the water-quality lab](docs/images/sunol-flowlab-v0.1/shot-0.png)
 
 _Current Chrome/Chromium simulation view. The same apparatus and laboratory
 composition are used in immersive Quest WebXR._
 
 ## Project status
 
-Implementation is in progress through accepted Batch 08. Batch 00 is substantially complete,
+The hosted v0.1.0 release candidate is live. Batch 00 is substantially complete,
 Batch 01A is accepted, and the local physical portion of Batch 01B is accepted
 on Quest 3; its hosted-URL smoke gate remains open. Reduced Batch 02A remains
 the immutable statistical prototype baseline. Batch 03 is
@@ -24,8 +26,10 @@ seated Quest integration, and
 Batches 07 and 08 passed their combined seated Quest instrument,
 control, readability, and comparison verdict. Batch 10 laboratory visuals,
 physical dashboard, selectable scenery, and generated audio passed iterative
-seated-headset review. Batch 09 final still/video capture and Batch 11 v0.1.0
-release hardening are now active; narration is explicitly deferred.
+seated-headset review. The final hosted still is captured, and the deployed URL
+has passed immersive Quest review. Batch 09 operator-led video capture and the
+remaining Batch 11 endurance check are now active; narration and a sideloadable
+APK are explicitly deferred.
 See [PROGRESS.md](PROGRESS.md), the
 [Batch 07 acceptance packet](docs/BATCH_07_ACCEPTANCE.md), the
 [Batch 08 acceptance packet](docs/BATCH_08_CANDIDATE.md), and the
@@ -147,7 +151,9 @@ npm ci
 npm run dev
 ```
 
-Open `http://localhost:5173` in Chrome for the built-in Quest 3 emulator. Use `npm run dev:https` only when an HTTPS origin is needed for same-network device testing.
+Open `http://localhost:5173` in Chrome for the built-in Quest 3 emulator. Use
+`npm run dev:https` only when an HTTPS origin is needed for same-network device
+testing. The production Pages build is `npm run build:pages`.
 
 Version 1 targets only current Quest Browser for immersive WebXR and current
 Chrome, or an equivalent Chromium-based desktop browser, for the in-browser VR
@@ -163,13 +169,15 @@ npm run typecheck
 npm run lint
 npm run format:check
 npm run build
+npm run build:pages
 npm run benchmark
 npm run test:browser
 ```
 
 The desktop browser suite requires Playwright Chromium. The physical Quest
-development route and accepted Batch 06 seated evidence are documented;
-hosted-route, endurance, thermal, and release checks remain later manual gates.
+development route and accepted seated evidence are documented. The public HTTPS
+route is deployed and its immersive Quest entry is accepted. Endurance,
+thermal, and final release approval remain manual gates.
 
 The physical XR route and Quest debugging workflow are documented in
 [docs/DEVICE_TESTING.md](docs/DEVICE_TESTING.md). The combined harness is
