@@ -8,8 +8,7 @@ This is a **phenomenological coagulation model**, not dose-prediction software, 
 
 ## Project status
 
-Implementation is in progress through accepted Batch 06, with Batch 07 and
-Batch 08 now at technical-candidate status. Batch 00 is substantially complete,
+Implementation is in progress through accepted Batch 08. Batch 00 is substantially complete,
 Batch 01A is accepted, and the local physical portion of Batch 01B is accepted
 on Quest 3; its hosted-URL smoke gate remains open. Reduced Batch 02A remains
 the immutable statistical prototype baseline. Batch 03 is
@@ -17,17 +16,17 @@ the immutable statistical prototype baseline. Batch 03 is
 Batch 04 is accepted with documented physical-test waivers, Batch 05 passed
 seated Quest integration, and
 [Batch 06 passed its complete seated treatment-cycle gate](docs/BATCH_06_ACCEPTANCE.md).
-The remaining Batch 07 instrument/control verdict and Batch 08 headset
-readability/comparison verdict are intentionally combined into one seated Quest
-review. Batches 09–11 remain unstarted. See [PROGRESS.md](PROGRESS.md), the
-[Batch 07 candidate packet](docs/BATCH_07_ACCEPTANCE.md), the
-[Batch 08 technical candidate packet](docs/BATCH_08_CANDIDATE.md), and the
+Batches 07 and 08 passed their combined seated Quest instrument,
+control, readability, and comparison verdict. Batches 09–11 remain unstarted.
+See [PROGRESS.md](PROGRESS.md), the
+[Batch 07 acceptance packet](docs/BATCH_07_ACCEPTANCE.md), the
+[Batch 08 acceptance packet](docs/BATCH_08_CANDIDATE.md), and the
 [implementation-plan index](IMPLEMENTATION_PLAN.md).
 
 The approved presentation direction is a [hybrid six-jar test bench and hero observation tank](docs/DESIGN_DIRECTION_JAR_TEST_HYBRID.md): one live authoritative simulation, six static canonical preset summaries, and a complete plot/log covering all eleven dose values.
 
-The current candidate runs one deterministic seven-phase treatment cycle with
-ready-only dose and Start controls, physical locked-state feedback, a 90-degree
+The accepted experience runs one deterministic seven-phase treatment cycle with
+ready-only labeled dose and Start controls, physical locked-state feedback,
 one immutable completed result, deterministic refill, a labeled relative-
 turbidity gauge, a complete 0–10 plot/log, persistent static canonical
 summaries, and bounded treatment-result ghost recording/playback. Batch 08 adds
@@ -46,8 +45,8 @@ The current automated checkpoint passes 22 repository-contract tests, 134
 Vitest tests across 29 files, all six rendered-browser scenarios, the canonical
 and nine-seed eleven-dose regression corpus, type checking, lint, production
 build, and the standalone simulation benchmark. The compatible-ghost desktop
-capture reports 55 development draw calls. These desktop checks do not replace
-the remaining combined Quest review.
+capture reports 55 development draw calls. The combined seated Quest review is
+recorded separately in the acceptance packets.
 
 ## Built With
 

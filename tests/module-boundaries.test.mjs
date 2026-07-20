@@ -75,6 +75,7 @@ test('Batch 06 composes one app-owned treatment cycle into the shared hero tank 
   assert.match(app, /new TreatmentCycleController\(/)
   assert.match(app, /locked=\{!cycle\.controlAvailability\.doseEnabled\}/)
   assert.match(app, /locked=\{!cycle\.controlAvailability\.startEnabled\}/)
+  assert.match(app, /text=\{'START'\}/)
   assert.match(app, /opticalLoadBands=\{presentationOpticalLoadBands\}/)
   assert.match(app, /presentationOpticalSource/)
   assert.match(app, /cycle\.interrupt\('XR session ended'\)/)

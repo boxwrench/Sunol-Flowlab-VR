@@ -1,5 +1,6 @@
 import type { ThreeEvent } from '@react-three/fiber'
 import { useEffect, useRef, useState } from 'react'
+import type { ReactNode } from 'react'
 
 import type { AppCommand } from '../app/commands'
 import {
@@ -14,12 +15,14 @@ import {
 
 interface StartButtonProps {
   readonly emitCommand: (command: AppCommand) => void
+  readonly label?: ReactNode
   readonly locked: boolean
   readonly recordState: (state: StartButtonState) => void
 }
 
 export function StartButton({
   emitCommand,
+  label,
   locked,
   recordState,
 }: StartButtonProps) {
@@ -93,6 +96,7 @@ export function StartButton({
           roughness={0.42}
         />
       </mesh>
+      {label}
       {locked ? (
         <mesh position={[0, 0.14, 0]} rotation={[0, Math.PI / 4, 0]}>
           <boxGeometry args={[0.22, 0.025, 0.035]} />

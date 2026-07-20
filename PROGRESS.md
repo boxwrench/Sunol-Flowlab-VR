@@ -112,11 +112,14 @@ Original prompt: batch 7
   log held only odd doses 3/5/9, so all jars correctly showed the same raw-water
   fallback. Re-ran `review-ready` to stage authoritative 0/2/4/6/8/10 results;
   the live page now exposes all six canonical summaries at READY.
+- Added a seated-facing START plaque to the physical button base. The required
+  browser client visually confirms it and the XR interaction regression passes.
+- The project owner stated the batch was good after requesting the START label.
+  Record the combined Batch 07/08 human gate as accepted; no acceptance tags
+  were created.
 
 ## Current TODO
 
-- Run one focused seated Quest rerun of the new text labels, jar spectrum,
-  past-run gauge comparison, and replay/refill/clear controls. The live-trial
-  performance row already has passing 2026-07-20 evidence.
-- Do not represent either batch as accepted before that verdict and do not start
-  Batch 09.
+- Begin Batch 09 only as a separate scoped increment.
+- Standing, endurance, hosted deployment, and release work remain open in their
+  governing later batches.

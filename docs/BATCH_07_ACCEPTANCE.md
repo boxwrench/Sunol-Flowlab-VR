@@ -1,18 +1,17 @@
-# Batch 07 Candidate Acceptance Packet
+# Batch 07 Acceptance Packet
 
 Date: 2026-07-17  
-Gate status updated: 2026-07-19
+Gate status updated: 2026-07-20
 
-Status: **Candidate; not yet accepted.** All local automated, deterministic,
-architecture, persistence, rendered-browser, and build gates pass. Seated Quest
-readability, comprehension, and physical-control checks remain the only open
-acceptance gate; the immersive performance row has passed.
+Status: **Accepted.** All local automated, deterministic, architecture,
+persistence, rendered-browser, build, seated Quest performance, and
+project-owner comprehension gates pass.
 
-On 2026-07-19 the project owner explicitly deferred the remaining human review
-so that safe candidate hardening could be batched. Later that day, the owner
-authorized Batch 08 technical work as a scheduling exception and directed one
-combined Quest review for both batches. This is not a pass, waiver, or Batch 07
-acceptance.
+The first combined review returned instrument-comprehension issues. Iterative
+worn-headset fixes removed unexplained geometry, added plain-language labels,
+retuned the seated layout, and made the canonical result tiers readable. After
+the final START label, the project owner gave the combined batch a positive
+verdict on 2026-07-20.
 
 ## What changed
 
@@ -91,7 +90,7 @@ working tree but is not Batch 07 runtime scope.
 
 ## Verification completed
 
-- `npm test`: 21 repository-contract tests and 133 Vitest tests pass across 30
+- `npm test`: 22 repository-contract tests and 134 Vitest tests pass across 29
   Vitest files.
 - The application-command boundary rejects unknown commands, invalid dose
   detents, missing ghost IDs, and non-finite seek payloads.
@@ -144,29 +143,24 @@ working tree but is not Batch 07 runtime scope.
 
 ## Requirement audit
 
-| Requirement                               | Evidence                            | State   |
-| ----------------------------------------- | ----------------------------------- | ------- |
-| One result per completion                 | unit, integration, browser restart  | Pass    |
-| Complete all-dose/repeat memory           | schema and marker tests             | Pass    |
-| Canonical exact/odd/latest/restore/clear  | domain and browser tests            | Pass    |
-| Gauge/plot share result authority         | exact mapping tests                 | Pass    |
-| Corrupt/future/quota storage safety       | domain tests                        | Pass    |
-| 10 Hz flat recording and endpoint bands   | 431×12 recorder tests               | Pass    |
-| Compatibility and migration classes       | current/migrated/legacy/error tests | Pass    |
-| Playback controls and interpolation       | exact/bounded/end tests             | Pass    |
-| Playback leaves live simulation unchanged | domain, integration, browser        | Pass    |
-| Three-record limit/delete/replace         | measured library tests              | Pass    |
-| Physical instrumentation present          | inspected desktop/XR captures       | Pass    |
-| Seated readability and comprehension      | project-owner worn-headset review   | Pending |
-| Physical refill/clear/replay controls     | project-owner worn-headset review   | Pending |
-| Immersive Quest performance               | seated rolling metrics              | Pass    |
+| Requirement                               | Evidence                            | State |
+| ----------------------------------------- | ----------------------------------- | ----- |
+| One result per completion                 | unit, integration, browser restart  | Pass  |
+| Complete all-dose/repeat memory           | schema and marker tests             | Pass  |
+| Canonical exact/odd/latest/restore/clear  | domain and browser tests            | Pass  |
+| Gauge/plot share result authority         | exact mapping tests                 | Pass  |
+| Corrupt/future/quota storage safety       | domain tests                        | Pass  |
+| 10 Hz flat recording and endpoint bands   | 431×12 recorder tests               | Pass  |
+| Compatibility and migration classes       | current/migrated/legacy/error tests | Pass  |
+| Playback controls and interpolation       | exact/bounded/end tests             | Pass  |
+| Playback leaves live simulation unchanged | domain, integration, browser        | Pass  |
+| Three-record limit/delete/replace         | measured library tests              | Pass  |
+| Physical instrumentation present          | inspected desktop/XR captures       | Pass  |
+| Seated readability and comprehension      | project-owner worn-headset review   | Pass  |
+| Physical refill/clear/replay controls     | project-owner worn-headset verdict  | Pass  |
+| Immersive Quest performance               | seated rolling metrics              | Pass  |
 
 ## Gate decision
 
-Do not tag or mark Batch 07 accepted yet. Proposed closing commit remains
-`feat: add instrumentation, persistence, and treatment-result ghosts`; proposed
-accepted tag remains `instrumentation-complete` after the three pending Quest
-rows pass or receive explicit documented waivers.
-
-The remaining rows now belong to the combined Batch 07/08 checklist in
-`docs/UX_VALIDATION.md`. Do not tag Batch 07 from Batch 08 desktop evidence.
+Batch 07 is accepted by the project owner through the combined Batch 07/08
+Quest verdict. No acceptance tag is created by this documentation update.

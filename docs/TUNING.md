@@ -4,11 +4,10 @@ Date: 2026-07-20
 
 ## Status and change classification
 
-The project owner authorized Batch 08 technical work to run before the open
-Batch 07 human verdict so both batches can use one combined Quest review. This
-is a scheduling exception, not retroactive Batch 07 acceptance. Batch 07 and
-Batch 08 remain unaccepted until the combined worn-headset gate passes or an
-explicit waiver is recorded.
+The project owner authorized Batch 08 technical work to run before the then-open
+Batch 07 human verdict so both batches could use one combined Quest review. The
+iterative worn-headset review has now passed, and Batches 07 and 08 are
+accepted.
 
 Every implementation change in this increment is **display tuning**. No dose
 curve, seed, phase timing, aggregation, settling, particle capacity, optical-
@@ -44,9 +43,8 @@ remains visually subordinate to the live needle, and adds:
 - no transparent layer; and
 - no comparison geometry inside the hero tank.
 
-The physical ghost controls now carry plain-language labels. The focused human
-rerun must confirm that their purpose and the cyan past-run needle are
-understood without explanation.
+The physical ghost controls carry plain-language labels. The project-owner
+combined verdict accepted their final seated presentation.
 
 ## Instrument and jar readability
 

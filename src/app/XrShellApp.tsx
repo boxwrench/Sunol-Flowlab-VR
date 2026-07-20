@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 
 import { XrShellScene } from '../render/XrShellScene'
+import { InstrumentLabel } from '../render/InstrumentLabel'
 import { PhysicalInstrumentation } from '../render/PhysicalInstrumentation'
 import { endpointOpticalLoad } from '../sim'
 import { DoseLever } from '../xr/DoseLever'
@@ -397,6 +398,17 @@ export function XrShellApp() {
         />
         <StartButton
           emitCommand={emitCommand}
+          label={
+            <InstrumentLabel
+              text={'START'}
+              width={0.22}
+              height={0.08}
+              position={[0, 0.075, 0.172]}
+              color={'#f4fff9'}
+              background={'#263f3c'}
+              fontScale={0.7}
+            />
+          }
           locked={!cycle.controlAvailability.startEnabled}
           recordState={recordStartButtonState}
         />

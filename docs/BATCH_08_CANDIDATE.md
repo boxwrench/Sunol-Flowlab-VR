@@ -1,11 +1,9 @@
-# Batch 08 Technical Candidate Packet
+# Batch 08 Acceptance Packet
 
 Date: 2026-07-20
 
-Status: **Technical candidate; not accepted.** The project owner authorized a
-scheduling exception that batches Batch 08 machine-verifiable work before the
-remaining Batch 07 human verdict. One combined Quest review now owns both open
-human gates.
+Status: **Accepted.** The technical candidate and combined seated Quest
+readability/comprehension gate pass.
 
 ## Implemented
 
@@ -68,9 +66,9 @@ The repository-wide Prettier command also sees the untracked local `.agents/`
 skill scaffold. Those user-owned files are outside this increment and remain
 untouched; every tracked or newly added Batch 07/08 file passes Prettier.
 
-## Open combined gate
+## Combined human validation
 
-The combined seated Quest review must establish:
+The combined seated Quest review established:
 
 1. remaining Batch 07 instrument/jar readability and physical replay, refill,
    replacement, and clear behavior;
@@ -83,9 +81,14 @@ The combined seated Quest review must establish:
 5. live-plus-ghost performance retains the 72 FPS posture through the expensive
    visible phases.
 
-Standing, portfolio media selection, and non-operator review may be recorded in
-the same session if practical. They are not inferred from earlier seated
-evidence.
+The first review returned actionable comprehension issues rather than a pass.
+Iterative worn-headset fixes added plain-language labels, removed misleading
+geometry, retuned seated placement, centered/scaled controls, aligned jar
+labels, and established visible transparent dark/medium/light result tiers.
+After the final START label, the project owner stated the batch was good.
+
+Standing, portfolio media selection, and non-operator review remain outside
+this accepted seated gate.
 
 The combined device harness is available as
 `npm run acceptance:08:quest -- review-ready`, followed by
@@ -95,7 +98,5 @@ to the project-owner operator.
 
 ## Gate decision
 
-Do not mark Batch 07 or Batch 08 accepted and do not create either accepted tag
-until the combined human checklist has a recorded verdict. Proposed Batch 08
-commit remains `refine: tune headset clearing and ghost readability`; proposed
-accepted tag remains `headset-readability-proven`.
+Batch 08 is accepted by the project owner through the combined Batch 07/08
+Quest verdict. No acceptance tag is created by this documentation update.

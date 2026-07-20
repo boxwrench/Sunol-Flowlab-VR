@@ -1,18 +1,17 @@
 # Session Handoff
 
-Updated: 2026-07-19
+Updated: 2026-07-20
 
 ## Resume point
 
 - Repository: <https://github.com/boxwrench/Sunol-Flowlab-VR>
 - Branch: main
 - Published branch: main; use `git log -1 --oneline` for the current increment
-- Working tree: combined Batch 07/08 technical-candidate increment; inspect
+- Working tree: accepted combined Batch 07/08 increment; inspect
   `git status --short` and `git log -1 --oneline`
 - `AGENTS.md` is repository-local authority and intentionally ignored at the
   repository root
-- Current milestone: Batch 07 and Batch 08 technical candidates; one combined
-  Quest visual/control/comparison verdict remains open
+- Current milestone: Batches 07 and 08 accepted; Batch 09 is next
 - Portfolio-evaluation recommendations are staged without expanding Batch 07:
   final media/transparency evidence in Batch 08, repository front-door work in
   Batch 09, and bundle/deployment/branding verification in Batch 11
@@ -36,17 +35,14 @@ Updated: 2026-07-19
   [docs/BATCH_08_CANDIDATE.md](docs/BATCH_08_CANDIDATE.md) and
   [docs/TUNING.md](docs/TUNING.md)
 
-Resume on main with Batch 07 as an unaccepted candidate. Batches 03 through 06
-are accepted. Batch 07 implementation, local automated/rendered evidence, and a
-successful 114.21 FPS / 9.50 ms p95 operator-started Dose 5 run are complete.
-On 2026-07-19 the owner deferred the remaining human readability,
-comprehension, and physical-control review, then authorized Batch 08 technical
-work and one combined Quest review. The 2026-07-20 technical run passed, but
-the human review rejected the unlabeled instruments and tank lines. The revised
-candidate retains allocation-free optical-band smoothing, removes the sensor
-and in-tank markers, and adds labeled physical instrumentation plus a past-run
-gauge needle. Neither batch is accepted yet. Do not pull
-Batch 09, environment, deployment, or release scope into this gate.
+Resume on main with Batches 07 and 08 accepted. The 2026-07-20 technical run
+passed; the first human review returned actionable instrument-comprehension
+issues. Iterative seated Quest revisions removed misleading geometry, added
+plain-language labels, retuned the apparatus and controls, aligned the jar
+labels, and established clear transparent result tiers. After the final START
+plaque, the project owner accepted the combined human gate. Batch 09 is now the
+next planned increment; environment, deployment, and release remain later
+scope.
 
 The superseded Godot plan remains isolated under docs/archive for provenance.
 Use only the active indexed Markdown plan.
@@ -319,15 +315,11 @@ deployment from this increment.
 
 ## Recommended next session
 
-1. Restart the seated Quest route and run
-   `npm run acceptance:08:quest -- review-ready` to stage every canonical jar,
-   select a compatible ghost, and park the labeled past-run gauge comparison.
-2. Run a focused headset check of text readability, the jar spectrum, graph
-   meaning, past-run purpose, and replay/refill/clear controls.
-3. Record one final pass or issue list. The live-trial phase/performance row
-   already passed on 2026-07-20.
-4. If the combined gate passes, update both candidate packets, tag Batch 07 and
-   Batch 08 at their accepted commits, and only then open Batch 09.
+1. Open Batch 09 as a separate scoped spectator-experience increment.
+2. Preserve the accepted seated apparatus, simulation authority, and Quest
+   performance posture.
+3. Keep standing, endurance, hosted deployment, and release work in their
+   governing later batches.
 
 ## Commands
 

@@ -69,17 +69,16 @@ handling, deterministic parity, and measured Quest performance. Batch 06 is
 accepted with the seven-phase treatment controller, immutable endpoint result,
 locked controls and deterministic refill.
 
-Batch 07 is a complete but unaccepted candidate. It adds app-owned experiment
+Batch 07 is accepted. It adds app-owned experiment
 memory, canonical jar summaries, physical instrumentation, 10 Hz treatment-
 ghost recording, bounded localStorage persistence, compatibility validation,
 and independent playback without particle replay or simulation recomputation.
-Automated, rendered-browser, and seated Quest performance evidence pass. The
-remaining human readability, comprehension, and physical-control verdict was
-explicitly deferred on 2026-07-19; it is not passed or waived. The owner then
-authorized Batch 08 technical work under a scheduling exception. Its technical
-candidate adds render-local optical-band smoothing. The first combined Quest
+Automated, rendered-browser, seated Quest performance, and final project-owner
+human evidence pass. Batch 08 is also accepted with render-local optical-band
+smoothing. The first combined Quest
 review passed the technical watcher but failed instrument comprehension. The
 remediation replaces the rejected in-tank prior-front marker with a labeled
 past-run gauge needle, removes the unexplained optical sensor, and adds plain-
-language labels. A focused Quest rerun now owns both open human gates; Batches
-09–11 remain unstarted.
+language labels. Subsequent seated iterations refined layout, controls, chart,
+jar tiers, and the START label. The project owner accepted the combined gate;
+Batch 09 is next and Batches 10–11 remain unstarted.

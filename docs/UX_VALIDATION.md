@@ -207,9 +207,10 @@ Use one combined seated Quest review to conserve operator time. Confirm that:
 7. no visible hitching, uncomfortable reach, or seated readability problem is
    present.
 
-Batch 07 remains unaccepted until the project-owner operator supplies a verdict.
-Under the later scheduling exception, this checklist is now combined with the
-Batch 08 comparison/readability review below.
+At this checkpoint Batch 07 remained unaccepted pending a project-owner
+verdict. Under the later scheduling exception, this checklist was combined with
+the Batch 08 comparison/readability review below; the final verdict is recorded
+at the end of this document.
 
 ### 2026-07-17 partial session
 
@@ -322,3 +323,11 @@ the clear-results control test had removed them; only odd-dose trials 3, 5, and
 9 remained. The identical raw-water jars were therefore the documented empty-
 memory fallback, not a failed color upload. The review harness restaged
 authoritative 0/2/4/6/8/10 completions before the next visual verdict.
+
+### 2026-07-20 final combined verdict
+
+The final seated-facing START plaque was added after the staged canonical jar
+summaries were restored. The project owner then stated that the batch was good.
+This records a pass for the combined Batch 07/08 human gate after the iterative
+issue/fix sequence above. Standing, non-operator, endurance, hosted, and release
+claims are not inferred from this seated verdict.

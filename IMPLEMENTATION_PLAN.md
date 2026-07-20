@@ -57,9 +57,9 @@ The work remains staged: Workstream 03D exposes the authoritative samples; Batch
 | 04    | Accepted               | Quest interaction accepted with documented waivers      |
 | 05    | Accepted               | Seated Quest integration and performance passed         |
 | 06    | Accepted               | Seated Quest cycle, readability, and performance passed |
-| 07    | Candidate checkpoint   | Technical gates pass; combined 07/08 human gate open    |
-| 08    | Technical candidate    | Combined Quest readability/performance verdict open     |
-| 09–11 | Not started            | Begin only after the combined 07/08 gate closes         |
+| 07    | Accepted               | Instrumentation, memory, and seated human gate passed   |
+| 08    | Accepted               | Headset readability and combined Quest verdict passed   |
+| 09–11 | Not started            | Batch 09 may now begin                                  |
 
 An [earlier Godot implementation plan](docs/archive/Sunol%20FlowLab%20Implementation%20Plan%20%28superseded%20Godot%29.pdf) is retained only as a superseded source artifact for provenance and is non-binding for this greenfield WebXR repository. The stale duplicate Batch 03 snapshot and superseded pre-research mechanics were removed from the active tree; Git history preserves them. Only [the indexed Batch 03 plan](batch-03-desktop-phenomenon-proof.md) is authoritative.
 
@@ -120,14 +120,16 @@ failed comprehension despite passing technical performance. Its remediation
 removes the unexplained sensor and in-tank comparison lines, adds plain-language
 instrument/control labels, labels the jar rack, increases the static jar
 display contrast, and moves prior-run comparison to a labeled cyan gauge
-needle. A focused human rerun remains the open Batch 07/08 gate.
+needle. Subsequent seated iterations aligned the jar labels, made three
+transparent result tiers unmistakable, centered/scaled the controls, and added
+a START plaque. The project owner accepted the combined Batch 07/08 gate on
+2026-07-20.
 
 On 2026-07-19 the project owner explicitly deferred that remaining human gate
 and subsequently authorized a scheduling exception for Batch 08 technical work
 so both batches can close through one combined Quest review. The exception is
-neither a Batch 07 pass nor a waiver. Batch 08's display-only implementation and
-desktop evidence may proceed; Batches 09–11 remain blocked until the combined
-07/08 gate closes.
+neither a Batch 07 pass nor a waiver at the time. The combined gate has since
+passed; Batch 09 is now the next planned increment.
 
 The hybrid direction maps runtime ownership to Batch 01A closure; hero-tank and jar-rack blockout plus recognition validation to Batch 03; interaction to Batch 04; integration to Batches 05-06; static jar summaries, complete memory, and treatment-ghost recording/playback runtime to Batch 07; live-versus-ghost readability to Batch 08; spectator presentation to Batch 09; presence to Batch 10; and release evidence to Batch 11.
 
