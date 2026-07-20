@@ -1,6 +1,6 @@
 {
   "name": "sunol-flowlab-vr",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "private": true,
   "description": "A phenomenological coagulation experiment for WebXR and desktop spectators.",
   "type": "module",
@@ -13,6 +13,7 @@
     "dev": "vite --host 0.0.0.0",
     "dev:https": "vite --host 0.0.0.0 --mode https",
     "build": "tsc -b && vite build",
+    "build:pages": "tsc -b && vite build --mode pages",
     "preview": "vite preview --host 0.0.0.0",
     "typecheck": "tsc -b --pretty false",
     "test": "node --test --test-isolation=none tests/*.test.mjs && vitest run",

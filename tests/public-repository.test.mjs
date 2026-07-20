@@ -40,3 +40,28 @@ test('session handoff identifies plan authority, accepted local device evidence,
   assert.match(handoff, /npm test/)
   assert.match(handoff, /Recommended next session/)
 })
+
+test('v0.1 public root and Pages deployment remain one bounded application', async () => {
+  const [app, xrApp, vite, manifestSource, pages] = await Promise.all([
+    read('src/app/App.tsx'),
+    read('src/app/XrShellApp.tsx'),
+    read('vite.config.ts'),
+    read('package.json'),
+    read('.github/workflows/pages.yml'),
+  ])
+  const manifest = JSON.parse(manifestSource)
+
+  assert.match(app, /mode === null \|\| mode === 'xr-shell'/)
+  assert.match(xrApp, /get\('panorama'\) === 'hetchy' \? 'hetchy' : 'sunol'/)
+  assert.match(xrApp, /get\('posture'\) \?\? 'seated'/)
+  assert.match(vite, /mode === 'pages' \? '\/Sunol-Flowlab-VR\/' : '\/'/)
+  assert.equal(manifest.version, '0.1.0')
+  assert.equal(
+    manifest.scripts['build:pages'],
+    'tsc -b && vite build --mode pages',
+  )
+  assert.match(pages, /npm run build:pages/)
+  assert.match(pages, /actions\/configure-pages@[a-f0-9]{40}/)
+  assert.match(pages, /actions\/upload-pages-artifact@[a-f0-9]{40}/)
+  assert.match(pages, /actions\/deploy-pages@[a-f0-9]{40}/)
+})

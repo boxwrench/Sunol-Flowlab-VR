@@ -72,9 +72,11 @@ const COMMAND_LOG_CAPACITY = 64
 export function XrShellApp() {
   const urlParameters = new URLSearchParams(window.location.search)
   const requestedPanorama =
-    urlParameters.get('panorama') === 'sunol' ? 'sunol' : 'hetchy'
+    urlParameters.get('panorama') === 'hetchy' ? 'hetchy' : 'sunol'
   const audioFlavor = requireProcessAudioFlavor(urlParameters.get('sound'))
-  const posture = requireXrShellPosture(urlParameters.get('posture'))
+  const posture = requireXrShellPosture(
+    urlParameters.get('posture') ?? 'seated',
+  )
   const showCalibrationMarker =
     import.meta.env.DEV && urlParameters.get('calibration') !== 'off'
   const [entryError, setEntryError] = useState<string | null>(null)
@@ -395,7 +397,7 @@ export function XrShellApp() {
     <main className={'app-shell'}>
       <div className={'app-heading'}>
         <h1>Sunol FlowLab VR</h1>
-        <p>Deterministic treatment-cycle proof</p>
+        <p>A phenomenological drinking-water coagulation model</p>
         <button className={'enter-vr'} type={'button'} onClick={enterVr}>
           Enter VR
         </button>

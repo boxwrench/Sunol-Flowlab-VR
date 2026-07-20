@@ -18,8 +18,8 @@ test('desktop foundation loads with explicit VR entry and a render surface', asy
   ).toBeVisible()
   await expect(page.getByRole('button', { name: 'Enter VR' })).toBeVisible()
   await expect(page.getByLabel('Development performance metrics')).toBeVisible()
-  await expect(page.getByLabel('Comparison presets')).toBeVisible()
-  await expect(page.getByLabel('Treatment cycle controls')).toBeVisible()
+  await expect(page.getByLabel('XR integration command status')).toBeVisible()
+  await expect(page.getByLabel('Comparison presets')).toHaveCount(0)
   await expect(page.locator('canvas')).toBeVisible()
   await expect
     .poll(async () => {
@@ -33,17 +33,16 @@ test('desktop foundation loads with explicit VR entry and a render surface', asy
     JSON.parse(window.render_performance_to_text?.() ?? '{}'),
   )
   expect(performance.metrics.drawCalls).toBeGreaterThan(28)
-  expect(performance.metrics.drawCalls).toBeLessThanOrEqual(70)
-  const xrPreflight = await page.evaluate(() =>
-    JSON.parse(window.render_xr_preflight_to_text?.() ?? '{}'),
+  expect(performance.metrics.drawCalls).toBeLessThanOrEqual(160)
+  const xrState = await page.evaluate(() =>
+    JSON.parse(window.render_xr_shell_to_text?.() ?? '{}'),
   )
-  expect(xrPreflight).toMatchObject({
+  expect(xrState).toMatchObject({
+    mode: 'treatment-cycle',
+    panorama: 'sunol',
+    phase: 'READY',
+    posture: 'seated',
     sessionActive: false,
-    leftControllerDetected: false,
-    rightControllerDetected: false,
-    leftSelectCount: 0,
-    rightSelectCount: 0,
-    targetSelectCount: 0,
   })
   expect(browserErrors).toEqual([])
 })
@@ -51,7 +50,7 @@ test('desktop foundation loads with explicit VR entry and a render surface', asy
 test('desktop treatment cycle starts, completes, refills, and resets deterministically', async ({
   page,
 }, testInfo) => {
-  await page.goto('/')
+  await page.goto('/?mode=desktop')
 
   const state = () =>
     page.evaluate(() => JSON.parse(window.render_game_to_text?.() ?? '{}'))
@@ -141,7 +140,7 @@ test('desktop treatment cycle starts, completes, refills, and resets determinist
 test('comparison presets deterministically expose the U-shaped endpoint', async ({
   page,
 }, testInfo) => {
-  await page.goto('/')
+  await page.goto('/?mode=desktop')
 
   async function runPreset(name: string) {
     await page.getByRole('button', { name }).click()
@@ -173,7 +172,7 @@ test('comparison presets deterministically expose the U-shaped endpoint', async 
 test('Batch 7 persists complete memory, restores jars, and replays independently', async ({
   page,
 }, testInfo) => {
-  await page.goto('/')
+  await page.goto('/?mode=desktop')
   await page.evaluate(() => localStorage.clear())
   await page.reload()
   const state = () =>

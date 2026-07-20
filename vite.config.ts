@@ -3,6 +3,7 @@ import basicSsl from '@vitejs/plugin-basic-ssl'
 import { defineConfig } from 'vite'
 
 export default defineConfig(({ mode }) => ({
+  base: mode === 'pages' ? '/Sunol-Flowlab-VR/' : '/',
   plugins: [mode === 'https' ? basicSsl() : null, react()],
   server: {
     host: true,

@@ -72,7 +72,11 @@ function recordParticleFrame(
 
 export function App() {
   const mode = new URLSearchParams(window.location.search).get('mode')
-  return mode === 'xr-shell' ? <XrShellApp /> : <PhenomenonApp />
+  return mode === null || mode === 'xr-shell' ? (
+    <XrShellApp />
+  ) : (
+    <PhenomenonApp />
+  )
 }
 
 function PhenomenonApp() {
