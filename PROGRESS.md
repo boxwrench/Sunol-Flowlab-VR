@@ -95,6 +95,11 @@ Original prompt: batch 7
   amber tested-jar diamonds and changed the authoritative jar-summary
   presentation from green/mint to a dark-brown through light-tan dose-result
   spectrum.
+- Reduced the mounted result chart to 72% and shifted it right to clear the
+  relative-turbidity dial. Replaced the jar rack's approximate combined dose
+  string with six labels driven by the exact jar-center formula. Made the
+  brown internal fills transparent at 0.80 opacity with depth writes disabled;
+  doses 0/10 remain darkest, 2/8 medium, and 4/6 lightest.
 
 ## Current TODO
 

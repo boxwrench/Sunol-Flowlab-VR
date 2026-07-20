@@ -67,7 +67,12 @@ test('jar-test bench has six static app-fed canonical summaries with no process 
   assert.match(source, /JAR_VESSEL_DIMENSIONS/)
   assert.match(source, /JAR_RIM_DIMENSIONS/)
   assert.match(source, /text=\{'JAR TEST'\}/)
-  assert.match(source, /DOSE {2}0 {5}2 {5}4 {5}6 {5}8 {4}10/)
+  assert.match(source, /CANONICAL_JAR_DOSES\.map\(\(dose, index\)/)
+  assert.match(
+    source,
+    /position=\{\[\(index - 2\.5\) \* 0\.25, 0\.58, 0\.08\]\}/,
+  )
+  assert.match(source, /transparent[\s\S]*opacity=\{0\.8\}/)
   assert.doesNotMatch(source, /cylinderGeometry|torusGeometry/)
   assert.doesNotMatch(
     source,

@@ -305,3 +305,9 @@ the WebXR start origin. The amber tested-jar diamonds were not understood, so
 they were removed. The reviewer expected the canonical jars to communicate
 dose outcomes through brown water, so their result-driven display now spans
 dark brown at the poorer endpoints through light tan near the optimum.
+
+The next check found the result chart overlapping the relative-turbidity dial
+and the jar dose numbers visually misaligned. The chart is now smaller and
+right-anchored. Jar numbers use exact jar-center coordinates, and the brown
+internal fluids are transparent while preserving the requested symmetric
+dark/medium/light outcome ordering.

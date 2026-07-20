@@ -294,7 +294,7 @@ function DoseResponsePlot({
   }, [markers, matrix])
 
   return (
-    <group position={[0.22, 0.05, 0.045]}>
+    <group position={[0.28, 0.06, 0.045]} scale={0.72}>
       <InstrumentLabel
         text={'DOSE vs FINAL TURBIDITY\nLOWER = CLEARER'}
         width={0.76}

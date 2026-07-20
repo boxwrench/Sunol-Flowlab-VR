@@ -68,7 +68,8 @@ const CLEARED_WATER_COLOR = new Color('#d99a48')
 
 export function jarDisplayContrast(displayClarity: number): number {
   if (!Number.isFinite(displayClarity)) return 0
-  return Math.min(1, Math.max(0, (displayClarity - 0.25) / 0.25))
+  const normalized = Math.min(1, Math.max(0, (displayClarity - 0.25) / 0.25))
+  return normalized * normalized
 }
 
 export function JarTestBench({ summaries = [] }: JarTestBenchProps) {
@@ -178,7 +179,13 @@ export function JarTestBench({ summaries = [] }: JarTestBenchProps) {
           args={[undefined, undefined, CANONICAL_JAR_DOSES.length]}
         >
           <boxGeometry args={[...RAW_WATER_FILL_DIMENSIONS]} />
-          <meshBasicMaterial color={'#ffffff'} toneMapped={false} />
+          <meshBasicMaterial
+            color={'#ffffff'}
+            transparent
+            opacity={0.8}
+            depthWrite={false}
+            toneMapped={false}
+          />
         </instancedMesh>
         <instancedMesh
           ref={jarsRef}
@@ -216,14 +223,16 @@ export function JarTestBench({ summaries = [] }: JarTestBenchProps) {
           <boxGeometry args={[1.58, 0.055, 0.12]} />
           <meshStandardMaterial color={'#405d59'} roughness={0.6} />
         </mesh>
-        <InstrumentLabel
-          text={'DOSE  0     2     4     6     8    10'}
-          width={1.48}
-          height={0.09}
-          position={[0, 0.58, 0.08]}
-          background={'#203b39'}
-          fontScale={0.43}
-        />
+        {CANONICAL_JAR_DOSES.map((dose, index) => (
+          <InstrumentLabel
+            key={dose}
+            text={String(dose)}
+            width={0.17}
+            height={0.09}
+            position={[(index - 2.5) * 0.25, 0.58, 0.08]}
+            fontScale={0.62}
+          />
+        ))}
         <mesh position={[-0.78, 0.35, 0]}>
           <boxGeometry args={[0.04, 0.7, 0.1]} />
           <meshStandardMaterial color={'#405d59'} roughness={0.6} />
