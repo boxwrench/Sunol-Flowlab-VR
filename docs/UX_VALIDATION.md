@@ -316,3 +316,9 @@ In-headset follow-up found that the transparent continuous colors still looked
 the same. The display transform now uses three separated result tiers rather
 than a subtle continuous blend; this is a readability correction, not a change
 to stored results or the process model.
+
+Remote inspection then found the live rack had no canonical summaries because
+the clear-results control test had removed them; only odd-dose trials 3, 5, and
+9 remained. The identical raw-water jars were therefore the documented empty-
+memory fallback, not a failed color upload. The review harness restaged
+authoritative 0/2/4/6/8/10 completions before the next visual verdict.

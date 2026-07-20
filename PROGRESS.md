@@ -107,6 +107,11 @@ Original prompt: batch 7
 - The first tiered capture was still flattened by the beige jar-wall overlay.
   Reduced the wall to 0.08 opacity and widened the fluid palette to near-black
   brown, medium brown, and pale gold for headset legibility.
+- Live Quest inspection explained the apparent missing spectrum: the
+  clear-results exercise had removed every canonical summary, and the remaining
+  log held only odd doses 3/5/9, so all jars correctly showed the same raw-water
+  fallback. Re-ran `review-ready` to stage authoritative 0/2/4/6/8/10 results;
+  the live page now exposes all six canonical summaries at READY.
 
 ## Current TODO
 
