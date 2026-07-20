@@ -120,6 +120,16 @@ Original prompt: batch 7
 
 ## Current TODO
 
-- Begin Batch 09 only as a separate scoped increment.
+- Begin Batch 09 only as a separate scoped increment. Its supported viewing
+  targets are Quest immersive WebXR and the Chrome/Chromium browser simulation;
+  mobile and broad cross-browser support are out of scope.
+- Use an owner-operated low/optimum/high task card for capture and prepare a
+  concise narration. Do not build cinematic autoplay or record final polished
+  footage before Batch 10 visual/audio acceptance.
+- Batch 09 preflight with the required bundled browser client loaded healthy
+  authoritative READY state, but its default 16:9 headless frame was heavily
+  occluded by the ground plane. The generic client also could not create an
+  immersive runtime. Treat readable browser capture framing as real Batch 09
+  work and use the established IWER/browser test path for immersive preflight.
 - Standing, endurance, hosted deployment, and release work remain open in their
   governing later batches.

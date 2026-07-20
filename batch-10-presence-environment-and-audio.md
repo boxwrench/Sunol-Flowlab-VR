@@ -1,7 +1,7 @@
 # Batch 10 Implementation Plan: Presence, Environment, and Audio
 
 **Status:** Not started — predecessor gates remain open
-**Depends on:** Core apparatus, instrumentation, readability, and spectator flow accepted  
+**Depends on:** Core apparatus, instrumentation, readability, and browser presentation accepted  
 **May run in parallel with:** Asset and audio preparation after Batch 03, but final integration occurs here  
 **Primary gate:** The scene reads as a stylized drinking-water plant, preserves instrument dominance and parallax, and maintains the Quest performance target.
 
@@ -208,7 +208,7 @@ Do not sacrifice the treatment loop to preserve scenery.
 - draw-call/material/triangle/texture audit;
 - label and instrument contrast screenshots;
 - seated/standing comfort check;
-- spectator-mode readability check;
+- Chrome/Chromium browser-simulation readability check;
 - audio permission and mute behavior;
 - KTX2 loader reuse test if panorama exists;
 - final public-data/provenance review of every asset.

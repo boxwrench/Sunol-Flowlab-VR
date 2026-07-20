@@ -315,7 +315,10 @@ deployment from this increment.
 
 ## Recommended next session
 
-1. Open Batch 09 as a separate scoped spectator-experience increment.
+1. Open Batch 09 as a separate browser-presentation increment. Support only
+   Quest immersive WebXR and the Chrome/Chromium in-browser VR simulation.
+   Rehearse an owner-operated low/optimum/high task card, capture it, and draft
+   concise narration; defer final polished footage until Batch 10 is accepted.
 2. Preserve the accepted seated apparatus, simulation authority, and Quest
    performance posture.
 3. Keep standing, endurance, hosted deployment, and release work in their

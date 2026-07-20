@@ -47,9 +47,13 @@ ergonomics, hosted deployment, and release work open. Exact results are in
 ## Desktop targets
 
 - Primary: current stable Chrome on Windows
-- Secondary: current stable Firefox on Windows
-- Chromium cross-check and Quest remote inspection: current stable Edge/Chrome DevTools
-- Mobile fallback: current mobile Safari or Chrome available at the release gate
+- Equivalent Chromium-based desktop browser: cross-check only when a
+  Chrome-specific issue is suspected
+- Quest remote inspection: current stable Chrome DevTools
+
+Version 1 does not support or claim mobile browsers, Firefox, Safari/WebKit, or
+a broad secondary-browser matrix. Its two viewing targets are Quest immersive
+WebXR and the Chrome/Chromium in-browser VR simulation.
 
 ## Gate capture
 

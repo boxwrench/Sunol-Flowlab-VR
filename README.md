@@ -2,7 +2,7 @@
 
 [![CI](https://github.com/boxwrench/Sunol-Flowlab-VR/actions/workflows/ci.yml/badge.svg)](https://github.com/boxwrench/Sunol-Flowlab-VR/actions/workflows/ci.yml)
 
-Sunol FlowLab VR is an open-source personal educational portfolio project for people interested in drinking-water treatment. It uses a VR-first tabletop coagulation experiment and a desktop spectator mode to show a qualitative idea: treatment response has an optimum, and both underdose and overdose can leave poorer water clarity.
+Sunol FlowLab VR is an open-source personal educational portfolio project for people interested in drinking-water treatment. It uses a VR-first tabletop coagulation experiment, viewable in immersive Quest WebXR or the Chrome/Chromium in-browser VR simulation, to show a qualitative idea: treatment response has an optimum, and both underdose and overdose can leave poorer water clarity.
 
 This is a **phenomenological coagulation model**, not dose-prediction software, operational guidance, CFD, or a calibrated model of a real plant. The setting and values are representative and fictionalized.
 
@@ -141,6 +141,11 @@ npm run dev
 
 Open `http://localhost:5173` in Chrome for the built-in Quest 3 emulator. Use `npm run dev:https` only when an HTTPS origin is needed for same-network device testing.
 
+Version 1 targets only current Quest Browser for immersive WebXR and current
+Chrome, or an equivalent Chromium-based desktop browser, for the in-browser VR
+simulation. Mobile browsers, Firefox, and Safari/WebKit are not supported
+targets.
+
 Validation commands:
 
 ```sh
@@ -162,10 +167,9 @@ The physical XR route and Quest debugging workflow are documented in
 [docs/DEVICE_TESTING.md](docs/DEVICE_TESTING.md). The combined harness is
 `npm run acceptance:08:quest`: `review-ready` stages the bounded comparison,
 `watch-combined` records the physical trial and rolling performance, and
-`watch-controls` records replay/refill/clear command evidence. The single
-remaining seated session follows the combined Batch 07/08 checklist in
-[docs/UX_VALIDATION.md](docs/UX_VALIDATION.md); neither candidate is marked
-accepted until that verdict is recorded.
+`watch-controls` records replay/refill/clear command evidence. The combined
+Batch 07/08 seated checklist and accepted verdict are recorded in
+[docs/UX_VALIDATION.md](docs/UX_VALIDATION.md).
 
 ## Architecture and contribution
 

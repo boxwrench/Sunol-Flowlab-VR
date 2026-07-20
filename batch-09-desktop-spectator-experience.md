@@ -1,224 +1,163 @@
-# Batch 09 Implementation Plan: Desktop Spectator Experience
+# Batch 09 Implementation Plan: Browser Presentation and Capture
 
-**Status:** Not started — predecessor gates remain open
-**Depends on:** Batches 06-08 stable; Batch 07 plot available  
-**May run in parallel with:** Final environment asset preparation and audio preparation  
-**Primary gate:** A person without a headset understands the project, sees the U-shaped dose response, and reaches the main portfolio takeaway in under one minute from the root URL.
+**Status:** Ready to begin — Batches 07 and 08 are accepted  
+**Depends on:** Accepted Batches 07-08 instrumentation and readability  
+**May run in parallel with:** Batch 10 environment and audio preparation  
+**Primary gate:** The same build is usable in Quest immersive WebXR and in the Chrome/Chromium browser simulation, and a repeatable operator-led task sequence can be captured with a concise narration.
 
-> This batch must also follow [the hybrid jar-test design direction](docs/DESIGN_DIRECTION_JAR_TEST_HYBRID.md). The design brief governs product intent and presentation meaning; this batch remains authoritative for timing, scope, tests, evidence, and acceptance.
-
-> “Replay” of the scripted spectator sequence means rerunning its orchestration from a clean state. A treatment-result ghost is the separate recorded-band feature governed by [the ghost replay design](docs/GHOST_REPLAY_DESIGN.md); do not conflate the two or use ghost playback to fake a live trial.
+> This batch follows [the hybrid jar-test design direction](docs/DESIGN_DIRECTION_JAR_TEST_HYBRID.md). The design brief governs product intent and presentation meaning; this plan governs Batch 09 scope, tests, evidence, and acceptance.
 
 ## Goal
 
-Create a lightweight, scripted desktop experience that reuses the real simulation and instrumentation rather than substituting a video or separate fake logic.
+Make the existing browser simulation a clear desktop presentation and establish a simple recording workflow. The project owner performs the real low/optimum/high tasks while Codex captures the session. A short narration explains the purpose, dose-response result, hero tank, jar summaries, and plot.
+
+Batch 09 does not create a separate spectator product, cinematic autoplay system, or prerecorded fallback experience.
+
+## Supported viewing targets
+
+Version 1 has exactly two viewing targets:
+
+1. Meta Quest Browser entering immersive WebXR.
+2. Current Chrome, or an equivalent Chromium-based desktop browser, running the existing in-browser VR simulation/IWER presentation.
+
+Mobile browsers, Firefox, WebKit/Safari, and a broad secondary-browser matrix are outside version 1 support and acceptance.
 
 ## Agent execution rules
 
 - Read `CLAUDE.md`, the current repository tree, `package.json`, and relevant tests before proposing edits.
 - Summarize the current architecture and any conflicts with this plan before writing code.
-- Use one implementation owner per worktree. A second agent may review, but must not edit concurrently.
-- Implement only this batch. Do not pull later-batch work forward because it appears convenient.
+- Implement only this batch. Do not pull final environment, audio, deployment, or release work forward.
 - Preserve the `/sim`, `/render`, `/xr`, and `/app` ownership boundaries.
-- Keep simulation state outside React. Do not add React state updates to the hot simulation path.
-- Report uncertainty instead of inventing package APIs, especially for the pinned `@react-three/xr` version.
-- Produce evidence: changed files, commands run, test output, performance measurements where applicable, known limitations, and remaining hot-path allocations.
+- Keep simulation state outside React and do not add React state updates to the hot simulation path.
+- Reuse the real trial commands, state machine, optical-load authority, instruments, jars, and plot.
+- Produce evidence: changed files, commands, test output, browser captures, known limitations, and any relevant performance measurements.
 - Do not mark the batch complete until every acceptance criterion has objective evidence.
 
-## Spectator principles
+## Presentation principles
 
-- Same deployed root URL as VR.
-- Same simulation, phase state machine, relative optical-load authority, gauge mapping, and plot logic.
-- Same hybrid hierarchy: one live hero tank, six static canonical preset jars, and one complete plot for all doses.
-- No headset required.
-- Scripted comprehension is required; full mouse parity is optional.
-- Camera and pacing may be spectator-specific.
-- Audible autoplay is not assumed; visuals must work muted.
+- Same application and simulation at the same URL for desktop and Quest.
+- One live hero tank, six static canonical jar summaries, and one complete plot/log.
+- The desktop presentation may use the bundled IWER view; it does not need desktop grab parity.
+- Normal in-scene labels remain the primary explanation of controls and instruments.
+- Narration supplements the scene; it does not justify unclear or unlabeled controls.
+- Capture should be straightforward and repeatable, not an autonomous film-production system.
 
-## Work package 09.1 - Mode selection and capability detection
+## Work package 09.1 - Entry and mode behavior
 
-- Detect XR support and session availability.
-- Default to desktop spectator scene on normal browsers.
-- Show one obvious `Enter VR` control only when supported.
-- Handle rejected XR permission and session failure without leaving spectator mode.
-- Preserve the desktop route after returning from an XR session.
-- Add mobile-browser fallback behavior.
+- Keep one obvious `Enter VR` action when immersive WebXR is available.
+- Keep the Chrome/Chromium browser simulation usable without a headset.
+- Handle rejected or failed XR entry without leaving the browser presentation unusable.
+- Preserve a usable browser view after returning from an XR session.
+- Do not add mobile-specific layout, input, or fallback behavior.
 
-## Work package 09.2 - Scripted demo controller
+## Work package 09.2 - Operator-led recording sequence
 
-Implement a spectator-only orchestration layer that uses the real trial APIs:
+Define a short, repeatable task card using the real controls and trial lifecycle:
 
-1. reset to blank or intentionally staged plot;
-2. run canonical underdose;
-3. record the result;
-4. refill identical raw water;
-5. run canonical near optimum;
-6. record the result;
-7. refill;
-8. run canonical overdose;
-9. record the result;
-10. reveal the resulting curve and hold.
+1. establish the apparatus and explain the experiment;
+2. run an underdose trial and show its result;
+3. refill;
+4. run the near-optimum trial and show improved clarity;
+5. refill;
+6. run an overdose trial and show the poorer result;
+7. finish on the complete dose-response plot and jar-test spectrum.
 
-The complete plot, not the canonical jars, carries the three-trial story. If the near-optimum trial uses odd dose 5, it must appear in the plot and ephemeral log while leaving all jar summaries unchanged.
+The project owner performs these tasks in the browser simulation or Quest. Codex records the session and may provide deterministic setup or reset commands, but must not substitute fake results, a separate simulation, or a hidden autoplay controller.
 
-Requirements:
+Recording setup must state whether it uses a clean experiment log or deliberately staged canonical history. Odd-dose results must remain represented by the complete plot/log without changing noncanonical jars.
 
-- cannot change chemistry constants;
-- can use approved spectator time scaling only if the same phase order and relative behavior remain;
-- logs and handles interruptions;
-- supports replay from a clean deterministic state;
-- does not corrupt the visitor’s persistent manual experiment log unless a clear policy is chosen.
+## Work package 09.3 - Browser framing and capture readiness
 
-Recommended persistence policy: spectator demo uses an isolated ephemeral log; interactive VR uses the persistent visitor log.
+- Choose one clear Chrome/Chromium framing that keeps the hero tank, controls, gauge, plot, and jar rack readable.
+- Confirm a clean 16:9 capture without development metrics or unrelated browser chrome.
+- Keep task transitions easy to follow while the operator works normally.
+- Add only minimal capture helpers that are demonstrably necessary.
+- Treat Batch 09 recordings as diagnostic or draft presentation evidence.
+- Record the final portfolio footage only after Batch 10 visual and audio polish is accepted.
 
-## Work package 09.3 - Camera storyboard
+Do not build an automated camera storyboard before final visuals are settled.
 
-Use a repeatable camera language across all three trials:
+## Work package 09.4 - Narration
 
-- apparatus establishing view;
-- dose-control close-up;
-- tank profile or quarter view for floc and clearing front;
-- gauge/plot result view;
-- final curve reveal.
-- optional static jar-summary close-up only when it helps explain canonical presets without implying complete memory.
+Prepare a concise voiceover or live-narration script aligned to the operator task card. It should explain:
 
-Keep the same core tank angle across conditions so differences read as process behavior, not cinematography.
+- this is a phenomenological coagulation model, not operating guidance;
+- the dose control and Start action;
+- formation and settling of floc in the live hero tank;
+- why both underdose and overdose perform worse than the optimum;
+- that the plot/log cover every tested dose;
+- that the six jars are static summaries for canonical doses 0, 2, 4, 6, 8, and 10;
+- how to enter immersive VR on Quest.
 
-Document target beat durations and total runtime. Aim for under one minute without making phase changes unreadable.
+Keep the narration short enough to fit one natural task demonstration. Captions or a transcript should accompany the final published recording, but final audio production belongs after Batch 10.
 
-## Work package 09.4 - Muted-first audio behavior
+## Work package 09.5 - Targeted validation
 
-- Start spectator visuals without requiring sound.
-- Provide a simple user-gesture path to enable audio.
-- Do not block the demo behind an audio modal.
-- Handle browser autoplay rejection gracefully.
-- Keep captions or minimal physical status cues sufficient when muted.
+Test only the supported viewing paths:
 
-Final audio assets arrive in Batch 10, but the permission/unlock architecture belongs here.
+- current stable Chrome on Windows using the bundled browser VR simulation/IWER path;
+- the target Quest model in Quest Browser, including user-initiated immersive entry;
+- Chromium-based desktop cross-check only when a Chrome-specific issue is suspected;
+- rejected XR entry and return from XR;
+- clean and existing local experiment data.
 
-## Work package 09.5 - Minimal spectator controls
+Record load success, clear entry, task completion, result/plot consistency, console errors, and capture readability. Do not create a mobile, Firefox, Safari, or general device matrix.
 
-Provide only controls that improve portfolio use:
+## Work package 09.6 - Repository front door preparation
 
-- replay;
-- pause/resume if needed;
-- skip to next canonical trial if it remains visually unobtrusive;
-- audio enable/mute;
-- Enter VR when supported.
-
-Prefer a restrained webpage shell outside the immersive scene for browser-required controls. The in-world no-chrome rule applies to the product interaction, but browser session entry and accessibility controls may exist as minimal page controls.
-
-## Work package 09.6 - Screen-recording readiness
-
-- Establish deterministic framing and timing.
-- Provide a clean capture mode without development metrics.
-- Verify common 16:9 recording output.
-- Ensure text and plot are readable at portfolio-video resolution.
-- Add a stable replay trigger and build/version indicator outside capture framing or in metadata.
-
-## Work package 09.7 - Browser and device matrix
-
-Test at minimum:
-
-- primary desktop browser;
-- secondary desktop browser;
-- mobile browser without XR;
-- Quest Browser before entering VR;
-- unsupported XR scenario;
-- rejected audio autoplay;
-- reduced-performance laptop if available.
-
-Record load time, first meaningful visual, demo completion, and any graphics differences.
-
-## Work package 09.8 - Comprehension test
-
-Ask new viewers after one autoplay cycle:
-
-- What was the experiment testing?
-- Which dose worked best?
-- What did the particles do?
-- What did the plot show?
-- What do the jars represent, and how do they relate to the hero tank?
-- Would they know how to enter VR if available?
-
-Pass when viewers can explain the main idea without a spoken tutorial.
-
-## Work package 09.9 - Public repository front door
-
-Make the repository understandable before a visitor reads the internal batch
-record:
-
-- add the accepted Batch 08 hero still near the top of README.md;
-- provide a compact 5-15 second motion preview from the real accepted build when
-  its file size and accessibility treatment are appropriate; retain a still
-  fallback and do not make video the only explanation;
-- add one small Mermaid architecture/data-flow diagram showing the
-  /sim, /render, /xr, and /app boundaries and the single relative optical-load
-  authority feeding every presentation and memory consumer;
-- retain and verify the CI badge;
-- add a concise testing lesson that distinguishes the failed initial jar
-  recognition, bounded repair, documented waiver, and accepted treatment
-  readability without presenting the waived rerun as a pass;
-- keep the public description consistent with “personal educational portfolio
-  project” and “phenomenological coagulation model”;
-- verify the GitHub About description and topics against the final README;
-- avoid publishing a demo URL until Batch 11 has deployed and verified it.
-
-Keep detailed batch evidence in its existing documents. The README should link
-to that evidence without becoming another chronological build log.
+- Describe the two supported viewing targets accurately in `README.md`.
+- Add a small architecture/data-flow diagram if it materially improves comprehension.
+- Retain and verify the CI badge and responsible model description.
+- Prepare locations and accessibility text for final still/video media.
+- Defer final screenshots, recorded footage, captions, and media selection until Batch 10 visuals and audio are accepted.
+- Do not publish a demo URL until Batch 11 deployment is verified.
 
 ## Explicit non-goals
 
+- No mobile support or mobile fallback.
+- No Firefox, Safari/WebKit, or broad compatibility program.
+- No separate spectator-only simulation or application.
+- No scripted autoplay, cinematic camera controller, spectator replay, pause, or skip controls.
 - No full desktop recreation of VR grabbing.
-- No keyboard-driven plant simulator.
-- No separate simplified chemistry model.
-- No pre-rendered video as the only fallback.
-- No final plant environment integration in this batch.
-- No marketing website beyond the minimum application shell.
+- No prerecorded video as a runtime fallback.
+- No final environment, final audio, deployment, or marketing website.
+- No final portfolio recording before Batch 10 acceptance.
 
 ## Required tests and evidence
 
-- scripted sequence integration tests;
-- deterministic replay test;
-- ephemeral-vs-persistent log isolation test;
-- XR capability/session failure tests;
-- autoplay rejection handling;
-- browser smoke-test matrix;
-- final under-one-minute recording;
-- comprehension-test notes.
-- README media/link/render check, architecture-diagram render check, CI badge
-  check, and captured GitHub About/topic metadata.
+- Chrome/Chromium browser-simulation smoke test and screenshot inspection;
+- Quest immersive entry, task interaction, and safe exit/recovery check;
+- low/optimum/high operator task-card rehearsal using authoritative results;
+- plot/log and canonical-jar consistency check;
+- clean-data and existing-data capture setup checks;
+- narration draft timed against one rehearsal;
+- one diagnostic 16:9 recording or capture sample;
+- README support-target and link check.
 
-## Review-agent checklist
+## Review checklist
 
-- Does spectator mode use the same real simulation and results?
-- Is the sequence understandable while muted?
-- Is Enter VR obvious but not obstructive?
-- Does the demo avoid polluting persistent visitor data?
-- Is the camera consistent across dose conditions?
-- Can an unsupported or failed XR session recover cleanly?
-- Has desktop parity expanded scope unnecessarily?
-- Does the repository front door explain the product, show the accepted
-  experience, and expose the architecture and current CI state without requiring
-  the batch logs?
+- Are Quest immersive WebXR and the Chrome/Chromium browser simulation the only claimed viewing targets?
+- Does the browser path use the same real simulation and results?
+- Can the owner perform the recording task card without special cinematic controls?
+- Do the hero tank, jars, gauge, and complete plot retain their accepted meanings?
+- Does the narration explain the experiment without overstating calibration or operating relevance?
+- Can failed XR entry return safely to the browser presentation?
+- Has final footage been correctly deferred until visual and audio polish are accepted?
 
 ## Acceptance criteria
 
-- Root URL provides a coherent desktop spectator experience.
-- The complete low/optimum/high sequence and U-curve reveal finish in roughly one minute or less.
-- Odd-dose results remain visible in the complete plot even when no canonical jar summary updates.
-- The hero tank reads as the live experiment and jars read as static canonical presets.
-- The experience works without audio and enables audio after user gesture.
-- A viewer can explain the experiment and identify the optimum without instructions.
-- XR entry is available where supported and failure returns safely to spectator mode.
-- The sequence is stable enough for portfolio screen recording.
-- The README and GitHub metadata present the accepted experience as a personal
-  educational portfolio project with current media, architecture, CI, and
-  appropriately scoped testing evidence.
+- The root application supports the Chrome/Chromium browser simulation and user-initiated Quest immersive WebXR.
+- The owner can complete the low/optimum/high recording task card using real controls and authoritative results.
+- The browser framing is readable in a clean 16:9 capture.
+- The plot/log and canonical jars retain their distinct complete-memory and static-summary roles.
+- XR entry failure and XR exit leave a usable browser presentation.
+- A concise, technically responsible narration draft is timed to the task sequence.
+- Mobile and unsupported-browser behavior are neither implemented nor claimed.
+- Final polished recording remains scheduled after Batch 10 acceptance.
 
 ## Suggested commit
 
-`feat: add deterministic desktop spectator demonstration`
+`docs: focus batch 9 on browser presentation and capture`
 
 ## Required closing acceptance packet
 
@@ -233,4 +172,5 @@ The implementation agent must provide:
 7. Known defects, compromises, and deferred decisions.
 8. Remaining allocations or expensive operations in per-frame paths.
 9. Documentation updated.
-10. Proposed commit message and whether the batch gate passed.
+10. Task card, narration draft, and capture evidence.
+11. Proposed commit message and whether the batch gate passed.

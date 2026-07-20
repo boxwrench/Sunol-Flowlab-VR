@@ -11,7 +11,7 @@ The active implementation plan is the ordered Markdown batch series:
 7. [Batch 06 - Treatment-cycle state machine](batch-06-treatment-cycle-state-machine.md)
 8. [Batch 07 - Physical instrumentation and persistence](batch-07-physical-instrumentation-and-persistence.md)
 9. [Batch 08 - Headset readability and clearing front](batch-08-headset-readability-and-clearing-front.md)
-10. [Batch 09 - Desktop spectator experience](batch-09-desktop-spectator-experience.md)
+10. [Batch 09 - Browser presentation and capture](batch-09-desktop-spectator-experience.md)
 11. [Batch 10 - Presence, environment, and audio](batch-10-presence-environment-and-audio.md)
 12. [Batch 11 - Release hardening and deployment](batch-11-release-hardening-and-deployment.md)
 
@@ -131,15 +131,17 @@ so both batches can close through one combined Quest review. The exception is
 neither a Batch 07 pass nor a waiver at the time. The combined gate has since
 passed; Batch 09 is now the next planned increment.
 
-The hybrid direction maps runtime ownership to Batch 01A closure; hero-tank and jar-rack blockout plus recognition validation to Batch 03; interaction to Batch 04; integration to Batches 05-06; static jar summaries, complete memory, and treatment-ghost recording/playback runtime to Batch 07; live-versus-ghost readability to Batch 08; spectator presentation to Batch 09; presence to Batch 10; and release evidence to Batch 11.
+The hybrid direction maps runtime ownership to Batch 01A closure; hero-tank and jar-rack blockout plus recognition validation to Batch 03; interaction to Batch 04; integration to Batches 05-06; static jar summaries, complete memory, and treatment-ghost recording/playback runtime to Batch 07; live-versus-ghost readability to Batch 08; Chrome/Chromium browser presentation and operator-led capture preparation to Batch 09; presence to Batch 10; and release evidence to Batch 11.
 
-Portfolio presentation remains staged rather than pulled into the active Batch
-07 boundary. Batch 08 produces accepted final still and motion evidence while
-enforcing the Quest transparency budget. Batch 09 turns that evidence into the
-public repository front door: concise README media, an architecture/data-flow
-diagram, CI signal, testing lessons, and verified GitHub metadata. Batch 11 owns
-host-specific base paths, production request/bundle analysis, deployment,
-rollback, final branding, and verified related-project links.
+Portfolio presentation remains staged. Batch 09 prepares the existing
+Chrome/Chromium browser simulation for an operator-led low/optimum/high capture
+and drafts a concise narration. It does not build cinematic autoplay or record
+the final portfolio footage. Batch 10 completes visual and audio polish before
+final media is captured. Batch 11 owns host-specific base paths, production
+request/bundle analysis, deployment, rollback, final branding, and verified
+related-project links. Version 1 claims only Quest immersive WebXR and the
+Chrome/Chromium browser simulation as viewing targets; mobile and broad
+cross-browser support are out of scope.
 
 [Post-v1 mechanistic coagulation research](docs/POST_V1_MECHANISTIC_COAGULATION_RESEARCH.md)
 is recorded outside this version 1 delivery plan. It does not change the

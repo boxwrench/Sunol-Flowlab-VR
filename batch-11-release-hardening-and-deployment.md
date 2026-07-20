@@ -3,7 +3,7 @@
 **Status:** Not started — predecessor gates remain open
 **Depends on:** All prior batch gates accepted  
 **May run in parallel with:** Independent release review and documentation verification only  
-**Primary gate:** A reproducible public release works on Quest, desktop, and mobile fallback, preserves the accepted dose-response behavior, contains no development or sensitive material, and can be rolled back safely.
+**Primary gate:** A reproducible public release works on Quest immersive WebXR and the Chrome/Chromium browser simulation, preserves the accepted dose-response behavior, contains no development or sensitive material, and can be rolled back safely.
 
 > This batch must also follow [the hybrid jar-test design direction](docs/DESIGN_DIRECTION_JAR_TEST_HYBRID.md). The design brief governs product intent and presentation meaning; this batch remains authoritative for timing, scope, tests, evidence, and acceptance.
 
@@ -106,9 +106,9 @@ Any intentional baseline change requires product-owner approval and updated `doc
 Test the final hosted candidate on:
 
 - target Quest model and current Quest Browser;
-- primary desktop browser;
-- secondary desktop browser;
-- mobile browser;
+- current stable Chrome on Windows;
+- equivalent Chromium-based desktop browser only when needed to investigate a
+  Chrome-specific issue;
 - XR unsupported path;
 - XR permission denied path;
 - audio autoplay denied path;
@@ -119,7 +119,7 @@ For each, record:
 
 - load success;
 - time to first meaningful visual;
-- spectator demo completion;
+- browser task-sequence completion;
 - Enter VR behavior where supported;
 - full trial completion;
 - persistence and clear-sheet behavior;
@@ -146,7 +146,7 @@ Run:
 
 - five-minute idle;
 - repeated full-session experiment loop;
-- spectator-to-XR transition and back;
+- browser-to-XR transition and back;
 - multiple refills and plot clears;
 - session interruption/re-entry.
 
@@ -169,7 +169,7 @@ Verify:
 - Remove or gate tuning panel and development metrics.
 - Remove debug controls, console spam, emulator-only elements, and test routes from public navigation.
 - Confirm physical clear-sheet action works for inherited data.
-- Confirm spectator mode is the root fallback.
+- Confirm the browser simulation remains usable at the root URL.
 - Confirm Enter VR is obvious where supported.
 - Verify labels and controls remain readable after production compression.
 - Check error and unsupported states are user-friendly.
@@ -209,7 +209,7 @@ Add troubleshooting for:
   that base path.
 - Record deployment ID and commit hash.
 - Define rollback to the previous known-good deployment.
-- Preserve the accepted desktop proof and final spectator recording.
+- Preserve the accepted browser presentation and final portfolio recording.
 - Preserve the last accepted dose-sweep artifacts.
 
 ## Work package 11.10 - Tag and release notes
@@ -264,7 +264,7 @@ The release cannot proceed with:
 A new visitor can:
 
 1. open the root URL;
-2. understand the experiment in desktop spectator mode;
+2. understand the experiment in the Chrome/Chromium browser simulation;
 3. enter VR where supported;
 4. set one of 11 doses;
 5. run the full treatment cycle;
