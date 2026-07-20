@@ -64,8 +64,10 @@ persistence, the plot, or the gauge.
 
 The follow-up seated review found the instrument backboard too close to the
 hero tank. Its apparatus-local X position moves from 1.72 m to 2.10 m, opening
-a clear visual gap on the tank's right while retaining the accepted facing
-angle and instrument height.
+a clear visual gap on the tank's right. A second review asked that it also come
+toward and face the operator: local Z moves from 0.12 m to 0.48 m and yaw moves
+from -0.22 to -0.72 radians. Instrument height and internal control layout stay
+unchanged.
 
 ## Automated comparison matrix
 

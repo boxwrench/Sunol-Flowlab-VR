@@ -81,7 +81,10 @@ Original prompt: batch 7
   remains dimensionless and uncalibrated.
 - Follow-up seated feedback found the instrument backboard too close to the
   hero tank. Shifted the complete backboard 0.38 m to apparatus-local X 2.10 m,
-  preserving its height, facing angle, labels, and control layout.
+  preserving its height, labels, and control layout.
+- A second seated adjustment brings the backboard 0.36 m toward the operator
+  to apparatus-local Z 0.48 m and increases its inward yaw from -0.22 to -0.72
+  radians so its face addresses the seated position.
 
 ## Current TODO
 
