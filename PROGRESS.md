@@ -21,7 +21,7 @@ Original prompt: batch 7
   handle, two-press tear sheet, small ghost controls, static canonical-jar
   summaries, and 90-degree detector geometry. Typecheck and targeted render
   tests pass.
-- Full repository suite passes: 22 contract tests and 133 Vitest tests. All six
+- Full repository suite passes: 22 contract tests and 134 Vitest tests. All six
   rendered Playwright scenarios pass, including restart persistence, canonical
   restore, history clear, independent ghost replay, deletion, and XR Start.
 - Simulation acceptance and benchmark pass without model drift. The current
@@ -89,6 +89,12 @@ Original prompt: batch 7
   local Z 0.62 m. Uniformly scaled the DoseLever and StartButton root groups to
   75%, preserving their control centers, discrete commands, and relative
   placement.
+- Centered the seated starting position between the controls by moving their
+  centers to symmetric X -0.30/+0.30 m positions and offsetting their shared
+  deck -0.40 m to cancel the apparatus world offset. Removed the unexplained
+  amber tested-jar diamonds and changed the authoritative jar-summary
+  presentation from green/mint to a dark-brown through light-tan dose-result
+  spectrum.
 
 ## Current TODO
 

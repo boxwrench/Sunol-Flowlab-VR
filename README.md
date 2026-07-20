@@ -42,7 +42,7 @@ subordinate past-run gauge needle; it adds no second tank, ghost particles, or
 transparent ghost layer. The selected display choices are recorded in
 [docs/TUNING.md](docs/TUNING.md).
 
-The current automated checkpoint passes 22 repository-contract tests, 133
+The current automated checkpoint passes 22 repository-contract tests, 134
 Vitest tests across 29 files, all six rendered-browser scenarios, the canonical
 and nine-seed eleven-dose regression corpus, type checking, lint, production
 build, and the standalone simulation benchmark. The compatible-ghost desktop

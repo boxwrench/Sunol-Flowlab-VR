@@ -12,7 +12,7 @@ export const CANONICAL_JAR_DOSES = [0, 2, 4, 6, 8, 10] as const
 const JAR_VESSEL_DIMENSIONS = [0.18, 0.36, 0.16] as const
 const JAR_RIM_DIMENSIONS = [0.19, 0.014, 0.17] as const
 const RAW_WATER_FILL_DIMENSIONS = [0.158, 0.26, 0.138] as const
-const RAW_WATER_FILL_COLOR = '#4f5940'
+const RAW_WATER_FILL_COLOR = '#5b210a'
 const JAR_WALL_EXTRUSION = {
   depth: JAR_VESSEL_DIMENSIONS[1],
   bevelEnabled: false,
@@ -64,7 +64,7 @@ interface JarTestBenchProps {
 }
 
 const RAW_WATER_COLOR = new Color(RAW_WATER_FILL_COLOR)
-const CLEARED_WATER_COLOR = new Color('#d0f3e8')
+const CLEARED_WATER_COLOR = new Color('#d99a48')
 
 export function jarDisplayContrast(displayClarity: number): number {
   if (!Number.isFinite(displayClarity)) return 0
@@ -77,7 +77,6 @@ export function JarTestBench({ summaries = [] }: JarTestBenchProps) {
   const paddlesRef = useRef<InstancedMesh>(null)
   const rimsRef = useRef<InstancedMesh>(null)
   const tableLegsRef = useRef<InstancedMesh>(null)
-  const summaryTokensRef = useRef<InstancedMesh>(null)
   const transform = useMemo(() => new Matrix4(), [])
   const jarWallShape = useMemo(
     () =>
@@ -104,14 +103,12 @@ export function JarTestBench({ summaries = [] }: JarTestBenchProps) {
     const paddles = paddlesRef.current
     const rims = rimsRef.current
     const tableLegs = tableLegsRef.current
-    const summaryTokens = summaryTokensRef.current
     if (
       fills === null ||
       jars === null ||
       paddles === null ||
       rims === null ||
-      tableLegs === null ||
-      summaryTokens === null
+      tableLegs === null
     )
       return
 
@@ -151,18 +148,6 @@ export function JarTestBench({ summaries = [] }: JarTestBenchProps) {
       tableLegs.setMatrixAt(index, transform)
     }
     tableLegs.instanceMatrix.needsUpdate = true
-
-    let tokenIndex = 0
-    for (let index = 0; index < CANONICAL_JAR_DOSES.length; index += 1) {
-      const dose = CANONICAL_JAR_DOSES[index]
-      if (!summaries.some((summary) => summary.dose === dose)) continue
-      const x = (index - 2.5) * 0.25
-      transform.makeTranslation(x, 0.61, 0.07)
-      summaryTokens.setMatrixAt(tokenIndex, transform)
-      tokenIndex += 1
-    }
-    summaryTokens.count = tokenIndex
-    summaryTokens.instanceMatrix.needsUpdate = true
   }, [summaries, transform])
 
   return (
@@ -193,24 +178,7 @@ export function JarTestBench({ summaries = [] }: JarTestBenchProps) {
           args={[undefined, undefined, CANONICAL_JAR_DOSES.length]}
         >
           <boxGeometry args={[...RAW_WATER_FILL_DIMENSIONS]} />
-          <meshStandardMaterial
-            color={'#ffffff'}
-            roughness={0.72}
-            transparent
-            opacity={0.96}
-            vertexColors
-          />
-        </instancedMesh>
-        <instancedMesh
-          ref={summaryTokensRef}
-          args={[undefined, undefined, CANONICAL_JAR_DOSES.length]}
-        >
-          <octahedronGeometry args={[0.035, 0]} />
-          <meshStandardMaterial
-            color={'#ffbd59'}
-            emissive={'#7a3f12'}
-            emissiveIntensity={0.45}
-          />
+          <meshBasicMaterial color={'#ffffff'} toneMapped={false} />
         </instancedMesh>
         <instancedMesh
           ref={jarsRef}
@@ -218,7 +186,7 @@ export function JarTestBench({ summaries = [] }: JarTestBenchProps) {
         >
           <extrudeGeometry args={[jarWallShape, JAR_WALL_EXTRUSION]} />
           <meshStandardMaterial
-            color={'#b7e1da'}
+            color={'#d8cbb5'}
             side={DoubleSide}
             transparent
             opacity={0.2}
@@ -230,7 +198,7 @@ export function JarTestBench({ summaries = [] }: JarTestBenchProps) {
           args={[undefined, undefined, CANONICAL_JAR_DOSES.length]}
         >
           <extrudeGeometry args={[jarRimShape, JAR_RIM_EXTRUSION]} />
-          <meshStandardMaterial color={'#c7eee8'} roughness={0.4} />
+          <meshStandardMaterial color={'#e4d2b6'} roughness={0.4} />
         </instancedMesh>
         <instancedMesh
           ref={paddlesRef}

@@ -50,7 +50,7 @@ human gates.
 
 ## Verification completed
 
-- `npm test`: 22 repository-contract tests and 133 Vitest tests pass across 29
+- `npm test`: 22 repository-contract tests and 134 Vitest tests pass across 29
   Vitest files.
 - `npm run test:browser`: all six Playwright scenarios pass and emit the Batch
   08 phase, endpoint, and compatible-ghost captures.

@@ -4,6 +4,7 @@ import {
   JarTestBench,
   type CanonicalJarSummaryPresentation,
 } from './JarTestBench'
+import { XR_CONTROL_DECK_LOCAL_X_METERS } from './layout'
 
 interface XrShellApparatusProps {
   readonly calibrationEyeHeightMeters: number
@@ -29,7 +30,11 @@ export function XrShellApparatus({
       {heroTank}
       <JarTestBench summaries={canonicalJarSummaries} />
       {instrumentation}
-      <group position={[0, 0, 1.8 - controlReachMeters]}>{children}</group>
+      <group
+        position={[XR_CONTROL_DECK_LOCAL_X_METERS, 0, 1.8 - controlReachMeters]}
+      >
+        {children}
+      </group>
       {showCalibrationMarker ? (
         <CalibrationMarker eyeHeightMeters={calibrationEyeHeightMeters} />
       ) : null}

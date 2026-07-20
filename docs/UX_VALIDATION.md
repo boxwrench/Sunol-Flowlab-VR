@@ -297,3 +297,11 @@ The request to label the dial NTU conflicts with the binding uncalibrated,
 dimensionless model boundary. The candidate therefore uses RELATIVE TURBIDITY;
 no calibrated NTU claim is introduced. The combined human gate remains open
 pending one focused readability/control rerun.
+
+Follow-up seated review accepted the labeled apparatus direction but requested
+continued spatial tuning. The backboard moved right, forward, and inward; the
+dose and Start controls were reduced to 75% and their midpoint was aligned with
+the WebXR start origin. The amber tested-jar diamonds were not understood, so
+they were removed. The reviewer expected the canonical jars to communicate
+dose outcomes through brown water, so their result-driven display now spans
+dark brown at the poorer endpoints through light tan near the optimum.

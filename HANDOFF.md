@@ -131,7 +131,7 @@ Use only the active indexed Markdown plan.
 - 22 repository-contract tests pass, including XR ownership, integration
   composition, detent, pointer-
   capture, and Start-latch source contracts.
-- 133 Vitest tests across 29 files pass, including the full transition matrix,
+- 134 Vitest tests across 29 files pass, including the full transition matrix,
   legal/illegal commands, fixed timing, centralized time scale, exactly-once
   immutable result, result/runtime isolation, deterministic refill,
   interruption/long-stall recovery, all eleven detents, lock suppression, and

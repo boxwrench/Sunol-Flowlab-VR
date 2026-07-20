@@ -45,7 +45,7 @@ test('jar-test bench has six static app-fed canonical summaries with no process 
   )
 
   assert.match(source, /\[0, 2, 4, 6, 8, 10\] as const/)
-  assert.equal((source.match(/<instancedMesh\b/g) ?? []).length, 6)
+  assert.equal((source.match(/<instancedMesh\b/g) ?? []).length, 5)
   for (const refName of ['fillsRef', 'jarsRef', 'rimsRef', 'paddlesRef']) {
     assert.match(source, new RegExp(`ref=\\{${refName}\\}`))
   }
@@ -53,11 +53,13 @@ test('jar-test bench has six static app-fed canonical summaries with no process 
     source,
     /ref=\{fillsRef\}[\s\S]*?CANONICAL_JAR_DOSES\.length[\s\S]*?RAW_WATER_FILL_DIMENSIONS/,
   )
-  assert.match(source, /const RAW_WATER_FILL_COLOR = '#4f5940'/)
+  assert.match(source, /const RAW_WATER_FILL_COLOR = '#5b210a'/)
+  assert.match(source, /const CLEARED_WATER_COLOR = new Color\('#d99a48'\)/)
+  assert.match(source, /meshBasicMaterial[\s\S]*toneMapped=\{false\}/)
   assert.match(source, /fills\.setMatrixAt\(index, transform\)/)
   assert.match(source, /fills\.instanceMatrix\.needsUpdate = true/)
   assert.match(source, /fills\.setColorAt/)
-  assert.match(source, /summaryTokensRef/)
+  assert.doesNotMatch(source, /summaryTokensRef|octahedronGeometry/)
   assert.match(source, /summary\.displayClarity/)
   assert.match(source, /jarDisplayContrast\(summary\.displayClarity\)/)
   assert.match(source, /ref=\{tableLegsRef\}/)
