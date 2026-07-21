@@ -23,6 +23,7 @@ This index separates current authority from historical delivery evidence.
 - [Treatment-result ghost replay design](GHOST_REPLAY_DESIGN.md)
 - [Post-v0.1 mechanistic research contract](POST_V1_MECHANISTIC_COAGULATION_RESEARCH.md)
 - [Batch 12 California-first reference library](plans/batch-12-reference-library.md)
+- [Post-release hardening and v0.2.0 release](plans/post-release-hardening.md)
 
 ## Current validation and operations
 

@@ -476,3 +476,34 @@ Original prompt: batch 7
   `git diff --check` validation pass for every changed Markdown file; the
   repository-wide format command still reports pre-existing formatting in the
   user-owned, untouched `.agents/` directory.
+
+# Post-release roadmap working notes
+
+- The owner supplied an external architecture and product analysis and asked
+  that its actionable recommendations be added to the roadmap.
+- Verified the two priority defects against current source. Trial identity uses
+  a controller-local sequence that resets on reload; duplicate IDs make
+  `ExperimentMemory.append` return false and therefore suppress the new
+  persisted point and ghost. `APP_PROJECT_VERSION` is also still `0.0.0`
+  while `package.json` is `0.1.0`.
+- Added a post-release hardening plan with unique injected record IDs,
+  package-version injection, reload regression coverage, ordered batch-name
+  cleanup, bounded App composition maintenance, structured mixed-user testing,
+  and filtration as a later discovery candidate.
+- Recorded the release-line decision explicitly: because current `main`
+  already includes accepted user-visible library and art changes and deploys
+  automatically, the recommended simple next tag is `v0.2.0`. A true
+  hardening-only `v0.1.1` must branch from the `v0.1.0` tag.
+- Added tomorrow's YouTube upload, Quest/desktop playback check, README demo-link
+  replacement, Built With line, and dedicated GPT-5.6 subsection ahead of code
+  expansion.
+- Refreshed the architecture and handoff status to record the completed v0.1.0
+  media/tag work and accepted Batch 12 Quest gate. No runtime source, model,
+  dependencies, or release tags changed.
+- Scoped Prettier, roadmap-link existence checks, stale-status searches, and
+  `git diff --check` pass for the documentation-only roadmap change.
+- The owner selected `v0.2.0` as the next release target because the accepted
+  library and visual polish are substantial post-v0.1 work already present on
+  current `main`. The alternative `v0.1.1` maintenance branch is no longer
+  planned; the package version remains `0.1.0` until the v0.2 hardening and
+  release gates pass.

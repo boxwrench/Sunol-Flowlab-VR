@@ -109,8 +109,14 @@ audio.
 
 The local and hosted Quest routes, final visual/audio presentation, corrected
 seated height, Dose 0/5/10 repeat cycle, refills, and immersive re-entry are
-accepted on Quest 3. The remaining v0.1 release work is the final demonstration
-video, release notes, and tag.
+accepted on Quest 3. Sunol FlowLab VR v0.1.0, its direct Quest demonstration,
+release notes, and public tag are complete.
+
+Current `main` also contains the accepted California-first reference library
+and three Quest-reviewed visual-polish passes. The next code work is limited to
+the confirmed persisted-record identity and project-version corrections in the
+[post-release hardening plan](plans/post-release-hardening.md). New process
+modules require separate owner approval.
 
 See [IMPLEMENTATION_PLAN.md](../IMPLEMENTATION_PLAN.md) for current status and
 [docs/README.md](README.md) for design and validation evidence.

@@ -8,8 +8,8 @@ Updated: 2026-07-20
 - Branch: `main`
 - Active plan authority: [IMPLEMENTATION_PLAN.md](IMPLEMENTATION_PLAN.md)
 - Detailed batch plans: [docs/plans](docs/plans/README.md)
-- Current milestone: `v0.1.0` released; Batch 12 reference-library
-  candidate awaits seated Quest review
+- Current milestone: `v0.1.0` released; Batch 12 reference library and visual
+  polish accepted; post-release correctness work planned
 - Public experience:
   <https://boxwrench.github.io/Sunol-Flowlab-VR/>
 
@@ -27,6 +27,8 @@ Sunol FlowLab VR is one coagulation-only phenomenological teaching experience:
 - one physical dashboard for dose, Start, mute, and scenery;
 - one four-wall laboratory with owner-created Sunol and Hetchy panoramas;
 - generated ambience, periodic lab details, and sparse music;
+- a four-book California-first reference library with an in-world reader and
+  official source-page links;
 - seated Quest WebXR and Chrome/Chromium desktop viewing at the same URL.
 
 The local physical Quest route is accepted. The hosted HTTPS deployment is
@@ -54,10 +56,10 @@ representative particles and canonical seed `0x5f3759df`.
 ## Current evidence
 
 - Release notes: [docs/RELEASE_NOTES_V0.1.0.md](docs/RELEASE_NOTES_V0.1.0.md)
-- Narrated Quest demonstration:
+- Downloadable narrated Quest demonstration:
   <https://github.com/boxwrench/Sunol-Flowlab-VR/releases/download/v0.1.0/sunol-flowlab-vr-v0.1.0-demo.mp4>
-- Hosted screenshot:
-  [docs/images/sunol-flowlab-v0.1/shot-0.png](docs/images/sunol-flowlab-v0.1/shot-0.png)
+- Current screenshot:
+  [docs/images/sunol-flowlab-current/shot-0.png](docs/images/sunol-flowlab-current/shot-0.png)
 - Architecture: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)
 - UX and headset verdicts: [docs/UX_VALIDATION.md](docs/UX_VALIDATION.md)
 - Performance record: [docs/PERFORMANCE.md](docs/PERFORMANCE.md)
@@ -70,23 +72,25 @@ desktop harness remains available only by explicit `?mode=desktop` and is used
 by deterministic browser validation. Production does not eagerly request the
 IWER emulator-room chunks.
 
-## Post-release candidate
+## Accepted post-release state
 
 Batch 12 adds a compact two-shelf bookcase on the operator's left, four
 clickable physical reference books, and a temporary in-world reader for
 coagulation, jar testing, interpreting results, and enhanced coagulation. The
 content is original, California-first, and source-cited; EPA owns the federal
-enhanced-coagulation reference. Desktop selection, bounded paging, Close,
-command validation, and visual inspection pass. No third-party media is
-bundled. Seated Quest controller interaction and readability remain the
-acceptance gate.
+enhanced-coagulation reference. Desktop and seated Quest selection, bounded
+paging, Close, same-tab source navigation, brightness, and readability are
+accepted. Three separate materials/color, lighting, and sparse-texture passes
+also passed seated Quest review.
 
 ## Release state
 
 The owner-operated low/optimum/high Quest demonstration, synthetic narration,
 release notes, and `v0.1.0` publication are complete. Mobile support and a
-sideloadable APK remain deferred. Begin any further process modules, simulation
-retuning, dependency upgrades, or mechanistic work as explicit post-v0.1 scope.
+sideloadable APK remain deferred. Current `main` deploys the accepted library
+and visual polish automatically. The owner selected `v0.2.0` as the next
+release target; `package.json`, release notes, and the tag change only after
+the post-release hardening and final validation gates pass.
 
 ## Validation
 
@@ -114,7 +118,9 @@ npm run acceptance:08:quest -- watch-controls
 
 ## Recommended next session
 
-Treat `v0.1.0` as the known-good baseline. Review the Batch 12 books, reader,
-paging, source, and Close controls in a seated Quest session. Accept or revise
-the candidate without changing the coagulation model, then decide whether it
-belongs in v0.2. Keep the published v0.1 release available for rollback.
+Treat `v0.1.0` as the known-good baseline. When the YouTube upload is ready,
+replace the forced-download demo link and add the short Built With and GPT-5.6
+README sections. Then implement unique persisted trial IDs first and package
+version injection second, using the
+[post-release hardening plan](docs/plans/post-release-hardening.md). Do not
+retune coagulation or begin filtration during those fixes.

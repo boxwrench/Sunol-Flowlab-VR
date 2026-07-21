@@ -24,3 +24,4 @@ root implementation index governs.
 11. [Presence, environment, and audio](batch-10-presence-environment-and-audio.md)
 12. [Release hardening and deployment](batch-11-release-hardening-and-deployment.md)
 13. [California-first reference library](batch-12-reference-library.md)
+14. [Post-release hardening and v0.2.0 release](post-release-hardening.md)

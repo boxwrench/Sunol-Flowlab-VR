@@ -1,8 +1,8 @@
 # Batch 12 Implementation Plan: California-First Reference Library
 
-**Status:** Candidate — implementation and desktop interaction pass; seated Quest review pending  
+**Status:** Accepted - desktop and seated Quest interaction/readability passed  
 **Depends on:** Released v0.1.0 baseline  
-**Release target:** Post-v0.1 / v0.2 candidate
+**Release target:** v0.2.0, subject to post-release hardening
 
 ## Goal
 
