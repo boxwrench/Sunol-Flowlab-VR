@@ -1,6 +1,7 @@
 # Implementation Plan Authority
 
-This file is the active delivery index for Sunol FlowLab VR v0.1. Detailed
+This file is the active delivery index for released Sunol FlowLab VR v0.1 and
+approved post-release batches. Detailed
 batch plans live in [docs/plans](docs/plans/README.md); validation records and
 design authorities are indexed from [docs/README.md](docs/README.md).
 
@@ -27,6 +28,7 @@ review.
 | 09    | Accepted               | Owner-operated narrated Quest demonstration passed                       |
 | 10    | Accepted               | Laboratory, scenery, dashboard, and audio passed                         |
 | 11    | Released               | Public experience, video, notes, and v0.1.0 release complete             |
+| 12    | Candidate              | California-first library implemented; seated Quest review pending        |
 
 ## Ordered batch plans
 
@@ -42,6 +44,7 @@ review.
 10. [Batch 09 - Browser presentation and capture](docs/plans/batch-09-desktop-spectator-experience.md)
 11. [Batch 10 - Presence, environment, and audio](docs/plans/batch-10-presence-environment-and-audio.md)
 12. [Batch 11 - Release hardening and deployment](docs/plans/batch-11-release-hardening-and-deployment.md)
+13. [Batch 12 - California-first reference library](docs/plans/batch-12-reference-library.md)
 
 Batch files preserve scoped implementation intent, non-goals, and acceptance
 criteria. Their historical language is evidence of the planned sequence; the
@@ -78,6 +81,8 @@ the simulation.
   media and is not part of the interactive runtime.
 - No calibrated NTU, operating guidance, plant prediction, CFD, or universal
   FlowLab engine is authorized.
+- Batch 12 adds cited educational reading without changing simulation authority,
+  process behavior, or operating-guidance boundaries.
 - Post-v0.1 mechanistic research remains governed by
   [docs/POST_V1_MECHANISTIC_COAGULATION_RESEARCH.md](docs/POST_V1_MECHANISTIC_COAGULATION_RESEARCH.md).
 

@@ -1,7 +1,7 @@
 # Delivery Plans
 
-These files preserve the scoped implementation plans for Sunol FlowLab VR
-v0.1. [IMPLEMENTATION_PLAN.md](../../IMPLEMENTATION_PLAN.md) is the current
+These files preserve the scoped implementation plans for released Sunol
+FlowLab VR v0.1 and approved post-release work. [IMPLEMENTATION_PLAN.md](../../IMPLEMENTATION_PLAN.md) is the current
 status authority and ordered index.
 
 The plans remain useful for design intent, acceptance criteria, and non-goals.
@@ -23,3 +23,4 @@ root implementation index governs.
 10. [Browser presentation and capture](batch-09-desktop-spectator-experience.md)
 11. [Presence, environment, and audio](batch-10-presence-environment-and-audio.md)
 12. [Release hardening and deployment](batch-11-release-hardening-and-deployment.md)
+13. [California-first reference library](batch-12-reference-library.md)

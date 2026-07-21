@@ -8,8 +8,8 @@ Updated: 2026-07-20
 - Branch: `main`
 - Active plan authority: [IMPLEMENTATION_PLAN.md](IMPLEMENTATION_PLAN.md)
 - Detailed batch plans: [docs/plans](docs/plans/README.md)
-- Current milestone: `v0.1.0` released with hosted experience and narrated
-  Quest demonstration
+- Current milestone: `v0.1.0` released; Batch 12 reference-library
+  candidate awaits seated Quest review
 - Public experience:
   <https://boxwrench.github.io/Sunol-Flowlab-VR/>
 
@@ -70,6 +70,17 @@ desktop harness remains available only by explicit `?mode=desktop` and is used
 by deterministic browser validation. Production does not eagerly request the
 IWER emulator-room chunks.
 
+## Post-release candidate
+
+Batch 12 adds a compact two-shelf bookcase on the operator's left, four
+clickable physical reference books, and a temporary in-world reader for
+coagulation, jar testing, interpreting results, and enhanced coagulation. The
+content is original, California-first, and source-cited; EPA owns the federal
+enhanced-coagulation reference. Desktop selection, bounded paging, Close,
+command validation, and visual inspection pass. No third-party media is
+bundled. Seated Quest controller interaction and readability remain the
+acceptance gate.
+
 ## Release state
 
 The owner-operated low/optimum/high Quest demonstration, synthetic narration,
@@ -103,6 +114,7 @@ npm run acceptance:08:quest -- watch-controls
 
 ## Recommended next session
 
-Treat `v0.1.0` as the known-good baseline. Start post-release work only from an
-explicitly approved goal, preserve the coagulation-only product boundary, and
-keep the published release and GitHub Pages deployment available for rollback.
+Treat `v0.1.0` as the known-good baseline. Review the Batch 12 books, reader,
+paging, source, and Close controls in a seated Quest session. Accept or revise
+the candidate without changing the coagulation model, then decide whether it
+belongs in v0.2. Keep the published v0.1 release available for rollback.

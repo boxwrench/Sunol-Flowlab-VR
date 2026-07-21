@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 
+import { ReferenceLibrary } from '../render/ReferenceLibrary'
 import { XrShellScene } from '../render/XrShellScene'
 import { InstrumentLabel } from '../render/InstrumentLabel'
 import { PhysicalInstrumentation } from '../render/PhysicalInstrumentation'
@@ -38,6 +39,15 @@ import {
   SimulationRuntime,
 } from './SimulationRuntime'
 import {
+  INITIAL_REFERENCE_LIBRARY_STATE,
+  isReferenceBookId,
+  isReferenceLibraryCommand,
+  reduceReferenceLibraryState,
+  REFERENCE_BOOKS,
+  type ReferenceLibraryCommand,
+  type ReferenceLibraryState,
+} from './referenceLibrary'
+import {
   DEFAULT_TREATMENT_CYCLE_CONFIG,
   TreatmentCycleController,
   type TreatmentCycleRecord,
@@ -50,6 +60,7 @@ declare global {
     ) => TreatmentCycleRecord | Batch07CommandResult
     render_xr_shell_to_text?: () => string
     reset_xr_trial_to_ready?: () => void
+    dispatch_reference_command?: (command: unknown) => boolean
   }
 }
 
@@ -84,6 +95,8 @@ export function XrShellApp() {
   const [panorama, setPanorama] = useState<'hetchy' | 'sunol'>(
     requestedPanorama,
   )
+  const [referenceLibrary, setReferenceLibrary] =
+    useState<ReferenceLibraryState>(INITIAL_REFERENCE_LIBRARY_STATE)
   const [statusRevision, setStatusRevision] = useState(0)
   const audioRef = useRef<ProcessAudioController | null>(null)
   if (audioRef.current === null)
@@ -212,6 +225,28 @@ export function XrShellApp() {
     [dispatchCommand],
   )
 
+  const dispatchReferenceCommand = useCallback(
+    (command: ReferenceLibraryCommand) => {
+      audio.playDashboardClick()
+      setReferenceLibrary((state) =>
+        reduceReferenceLibraryState(state, command),
+      )
+    },
+    [audio],
+  )
+
+  const openReferenceBook = useCallback(
+    (bookId: string) => {
+      if (!isReferenceBookId(bookId)) return
+      dispatchReferenceCommand({ type: 'OPEN_REFERENCE', bookId })
+    },
+    [dispatchReferenceCommand],
+  )
+
+  const openReferenceSource = useCallback((sourceUrl: string) => {
+    window.location.assign(sourceUrl)
+  }, [])
+
   const recordDetentState = useCallback((state: DetentControlState) => {
     snapshotRef.current.leverPhase = state.interaction.phase
     snapshotRef.current.leverHandedness = state.interaction.handedness
@@ -314,6 +349,7 @@ export function XrShellApp() {
           endpointOpticalLoad(runtime.opticalLoadBands),
         globalRelativeOpticalLoad: runtime.opticalLoadBands.globalRelativeLoad,
         audio: audio.snapshot,
+        referenceLibrary,
       })
     }
     window.render_game_to_text = renderState
@@ -324,6 +360,11 @@ export function XrShellApp() {
       const snapshot = snapshotRef.current
       snapshot.dose = cycle.selectedDose
       setStatusRevision((revision) => revision + 1)
+    }
+    window.dispatch_reference_command = (command) => {
+      if (!isReferenceLibraryCommand(command)) return false
+      dispatchReferenceCommand(command)
+      return true
     }
     window.advanceTime = (milliseconds) => {
       if (!Number.isFinite(milliseconds) || milliseconds < 0) {
@@ -338,9 +379,19 @@ export function XrShellApp() {
       delete window.render_game_to_text
       delete window.render_xr_shell_to_text
       delete window.reset_xr_trial_to_ready
+      delete window.dispatch_reference_command
       delete window.advanceTime
     }
-  }, [audio, cycle, dispatchCommand, experiment, panorama, runtime])
+  }, [
+    audio,
+    cycle,
+    dispatchCommand,
+    dispatchReferenceCommand,
+    experiment,
+    panorama,
+    referenceLibrary,
+    runtime,
+  ])
 
   async function enterVr() {
     setEntryError(null)
@@ -437,7 +488,27 @@ export function XrShellApp() {
         posture={posture}
         presentationEpoch={cycle.presentationEpoch}
         recordParticleFrame={recordParticleFrame}
-        sceneChildren={<Batch07Driver cycle={cycle} experiment={experiment} />}
+        sceneChildren={
+          <>
+            <Batch07Driver cycle={cycle} experiment={experiment} />
+            <ReferenceLibrary
+              books={REFERENCE_BOOKS}
+              close={() =>
+                dispatchReferenceCommand({ type: 'CLOSE_REFERENCE' })
+              }
+              next={() =>
+                dispatchReferenceCommand({ type: 'NEXT_REFERENCE_PAGE' })
+              }
+              openBook={openReferenceBook}
+              openSource={openReferenceSource}
+              pageIndex={referenceLibrary.pageIndex}
+              previous={() =>
+                dispatchReferenceCommand({ type: 'PREVIOUS_REFERENCE_PAGE' })
+              }
+              selectedBookId={referenceLibrary.selectedBookId}
+            />
+          </>
+        }
         showCalibrationMarker={showCalibrationMarker}
       >
         <DoseLever

@@ -98,13 +98,41 @@ test('plant environment stays render-only and bounds its animated work', async (
   const frameCallback = source.slice(source.indexOf('useFrame('))
 
   assert.doesNotMatch(source, /\.\.\/sim|SimulationRuntime|useState/)
-  assert.equal((source.match(/<instancedMesh\b/g) ?? []).length, 3)
+  assert.equal((source.match(/<instancedMesh\b/g) ?? []).length, 4)
   assert.match(source, /deltaSeconds \* 0\.7/)
   assert.doesNotMatch(frameCallback, /new (?:Matrix4|Vector3|Array|Color)\b/)
   assert.doesNotMatch(source, /shadow|useTexture/)
+  assert.match(source, /new DataTexture/)
+  assert.match(source, /map=\{labSurfaceTexture\}/)
+  assert.match(source, /labSurfaceTexture\.dispose\(\)/)
+  assert.doesNotMatch(source, /Math\.random/)
+  assert.doesNotMatch(frameCallback, /new (?:DataTexture|Uint8Array)\b/)
   assert.equal((source.match(/useLoader\(TextureLoader/g) ?? []).length, 1)
   assert.match(source, /import\.meta\.env\.BASE_URL/)
   assert.match(source, /side=\{BackSide\}/)
+})
+
+test('desktop and XR share the bounded Quest-safe lab lighting rig', async () => {
+  const lighting = await readFile(
+    new URL('../src/render/LabLighting.tsx', import.meta.url),
+    'utf8',
+  )
+  const foundationScene = await readFile(
+    new URL('../src/render/FoundationScene.tsx', import.meta.url),
+    'utf8',
+  )
+  const xrScene = await readFile(
+    new URL('../src/render/XrShellScene.tsx', import.meta.url),
+    'utf8',
+  )
+
+  assert.equal((lighting.match(/<hemisphereLight\b/g) ?? []).length, 1)
+  assert.equal((lighting.match(/<directionalLight\b/g) ?? []).length, 1)
+  assert.doesNotMatch(lighting, /castShadow|shadowMap/)
+  for (const scene of [foundationScene, xrScene]) {
+    assert.match(scene, /<LabLighting \/>/)
+    assert.doesNotMatch(scene, /<ambientLight\b|<directionalLight\b/)
+  }
 })
 
 test('process audio remains app-owned, generated, bounded, and gesture gated', async () => {
@@ -154,4 +182,19 @@ test('operator controls share one physical dashboard with bounded scenery choice
     dashboard + selector,
     /\.\.\/sim|SimulationRuntime|useFrame/,
   )
+})
+
+test('reference sources use same-tab navigation that cannot be popup-blocked', async () => {
+  const app = await readFile(
+    new URL('../src/app/XrShellApp.tsx', import.meta.url),
+    'utf8',
+  )
+  const library = await readFile(
+    new URL('../src/render/ReferenceLibrary.tsx', import.meta.url),
+    'utf8',
+  )
+
+  assert.match(app, /window\.location\.assign\(sourceUrl\)/)
+  assert.doesNotMatch(app, /window\.open\(sourceUrl/)
+  assert.match(library, /label=\{'WEB'\}/)
 })

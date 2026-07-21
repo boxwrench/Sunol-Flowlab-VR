@@ -15,6 +15,7 @@ import {
 } from './layout'
 import type { ParticleFrameRecorder } from './ParticleCloud'
 import type { OpticalLoadBandsPresentation } from './OpticalLoadGradient'
+import { LabLighting } from './LabLighting'
 import { PlantEnvironment, type LabPanoramaId } from './PlantEnvironment'
 import { ControlDashboard } from './ControlDashboard'
 
@@ -57,8 +58,7 @@ export function XrShellScene({
       <XR store={xrStore}>
         <XROrigin position={[0, layout.playerOriginHeightOffsetMeters, 0]} />
         <color attach={'background'} args={['#081719']} />
-        <ambientLight intensity={1.1} />
-        <directionalLight position={[2, 4, 3]} intensity={1.7} />
+        <LabLighting />
         <PlantEnvironment panorama={panorama} />
         {sceneChildren}
         <group position={[...APPARATUS_WORLD_POSITION]}>

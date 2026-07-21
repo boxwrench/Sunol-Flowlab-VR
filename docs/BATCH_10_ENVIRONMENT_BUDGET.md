@@ -25,8 +25,8 @@ columns, and handrail rather than layering additional scenery over them.
 
 ## Render budget
 
-- Environment source draw-call allowance: **5** before controller models.
-- Environment material allowance: **5 shared flat/lightly shaded materials**.
+- Environment source draw-call allowance: **6** before controller models.
+- Environment material allowance: **6 shared flat/lightly shaded materials**.
 - Environment triangle count: approximately **1,114**, including instances.
 - The exact owner-provided Hetchy JPG is **3,947,484 compressed bytes** and
   **33,549,312 decoded RGBA bytes** at 5,216 by 1,608 pixels.
@@ -35,11 +35,20 @@ columns, and handrail rather than layering additional scenery over them.
   maximum decoded panorama budget.
 - One self-created `WATER QUALITY LAB` canvas label adds approximately **1.64
   MB** of uncompressed RGBA texture memory.
-- Walls, window frames, benches, analyzers, screens, and ceiling panels share
-  one colored instanced box draw.
+- One deterministic self-created 64 by 64 warm-neutral surface texture adds
+  **16,384 decoded RGBA bytes**. It repeats across the existing shaded lab
+  material; no image file, network request, draw call, or material is added.
+- Room structure, work surfaces, and equipment share one colored shaded box
+  draw. Ceiling panels and analyzer screens share one self-lit box draw. The
+  lighting pass redistributes existing instances within the established draw
+  ceiling and adds no geometry or texture memory.
 - Beaker walls and fluids use two bounded instanced draws.
 - One small magnetic stir bar is the only environment object updated per frame;
   it mutates one existing group and allocates nothing.
+- Desktop and XR share one hemisphere fill and one directional key light. The
+  lab uses no dynamic shadows or environment maps. The generated surface map is
+  created once per mounted environment, disposed on teardown, and never touched
+  by the frame loop.
 
 The prior apparatus measured 51 ready-state and 55 compatible-replay development
 draw calls. The lab candidate retains the established browser ceilings of 70

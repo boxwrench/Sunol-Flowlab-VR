@@ -16,6 +16,7 @@ import {
 } from './layout'
 import type { ParticleFrameRecorder } from './ParticleCloud'
 import type { OpticalLoadBandsPresentation } from './OpticalLoadGradient'
+import { LabLighting } from './LabLighting'
 import { PlantEnvironment, type LabPanoramaId } from './PlantEnvironment'
 
 interface FoundationSceneProps {
@@ -53,8 +54,7 @@ export function FoundationScene({
       <XR store={xrStore}>
         {children}
         <color attach="background" args={['#081719']} />
-        <ambientLight intensity={1.1} />
-        <directionalLight position={[2, 4, 3]} intensity={1.7} />
+        <LabLighting />
         <PlantEnvironment panorama={panorama} />
         <group position={[...APPARATUS_WORLD_POSITION]}>
           <HeroObservationTank

@@ -301,3 +301,154 @@ Original prompt: batch 7
   transitive packages, plus one superseded pre-v0.1 README screenshot. Ignored
   build output, test captures, logs, and TypeScript cache were cleared locally.
   Git history remains the recovery path for pruned tracked files.
+
+# Batch 12 reference-library working notes
+
+- Original Batch 12 prompt: Add clickable reference books about coagulation and
+  jar testing that open in-app video or readable text, using California or AWWA
+  sources and replacing model limitations with enhanced coagulation.
+- Started from released v0.1.0 commit `191f352` with only user-owned
+  `.agents/` untracked.
+- Added a California-first four-book content contract, physical book stand,
+  temporary in-world reader, bounded paging, source links, and Close.
+- Focused unit tests, type checking, a browser scenario, and the required
+  bundled-client real canvas interactions pass. Screenshots were inspected
+  after initial placement and after the centered-reader revision.
+- Full validation passes: 26 repository contracts, 31 Vitest files with 140
+  tests, typecheck, lint, standard and Pages production builds, 03D acceptance,
+  benchmark, formatting, and seven single-worker Chromium scenarios.
+- Restored the browser command to its documented single-worker policy after two
+  parallel seven-WebGL runs advanced real-time playback during deterministic
+  assertions. No timing assertion was weakened.
+- Loaded the current candidate on the connected Quest 3 through the local
+  reverse route and confirmed the development state exposes the closed
+  reference library at READY. Human controller/readability review remains.
+- No model, simulation authority, treatment timing, persistence, or v0.1
+  release artifact changed. No third-party document or video is bundled.
+- Replaced the first loose-book stand with a recognizable two-shelf wood
+  bookcase placed to the seated operator's left and angled toward the origin.
+  Added distinct book volumes, page edges, a physical library plaque, and a
+  static lower row of lab notes while keeping the reader's accepted centered
+  world placement independent from the shelf transform.
+- The required browser client visually confirms the bookcase, opened reader,
+  and second page. Real canvas input opens, advances, and closes the book with
+  matching `render_game_to_text` state and no console-error artifacts. The
+  post-revision contract/unit suite, lint, typecheck, production build, and all
+  seven single-worker Chromium scenarios pass.
+- At owner direction, moved only the bookcase 0.30 m farther left and 0.30 m
+  forward toward the seated origin, from world `(-1.85, 0.20, -1.05)` to
+  `(-2.15, 0.20, -0.75)`. The temporary reader retains its centered world
+  placement. Browser screenshots confirm the clearer separation, and real
+  canvas input still opens and closes the relocated book without console errors.
+- Headset review found that intermediate placement still intersected the long
+  side bench. Moved the bookcase another 0.90 m forward to world
+  `(-2.15, 0.20, 0.15)` and changed its yaw from `0.95` to `1.40` radians so it
+  remains aimed at the seated origin. The browser view now shows clear space
+  between the bookcase, side bench, and jar-test table; a visible book still
+  opens and closes with matching text state and no console errors.
+- The owner confirmed that the collision-clear bookcase placement works.
+
+# Post-v0.1 visual-polish working notes
+
+- The owner authorized three separate review passes: materials/color variation,
+  then baked/fake lighting, then sparse textures. Each layer receives its own
+  headset verdict before the next begins.
+- Art pass 1 changes only material response and palette. Split the lab's box
+  instances into matte structure/cabinetry and satin work-surface/equipment
+  draws; introduced warmer ceiling/counter colors, stronger window-frame
+  contrast, cabinet variation, and three restrained analyzer/screen variants.
+  Lighting, shadows, textures, geometry, simulation, and apparatus values are
+  unchanged.
+- The material distinction adds exactly one instanced draw and one shared
+  material, moving the audited environment budget from five to six of each
+  without adding triangles or texture memory. Focused budget, architecture,
+  and type checks pass; the required browser screenshot shows intact label,
+  tank, jar, and instrument contrast with no console errors.
+- Headset review found flicker where the darker wall pillars met the ceiling.
+  The cause was pre-existing geometry overlap made visible by the stronger
+  palette: pillars and window headers extended 0.03 m into the ceiling, and the
+  front wall extended 0.07 m into it. All now terminate exactly at the 3.17 m
+  ceiling underside. A regression audit fixes the four vertical seam values at
+  3.17 m; three successive browser frames show a closed, stable junction with
+  no console-error artifacts. Art pass 2 remains unstarted.
+- The first seam correction looked unchanged in headset. A live Quest audit
+  proved the candidate was not stale: the local seam-fix URL was immersive and
+  the fetched source contained the new seam constants and material split. The
+  remaining coplanarity was pillar-versus-header, not pillar-versus-ceiling:
+  each pillar shared the wall's interior face while extending through the upper
+  header band. Rebuilt all nine as 0.06 m shallow trims attached exactly to,
+  but sitting proud of, the rear and side wall faces. Surface-join regression
+  checks and three successive browser frames pass without errors.
+- The owner confirmed that the stronger palette difference is good. No image
+  texture maps have been added yet; the visible surface difference in this pass
+  comes only from color, roughness, and metalness. Sparse textures remain the
+  separately reviewed third art pass.
+- After the trim separation passed, the newly proud center pillar obscured the
+  centered `WATER QUALITY LAB` plaque. Shifted only the plaque 1.35 m into the
+  clear right-hand header bay, preserving its height, scale, and orientation.
+  Browser inspection confirms full pillar clearance and no console errors.
+- The owner accepted the relocated lab plaque and closed art pass 1.
+- Art pass 2 replaces each scene's flat ambient/directional pair with one shared
+  Quest-safe hemisphere fill and one warm directional key. Ceiling panels and
+  analyzer screens share one self-lit instanced draw; there are no dynamic
+  shadows, environment maps, textures, or new per-frame work.
+- An initial five-instance contact-shade candidate looked grounded in the
+  browser but raised compatible-replay draw calls from the binding ceiling of
+  71 to 73. Removed that draw and consolidated the non-luminous lab boxes while
+  preserving the accepted palette. The final candidate remains six environment
+  draws, six materials, approximately 1,114 triangles, and zero added texture
+  bytes; the browser returns to the established 70/71 ceilings.
+- The required client screenshot shows readable controls, jar labels, lab sign,
+  tank, and self-lit fixtures at authoritative READY state with no console-error
+  artifact. Full validation passes: 27 Node contracts, 142 Vitest tests, all
+  seven single-worker Chromium scenarios, typecheck, lint, production build,
+  and `git diff --check`. Seated Quest lighting review remains the human gate;
+  sparse textures are still untouched.
+- The owner passed the seated Quest lighting candidate and closed art pass 2.
+- Art pass 3 adds one deterministic self-created 64 by 64 warm-neutral surface
+  map to the existing shaded lab material. It is visibly restrained on the
+  floor and structural faces while leaving fixtures, screens, glass, labels,
+  the tank, and jar fluids clean. It adds 16,384 decoded RGBA bytes but no file,
+  network request, draw call, material, triangle, or frame-loop work; disposal
+  is explicit on environment teardown.
+- The required browser capture reports the same 118 development draw calls as
+  the accepted lighting candidate at READY, with matching text state and no
+  console-error artifact. Full texture-candidate validation passes: 27 Node
+  contracts, 143 Vitest tests, all seven single-worker Chromium scenarios,
+  typecheck, lint, production build, and `git diff --check`. Seated Quest
+  texture review is the remaining art-pass gate.
+- The owner passed the seated Quest texture candidate and closed art pass 3.
+  Materials/color, lighting, and sparse texture polish are now all accepted.
+- The subsequent library interaction review found the shelf too dim and direct
+  PDF sources entering Quest Browser's paused-download flow. Brightened the
+  existing wood, book-cover, page-edge, and lower-row materials through bounded
+  emissive response only; this adds no light, geometry, draw, or material.
+- Replaced all four direct runtime PDF targets with official HTML resource
+  pages and relabeled the reader control `WEB`. California books now open the
+  State Water Board's Safe Drinking Water Plan or Mendocino jar-testing page;
+  enhanced coagulation opens EPA's Surface Water guidance-manual page. The
+  exact underlying PDFs remain documented for desktop use. No third-party PDF
+  viewer, copied document, proxy, or new runtime asset was added.
+- The required closed-shelf and opened-reader captures were inspected: the
+  stronger library illumination is visible, `WEB` is clear, READY state matches,
+  and the closed scene remains at 118 development draw calls. Full validation
+  passes: 27 Node contracts, 143 Vitest tests, all seven single-worker Chromium
+  scenarios, typecheck, lint, production build, and `git diff --check`.
+- Quest review then proved that `window.open` is blocked when invoked from the
+  immersive controller event, so `WEB` appeared inert. Replaced the popup with
+  same-tab `window.location.assign`; opening a source now intentionally exits
+  VR, and Browser Back returns to the app for re-entry.
+- The required real-canvas choreography opened Enhanced Coagulation and caused
+  the expected navigation-time context teardown at `WEB`. A controlled follow-up
+  asserted the exact EPA destination URL and zero console errors. A new source
+  contract forbids restoring the popup path. Final validation passes: 28 Node
+  contracts, 143 Vitest tests, all seven Chromium scenarios, typecheck, lint,
+  production build, and `git diff --check`.
+- The owner confirmed the revised Quest library as good. Brightness, in-app
+  paging/Close, and same-tab `WEB` navigation are accepted; this closes the
+  Batch 12 human gate.
+
+## Batch 12 TODO
+
+- Package the accepted Batch 12 library and visual-polish work as a v0.2
+  candidate when authorized.

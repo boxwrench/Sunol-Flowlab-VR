@@ -10,6 +10,7 @@ This index separates current authority from historical delivery evidence.
 - [Commands and data contracts](CONTRACTS.md)
 - [Dose-sweep regression contract](REGRESSION_CONTRACT.md)
 - [Public-data and branding boundary](DATA_BOUNDARY.md)
+- [Reference-library source record](REFERENCE_LIBRARY_SOURCES.md)
 
 ## Product, design, and model
 
@@ -21,6 +22,7 @@ This index separates current authority from historical delivery evidence.
 - [Version 1 modeling research amendment](MODELING_RESEARCH_AMENDMENT.md)
 - [Treatment-result ghost replay design](GHOST_REPLAY_DESIGN.md)
 - [Post-v0.1 mechanistic research contract](POST_V1_MECHANISTIC_COAGULATION_RESEARCH.md)
+- [Batch 12 California-first reference library](plans/batch-12-reference-library.md)
 
 ## Current validation and operations
 

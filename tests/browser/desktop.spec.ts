@@ -430,3 +430,72 @@ test('XR route runs the shared treatment cycle with locked controls and refill',
     ),
   ).toMatchObject({ accepted: true, dose: 10 })
 })
+
+test('reference library opens, pages, bounds navigation, and closes', async ({
+  page,
+}, testInfo) => {
+  const browserErrors: string[] = []
+  page.on('console', (message) => {
+    if (message.type() === 'error') browserErrors.push(message.text())
+  })
+  page.on('pageerror', (error) => browserErrors.push(error.message))
+  await page.goto('/')
+  await expect
+    .poll(async () => {
+      const report = await page.evaluate(() =>
+        JSON.parse(window.render_performance_to_text?.() ?? '{}'),
+      )
+      return report.metrics?.drawCalls ?? 0
+    })
+    .toBeGreaterThan(28)
+
+  const referenceState = () =>
+    page.evaluate(
+      () => JSON.parse(window.render_game_to_text?.() ?? '{}').referenceLibrary,
+    )
+
+  expect(
+    await page.evaluate(() =>
+      window.dispatch_reference_command?.({
+        type: 'OPEN_REFERENCE',
+        bookId: 'enhanced-coagulation',
+      }),
+    ),
+  ).toBe(true)
+  await expect.poll(referenceState).toEqual({
+    selectedBookId: 'enhanced-coagulation',
+    pageIndex: 0,
+  })
+  await page.waitForTimeout(250)
+  await page.screenshot({
+    path: testInfo.outputPath('batch-12-reference-open.png'),
+  })
+
+  for (let index = 0; index < 4; index += 1)
+    await page.evaluate(() =>
+      window.dispatch_reference_command?.({
+        type: 'NEXT_REFERENCE_PAGE',
+      }),
+    )
+  await expect.poll(referenceState).toEqual({
+    selectedBookId: 'enhanced-coagulation',
+    pageIndex: 2,
+  })
+
+  expect(
+    await page.evaluate(() =>
+      window.dispatch_reference_command?.({
+        type: 'OPEN_REFERENCE',
+        bookId: 'model-limitations',
+      }),
+    ),
+  ).toBe(false)
+  await page.evaluate(() =>
+    window.dispatch_reference_command?.({ type: 'CLOSE_REFERENCE' }),
+  )
+  await expect.poll(referenceState).toEqual({
+    selectedBookId: null,
+    pageIndex: 0,
+  })
+  expect(browserErrors).toEqual([])
+})

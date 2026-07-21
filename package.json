@@ -18,7 +18,7 @@
     "typecheck": "tsc -b --pretty false",
     "test": "node --test --test-isolation=none tests/*.test.mjs && vitest run",
     "test:unit": "vitest run",
-    "test:browser": "playwright test",
+    "test:browser": "playwright test --workers=1",
     "capture:review": "node scripts/capture-batch-03-review.mjs",
     "capture:apparatus": "node scripts/capture-batch-03-review.mjs --apparatus-only",
     "benchmark": "vitest run src/sim/benchmark.cli.test.ts --reporter=dot",
