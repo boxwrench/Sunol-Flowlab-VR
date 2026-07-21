@@ -49,6 +49,7 @@ This index separates current authority from historical delivery evidence.
 ## Evidence and archive
 
 - [Batch 03 captured evidence](evidence/batch-03-review/)
+- [Current README screenshot](images/sunol-flowlab-current/shot-0.png)
 - [Hosted v0.1 screenshot](images/sunol-flowlab-v0.1/shot-0.png)
 - [v0.1.0 release notes](RELEASE_NOTES_V0.1.0.md)
 - [Archived superseded material](archive/README.md)

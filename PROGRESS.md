@@ -452,3 +452,27 @@ Original prompt: batch 7
 
 - Package the accepted Batch 12 library and visual-polish work as a v0.2
   candidate when authorized.
+
+# README refresh working notes
+
+- The owner requested a current README revision and replacement screenshot
+  after the accepted Batch 12 reference-library and visual-polish work landed.
+- Captured a new 1,280 by 720 still from the standard local production build
+  with the required bundled web-game client. The final capture uses the Sunol
+  panorama, muted audio, the default seated spectator shell, and a four-second
+  loading settle; it has no development overlay or console-error artifact.
+- Visually inspected the exact retained PNG. It shows the physical reference
+  shelf alongside the jar rack, hero tank, operator dashboard, result gauge and
+  plot, laboratory lighting, surface treatment, and Sunol window panorama.
+- Updated the README to describe the four-book in-world library, same-tab
+  official-source behavior, accepted post-v0.1 visual polish, and the current
+  automated validation counts. Added the new asset to the documentation index
+  and provenance record without replacing the retained v0.1 release still.
+- No simulation, process-model, XR interaction, persistence, or runtime source
+  changed in this documentation-only increment.
+- Standard and GitHub Pages production builds pass. The post-edit bundled-client
+  production capture again completed without an error artifact, and the exact
+  retained PNG was inspected at 1,280 by 720. Scoped Prettier and
+  `git diff --check` validation pass for every changed Markdown file; the
+  repository-wide format command still reports pre-existing formatting in the
+  user-owned, untouched `.agents/` directory.

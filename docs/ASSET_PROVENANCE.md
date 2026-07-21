@@ -1,5 +1,16 @@
 # Asset Provenance
 
+## Current README screenshot
+
+- Repository asset: `docs/images/sunol-flowlab-current/shot-0.png`
+- Source: self-created 1,280 by 720 Playwright capture of the local production
+  build on 2026-07-20.
+- Inputs: repository-owned application geometry and the owner-created Sunol
+  panorama documented below.
+- Capture state: default seated WebXR spectator shell at `READY`, Sunol scenery,
+  muted audio, and a four-second panorama-loading settle.
+- Modification: none after capture.
+
 ## Hetchy panorama
 
 - Repository asset: `public/panoramas/hetchy.jpg`

@@ -5,11 +5,12 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
 A VR-first, hands-on coagulation experiment for learning why the best treatment
-dose is not always the largest dose.
+dose is not always the largest dose. The current experience also includes an
+in-world reference library built around official California and EPA resources.
 
 **[Launch Sunol FlowLab VR](https://boxwrench.github.io/Sunol-Flowlab-VR/)**
 
-![Sunol FlowLab VR coagulation experiment in a water-quality lab](docs/images/sunol-flowlab-v0.1/shot-0.png)
+![Sunol FlowLab VR coagulation experiment and reference library in a water-quality lab](docs/images/sunol-flowlab-current/shot-0.png)
 
 **[Watch the narrated Quest demonstration](https://github.com/boxwrench/Sunol-Flowlab-VR/releases/download/v0.1.0/sunol-flowlab-vr-v0.1.0-demo.mp4)**
 
@@ -17,7 +18,9 @@ Sunol FlowLab VR is an open-source personal educational portfolio project
 inspired by drinking-water treatment. It presents one tabletop experiment in a
 fictionalized water-quality laboratory. Choose a relative coagulant dose,
 observe floc formation and settling, compare the resulting water clarity, and
-build a dose-response curve across repeated trials.
+build a dose-response curve across repeated trials. A physical reference shelf
+adds short in-world primers on coagulation, jar testing, reading results, and
+enhanced coagulation, with links to the official source pages.
 
 The experience runs at the same URL in immersive Meta Quest WebXR and as a
 desktop spectator simulation in Chrome or Chromium.
@@ -33,6 +36,11 @@ Coagulation has an optimum region:
 The live observation tank makes the treatment cycle visible. A physical gauge
 and mounted plot summarize the result, while the six-jar rack preserves static
 summaries for canonical doses 0, 2, 4, 6, 8, and 10.
+
+The reference library keeps the process lesson close to the apparatus. Each
+book opens as a bounded, readable in-world page sequence. Its **WEB** control
+opens the corresponding California or EPA resource in the same browser tab;
+Browser Back returns to FlowLab for VR re-entry.
 
 This is a **phenomenological coagulation model**, not dose-prediction software,
 a calibrated plant model, CFD, or operational guidance. It does not report NTU
@@ -51,6 +59,8 @@ and fictionalized.
 4. Press **Start** and watch the complete treatment cycle.
 5. Read the **Relative Turbidity** gauge and result plot.
 6. Refill, choose another dose, and compare the outcomes.
+7. Select a book on the reference shelf to review the treatment concepts or
+   open its official source page.
 
 The v0.1 experience is designed and tested for seated use on Quest 3. It also
 includes a physical mute control and selectable Sunol or Hetchy scenery.
@@ -73,12 +83,13 @@ be operated with pointer input. No mobile-specific experience is provided.
 | Jar Test rack            | Shows static summaries for doses 0, 2, 4, 6, 8, and 10       |
 | Replay controls          | Compare a limited saved result with the current result       |
 | Refill control           | Restores the same deterministic raw-water starting condition |
+| Reference library        | Opens four short primers and their official source pages     |
 
 One live simulation is authoritative. The jars are summaries rather than six
 additional simulations, and the plot and experiment log retain results for all
 eleven dose settings.
 
-## v0.1 release
+## Release status
 
 Version 0.1.0 is released. The public experience and owner-operated narrated
 Quest demonstration have passed final review. Release validation includes:
@@ -94,6 +105,14 @@ Quest demonstration have passed final review. Release validation includes:
 
 See the [v0.1.0 release notes](docs/RELEASE_NOTES_V0.1.0.md). A sideloadable APK
 and mobile-specific experience remain intentionally deferred.
+
+The current main branch builds on v0.1.0 with the accepted four-book reference
+library and three Quest-reviewed visual-polish passes: stronger material and
+color separation, shared low-cost lab lighting, and a subtle deterministic
+surface texture. No process-model values, treatment timing, persistence
+contracts, or operational claims changed. The library's official resource
+record is in
+[docs/REFERENCE_LIBRARY_SOURCES.md](docs/REFERENCE_LIBRARY_SOURCES.md).
 
 Detailed evidence is recorded in [PROGRESS.md](PROGRESS.md),
 [the implementation plan](IMPLEMENTATION_PLAN.md),
@@ -164,8 +183,8 @@ npm run benchmark
 npm run test:browser
 ```
 
-The current checkpoint includes 26 repository-contract tests and 137 Vitest
-tests across 30 files, plus six rendered Chromium scenarios. Quest evidence is
+The current checkpoint includes 28 repository-contract tests and 143 Vitest
+tests, plus seven rendered Chromium scenarios. Quest evidence is
 kept separate from automated browser evidence so headset-specific claims remain
 traceable.
 
