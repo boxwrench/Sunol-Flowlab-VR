@@ -11,6 +11,8 @@ dose is not always the largest dose.
 
 ![Sunol FlowLab VR coagulation experiment in a water-quality lab](docs/images/sunol-flowlab-v0.1/shot-0.png)
 
+**[Watch the narrated Quest demonstration](https://github.com/boxwrench/Sunol-Flowlab-VR/releases/download/v0.1.0/sunol-flowlab-vr-v0.1.0-demo.mp4)**
+
 Sunol FlowLab VR is an open-source personal educational portfolio project
 inspired by drinking-water treatment. It presents one tabletop experiment in a
 fictionalized water-quality laboratory. Choose a relative coagulant dose,
@@ -76,19 +78,22 @@ One live simulation is authoritative. The jars are summaries rather than six
 additional simulations, and the plot and experiment log retain results for all
 eleven dose settings.
 
-## v0.1 status
+## v0.1 release
 
-The public release candidate is deployed and has passed:
+Version 0.1.0 is released. The public experience and owner-operated narrated
+Quest demonstration have passed final review. Release validation includes:
 
 - immersive entry and seated review on Meta Quest 3;
 - the final laboratory, dashboard, scenery, labeling, and audio review;
 - a hosted Dose 0, Dose 5, and Dose 10 repeat cycle with refills;
 - immersive exit and re-entry;
 - deterministic dose-sweep and simulation regression checks;
-- unit, architecture, browser, type, lint, build, and benchmark checks.
+- unit, architecture, browser, type, lint, build, and benchmark checks;
+- a three-minute direct Quest-view capture with the approved educational
+  narration and final jar-spectrum inspection.
 
-The final no-narration demonstration video and the `v0.1.0` release tag remain.
-A sideloadable APK and narration are intentionally deferred.
+See the [v0.1.0 release notes](docs/RELEASE_NOTES_V0.1.0.md). A sideloadable APK
+and mobile-specific experience remain intentionally deferred.
 
 Detailed evidence is recorded in [PROGRESS.md](PROGRESS.md),
 [the implementation plan](IMPLEMENTATION_PLAN.md),

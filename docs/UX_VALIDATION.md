@@ -370,3 +370,19 @@ completion with refills, exited immersive VR, and re-entered. The final verdict
 was "pass," with no reported stutter, excessive heat, broken controls or audio,
 or visual corruption. This is a bounded owner-operated repeat-cycle check, not
 a quantified long-duration thermal trace or non-operator study.
+
+### 2026-07-20 release-video and narration verdict
+
+The final demonstration was captured directly from the connected Quest 3 at
+1920 by 1080 while the project owner performed the real treatment task. The
+release edit uses a single-eye 16:9 crop, retains the owner's actual head and
+controller movement, and finishes with inspection of the apparatus and jar
+spectrum. No autoplay or substitute simulation was used.
+
+After accepting the headset-view cut, the owner requested a concise synthetic
+narration. The approved revision explains why coagulation is used, defines jar
+testing as a controlled comparison of doses under common mixing and settling,
+describes the relative-turbidity instruments, and states that the experience is
+a phenomenological teaching model rather than operating guidance. The owner's
+final verdict was "pass." This is release-media acceptance, not a new runtime,
+performance, endurance, or non-operator usability claim.

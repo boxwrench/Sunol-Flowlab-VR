@@ -1,6 +1,6 @@
 # Batch 11 Implementation Plan: Release Hardening and Deployment
 
-**Status:** In progress - final video, release notes, and v0.1.0 tag remain
+**Status:** Released - v0.1.0 package approved and published
 **Depends on:** All prior batch gates accepted  
 **May run in parallel with:** Independent release review and documentation verification only  
 **Primary gate:** A reproducible public release works on Quest immersive WebXR and the Chrome/Chromium browser simulation, preserves the accepted dose-response behavior, contains no development or sensitive material, and can be rolled back safely.

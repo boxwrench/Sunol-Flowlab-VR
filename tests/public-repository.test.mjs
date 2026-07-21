@@ -28,14 +28,19 @@ test('public repository has licensing, safety, contribution, plan authority, and
   assert.match(ci, /actions\/setup-node@v7/)
 })
 
-test('session handoff identifies plan authority, hosted evidence, and open release gates', async () => {
+test('session handoff identifies plan authority and released hosted evidence', async () => {
   const handoff = await read('HANDOFF.md')
 
   assert.match(handoff, /Active plan authority: \[IMPLEMENTATION_PLAN\.md\]/)
   assert.match(handoff, /local physical Quest route is accepted/)
   assert.match(handoff, /hosted HTTPS deployment is\s+authorized and live/)
   assert.match(handoff, /Hosted Quest entry/)
-  assert.match(handoff, /final video.*release\s+tagging/s)
+  assert.match(handoff, /Current milestone: `v0\.1\.0` released/)
+  assert.match(handoff, /Narrated Quest demonstration/)
+  assert.match(
+    handoff,
+    /release notes, and `v0\.1\.0` publication are complete/,
+  )
   assert.match(handoff, /npm test/)
   assert.match(handoff, /Recommended next session/)
 })

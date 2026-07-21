@@ -8,8 +8,8 @@ Updated: 2026-07-20
 - Branch: `main`
 - Active plan authority: [IMPLEMENTATION_PLAN.md](IMPLEMENTATION_PLAN.md)
 - Detailed batch plans: [docs/plans](docs/plans/README.md)
-- Current milestone: hosted v0.1 candidate accepted; final video and release
-  tagging remain
+- Current milestone: `v0.1.0` released with hosted experience and narrated
+  Quest demonstration
 - Public experience:
   <https://boxwrench.github.io/Sunol-Flowlab-VR/>
 
@@ -53,6 +53,9 @@ representative particles and canonical seed `0x5f3759df`.
 
 ## Current evidence
 
+- Release notes: [docs/RELEASE_NOTES_V0.1.0.md](docs/RELEASE_NOTES_V0.1.0.md)
+- Narrated Quest demonstration:
+  <https://github.com/boxwrench/Sunol-Flowlab-VR/releases/download/v0.1.0/sunol-flowlab-vr-v0.1.0-demo.mp4>
 - Hosted screenshot:
   [docs/images/sunol-flowlab-v0.1/shot-0.png](docs/images/sunol-flowlab-v0.1/shot-0.png)
 - Architecture: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)
@@ -67,15 +70,12 @@ desktop harness remains available only by explicit `?mode=desktop` and is used
 by deterministic browser validation. Production does not eagerly request the
 IWER emulator-room chunks.
 
-## Open release work
+## Release state
 
-1. Record the owner-operated low/optimum/high demonstration without narration.
-2. Add the final video link and concise release notes.
-3. Tag and publish `v0.1.0`.
-
-Narration, mobile support, and a sideloadable APK are deferred. Do not add new
-process modules, simulation retuning, dependency upgrades, or post-v0.1
-mechanistic features during release freeze.
+The owner-operated low/optimum/high Quest demonstration, synthetic narration,
+release notes, and `v0.1.0` publication are complete. Mobile support and a
+sideloadable APK remain deferred. Begin any further process modules, simulation
+retuning, dependency upgrades, or mechanistic work as explicit post-v0.1 scope.
 
 ## Validation
 
@@ -103,8 +103,6 @@ npm run acceptance:08:quest -- watch-controls
 
 ## Recommended next session
 
-Prepare a clean 16:9 Chrome/Chromium capture, then record the real
-owner-operated underdose, refill, optimum, refill, and overdose sequence. End
-on the completed plot and jar spectrum. Do not add narration or a hidden
-autoplay path. After reviewing the exported video, update the release notes and
-publish `v0.1.0`.
+Treat `v0.1.0` as the known-good baseline. Start post-release work only from an
+explicitly approved goal, preserve the coagulation-only product boundary, and
+keep the published release and GitHub Pages deployment available for rollback.

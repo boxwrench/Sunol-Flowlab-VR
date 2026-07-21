@@ -48,6 +48,7 @@ This index separates current authority from historical delivery evidence.
 
 - [Batch 03 captured evidence](evidence/batch-03-review/)
 - [Hosted v0.1 screenshot](images/sunol-flowlab-v0.1/shot-0.png)
+- [v0.1.0 release notes](RELEASE_NOTES_V0.1.0.md)
 - [Archived superseded material](archive/README.md)
 
 Historical batch documents may describe the state when their gate was run.

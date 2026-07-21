@@ -6,10 +6,10 @@ design authorities are indexed from [docs/README.md](docs/README.md).
 
 ## Current release status
 
-The public GitHub Pages candidate is deployed and accepted in seated Quest 3
-review. The corrected viewer height, low/optimum/high repeat cycle, refills, and
-immersive re-entry pass. The remaining v0.1 work is the operator-led
-no-narration video, final release notes, and the `v0.1.0` tag.
+Sunol FlowLab VR v0.1.0 is released. The public GitHub Pages experience,
+corrected seated height, low/optimum/high repeat cycle, refills, immersive
+re-entry, direct Quest-view recording, and narrated release cut passed owner
+review.
 
 | Batch | Status                 | Closing gate                                                             |
 | ----- | ---------------------- | ------------------------------------------------------------------------ |
@@ -24,9 +24,9 @@ no-narration video, final release notes, and the `v0.1.0` tag.
 | 06    | Accepted               | Complete treatment cycle, refill, and lifecycle handling passed          |
 | 07    | Accepted               | Instrumentation, persistence, and experiment memory passed               |
 | 08    | Accepted               | Headset readability and result comparison passed                         |
-| 09    | Capture-ready          | Final no-narration demonstration video remains                           |
+| 09    | Accepted               | Owner-operated narrated Quest demonstration passed                       |
 | 10    | Accepted               | Laboratory, scenery, dashboard, and audio passed                         |
-| 11    | In progress            | Final video, release notes, and v0.1.0 publication remain                |
+| 11    | Released               | Public experience, video, notes, and v0.1.0 release complete             |
 
 ## Ordered batch plans
 
@@ -74,7 +74,8 @@ the simulation.
 - Coagulation is the only v0.1 process module.
 - Quest immersive WebXR and Chrome/Chromium desktop viewing are the supported
   targets.
-- Mobile layouts, narration, and a sideloadable APK are deferred.
+- Mobile layouts and a sideloadable APK are deferred. Narration is release
+  media and is not part of the interactive runtime.
 - No calibrated NTU, operating guidance, plant prediction, CFD, or universal
   FlowLab engine is authorized.
 - Post-v0.1 mechanistic research remains governed by
